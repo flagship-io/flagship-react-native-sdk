@@ -1,71 +1,62 @@
 # Flagship - React Native Sdk
 
-React Native Flagship SDK provides a `<RNFlagshipProvider/>`, which makes Flagship features available to your apps (ios/android)
+React Native Flagship SDK provides a `<FlagshipProvider/>`, which makes Flagship features available to your apps (ios/android)
 Flagship features are accessible using Flagship hooks, have a look to the documentation for details.
 
 ### Prerequisites
 
--   **Node.js**: version 6.0.0 or later...
+- **Node.js**: version 6.0.0 or later...
 
--   **Npm**: version 5.2.0 or later...
+- **Npm**: version 5.2.0 or later...
 
--   **React**: version 16.8.0 or later... (This SDK supports only hooks for now)
+- **React**: version 16.8.0 or later... (This SDK supports only hooks for now)
 
- 
 ## Getting Started
 
 1. **Install** the node module:
 
 ```js
 
-/// Install flagship-react-native-sdk package 
-npm install "flagship-react-native-sdk"
+/// Install @flagship.io/react-native-sdk package
+npm install "@flagship.io/react-native-sdk"
 ```
 
-2. **Import** the Flagship React provider at the root level of your app like `App.js` file 
+2. **Import** the Flagship React provider at the root level of your app like `App.js` file
 
-
-3. **Initialize** the provider with at least required props such as `envId`, `visitorData` :
+3) **Initialize** the provider with at least required props such as `envId`, `visitorData` :
 
 ```js
-
 /// Import the  flagship provider from package
-import ReactNativeFlagshipProvider from 'flagship-react-native-sdk'
-
-
+import FlagshipProvider from "@flagship.io/react-native-sdk";
 
 const App = createAppContainer(navigator);
 
 export default () => {
   return (
-    <ReactNativeFlagshipProvider
+    <FlagshipProvider
       envId="your envId"
       config={{
         fetchNow: true,
         enableConsoleLogs: true,
-        nodeEnv: 'development'
+        nodeEnv: "development",
       }}
-       onInitStart={() => {
-
-         // Callback called on start the Flagship
-       }}
-       onInitDone={() => {
-
+      onInitStart={() => {
+        // Callback called on start the Flagship
+      }}
+      onInitDone={() => {
         // Callback called when the init is done
-       }}
-      onError = { ()=>{
-
+      }}
+      onError={() => {
         // if something goes wrong with your envId, this Error call back will be called
       }}
       visitorData={{
         id: "visitorId",
-        context: {"isVip":true},  /// (keys/values) to define the context
+        context: { isVip: true }, /// (keys/values) to define the context
       }}
-
       loadingComponent={}
-      >
-      <App/>
-      </ReactNativeFlagshipProvider>
+    >
+      <App />
+    </FlagshipProvider>
   );
 };
 ```
@@ -73,31 +64,28 @@ export default () => {
 4. Use a Flagship hook in a component.
 
 ```js
-import React  from 'react';
-import {View, Text} from 'react-native';
-import { RNuseFsModifications } from 'flagship-react-native-sdk'
+import React from "react";
+import { View, Text } from "react-native";
+import { useFsModifications } from "@flagship.io/react-native-sdk";
 
 export const MyReactNativeComponent = () => {
-
-
-///
-    const fsModifications = RNuseFsModifications([
+  ///
+  const fsModifications = useFsModifications([
     {
       key: "backGroundColor",
       defaultValue: "yellow",
       activate: true,
-    }
+    },
   ]);
 
-
-    /// Set the backgroud color by using the fsModifications 
-    return (<View backgroundColor = {fsModifications.RNBackGroundColor}/>);
+  /// Set the backgroud color by using the fsModifications
+  return <View backgroundColor={fsModifications.BackGroundColor} />;
 };
 ```
 
-## RNFlagshipProvider Props
+## FlagshipProvider Props
 
-This is all available props which you can use inside the `RNFlagshipProvider` react component:
+This is all available props which you can use inside the `FlagshipProvider` react component:
 
 <table class="table table-bordered table-striped">
     <thead>
@@ -266,19 +254,19 @@ Here are the attributes which you can set inside the SDK settings object:
 
 Here the list of current available hooks:
 
--   [RNuseFlagship](#RNuseFlagship)
--   [RNuseFsModifications](#RNuseFsModifications)
--   [RNuseFsActivate](#RNuseFsActivate)
--   [RNuseFsSynchronize](#RNuseFsSynchronize)
+- [useFlagship](#useFlagship)
+- [useFsModifications](#useFsModifications)
+- [useFsActivate](#useFsActivate)
+- [useFsSynchronize](#useFsSynchronize)
 
 ### Available hits
 
--   [Transaction Hit](#transaction-hit)
--   [Screen Hit](#screen-hit)
--   [Item Hit](#item-hit)
--   [Event Hit](#event-hit)
+- [Transaction Hit](#transaction-hit)
+- [Screen Hit](#screen-hit)
+- [Item Hit](#item-hit)
+- [Event Hit](#event-hit)
 
-### RNuseFlagship
+### useFlagship
 
 Most used hook from the Flagship React Native SDK. Through this hook, you can access to modifications of your current visitor and have an access to the SDK status. Output shape is visible [here](#useFlagship-output-shape).
 
@@ -301,7 +289,7 @@ Most used hook from the Flagship React Native SDK. Through this hook, you can ac
     </tbody>
 </table>
 
-#### `RNuseFlagship options`
+#### `useFlagship options`
 
 <table class="table table-bordered table-striped">
     <thead>
@@ -356,7 +344,7 @@ Most used hook from the Flagship React Native SDK. Through this hook, you can ac
     </tbody>
 </table>
 
-##### `RNuseFlagship output shape`
+##### `useFlagship output shape`
 
 <table class="table table-bordered table-striped">
     <thead>
@@ -423,8 +411,7 @@ Most used hook from the Flagship React Native SDK. Through this hook, you can ac
     </tbody>
 </table>
 
-
-### RNuseFsModifications
+### useFsModifications
 
 This will give you the modification saved in the SDK cache.
 
@@ -478,9 +465,7 @@ returns Flagship modifications
     </tbody>
 </table>
 
-
-
-### RNuseFsActivate
+### useFsActivate
 
 return `void`
 
@@ -509,16 +494,15 @@ return `void`
     </tbody>
 </table>
 
-
 ```JSX
 
-/// Hooks to activate manualy , RNBackGroundColor is the modificationKey
+/// Hooks to activate manualy , BackGroundColor is the modificationKey
 
-RNuseFsActivate(["RNBackGroundColor"]);
+useFsActivate(["BackGroundColor"]);
 
 ```
 
-### RNuseFsSynchronize
+### useFsSynchronize
 
 Refresh modifications in cache by making a http request to the Flagship API.
 
@@ -548,22 +532,21 @@ return `void`
         </tr>
     </tbody>
 </table>
- 
 
 ### <i>Shape</i> of possible hits to send
 
--   [Transaction Hit](#transaction-hit)
--   [Screen Hit](#screen-hit)
--   [Item Hit](#item-hit)
--   [Event Hit](#event-hit)
+- [Transaction Hit](#transaction-hit)
+- [Screen Hit](#screen-hit)
+- [Item Hit](#item-hit)
+- [Event Hit](#event-hit)
 
 #### `Transaction Hit`
 
 ```Js
 
-import { RNuseFlagship} from 'flagship-react-native-sdk';
+import { useFlagship} from '@flagship.io/react-native-sdk';
 
-const { hit: fsHit } = RNuseFlagship();
+const { hit: fsHit } = useFlagship();
 
 /// Transaction hit
 const transactionHit = {
@@ -584,11 +567,10 @@ const transactionHit = {
     }
   };
 
-/// Send the transaction hit 
+/// Send the transaction hit
 fsHit.send(transactionHit);
 
 ```
-
 
 <table class="table table-bordered table-striped">
     <thead>
@@ -667,9 +649,9 @@ fsHit.send(transactionHit);
 ```Js
 
 /// Send Screen Hit
-import { RNuseFlagship} from 'flagship-react-native-sdk';
+import { useFlagship } from '@flagship.io/react-native-sdk';
 
-const { hit: fsHit } = RNuseFlagship();
+const { hit: fsHit } = useFlagship();
 
 /// Screen hit
   const screenHit = {
@@ -680,12 +662,10 @@ const { hit: fsHit } = RNuseFlagship();
     }
   };
 
-//send the screen hit 
+//send the screen hit
 fsHit.send(screenHit);
 
 ```
-
-
 
 <table class="table table-bordered table-striped">
     <thead>
@@ -711,26 +691,24 @@ fsHit.send(screenHit);
 
 #### `Item Hit`
 
-
 ```js
-
 /// Send Item Hit
-import { RNuseFlagship} from 'flagship-react-native-sdk';
+import { useFlagship } from "@flagship.io/react-native-sdk";
 
-const { hit: fsHit } = RNuseFlagship();
+const { hit: fsHit } = useFlagship();
 
 const itemHit = {
-    type: 'Item',
-    data: {
-      transactionId: '0987654321',
-      name: 'RN_item',
-      price: 100,
-      code: 'code',
-      category: 'category',
-      quantity: 123,
-      documentLocation: "APP"
-    }
-  };
+  type: "Item",
+  data: {
+    transactionId: "0987654321",
+    name: "RN_item",
+    price: 100,
+    code: "code",
+    category: "category",
+    quantity: 123,
+    documentLocation: "APP",
+  },
+};
 
 fsHit.send(itemHit);
 ```
@@ -791,10 +769,10 @@ fsHit.send(itemHit);
 
 #### `Event Hit`
 
-```js 
+```js
 /// Send Event
 
-  const { hit: fsHit } = RNuseFlagship();
+  const { hit: fsHit } = useFlagship();
 
   const eventHit = {
 
@@ -810,6 +788,7 @@ fsHit.send(itemHit);
 
 
 ```
+
 <table class="table table-bordered table-striped">
     <thead>
     <tr>
@@ -851,8 +830,6 @@ fsHit.send(itemHit);
         </tr>
     </tbody>
 </table>
-
-
 
 ## Release
 
