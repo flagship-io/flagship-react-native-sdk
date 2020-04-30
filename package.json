@@ -1,14 +1,14 @@
 {
-  "name": "flagship-react-native-sdk",
-  "version": "0.1.0",
-  "description": "flagship react native",
+  "name": "@flagship.io/react-native-sdk",
+  "version": "0.0.1",
+  "description": "Flagship SDK for React Native",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git@gitlab.com:canarybay/sdk/flagship-react-native-sdk.git"
+    "url": "git@gitlab.com:canarybay/sdk/react-native-sdk.git"
   },
   "dependencies": {
     "@flagship.io/react-sdk": "0.0.20"
