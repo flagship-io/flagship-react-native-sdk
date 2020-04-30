@@ -7,8 +7,8 @@ import {
   useFlagship,
 } from "@flagship.io/react-sdk";
 
-import { generateFlagshipId, checkValidityPatternForEnvId } from "./FSTools";
-import ErrorBoundary from "./ErrorBoundary";
+import { generateFlagshipId, checkValidityPatternForEnvId } from "./lib/FSTools";
+import ErrorBoundary from "./lib/ErrorBoundary";
 
 const FlagshipProvider = ({ children, ...otherProps }) => {
   const {
