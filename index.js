@@ -7,7 +7,10 @@ import {
   useFlagship,
 } from "@flagship.io/react-sdk";
 
-import { generateFlagshipId, checkValidityPatternForEnvId } from "./lib/FSTools";
+import {
+  generateFlagshipId,
+  checkValidityPatternForEnvId,
+} from "./lib/FSTools";
 import ErrorBoundary from "./lib/ErrorBoundary";
 
 const FlagshipProvider = ({ children, ...otherProps }) => {
@@ -17,6 +20,7 @@ const FlagshipProvider = ({ children, ...otherProps }) => {
     config,
     onInitStart,
     onInitDone,
+    onUpdate,
     onError,
     loadingComponent,
   } = otherProps;
@@ -48,6 +52,7 @@ const FlagshipProvider = ({ children, ...otherProps }) => {
           onInitDone();
         }
       }}
+      onUpdate={onUpdate}
       visitorData={{
         /// Check the visitor id is null ?
         id: visitorData.id == null ? generateFlagshipId() : visitorData.id,
