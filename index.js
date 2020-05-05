@@ -1,68 +1,71 @@
-import React from "react";
+import React from 'react';
 import {
-  FlagshipProvider as ReactFlagshipProvider,
-  useFsModifications,
-  useFsActivate,
-  useFsSynchronize,
-  useFlagship,
-} from "@flagship.io/react-sdk";
+    FlagshipProvider as ReactFlagshipProvider,
+    useFsModifications,
+    useFsActivate,
+    useFsSynchronize,
+    useFlagship
+} from '@flagship.io/react-sdk';
 
 import {
-  generateFlagshipId,
-  checkValidityPatternForEnvId,
-} from "./lib/FSTools";
-import ErrorBoundary from "./lib/ErrorBoundary";
+    generateFlagshipId,
+    checkValidityPatternForEnvId
+} from './lib/FSTools';
+import ErrorBoundary from './lib/ErrorBoundary';
 
 const FlagshipProvider = ({ children, ...otherProps }) => {
-  const {
-    visitorData,
-    envId,
-    config,
-    onInitStart,
-    onInitDone,
-    onUpdate,
-    onError,
-    loadingComponent,
-  } = otherProps;
+    const {
+        visitorData,
+        envId,
+        config,
+        onInitStart,
+        onInitDone,
+        onUpdate,
+        onError,
+        loadingComponent
+    } = otherProps;
 
-  /// Check the Envid
-  if (!checkValidityPatternForEnvId(envId)) {
-    console.log("Flagship sdk - The format of your EnvId is not valid");
+    /// Check the Envid
+    if (!checkValidityPatternForEnvId(envId)) {
+        console.log('Flagship sdk - The format of your EnvId is not valid');
 
-    if (onError) {
-      onError();
+        if (onError) {
+            onError();
+        }
+        return <ErrorBoundary>{children}</ErrorBoundary>;
     }
-    return <ErrorBoundary>{children}</ErrorBoundary>;
-  }
 
-  return (
-    <ReactFlagshipProvider
-      envId={envId}
-      config={config}
-      onInitStart={() => {
-        console.log("Flagship SDK : Starting ....");
+    return (
+        <ReactFlagshipProvider
+            envId={envId}
+            config={config}
+            onInitStart={() => {
+                console.log('Flagship SDK : Starting ....');
 
-        if (onInitStart) {
-          onInitStart();
-        }
-      }}
-      onInitDone={() => {
-        console.log("Flagship SDK : Init is Done");
-        if (onInitDone) {
-          onInitDone();
-        }
-      }}
-      onUpdate={onUpdate}
-      visitorData={{
-        /// Check the visitor id is null ?
-        id: visitorData.id == null ? generateFlagshipId() : visitorData.id,
-        context: visitorData.context,
-      }}
-      loadingComponent={loadingComponent}
-    >
-      {children}
-    </ReactFlagshipProvider>
-  );
+                if (onInitStart) {
+                    onInitStart();
+                }
+            }}
+            onInitDone={() => {
+                console.log('Flagship SDK : Init is Done');
+                if (onInitDone) {
+                    onInitDone();
+                }
+            }}
+            onUpdate={onUpdate}
+            visitorData={{
+                /// Check the visitor id is null ?
+                id:
+                    visitorData.id == null
+                        ? generateFlagshipId()
+                        : visitorData.id,
+                context: visitorData.context
+            }}
+            loadingComponent={loadingComponent}
+        >
+            {children}
+        </ReactFlagshipProvider>
+    );
 };
 
 /// Activate
