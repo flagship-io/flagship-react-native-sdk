@@ -1,34 +1,41 @@
 {
-  "name": "@flagship.io/react-native-sdk",
-  "version": "0.0.1",
-  "description": "Flagship SDK for React Native",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git@gitlab.com:canarybay/sdk/react-native-sdk.git"
-  },
-  "dependencies": {
-    "@flagship.io/react-sdk": "0.0.20"
-  },
-  "keywords": [
-    "mobile",
-    "react",
-    "native"
-  ],
-  "author": "ABTasty",
-  "license": "ISC",
-  "devDependencies": {
-    "@react-native-community/eslint-config": "^1.1.0",
-    "eslint": "^6.8.0",
-    "eslint-config-prettier": "^6.11.0",
-    "eslint-plugin-import": "^2.20.2",
-    "eslint-plugin-jsx-a11y": "^6.2.3",
-    "eslint-plugin-react": "^7.19.0",
-    "eslint-plugin-react-hooks": "^4.0.0",
-    "prettier": "^2.0.5",
-    "prettier-eslint": "^9.0.1"
-  }
+    "name": "@flagship.io/react-native-sdk",
+    "version": "0.0.2",
+    "description": "Flagship SDK for React Native",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 0",
+        "build": "exit 0",
+        "release": "npm version patch && npm publish --access public"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git@gitlab.com:canarybay/sdk/react-native-sdk.git"
+    },
+    "dependencies": {
+        "@flagship.io/react-sdk": "0.0.20"
+    },
+    "peerDependencies": {
+        "react-native": "^16.8.0"
+    },
+    "keywords": [
+        "mobile",
+        "react",
+        "native"
+    ],
+    "author": "ABTasty",
+    "license": "ISC",
+    "devDependencies": {
+        "@react-native-community/eslint-config": "^1.1.0",
+        "eslint": "^6.8.0",
+        "eslint-config-prettier": "^6.11.0",
+        "eslint-loader": "^3.0.3",
+        "eslint-plugin-import": "^2.20.2",
+        "eslint-plugin-jsx-a11y": "^6.2.3",
+        "eslint-plugin-react": "^7.19.0",
+        "eslint-plugin-react-hooks": "^4.0.0",
+        "np": "^6.2.3",
+        "prettier": "^2.0.5",
+        "prettier-eslint": "^9.0.1"
+    }
 }
