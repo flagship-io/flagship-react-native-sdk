@@ -3,7 +3,7 @@
 React Native Flagship SDK provides a `<FlagshipProvider/>`, which makes Flagship features available to your apps (ios/android)
 Flagship features are accessible using Flagship hooks, have a look to the documentation for details.
 
-### Prerequisites
+## Prerequisites
 
 - **Node.js**: version 6.0.0 or later...
 
@@ -11,79 +11,85 @@ Flagship features are accessible using Flagship hooks, have a look to the docume
 
 - **React**: version 16.8.0 or later... (This SDK supports only hooks for now)
 
-## Getting Started
+# Getting Started
 
-1. **Install** the node module:
+## 1. **Install** the node module:
 
-```js
-
-/// Install @flagship.io/react-native-sdk package
-npm install "@flagship.io/react-native-sdk"
+```
+npm install @flagship.io/react-native-sdk
 ```
 
-2. **Import** the Flagship React provider at the root level of your app like `App.js` file
+## 2. **Import** the Flagship React provider:
 
-3) **Initialize** the provider with at least required props such as `envId`, `visitorData` :
+In most of case, you want to wrap all your app with this provider, so you might put it in your `App.js` file.
 
-```js
-/// Import the  flagship provider from package
-import FlagshipProvider from "@flagship.io/react-native-sdk";
+```
+import React from 'react';
+import { FlagshipProvider } from '@flagship.io/react-native-sdk';
 
-const App = createAppContainer(navigator);
+const App = () => (
+    <>
+        <FlagshipProvider>{/* [...] */}</FlagshipProvider>
+    </>
+);
+```
 
-export default () => {
-  return (
-    <FlagshipProvider
-      envId="your envId"
-      config={{
-        fetchNow: true,
-        enableConsoleLogs: true,
-        nodeEnv: "development",
-      }}
-      onInitStart={() => {
-        // Callback called on start the Flagship
-      }}
-      onInitDone={() => {
-        // Callback called when the init is done
-      }}
-      onError={() => {
-        // if something goes wrong with your envId, this Error call back will be called
-      }}
-      visitorData={{
-        id: "visitorId",
-        context: { isVip: true }, /// (keys/values) to define the context
-      }}
-      loadingComponent={}
-    >
-      <App />
-    </FlagshipProvider>
-  );
+## 3. **Initialize** the provider:
+
+You must put at least required props such as `envId`, `visitorData`.
+
+```
+import React from 'react';
+import { FlagshipProvider } from '@flagship.io/react-native-sdk';
+
+const App = () => (
+    <>
+        <FlagshipProvider
+            envId="your envId"
+            visitorData={{
+              id: "visitorId",
+              context: { isVip: true }, /// (keys/values) to define the context
+            }}
+            config={{
+                fetchNow: true,
+                enableConsoleLogs: true
+            }}
+        >
+            {/* [...] */}
+        </FlagshipProvider>
+    </>
+);
+```
+
+## 4. Use a Flagship hook in a component:
+
+In most case, you will get the desired modifications.
+
+```
+import React from 'react';
+import { useFsModifications } from '@flagship.io/react-native-sdk';
+
+export const MyReactComponent = () => {
+    const fsModifications = useFsModifications([
+        {
+            key: 'BackGroundColor',
+            defaultValue: 'green',
+            activate: false
+        }
+    ]);
+    return (
+        <View
+            backgroundColor={fsModifications.BackGroundColor}
+        >
+            {"I'm a square with color=" + fsModifications.BackGroundColor}
+        </View>
+    );
 };
 ```
 
-4. Use a Flagship hook in a component.
+# FlagshipProvider Props
 
-```js
-import React from "react";
-import { View, Text } from "react-native";
-import { useFsModifications } from "@flagship.io/react-native-sdk";
-
-export const MyReactNativeComponent = () => {
-  ///
-  const fsModifications = useFsModifications([
-    {
-      key: "backGroundColor",
-      defaultValue: "yellow",
-      activate: true,
-    },
-  ]);
-
-  /// Set the backgroud color by using the fsModifications
-  return <View backgroundColor={fsModifications.BackGroundColor} />;
-};
-```
-
-## FlagshipProvider Props
+## All props
 
 This is all available props which you can use inside the `FlagshipProvider` react component:
 
@@ -147,12 +153,6 @@ This is all available props which you can use inside the `FlagshipProvider` reac
           <td>Callback function called when the SDK ends initialization.</td>
         </tr>
         <tr>
-          <td>onError</td>
-          <td>function():void</td>
-          <td>null</td>
-          <td>Callback function called when an error occurred.</td>
-        </tr>
-        <tr>
           <td>onUpdate</td>
           <td>function(object):void</td>
           <td>null</td>
@@ -184,7 +184,7 @@ This is all available props which you can use inside the `FlagshipProvider` reac
     </tbody>
 </table>
 
-## SDK Prop Settings
+## "config" prop
 
 This is all available settings which you can set on the SDK.
 
@@ -250,7 +250,9 @@ Here are the attributes which you can set inside the SDK settings object:
 
 </table>
 
-## Flagship Hooks
+# Flagship Hooks
+
+## Summary
 
 Here the list of current available hooks:
 
@@ -259,18 +261,18 @@ Here the list of current available hooks:
 - [useFsActivate](#useFsActivate)
 - [useFsSynchronize](#useFsSynchronize)
 
-### Available hits
+## Available hits
 
 - [Transaction Hit](#transaction-hit)
 - [Screen Hit](#screen-hit)
 - [Item Hit](#item-hit)
 - [Event Hit](#event-hit)
 
-### useFlagship
+## `useFlagship`
 
 Most used hook from the Flagship React Native SDK. Through this hook, you can access to modifications of your current visitor and have an access to the SDK status. Output shape is visible [here](#useFlagship-output-shape).
 
-> returns an object (Typescript: UseFlagshipOutput)
+- returns an object (Typescript: UseFlagshipOutput)
 
 <table class="table table-bordered table-striped">
     <thead>
@@ -289,7 +291,7 @@ Most used hook from the Flagship React Native SDK. Through this hook, you can ac
     </tbody>
 </table>
 
-#### `useFlagship options`
+### `useFlagship options`
 
 <table class="table table-bordered table-striped">
     <thead>
@@ -344,7 +346,7 @@ Most used hook from the Flagship React Native SDK. Through this hook, you can ac
     </tbody>
 </table>
 
-##### `useFlagship output shape`
+### `useFlagship output shape`
 
 <table class="table table-bordered table-striped">
     <thead>
@@ -411,13 +413,73 @@ Most used hook from the Flagship React Native SDK. Through this hook, you can ac
     </tbody>
 </table>
 
-### useFsModifications
+> **Demo:**
+
+```
+import { useFlagship } from '@flagship.io/react-native-sdk';
+
+const fsParams = {
+    modifications: {
+        requested: [
+            {
+                key: 'btnColor',
+                defaultValue: 'green',
+                activate: false
+            }
+        ]
+    }
+}
+
+const {
+    modifications: fsModifications,
+    status: fsStatus,
+    hit: fsHit,
+} = useFlagship(fsParams);
+```
+
+> **Demo 2:**
+
+```
+import { useFlagship } from '@flagship.io/react-native-sdk';
+
+const { hit: fsHit } = useFlagship();
+
+// insider render function:
+
+<Button
+    onClick={() => {
+        const mockHit = {
+            type: 'Transaction',
+            data: {
+                transactionId: '12451342423',
+                affiliation: 'myAffiliation',
+                totalRevenue: 999,
+                shippingCost: 888,
+                shippingMethod: 'myShippingMethod',
+                currency: 'myCurrency',
+                taxes: 1234444,
+                paymentMethod: 'myPaymentMethod',
+                itemCount: 2,
+                couponCode: 'myCOUPON',
+                documentLocation:
+                    'http%3A%2F%2Fabtastylab.com%2F60511af14f5e48764b83d36ddb8ece5a%2F',
+                pageTitle: 'myScreen'
+            }
+        };
+        fsHit.send(mockHit);
+    }}
+>
+    Send a transaction hit
+</Button>
+```
+
+## `useFsModifications`
 
 This will give you the modification saved in the SDK cache.
 
 **NOTE:** If the SDK cache is empty, you can expect that it will return nothing.
 
-returns Flagship modifications
+- returns Flagship modifications
 
 <table class="table table-bordered table-striped">
     <thead>
@@ -465,9 +527,23 @@ returns Flagship modifications
     </tbody>
 </table>
 
-### useFsActivate
+> **Demo:**
 
-return `void`
+```
+import { useFsModifications } from '@flagship.io/react-native-sdk';
+
+const fsModifications = useFsModifications([
+  {
+      key: 'btnColor',
+      defaultValue: 'green',
+      activate: false
+  }
+]);
+```
+
+## `useFsActivate`
+
+- return `void`
 
 <table class="table table-bordered table-striped">
     <thead>
@@ -494,19 +570,30 @@ return `void`
     </tbody>
 </table>
 
-```JSX
-
-/// Hooks to activate manualy , BackGroundColor is the modificationKey
-
-useFsActivate(["BackGroundColor"]);
+> **Demo:**
 
 ```
+import { useFsActivate } from '@flagship.io/react-native-sdk';
 
-### useFsSynchronize
+const [toggle, setToggle] = React.useState(false);
+
+useFsActivate(['btnColor', 'otherKey1', 'otherKey2'], [toggle]); // trigger an activate when "toggle" value change.
+
+// insider render function:
+
+<Button
+variant="secondary"
+onClick={() => setToggle(!toggle)}
+>
+    Trigger activate
+</Button>
+```
+
+## `useFsSynchronize`
 
 Refresh modifications in cache by making a http request to the Flagship API.
 
-return `void`
+- return `void`
 
 <table class="table table-bordered table-striped">
     <thead>
@@ -533,44 +620,38 @@ return `void`
     </tbody>
 </table>
 
-### <i>Shape</i> of possible hits to send
+> **Demo:**
+
+```
+import { useFsSynchronize } from '@flagship.io/react-native-sdk';
+
+const [toggle, setToggle] = React.useState(false);
+const activateAllModifications = false;
+
+useFsSynchronize([toggle], activateAllModifications); // trigger a synchronize when "toggle" value change.
+
+// insider render function:
+
+<Button
+variant="secondary"
+onClick={() => setToggle(!toggle)}
+>
+    Trigger synchronize
+</Button>
+```
+
+# Hits
+
+## Summary
+
+<p id='Shape-of-possible-hits-to-send'><i>Shape</i> of possible hits to send:</p>
 
 - [Transaction Hit](#transaction-hit)
 - [Screen Hit](#screen-hit)
 - [Item Hit](#item-hit)
 - [Event Hit](#event-hit)
 
-#### `Transaction Hit`
-
-```Js
-
-import { useFlagship} from '@flagship.io/react-native-sdk';
-
-const { hit: fsHit } = useFlagship();
-
-/// Transaction hit
-const transactionHit = {
-    type: 'Transaction',
-    data: {
-      transactionId: '101010101',
-      affiliation: 'RN_affiliation',
-      totalRevenue: 999,
-      shippingCost: 888,
-      shippingMethod: 'CB',
-      currency: '784',
-      taxes: 1234444,
-      paymentMethod: 'payPal',
-      itemCount: 2,
-      couponCode: 'myCOUPON',
-      documentLocation: "APP",
-      pageTitle: 'myScreen'
-    }
-  };
-
-/// Send the transaction hit
-fsHit.send(transactionHit);
-
-```
+## `Transaction Hit`
 
 <table class="table table-bordered table-striped">
     <thead>
@@ -644,28 +725,7 @@ fsHit.send(transactionHit);
     </tbody>
 </table>
 
-#### `Screen Hit`
-
-```Js
-
-/// Send Screen Hit
-import { useFlagship } from '@flagship.io/react-native-sdk';
-
-const { hit: fsHit } = useFlagship();
-
-/// Screen hit
-  const screenHit = {
-    type: 'Screen',
-    data: {
-      documentLocation: "APP",  /// For the Mobile,  documentLocation = APP
-      pageTitle: "blogpost"
-    }
-  };
-
-//send the screen hit
-fsHit.send(screenHit);
-
-```
+## `Screen Hit`
 
 <table class="table table-bordered table-striped">
     <thead>
@@ -689,29 +749,7 @@ fsHit.send(screenHit);
     </tbody>
 </table>
 
-#### `Item Hit`
-
-```js
-/// Send Item Hit
-import { useFlagship } from "@flagship.io/react-native-sdk";
-
-const { hit: fsHit } = useFlagship();
-
-const itemHit = {
-  type: "Item",
-  data: {
-    transactionId: "0987654321",
-    name: "RN_item",
-    price: 100,
-    code: "code",
-    category: "category",
-    quantity: 123,
-    documentLocation: "APP",
-  },
-};
-
-fsHit.send(itemHit);
-```
+## `Item Hit`
 
 <table class="table table-bordered table-striped">
     <thead>
@@ -767,27 +805,7 @@ fsHit.send(itemHit);
     </tbody>
 </table>
 
-#### `Event Hit`
-
-```js
-/// Send Event
-
-  const { hit: fsHit } = useFlagship();
-
-  const eventHit = {
-
-    type: 'Event',
-    data: {
-      category: 'User Engagement',
-      action: 'RN_Onclick',
-      label: 'Hello from React Native',
-      value: 123,
-      documentLocation: "APP"
-    }
-    fsHit.send(eventHit);
-
-
-```
+## `Event Hit`
 
 <table class="table table-bordered table-striped">
     <thead>
@@ -831,6 +849,14 @@ fsHit.send(itemHit);
     </tbody>
 </table>
 
-## Release
+# Contributing
 
-Current version 0.1.0
+Take a look to the [Contributors Guide](CONTRIBUTING.md).
+
+# What is Flagship ?
+
+Have a look [here](https://www.abtasty.com/solutions-product-teams/).
+
+# License
+
+Flagship uses license under the [Apache version 2.0](http://www.apache.org/licenses/).
