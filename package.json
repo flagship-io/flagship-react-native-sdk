@@ -1,6 +1,6 @@
 {
     "name": "@flagship.io/react-native-sdk",
-    "version": "0.0.2",
+    "version": "0.0.3",
     "description": "Flagship SDK for React Native",
     "main": "index.js",
     "scripts": {
