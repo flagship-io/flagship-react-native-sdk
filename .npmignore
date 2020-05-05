@@ -1,0 +1,15 @@
+# Logs
+*.log
+npm-debug.log
+
+# Runtime data
+dist
+
+# Dependency directory
+node_modules
+webpack
+webpack.config.js
+
+.eslintrc.js
+.babelrc
+.prettierrc
