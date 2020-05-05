@@ -1,1 +1,17 @@
 node_modules
+
+
+example/ExpoCli/node_modules/**/*
+example/ExpoCli/.expo/*
+example/ExpoCli/npm-debug.*
+example/ExpoCli/*.jks
+example/ExpoCli/*.p8
+example/ExpoCli/*.p12
+example/ExpoCli/*.key
+example/ExpoCli/*.mobileprovision
+example/ExpoCli/*.orig.*
+example/ExpoCli/web-build/
+example/ExpoCli/web-report/
+
+# macOS
+.DS_Store
