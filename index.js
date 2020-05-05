@@ -13,22 +13,15 @@ import {
 } from './lib/FSTools';
 import ErrorBoundary from './lib/ErrorBoundary';
 
-const FlagshipProvider = ({ children, ...otherProps }) => {
-    const {
-        visitorData,
-        envId,
-        config,
-        onInitStart,
-        onInitDone,
-        onUpdate,
-        onError,
-        loadingComponent
-    } = otherProps;
-
+const FlagshipProvider = ({
+    children,
+    envId,
+    onError,
+    visitorData,
+    ...otherProps
+}) => {
     /// Check the Envid
     if (!checkValidityPatternForEnvId(envId)) {
-        console.log('Flagship sdk - The format of your EnvId is not valid');
-
         if (onError) {
             onError();
         }
@@ -37,22 +30,8 @@ const FlagshipProvider = ({ children, ...otherProps }) => {
 
     return (
         <ReactFlagshipProvider
+            {...otherProps}
             envId={envId}
-            config={config}
-            onInitStart={() => {
-                console.log('Flagship SDK : Starting ....');
-
-                if (onInitStart) {
-                    onInitStart();
-                }
-            }}
-            onInitDone={() => {
-                console.log('Flagship SDK : Init is Done');
-                if (onInitDone) {
-                    onInitDone();
-                }
-            }}
-            onUpdate={onUpdate}
             visitorData={{
                 /// Check the visitor id is null ?
                 id:
@@ -61,15 +40,14 @@ const FlagshipProvider = ({ children, ...otherProps }) => {
                         : visitorData.id,
                 context: visitorData.context
             }}
-            loadingComponent={loadingComponent}
         >
             {children}
         </ReactFlagshipProvider>
     );
 };
 
-/// Activate
+// Flagship Hooks
 export { useFsActivate, useFsModifications, useFsSynchronize, useFlagship };
 
-/// Provider
+// Flagship Provider overloaded
 export default FlagshipProvider;
