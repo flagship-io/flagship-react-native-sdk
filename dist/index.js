@@ -118,25 +118,27 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony import */ var _lib_FSTools__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./lib/FSTools */ "./lib/FSTools.js");
 /* harmony import */ var _lib_ErrorBoundary__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./lib/ErrorBoundary */ "./lib/ErrorBoundary.js");
+function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
+
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
 
 
 
 
 
-const FlagshipProvider = ({
-  children,
-  ...otherProps
-}) => {
-  const {
-    visitorData,
-    envId,
-    config,
-    onInitStart,
-    onInitDone,
-    onUpdate,
-    onError,
-    loadingComponent
-  } = otherProps; /// Check the Envid
+
+var FlagshipProvider = function FlagshipProvider(_ref) {
+  var children = _ref.children,
+      otherProps = _objectWithoutProperties(_ref, ["children"]);
+
+  var visitorData = otherProps.visitorData,
+      envId = otherProps.envId,
+      config = otherProps.config,
+      _onInitStart = otherProps.onInitStart,
+      _onInitDone = otherProps.onInitDone,
+      onUpdate = otherProps.onUpdate,
+      onError = otherProps.onError,
+      loadingComponent = otherProps.loadingComponent; /// Check the Envid
 
   if (!Object(_lib_FSTools__WEBPACK_IMPORTED_MODULE_2__["checkValidityPatternForEnvId"])(envId)) {
     console.log('Flagship sdk - The format of your EnvId is not valid');
@@ -151,18 +153,18 @@ const FlagshipProvider = ({
   return /*#__PURE__*/!(function webpackMissingModule() { var e = new Error("Cannot find module 'react'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()).createElement(_flagship_io_react_sdk__WEBPACK_IMPORTED_MODULE_1__["FlagshipProvider"], {
     envId: envId,
     config: config,
-    onInitStart: () => {
+    onInitStart: function onInitStart() {
       console.log('Flagship SDK : Starting ....');
 
-      if (onInitStart) {
-        onInitStart();
+      if (_onInitStart) {
+        _onInitStart();
       }
     },
-    onInitDone: () => {
+    onInitDone: function onInitDone() {
       console.log('Flagship SDK : Init is Done');
 
-      if (onInitDone) {
-        onInitDone();
+      if (_onInitDone) {
+        _onInitDone();
       }
     },
     onUpdate: onUpdate,
@@ -193,37 +195,76 @@ const FlagshipProvider = ({
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return ErrorBoundary; });
 !(function webpackMissingModule() { var e = new Error("Cannot find module 'react'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function () { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
  ///  ErrorBoundary ///
 
-class ErrorBoundary extends !(function webpackMissingModule() { var e = new Error("Cannot find module 'react'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()).Component {
-  constructor(props) {
-    super(props);
-    this.state = {
+var ErrorBoundary = /*#__PURE__*/function (_React$Component) {
+  _inherits(ErrorBoundary, _React$Component);
+
+  var _super = _createSuper(ErrorBoundary);
+
+  function ErrorBoundary(props) {
+    var _this;
+
+    _classCallCheck(this, ErrorBoundary);
+
+    _this = _super.call(this, props);
+    _this.state = {
       hasError: false
     };
+    return _this;
   }
 
-  static getDerivedStateFromError(error) {
-    // Update state so the next render will show the fallback UI.
-    return {
-      hasError: true
-    };
-  }
-
-  componentDidCatch(error, errorInfo) {// You can also log the error to an error reporting service
-    //logErrorToMyService(error, errorInfo);
-  }
-
-  render() {
-    if (this.state.hasError) {
-      // You can render any custom fallback UI
-      return /*#__PURE__*/!(function webpackMissingModule() { var e = new Error("Cannot find module 'react'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()).createElement(!(function webpackMissingModule() { var e = new Error("Cannot find module 'react'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()).Fragment, null, /*#__PURE__*/!(function webpackMissingModule() { var e = new Error("Cannot find module 'react'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()).createElement(Text, null, "Something went wrong."), /*#__PURE__*/!(function webpackMissingModule() { var e = new Error("Cannot find module 'react'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()).createElement(!(function webpackMissingModule() { var e = new Error("Cannot find module 'react'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()).Fragment, null, this.props.children));
+  _createClass(ErrorBoundary, [{
+    key: "componentDidCatch",
+    value: function componentDidCatch(error, errorInfo) {// You can also log the error to an error reporting service
+      //logErrorToMyService(error, errorInfo);
     }
+  }, {
+    key: "render",
+    value: function render() {
+      if (this.state.hasError) {
+        // You can render any custom fallback UI
+        return /*#__PURE__*/!(function webpackMissingModule() { var e = new Error("Cannot find module 'react'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()).createElement(!(function webpackMissingModule() { var e = new Error("Cannot find module 'react'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()).Fragment, null, /*#__PURE__*/!(function webpackMissingModule() { var e = new Error("Cannot find module 'react'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()).createElement(Text, null, "Something went wrong."), /*#__PURE__*/!(function webpackMissingModule() { var e = new Error("Cannot find module 'react'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()).createElement(!(function webpackMissingModule() { var e = new Error("Cannot find module 'react'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()).Fragment, null, this.props.children));
+      }
 
-    return this.props.children;
-  }
+      return this.props.children;
+    }
+  }], [{
+    key: "getDerivedStateFromError",
+    value: function getDerivedStateFromError(error) {
+      // Update state so the next render will show the fallback UI.
+      return {
+        hasError: true
+      };
+    }
+  }]);
 
-}
+  return ErrorBoundary;
+}(!(function webpackMissingModule() { var e = new Error("Cannot find module 'react'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()).Component);
+
+
 
 /***/ }),
 
@@ -238,10 +279,10 @@ class ErrorBoundary extends !(function webpackMissingModule() { var e = new Erro
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "generateFlagshipId", function() { return generateFlagshipId; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "checkValidityPatternForEnvId", function() { return checkValidityPatternForEnvId; });
-const XidLength = 20;
-const XidPattern = '[0-9a-v]{20}';
+var XidLength = 20;
+var XidPattern = '[0-9a-v]{20}';
 function generateFlagshipId() {
-  const id = Math.floor(Math.random() * Date.now());
+  var id = Math.floor(Math.random() * Date.now());
   console.log('Flagship SDK generated Visitor ID: ', id);
   return id.toString();
 }
@@ -4214,4 +4255,4 @@ function isSlowBuffer (obj) {
 
 /******/ })["default"];
 });
-//# sourceMappingURL=index.reactNative.js.map
+//# sourceMappingURL=index.js.map

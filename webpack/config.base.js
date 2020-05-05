@@ -16,38 +16,22 @@ module.exports = {
         libraryExport: 'default'
     },
     module: {
-        exprContextCritical: false,
+        // exprContextCritical: false,
         rules: [
             {
-                test: /\.m?js$/,
+                test: /\.(js|jsx)$/,
                 exclude: /(node_modules|bower_components)/,
                 use: [
                     {
-                        loader: 'babel-loader',
-                        options: {
-                            presets: ['@babel/react']
-                        }
+                        loader: 'babel-loader'
+                        // options: {
+                        //     presets: ['@babel/react']
+                        // }
                     }
-                    // {
-                    //     loader: 'eslint-loader',
-                    //     // query: {
-                    //     //     presets: ['es2015', 'react']
-                    //     // },
-                    //     options: {
-                    //         cache: true,
-                    //         emitWarning: true,
-                    //         configFile: '.eslintrc.js'
-                    //     }
-                    // }
                 ]
             }
         ]
     },
-    externals: [
-        nodeExternals({
-            whitelist: ['axios']
-        })
-    ],
     plugins: [new webpack.DefinePlugin({ 'global.GENTLY': false })],
     resolve: {
         extensions: ['.webpack.js', '.web.js', '.ts', '.tsx', '.js']

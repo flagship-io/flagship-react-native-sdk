@@ -22,11 +22,11 @@
     "author": "ABTasty",
     "license": "ISC",
     "devDependencies": {
-        "@babel/core": "^7.7.2",
-        "@babel/preset-env": "^7.7.1",
+        "@babel/core": "^7.9.6",
+        "@babel/preset-env": "^7.9.6",
         "@babel/preset-react": "^7.9.4",
         "@react-native-community/eslint-config": "^1.1.0",
-        "babel-loader": "^8.0.6",
+        "babel-loader": "^8.1.0",
         "eslint": "^6.8.0",
         "eslint-config-prettier": "^6.11.0",
         "eslint-loader": "^3.0.3",
@@ -36,9 +36,9 @@
         "eslint-plugin-react-hooks": "^4.0.0",
         "prettier": "^2.0.5",
         "prettier-eslint": "^9.0.1",
-        "webpack": "4.41.0",
+        "webpack": "^4.43.0",
         "webpack-bundle-analyzer": "^3.6.0",
-        "webpack-cli": "^3.3.10",
+        "webpack-cli": "^3.3.11",
         "webpack-merge": "^4.2.2",
         "webpack-node-externals": "^1.7.2"
     }

@@ -4,7 +4,7 @@ const baseConfig = require('./config.base.js');
 module.exports = merge(baseConfig, {
     target: 'web',
     output: {
-        filename: 'index.reactNative.js',
+        filename: 'index.js',
         libraryTarget: 'umd'
     },
     externals: {
