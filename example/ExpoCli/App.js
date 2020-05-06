@@ -5,12 +5,13 @@ import Container from './src/Container';
 import FlagshipLoading from './src/FlagshipLoading';
 
 export default function App() {
+    const [state, setState] = React.useState({ isVip: true, isAuth: true });
     return (
         <FlagshipProvider
-            envId="your envId"
+            envId="bn1ab7m56qolupi5sa0g"
             visitorData={{
-                id: 'bqjfsd6irtfg02cm79jg',
-                context: { isVip: true, isAuth: true }
+                id: 'randomVisitor',
+                context: { ...state }
             }}
             config={{
                 fetchNow: true,
@@ -18,7 +19,10 @@ export default function App() {
             }}
             loadingComponent={<FlagshipLoading />}
         >
-            <Container />
+            <Container
+                state={state}
+                onStateChange={(newState) => setState({ ...newState })}
+            />
         </FlagshipProvider>
     );
 }
