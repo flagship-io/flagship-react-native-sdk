@@ -12,15 +12,31 @@ import {
     checkValidityPatternForEnvId
 } from './lib/FSTools';
 import ErrorBoundary from './lib/ErrorBoundary';
+import FsLogger from './lib/FsLogger';
+
+const initState = {
+    log: null
+};
+
+const FsReactNativeContext = React.createContext({
+    state: { ...initState },
+    setState: null
+});
 
 const FlagshipProvider = ({
     children,
     envId,
     onError,
+    config,
     visitorData,
     ...otherProps
 }) => {
-    /// Check the Envid
+    const [state, setState] = React.useState({
+        ...initState,
+        log: FsLogger.getLogger(config)
+    });
+
+    // Check the envId
     if (!checkValidityPatternForEnvId(envId)) {
         if (onError) {
             onError();
@@ -29,22 +45,28 @@ const FlagshipProvider = ({
     }
 
     return (
-        <ReactFlagshipProvider
-            {...otherProps}
-            envId={envId}
-            visitorData={{
-                /// Check the visitor id is null ?
-                id:
-                    visitorData.id == null
-                        ? generateFlagshipId()
-                        : visitorData.id,
-                context: visitorData.context
-            }}
-        >
-            {children}
-        </ReactFlagshipProvider>
+        <FsReactNativeContext.Provider value={{ state, setState }}>
+            <ReactFlagshipProvider
+                {...otherProps}
+                envId={envId}
+                config={config}
+                visitorData={{
+                    /// Check the visitor id is null ?
+                    id:
+                        visitorData.id == null
+                            ? generateFlagshipId()
+                            : visitorData.id,
+                    context: visitorData.context
+                }}
+            >
+                {children}
+            </ReactFlagshipProvider>
+        </FsReactNativeContext.Provider>
     );
 };
+
+// Flagship react native consumer
+export const FsReactNativeConsumer = FsReactNativeContext.Consumer;
 
 // Flagship Hooks
 export { useFsActivate, useFsModifications, useFsSynchronize, useFlagship };

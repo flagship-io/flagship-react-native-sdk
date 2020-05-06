@@ -5,11 +5,11 @@ Flagship features are accessible using Flagship hooks, have a look to the docume
 
 ## Prerequisites
 
-- **Node.js**: version 6.0.0 or later...
+-   **Node.js**: version 6.0.0 or later...
 
-- **Npm**: version 5.2.0 or later...
+-   **Npm**: version 5.2.0 or later...
 
-- **React**: version 16.8.0 or later... (This SDK supports only hooks for now)
+-   **React**: version 16.8.0 or later... (This SDK supports only hooks for now)
 
 # Getting Started
 
@@ -246,6 +246,12 @@ Here are the attributes which you can set inside the SDK settings object:
           - If you want to move to an earlier version the Flagship API (v2, v3,...).
           </td>
         </tr>
+        <tr>
+          <td>apiKey</td>
+          <td>string</td>
+          <td>null</td>
+          <td>If you want to use the <a href="http://developers.flagship.io/api/v2/">Decision API V2</a>, you must contact the support team so they'll provide you an API Key to authenticate the calls.</td>
+        </tr>
 </tbody>
 
 </table>
@@ -256,23 +262,23 @@ Here are the attributes which you can set inside the SDK settings object:
 
 Here the list of current available hooks:
 
-- [useFlagship](#useFlagship)
-- [useFsModifications](#useFsModifications)
-- [useFsActivate](#useFsActivate)
-- [useFsSynchronize](#useFsSynchronize)
+-   [useFlagship](#useFlagship)
+-   [useFsModifications](#useFsModifications)
+-   [useFsActivate](#useFsActivate)
+-   [useFsSynchronize](#useFsSynchronize)
 
 ## Available hits
 
-- [Transaction Hit](#transaction-hit)
-- [Screen Hit](#screen-hit)
-- [Item Hit](#item-hit)
-- [Event Hit](#event-hit)
+-   [Transaction Hit](#transaction-hit)
+-   [Screen Hit](#screen-hit)
+-   [Item Hit](#item-hit)
+-   [Event Hit](#event-hit)
 
 ## `useFlagship`
 
 Most used hook from the Flagship React Native SDK. Through this hook, you can access to modifications of your current visitor and have an access to the SDK status. Output shape is visible [here](#useFlagship-output-shape).
 
-- returns an object (Typescript: UseFlagshipOutput)
+-   returns an object (Typescript: UseFlagshipOutput)
 
 <table class="table table-bordered table-striped">
     <thead>
@@ -479,7 +485,7 @@ This will give you the modification saved in the SDK cache.
 
 **NOTE:** If the SDK cache is empty, you can expect that it will return nothing.
 
-- returns Flagship modifications
+-   returns Flagship modifications
 
 <table class="table table-bordered table-striped">
     <thead>
@@ -543,7 +549,7 @@ const fsModifications = useFsModifications([
 
 ## `useFsActivate`
 
-- return `void`
+-   return `void`
 
 <table class="table table-bordered table-striped">
     <thead>
@@ -593,7 +599,7 @@ onClick={() => setToggle(!toggle)}
 
 Refresh modifications in cache by making a http request to the Flagship API.
 
-- return `void`
+-   return `void`
 
 <table class="table table-bordered table-striped">
     <thead>
@@ -646,10 +652,10 @@ onClick={() => setToggle(!toggle)}
 
 <p id='Shape-of-possible-hits-to-send'><i>Shape</i> of possible hits to send:</p>
 
-- [Transaction Hit](#transaction-hit)
-- [Screen Hit](#screen-hit)
-- [Item Hit](#item-hit)
-- [Event Hit](#event-hit)
+-   [Transaction Hit](#transaction-hit)
+-   [Screen Hit](#screen-hit)
+-   [Item Hit](#item-hit)
+-   [Event Hit](#event-hit)
 
 ## `Transaction Hit`
 

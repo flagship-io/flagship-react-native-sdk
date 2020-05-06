@@ -5,14 +5,17 @@
     "main": "index.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 0",
-        "build": "exit 0",
-        "release": "npm version patch && npm publish --access public"
+        "build": "npm install @flagship.io/react-sdk@latest --save && exit 0",
+        "publish": "npm run update:expo-cli-demo && git add . && git commit -m\"Post publish update\" && git push",
+        "update:expo-cli-demo": "cd ./examples/expo-cli-demo && npm install @flagship.io/react-native-sdk@latest --save && cd ../../",
+        "release": "np"
     },
     "repository": {
         "type": "git",
-        "url": "git@gitlab.com:canarybay/sdk/react-native-sdk.git"
+        "url": "git+https://github.com/abtasty/flagship-react-native-sdk.git"
     },
     "dependencies": {
+        "@flagship.io/js-sdk-logs": "0.0.4",
         "@flagship.io/react-sdk": "0.0.20"
     },
     "peerDependencies": {
@@ -24,7 +27,8 @@
         "native"
     ],
     "author": "ABTasty",
-    "license": "ISC",
+    "homepage": "https://github.com/abtasty/flagship-react-native-sdk#readme",
+    "license": "Apache-2.0",
     "devDependencies": {
         "@react-native-community/eslint-config": "^1.1.0",
         "eslint": "^6.8.0",
