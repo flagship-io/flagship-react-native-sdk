@@ -15,3 +15,5 @@ example/ExpoCli/web-report/
 
 # macOS
 .DS_Store
+
+examples/expo-cli-demo/.expo/
