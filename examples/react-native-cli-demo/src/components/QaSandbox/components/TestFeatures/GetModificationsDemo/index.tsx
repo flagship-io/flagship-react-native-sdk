@@ -41,29 +41,49 @@ const GetModificationsDemo: React.SFC<Props> = ({navigation}) => {
   return (
     <SafeAreaView>
       <ScrollView style={[s.ph3, styles.body]}>
-        <Text style={[s.mt4, s.f3]}>hook argument:</Text>
+        {/* INPUT */}
         <View>
-          <JSONTree data={params} theme={themeJsonTree} />
+          <Text style={[s.mt4, s.f3]}>hook argument:</Text>
+          <View>
+            <JSONTree data={params} theme={themeJsonTree} />
+          </View>
+          <Button
+            title="Edit argument"
+            containerStyle={[s.mv3]}
+            buttonStyle={{backgroundColor: 'black'}}
+            onPress={() => {
+              navigation.navigate('EditModificationsArgs');
+            }}
+          />
         </View>
-        <Text style={[s.mt4, s.f3]}>hook output:</Text>
+        {/* OUTPUT */}
         <View>
-          <JSONTree data={fsModifications} theme={themeJsonTree} />
+          <Text style={[s.mt4, s.f3]}>hook output:</Text>
+          <View>
+            <JSONTree data={fsModifications} theme={themeJsonTree} />
+          </View>
         </View>
-        <Text style={[s.mt4, s.f3]}>result:</Text>
-        <View>
-          <Text cls={fsModifications.color}>
-            My color is {fsModifications.color}{' '}
-            {fsModifications.color !== params[0].defaultValue &&
-              'which is not my default value! :p'}
-          </Text>
+        {/* RESULT */}
+        <View style={[s.mb4]}>
+          <Text style={[s.mt4, s.f3]}>result:</Text>
+          <View>
+            <Text cls={fsModifications.color}>
+              My color is {fsModifications.color}{' '}
+              {fsModifications.color !== params[0].defaultValue &&
+                'which is not my default value! :p'}
+            </Text>
+          </View>
         </View>
-        <Button
-          title="Go back"
-          containerStyle={[s.mv5]}
-          onPress={() => {
-            navigation.navigate('QaSandbox');
-          }}
-        />
+        {/* BOTTOM MENU */}
+        <View style={[{borderTopColor: 'black', borderTopWidth: 1}, s.pv2]}>
+          <Button
+            title="Go back"
+            containerStyle={[s.mv1]}
+            onPress={() => {
+              navigation.navigate('QaSandbox');
+            }}
+          />
+        </View>
       </ScrollView>
     </SafeAreaView>
   );

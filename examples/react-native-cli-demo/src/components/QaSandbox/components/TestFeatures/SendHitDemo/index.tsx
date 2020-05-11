@@ -101,7 +101,7 @@ const SendHitDemo: React.SFC<Props> = ({navigation}) => {
               containerStyle={[s.mv3]}
               buttonStyle={{backgroundColor: 'black'}}
               onPress={() => {
-                navigation.navigate('QaSandbox');
+                navigation.navigate('EditHitPayload');
               }}
             />
           </View>

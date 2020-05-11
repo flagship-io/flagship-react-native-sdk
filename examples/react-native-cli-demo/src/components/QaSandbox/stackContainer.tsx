@@ -6,6 +6,8 @@ import ReduxStateInfo from './components/ReduxStateInfo';
 import NewVisitorContext from './components/SdkSettings/components/NewVisitorContext';
 import GetModificationsDemo from './components/TestFeatures/GetModificationsDemo';
 import SendHitDemo from './components/TestFeatures/SendHitDemo';
+import EditArguments from './components/TestFeatures/GetModificationsDemo/components/EditArguments';
+import EditHitPayload from './components/TestFeatures/SendHitDemo/components/EditHitPayload';
 // const styles = StyleSheet.create({});
 
 // REACT NAVIGATION: begin
@@ -16,6 +18,8 @@ export type RootStackParamList = {
   NewVisitorContext: {};
   GetModificationsDemo: {};
   SendHitDemo: {};
+  EditModificationsArgs: {};
+  EditHitPayload: {};
 };
 const Stack = createStackNavigator<RootStackParamList>();
 // REACT NAVIGATION: end
@@ -60,6 +64,16 @@ const DevSandbox: React.SFC<Props> = () => {
         name="NewVisitorContext"
         component={NewVisitorContext}
         options={{title: 'Add a visitor context attribute'}}
+      />
+      <Stack.Screen
+        name="EditModificationsArgs"
+        component={EditArguments}
+        options={{title: 'Modify arguments'}}
+      />
+      <Stack.Screen
+        name="EditHitPayload"
+        component={EditHitPayload}
+        options={{title: 'Modify hit payload'}}
       />
     </Stack.Navigator>
   );
