@@ -3,22 +3,23 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {NavigationContainer} from '@react-navigation/native';
 import FlagshipProvider from '@flagship.io/react-native-sdk';
 import {useSelector, useDispatch} from 'react-redux';
-import {View} from 'react-native';
-import {Text} from 'native-base';
+import {View, Image, Text} from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import QaSbStackContainer from '../QaSandbox/stackContainer';
 import Home from '../Home';
 import {RootState} from '../../redux/rootReducer';
 import {setFsModifications} from '../../redux/stuff/sdkSettings/actions';
+import {SafeAreaView} from 'react-native-safe-area-context';
+import NativeTachyons, {styles as s} from 'react-native-style-tachyons';
 
 // REACT NAVIGATION: begin
 const Tab = createBottomTabNavigator();
 
 const FlagshipWrapper = () => {
   const FsLoadingProvider = () => (
-    <View>
-      <Text>Loading...</Text>
+    <View style={[s.flex, s.jcc, s.asc, {height: '100%'}]}>
+      <Text style={[s.f4]}>Loading...</Text>
     </View>
   );
   const sdkSettings = useSelector((state: RootState) => state.sdkSettings);

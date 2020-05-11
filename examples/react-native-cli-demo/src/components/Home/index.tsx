@@ -1,10 +1,10 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import {Text} from 'react-native';
+import {Text, Image} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {styles as s} from 'react-native-style-tachyons';
 import {ScrollView} from 'react-native-gesture-handler';
-
+import loadingGif from '../../assets/loading.gif';
 const Home = () => {
   return (
     <SafeAreaView>
@@ -14,6 +14,14 @@ const Home = () => {
           Reana is a demo app for the React-Native Flagship SDK.
         </Text>
         <Text style={[s.f6, s.pv3]}>This is a QA app.</Text>
+        <Image
+          style={{
+            width: 300,
+            height: 300,
+            resizeMode: 'stretch',
+          }}
+          source={loadingGif}
+        />
       </ScrollView>
     </SafeAreaView>
   );

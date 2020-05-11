@@ -9,6 +9,8 @@ import {Button} from 'react-native-elements';
 import {RootStackParamList} from '../../../stackContainer';
 import {useFsModifications} from '@flagship.io/react-native-sdk';
 import {themeJsonTree} from '../../../../../assets/commonStyles';
+import {useSelector} from 'react-redux';
+import {RootState} from '../../../../../redux/rootReducer';
 
 const styles = StyleSheet.create({
   body: {
@@ -30,13 +32,9 @@ interface Props {
 }
 
 const GetModificationsDemo: React.SFC<Props> = ({navigation}) => {
-  const params = [
-    {
-      key: 'color',
-      defaultValue: 'green',
-      activate: false,
-    },
-  ];
+  const params = useSelector<RootState>(
+    (state) => state.demo.getModifications.params,
+  );
   const fsModifications = useFsModifications(params);
   return (
     <SafeAreaView>
