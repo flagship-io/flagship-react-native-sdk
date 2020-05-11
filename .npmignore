@@ -4,6 +4,7 @@ npm-debug.log
 
 # Runtime data
 dist
+examples
 
 # Dependency directory
 node_modules
