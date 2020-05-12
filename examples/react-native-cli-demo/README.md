@@ -1,4 +1,6 @@
-# FS SDK QA - React Native
+# Sample of React Native CLI using [Flagship - React Native SDK](../../README.md)
+
+![React native demo gif](./src/asssets/demo_reana.gif)
 
 ## Getting Started
 
