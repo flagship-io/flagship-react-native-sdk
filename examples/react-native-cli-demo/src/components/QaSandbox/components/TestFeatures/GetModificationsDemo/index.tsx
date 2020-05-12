@@ -41,7 +41,7 @@ const GetModificationsDemo: React.SFC<Props> = ({navigation}) => {
       <ScrollView style={[s.ph3, styles.body]}>
         {/* INPUT */}
         <View>
-          <Text style={[s.mt4, s.f3]}>hook argument:</Text>
+          <Text style={[s.mt4, s.f3]}>Hook argument:</Text>
           <View>
             <JSONTree data={params} theme={themeJsonTree} />
           </View>
@@ -56,14 +56,14 @@ const GetModificationsDemo: React.SFC<Props> = ({navigation}) => {
         </View>
         {/* OUTPUT */}
         <View>
-          <Text style={[s.mt4, s.f3]}>hook output:</Text>
+          <Text style={[s.mt4, s.f3]}>Hook output:</Text>
           <View>
             <JSONTree data={fsModifications} theme={themeJsonTree} />
           </View>
         </View>
         {/* RESULT */}
         <View style={[s.mb4]}>
-          <Text style={[s.mt4, s.f3]}>result:</Text>
+          <Text style={[s.mt4, s.f3]}>Result:</Text>
           <View>
             <Text cls={fsModifications.color}>
               My color is {fsModifications.color}{' '}
