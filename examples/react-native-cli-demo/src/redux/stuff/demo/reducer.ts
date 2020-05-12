@@ -2,6 +2,7 @@ import {
   DEMO_UPDATE_HIT_PAYLOAD,
   DEMO_SET_CURRENT_HIT_SELECTED,
   DEMO_SET_USE_MODIFICATIONS_PARAMS,
+  DEMO_RESET,
 } from './../../glossary';
 import initialState from './initialState';
 import {DemoState} from './types';
@@ -34,6 +35,8 @@ const demoReducer = (
     case DEMO_SET_USE_MODIFICATIONS_PARAMS:
       newState.getModifications.params = action.payload;
       return newState;
+    case DEMO_RESET:
+      return {...initialState};
     default:
       return state;
   }

@@ -2,6 +2,7 @@ export type SdkSettingsState = {
   envId: string | undefined;
   visitorId: string | undefined;
   visitorContext: Array<visitorContextElement>;
+  fsModifications: any[];
 };
 
 export type SetEnvIdAction = {

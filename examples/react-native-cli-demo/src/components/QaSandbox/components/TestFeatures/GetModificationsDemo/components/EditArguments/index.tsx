@@ -225,7 +225,7 @@ const EditArguments: React.SFC<Props> = ({navigation}) => {
               buttonStyle={{backgroundColor: 'black'}}
               onPress={() => {
                 setError(null);
-                if (!newReqModif.key) {
+                if (!newReqModif || !newReqModif.key) {
                   setError('key is missing');
                 } else if (!newReqModif.defaultValueType) {
                   setError('default value type not specified.');
@@ -233,16 +233,17 @@ const EditArguments: React.SFC<Props> = ({navigation}) => {
                   setError('default value is missing');
                 } else if (newReqModif.activate === null) {
                   setError('activate not specified');
+                } else {
+                  const toUpdate = [...params];
+                  const toAdd = {
+                    key: newReqModif.key,
+                    defaultValue: newReqModif.defaultValue,
+                    activate: newReqModif.activate,
+                  };
+                  toUpdate.push(toAdd);
+                  dispatch(setModificationsParams(toUpdate));
+                  navigation.goBack();
                 }
-                const toUpdate = [...params];
-                const toAdd = {
-                  key: newReqModif.key,
-                  defaultValue: newReqModif.defaultValue,
-                  activate: newReqModif.activate,
-                };
-                toUpdate.push(toAdd);
-                dispatch(setModificationsParams(toUpdate));
-                navigation.goBack();
               }}
             />
           </View>

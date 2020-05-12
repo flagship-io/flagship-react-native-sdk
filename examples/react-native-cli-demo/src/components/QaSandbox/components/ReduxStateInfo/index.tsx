@@ -8,8 +8,10 @@ import {RootStackParamList} from '../../stackContainer';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {Button} from 'react-native-elements';
 import {themeJsonTree} from '../../../../assets/commonStyles';
-import {useSelector} from 'react-redux';
-import {RootState} from 'src/redux/rootReducer';
+import {useSelector, useDispatch} from 'react-redux';
+import {RootState} from '../../../../redux/rootReducer';
+import {resetDemo} from '../../../../redux/stuff/demo/actions';
+import {resetSettings} from '../../../../redux/stuff/sdkSettings/actions';
 
 const styles = StyleSheet.create({
   body: {
@@ -33,6 +35,7 @@ interface Props {
 const ReduxStateInfo: React.SFC<Props> = ({navigation}) => {
   const sdkSettings = useSelector((state: RootState) => state.sdkSettings);
   const demo = useSelector((state: RootState) => state.demo);
+  const dispatch = useDispatch();
   return (
     <SafeAreaView>
       <ScrollView style={[s.ph3, styles.body]}>
@@ -45,8 +48,17 @@ const ReduxStateInfo: React.SFC<Props> = ({navigation}) => {
           <JSONTree data={demo} theme={themeJsonTree} />
         </View>
         <Button
-          title="Ok"
-          containerStyle={[s.mv5]}
+          title="Reset"
+          containerStyle={[s.mv2]}
+          buttonStyle={[{backgroundColor: 'red'}]}
+          onPress={() => {
+            dispatch(resetDemo());
+            dispatch(resetSettings());
+          }}
+        />
+        <Button
+          title="Go back"
+          containerStyle={[s.mv2]}
           onPress={() => {
             navigation.navigate('QaSandbox');
           }}

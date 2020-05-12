@@ -2,6 +2,7 @@ import {
   DEMO_SET_USE_MODIFICATIONS_PARAMS,
   DEMO_SET_CURRENT_HIT_SELECTED,
   DEMO_UPDATE_HIT_PAYLOAD,
+  DEMO_RESET,
 } from './../../glossary';
 import {Modification, HitShape} from './types';
 
@@ -29,5 +30,11 @@ export const updateHitPayload = (
   return {
     type: DEMO_UPDATE_HIT_PAYLOAD,
     payload,
+  };
+};
+
+export const resetDemo = (): {type: string} => {
+  return {
+    type: DEMO_RESET,
   };
 };

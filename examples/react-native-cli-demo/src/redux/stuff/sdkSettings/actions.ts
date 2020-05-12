@@ -3,6 +3,7 @@ import {
   SDK_SETTINGS_SET_ENV_ID,
   SDK_SETTINGS_SET_VISITOR_CONTEXT,
   SDK_SETTINGS_SET_FS_MODIFICATIONS,
+  SDK_SETTINGS_RESET,
 } from './../../glossary';
 import {
   SetEnvIdAction,
@@ -23,6 +24,12 @@ export const setVisitorIdAction = (id: string): SetVisitorIdAction => {
   return {
     type: SDK_SETTINGS_SET_VISITOR_ID,
     payload: id,
+  };
+};
+
+export const resetSettings = () => {
+  return {
+    type: SDK_SETTINGS_RESET,
   };
 };
 
