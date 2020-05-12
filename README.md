@@ -11,6 +11,15 @@ Flagship features are accessible using Flagship hooks, have a look to the docume
 
 -   **React**: version 16.8.0 or later... (This SDK supports only hooks for now)
 
+## Good to know
+
+<ul style="line-height:1.4;">
+- <a href="examples/expo-cli-demo/README.md">Simple Demo</a> made with expo CLI.
+</ul>
+<ul style="line-height:1.4;">
+- <a href="examples/react-native-cli-demo/README.md">Advanced Demo</a> made with react natice CLI.
+</ul>
+
 # Getting Started
 
 ## 1. **Install** the node module:
@@ -217,12 +226,6 @@ Here are the attributes which you can set inside the SDK settings object:
           <td>boolean</td>
           <td>false</td>
           <td>Enable it to display logs on the console when SDK is running.<br>This will only display logs such as <i>Warnings</i>, <i>Errors</i>, <i>Fatal errors</i> and <i>Info</i>.</td>
-        </tr>
-        <tr>
-          <td>logPathName</td>
-          <td>string</td>
-          <td>'flagshipNodeSdkLogs'</td>
-          <td>This is the path where logs will be written when SDK is running.<br>By default it will create a folder named <i>flagshipNodeSdkLogs</i> at the root of your project</a>.</td>
         </tr>
         <tr>
           <td>enableErrorLayout</td>
