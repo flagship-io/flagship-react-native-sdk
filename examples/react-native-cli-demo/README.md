@@ -1,6 +1,6 @@
 # Sample of React Native CLI using [Flagship - React Native SDK](../../README.md)
 
-![React native demo gif](./src/asssets/demo_reana.gif)
+![React native demo gif](./src/assets/demo_reana.gif)
 
 ## Getting Started
 

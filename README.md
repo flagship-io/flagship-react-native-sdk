@@ -11,6 +11,15 @@ Flagship features are accessible using Flagship hooks, have a look to the docume
 
 -   **React**: version 16.8.0 or later... (This SDK supports only hooks for now)
 
+## Good to know
+
+<ul style="line-height:1.4;">
+- <a href="examples/expo-cli-demo/README.md">Simple Demo</a> made with expo CLI.
+</ul>
+<ul style="line-height:1.4;">
+- <a href="examples/react-native-cli-demo/README.md">Advanced Demo</a> made with react natice CLI.
+</ul>
+
 # Getting Started
 
 ## 1. **Install** the node module:
