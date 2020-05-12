@@ -35,10 +35,7 @@ const FlagshipWrapper = () => {
       onUpdate={({fsModifications}) => {
         dispatch(setFsModifications(fsModifications));
       }}
-      config={{
-        fetchNow: true,
-        enableConsoleLogs: true,
-      }}
+      config={{...sdkSettings.config}}
       onInitStart={() => {
         console.log('init start');
       }}

@@ -4,6 +4,7 @@ import {
   SDK_SETTINGS_SET_VISITOR_CONTEXT,
   SDK_SETTINGS_SET_FS_MODIFICATIONS,
   SDK_SETTINGS_RESET,
+  SDK_SETTINGS_UPDATE_CONFIG,
 } from './../../glossary';
 import {
   SetEnvIdAction,
@@ -24,6 +25,13 @@ export const setVisitorIdAction = (id: string): SetVisitorIdAction => {
   return {
     type: SDK_SETTINGS_SET_VISITOR_ID,
     payload: id,
+  };
+};
+
+export const updateConfig = (newConfig): {type: string; payload: any} => {
+  return {
+    type: SDK_SETTINGS_UPDATE_CONFIG,
+    payload: {...newConfig},
   };
 };
 

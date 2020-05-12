@@ -13,5 +13,14 @@ export default {
       type: 'boolean',
     },
   ],
+  config: {
+    fetchNow: true,
+    activateNow: false,
+    enableConsoleLogs: true,
+    enableErrorLayout: false,
+    nodeEnv: 'production',
+    flagshipApi: 'https://decision-api.flagship.io/v1/',
+    apiKey: null,
+  },
   fsModifications: [],
 };

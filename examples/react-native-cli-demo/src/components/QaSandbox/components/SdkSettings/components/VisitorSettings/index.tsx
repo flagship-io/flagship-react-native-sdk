@@ -60,7 +60,7 @@ const VisitorSettings: React.SFC<Props> = ({
     <Badge value="String" status="warning" containerStyle={styles.customRow} />
   );
   return (
-    <View style={[s.mt3]}>
+    <View style={[s.mv3]}>
       <Input
         {...commonInputStyle}
         label="Visitor ID"
@@ -91,11 +91,11 @@ const VisitorSettings: React.SFC<Props> = ({
             switch (context.type) {
               case 'bool':
               case 'boolean':
-                return <BoolBadge />;
+                return <BoolBadge key={context.type + index} />;
               case 'string':
-                return <StringBadge />;
+                return <StringBadge key={context.type + index} />;
               case 'number':
-                return <NumberBadge />;
+                return <NumberBadge key={context.type + index} />;
               default:
                 return null;
             }
