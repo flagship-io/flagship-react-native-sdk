@@ -1,8 +1,8 @@
 # Sample of Expo CLI using [Flagship - React Native SDK](../../README.md)
 
-<div style="text-align:center">
-<img src="./src/assets/expo-cli.gif"/>
-</div>
+<p align="center">
+<img src="./src/assets/expo-cli.gif" alt="demo gif"/>
+</p>
 
 ## Getting Started
 
