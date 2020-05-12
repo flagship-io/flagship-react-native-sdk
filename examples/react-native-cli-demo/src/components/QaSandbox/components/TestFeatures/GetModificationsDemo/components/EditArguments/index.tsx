@@ -9,7 +9,7 @@ import {Button, Input, ButtonGroup, CheckBox} from 'react-native-elements';
 import {RootStackParamList} from '../../../stackContainer';
 import {useFsModifications} from '@flagship.io/react-native-sdk';
 import {themeJsonTree} from '../../../../../assets/commonStyles';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import {RootState} from '../../../../../../../redux/rootReducer';
 import {appColors} from '../../../../../../../assets/commonStyles';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -17,6 +17,8 @@ import {
   commonInputStyle,
   commonIconStyle,
 } from './../../../../SdkSettings/index';
+import ErrorBlock from '../../../../../../common/ErrorBlock';
+import {setModificationsParams} from '../../../../../../../redux/stuff/demo/actions';
 
 const styles = StyleSheet.create({
   body: {
@@ -41,6 +43,7 @@ const EditArguments: React.SFC<Props> = ({navigation}) => {
   const params = useSelector<RootState>(
     (state) => state.demo.getModifications.params,
   );
+  const dispatch = useDispatch();
   const [newReqModif, updateReqModif] = React.useState({
     key: null,
     defaultValue: null,
@@ -48,6 +51,7 @@ const EditArguments: React.SFC<Props> = ({navigation}) => {
     activate: false,
   });
   const types = ['boolean', 'string', 'number'];
+  const [error, setError] = React.useState(null);
 
   return (
     <SafeAreaView>
@@ -55,33 +59,39 @@ const EditArguments: React.SFC<Props> = ({navigation}) => {
         <View>
           {/* Edit those already set: */}
           <View style={[s.flex]}>
-            <Text style={[s.f3, s.pv3]}>Already set:</Text>
-            <View style={[s.flex, s.jcsb]} cls="flx-row">
-              <View style={[{width: '25%'}, s.pb2]}>
-                <Text style={[s.f6]}>Key</Text>
+            <View key="titles">
+              <Text style={[s.f3, s.pv3]}>Already set:</Text>
+              <View style={[s.flex, s.jcsb]} cls="flx-row">
+                <View style={[{width: '25%'}, s.pb2]}>
+                  <Text style={[s.f6]}>Key</Text>
+                </View>
+                <View style={{width: '45%'}}>
+                  <Text style={[s.f6]}>Default value</Text>
+                </View>
+                <View style={{width: '20%'}}>
+                  <Text style={[s.f6]}>Activate</Text>
+                </View>
+                <View style={{width: '10%'}} />
               </View>
-              <View style={{width: '45%'}}>
-                <Text style={[s.f6]}>Default value</Text>
-              </View>
-              <View style={{width: '20%'}}>
-                <Text style={[s.f6]}>Activate</Text>
-              </View>
-              <View style={{width: '10%'}} />
             </View>
-            {params.map((p) => (
-              <View style={[s.flex, s.jcsb, s.aic]} cls="flx-row">
+            {params.map((p, index) => (
+              <View style={[s.flex, s.jcsb, s.aic]} cls="flx-row" key={p.key}>
                 <View style={{width: '25%'}}>
                   <Text>{p.key}</Text>
                 </View>
                 <View style={{width: '45%'}}>
-                  <Text>{p.defaultValue}</Text>
+                  <Text>{p.defaultValue.toString()}</Text>
                 </View>
                 <View style={{width: '20%'}}>
                   <Switch
                     // trackColor={{false: appColors.red, true: appColors.green}}
-                    thumbColor={p.activate ? appColors.green : appColors.red}
+                    thumbColor={p.activate ? 'white' : appColors.red}
                     ios_backgroundColor="white"
-                    onValueChange={() => {}}
+                    onValueChange={() => {
+                      const toUpdate = [...params];
+                      toUpdate[index].activate = !toUpdate[index].activate;
+                      dispatch(setModificationsParams(toUpdate));
+                    }}
                     value={p.activate}
                   />
                 </View>
@@ -90,7 +100,11 @@ const EditArguments: React.SFC<Props> = ({navigation}) => {
                     icon={<Icon name="times" size={12} color="white" />}
                     buttonStyle={[{backgroundColor: appColors.red}]}
                     title=""
-                    onPress={() => {}}
+                    onPress={() => {
+                      const toUpdate = [...params];
+                      toUpdate.splice(index, 1);
+                      dispatch(setModificationsParams(toUpdate));
+                    }}
                     containerStyle={[
                       {
                         marginTop: 6,
@@ -104,6 +118,7 @@ const EditArguments: React.SFC<Props> = ({navigation}) => {
           </View>
           <View style={[s.flex]}>
             <Text style={[s.f3, s.pv3]}>Add new:</Text>
+            {error && <ErrorBlock error={error} />}
             <Text style={[s.f5, s.pv2]}>Key:</Text>
             <Input
               {...commonInputStyle}
@@ -115,20 +130,22 @@ const EditArguments: React.SFC<Props> = ({navigation}) => {
               onChangeText={(txt) => updateReqModif({...newReqModif, key: txt})}
               leftIcon={<Icon name="key" {...commonIconStyle} />}
             />
-            <Text style={[s.f5, s.pv2]}>Default value:</Text>
             {newReqModif.key && (
-              <ButtonGroup
-                onPress={(index) => {
-                  updateReqModif({
-                    ...newReqModif,
-                    defaultValue: null,
-                    defaultValueType: types[index],
-                  });
-                }}
-                containerStyle={[s.mv3]}
-                selectedIndex={types.indexOf(newReqModif.defaultValueType)}
-                buttons={types}
-              />
+              <View>
+                <Text style={[s.f5, s.pv2]}>Default value:</Text>
+                <ButtonGroup
+                  onPress={(index) => {
+                    updateReqModif({
+                      ...newReqModif,
+                      defaultValue: null,
+                      defaultValueType: types[index],
+                    });
+                  }}
+                  containerStyle={[s.mv3]}
+                  selectedIndex={types.indexOf(newReqModif.defaultValueType)}
+                  buttons={types}
+                />
+              </View>
             )}
 
             {newReqModif.defaultValueType &&
@@ -179,26 +196,52 @@ const EditArguments: React.SFC<Props> = ({navigation}) => {
                   leftIcon={<Icon name="quote-right" {...commonIconStyle} />}
                 />
               )}
-            <Text style={[s.f5, s.pv2]}>Activate:</Text>
-            <View>
-              <CheckBox
-                title={'true'}
-                checked={!!newReqModif.activate}
-                onPress={() => updateReqModif({...newReqModif, activate: true})}
-              />
-              <CheckBox
-                title={'false'}
-                checked={newReqModif.activate !== null && !newReqModif.activate}
-                onPress={() =>
-                  updateReqModif({...newReqModif, activate: false})
-                }
-              />
-            </View>
+            {newReqModif.defaultValue && (
+              <View>
+                <Text style={[s.f5, s.pv2]}>Activate:</Text>
+                <View>
+                  <CheckBox
+                    title={'true'}
+                    checked={!!newReqModif.activate}
+                    onPress={() =>
+                      updateReqModif({...newReqModif, activate: true})
+                    }
+                  />
+                  <CheckBox
+                    title={'false'}
+                    checked={
+                      newReqModif.activate !== null && !newReqModif.activate
+                    }
+                    onPress={() =>
+                      updateReqModif({...newReqModif, activate: false})
+                    }
+                  />
+                </View>
+              </View>
+            )}
             <Button
               title="Add"
               containerStyle={[s.mt3, s.mb3]}
               buttonStyle={{backgroundColor: 'black'}}
               onPress={() => {
+                setError(null);
+                if (!newReqModif.key) {
+                  setError('key is missing');
+                } else if (!newReqModif.defaultValueType) {
+                  setError('default value type not specified.');
+                } else if (newReqModif.defaultValue === null) {
+                  setError('default value is missing');
+                } else if (newReqModif.activate === null) {
+                  setError('activate not specified');
+                }
+                const toUpdate = [...params];
+                const toAdd = {
+                  key: newReqModif.key,
+                  defaultValue: newReqModif.defaultValue,
+                  activate: newReqModif.activate,
+                };
+                toUpdate.push(toAdd);
+                dispatch(setModificationsParams(toUpdate));
                 navigation.goBack();
               }}
             />

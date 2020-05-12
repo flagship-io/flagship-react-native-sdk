@@ -62,16 +62,18 @@ const GetModificationsDemo: React.SFC<Props> = ({navigation}) => {
           </View>
         </View>
         {/* RESULT */}
-        <View style={[s.mb4]}>
-          <Text style={[s.mt4, s.f3]}>Result:</Text>
-          <View>
-            <Text cls={fsModifications.color}>
-              My color is {fsModifications.color}{' '}
-              {fsModifications.color !== params[0].defaultValue &&
-                'which is not my default value! :p'}
-            </Text>
+        {fsModifications.color && (
+          <View style={[s.mb4]}>
+            <Text style={[s.mt4, s.f3]}>Result:</Text>
+            <View>
+              <Text cls={fsModifications.color}>
+                My color is {fsModifications.color}{' '}
+                {fsModifications.color !== params[0].defaultValue &&
+                  'which is not my default value! :p'}
+              </Text>
+            </View>
           </View>
-        </View>
+        )}
         {/* BOTTOM MENU */}
         <View style={[{borderTopColor: 'black', borderTopWidth: 1}, s.pv2]}>
           <Button

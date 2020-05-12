@@ -11,6 +11,7 @@ import {StackNavigationProp} from '@react-navigation/stack';
 import {setVisitorContextAction} from '../../../../../../redux/stuff/sdkSettings/actions';
 import {RootStackParamList} from '../../../../stackContainer';
 import {RootState} from '../../../../../../redux/rootReducer';
+import ErrorBlock from '../../../../../common/ErrorBlock';
 
 const styles = StyleSheet.create({
   body: {
@@ -44,20 +45,7 @@ const NewVisitorContext: React.SFC<Props> = ({navigation}) => {
   return (
     <SafeAreaView>
       <ScrollView style={[s.ph3, styles.body]}>
-        {error && (
-          <View style={[s.f2, s.flex, s.aic]} cls="bg-red">
-            <View>
-              <Text style={[s.f3, s.pv3]} cls="white">
-                ⚠️ Error ⚠️
-              </Text>
-            </View>
-            <View>
-              <Text style={[s.f5, s.pb3]} cls="white">
-                {error}
-              </Text>
-            </View>
-          </View>
-        )}
+        {error && <ErrorBlock error={error} />}
         <View style={[s.f3, s.pv3, s.tc]}>
           <Input
             {...commonInputStyle}
