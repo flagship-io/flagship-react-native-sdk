@@ -108,6 +108,7 @@ const VisitorSettings: React.SFC<Props> = ({
               case 'boolean':
                 return (
                   <View
+                    key={context.value.toString() + index}
                     style={{
                       flex: 1,
                       alignItems: 'center',
@@ -122,6 +123,7 @@ const VisitorSettings: React.SFC<Props> = ({
               case 'string':
                 return (
                   <View
+                    key={context.value.toString()}
                     style={{
                       flex: 1,
                       alignItems: 'center',
@@ -134,6 +136,7 @@ const VisitorSettings: React.SFC<Props> = ({
               case 'number':
                 return (
                   <View
+                    key={context.value.toString()}
                     style={{
                       flex: 1,
                       alignItems: 'center',
@@ -152,6 +155,7 @@ const VisitorSettings: React.SFC<Props> = ({
           {visitorContext.map((context, index) => {
             return (
               <Button
+                key={index + index}
                 icon={<Icon name="times" size={12} color="white" />}
                 buttonStyle={[{backgroundColor: appColors.red}]}
                 title=""

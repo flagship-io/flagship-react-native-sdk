@@ -58,8 +58,6 @@ const SdkSettings: React.SFC<Props> = ({navigation}) => {
     (state: RootState) => state.sdkSettings.visitorContext,
   );
 
-  console.log('visitorContext : ', visitorContext);
-
   const stateEnvId = useSelector((state: RootState) => state.sdkSettings.envId);
   const stateVisId = useSelector(
     (state: RootState) => state.sdkSettings.visitorId,
@@ -176,11 +174,44 @@ const SdkSettings: React.SFC<Props> = ({navigation}) => {
             }
           />
         </View>
+        <View>
+          <Text style={[s.f5, s.mb2]}>flagshipApi:</Text>
+          <Input
+            {...commonInputStyle}
+            autoCorrect={false}
+            autoCapitalize={'none'}
+            autoCompleteType={'off'}
+            value={(config.flagshipApi || '').toString()}
+            placeholder="null"
+            onChangeText={(txt) =>
+              updateLocalConfig({
+                ...config,
+                flagshipApi: txt === '' ? null : txt,
+              })
+            }
+          />
+        </View>
+        <View style={[s.mt3]}>
+          <Text style={[s.f5, s.mb2]}>apiKey:</Text>
+          <Input
+            {...commonInputStyle}
+            autoCorrect={false}
+            autoCapitalize={'none'}
+            autoCompleteType={'off'}
+            value={(config.apiKey || '').toString()}
+            placeholder="null"
+            onChangeText={(txt) =>
+              updateLocalConfig({
+                ...config,
+                apiKey: txt === '' ? null : txt,
+              })
+            }
+          />
+        </View>
         <Button
           title="Save settings"
-          containerStyle={[s.mt5, s.mb4]}
+          containerStyle={[s.mt3, s.mb4]}
           onPress={() => {
-            console.log(envId);
             storeData('envId', "envId || ''");
             storeData('visId', "visId || ''");
             storeData('visContext', 'visitorContext.toString()');
