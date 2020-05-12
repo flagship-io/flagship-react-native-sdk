@@ -32,12 +32,17 @@ interface Props {
 
 const ReduxStateInfo: React.SFC<Props> = ({navigation}) => {
   const sdkSettings = useSelector((state: RootState) => state.sdkSettings);
+  const demo = useSelector((state: RootState) => state.demo);
   return (
     <SafeAreaView>
       <ScrollView style={[s.ph3, styles.body]}>
         <Text style={[s.mt4, s.f3]}>state.sdkSettings:</Text>
         <View>
           <JSONTree data={sdkSettings} theme={themeJsonTree} />
+        </View>
+        <Text style={[s.mt4, s.f3]}>state.demo:</Text>
+        <View>
+          <JSONTree data={demo} theme={themeJsonTree} />
         </View>
         <Button
           title="Ok"

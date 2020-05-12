@@ -10,6 +10,9 @@ import {RootStackParamList} from '../../../stackContainer';
 import {useFlagship} from '@flagship.io/react-native-sdk';
 import {themeJsonTree} from '../../../../../assets/commonStyles';
 import hit from '../../../../../mock/hit';
+import {useSelector, useDispatch} from 'react-redux';
+import {RootState} from '../../../../../redux/rootReducer';
+import {setCurrentHitSelected} from '../../../../../redux/stuff/demo/actions';
 
 const styles = StyleSheet.create({
   body: {
@@ -32,10 +35,8 @@ interface Props {
 
 const SendHitDemo: React.SFC<Props> = ({navigation}) => {
   const {hit: fsHit} = useFlagship();
-  const [hitState, setHitState] = React.useState({
-    type: null,
-    payload: null,
-  });
+  const hitInfo = useSelector<RootState>((state) => state.demo.sendHit);
+  const dispatch = useDispatch();
   const [isHitSent, toggleHitSend] = React.useState(false);
   return (
     <SafeAreaView>
@@ -69,32 +70,33 @@ const SendHitDemo: React.SFC<Props> = ({navigation}) => {
           </View>
           <CheckBox
             title={'transaction'}
-            checked={hitState.type === 'transaction'}
-            onPress={() =>
-              setHitState({payload: hit.transaction, type: 'transaction'})
-            }
+            checked={hitInfo.selected === 'transaction'}
+            onPress={() => dispatch(setCurrentHitSelected('transaction'))}
           />
           <CheckBox
             title={'screen'}
-            checked={hitState.type === 'screen'}
-            onPress={() => setHitState({payload: hit.screen, type: 'screen'})}
+            checked={hitInfo.selected === 'screen'}
+            onPress={() => dispatch(setCurrentHitSelected('screen'))}
           />
           <CheckBox
             title={'item'}
-            checked={hitState.type === 'item'}
-            onPress={() => setHitState({payload: hit.item, type: 'item'})}
+            checked={hitInfo.selected === 'item'}
+            onPress={() => dispatch(setCurrentHitSelected('item'))}
           />
           <CheckBox
             title={'event'}
-            checked={hitState.type === 'event'}
-            onPress={() => setHitState({payload: hit.event, type: 'event'})}
+            checked={hitInfo.selected === 'event'}
+            onPress={() => dispatch(setCurrentHitSelected('event'))}
           />
         </View>
-        {hitState.payload && (
+        {hitInfo.selected && (
           <View>
             <View>
               <Text style={[s.f6, s.pv2, s.pl2, s.b]}>Hit payload:</Text>
-              <JSONTree data={hitState.payload} theme={themeJsonTree} />
+              <JSONTree
+                data={hitInfo[hitInfo.selected]}
+                theme={themeJsonTree}
+              />
             </View>
             <Button
               title="Edit hit payload"
@@ -107,13 +109,13 @@ const SendHitDemo: React.SFC<Props> = ({navigation}) => {
           </View>
         )}
         <View style={[{borderTopColor: 'black', borderTopWidth: 1}, s.pv4]}>
-          {hitState.payload && (
+          {hitInfo.selected && (
             <Button
               title="Send Hit"
               containerStyle={[s.mv1]}
               buttonStyle={{backgroundColor: 'orange'}}
               onPress={() => {
-                fsHit.send(hitState.payload);
+                fsHit.send(hitInfo[hitInfo.selected]);
                 toggleHitSend(true);
               }}
             />

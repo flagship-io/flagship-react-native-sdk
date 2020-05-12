@@ -14,12 +14,23 @@ const demoReducer = (
   switch (action.type) {
     case DEMO_UPDATE_HIT_PAYLOAD:
       if (newState.sendHit.selected) {
-        newState[newState.sendHit.selected] = action.payload;
+        return {
+          ...state,
+          sendHit: {
+            ...state.sendHit,
+            [newState.sendHit.selected]: action.payload,
+          },
+        };
       }
-      return newState;
+      return {...state};
     case DEMO_SET_CURRENT_HIT_SELECTED:
-      newState.sendHit.selected = action.payload;
-      return newState;
+      return {
+        ...state,
+        sendHit: {
+          ...state.sendHit,
+          selected: action.payload,
+        },
+      };
     case DEMO_SET_USE_MODIFICATIONS_PARAMS:
       newState.getModifications.params = action.payload;
       return newState;
