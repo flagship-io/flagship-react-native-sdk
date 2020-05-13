@@ -12,14 +12,13 @@
 **Visit [https://developers.flagship.io/](https://developers.flagship.io/) to get started with Flagship.**
 
 ## Docs
-react-native/v0.1.x/
-- [Installation](https://developers.flagship.io/react-native/v0.1.x/#installation)
-- [Get Started](https://developers.flagship.io/react-native/v0.1.x/#getting-started)
-- [Initialize and start](https://developers.flagship.io/react-native/v0.1.x/#initialize-and-start-the-library)
-- [Create a visitor](https://developers.flagship.io/react-native/v0.1.x/#create-a-visitor)
-- [Campaign integration](https://developers.flagship.io/react-native/v0.1.x/#campaign-integration)
-- [Hit tracking](https://developers.flagship.io/react-native/v0.1.x/#hit-tracking)
-- [Release Notes](https://developers.flagship.io/react-native/v0.1.x/#releases)
+- [Installation](https://developers.flagship.io/react-native/v1.0.0/#installation)
+- [Get Started](https://developers.flagship.io/react-native/v1.0.0/#getting-started)
+- [Initialize and start](https://developers.flagship.io/react-native/v1.0.0/#initialize-and-start-the-library)
+- [Create a visitor](https://developers.flagship.io/react-native/v1.0.0/#create-a-visitor)
+- [Campaign integration](https://developers.flagship.io/react-native/v1.0.0/#campaign-integration)
+- [Hit tracking](https://developers.flagship.io/react-native/v1.0.0/#hit-tracking)
+- [Release Notes](https://developers.flagship.io/react-native/v1.0.0/#releases)
 
 ## Examples
 
@@ -33,4 +32,4 @@ react-native/v0.1.x/
 
 ## Licence
 
-[Apache License.](https://github.com/abtasty/flagship-go-sdk/blob/master/LICENSE)
+[Apache License.](https://github.com/abtasty/flagship-react-native-sdk/blob/master/LICENSE)
