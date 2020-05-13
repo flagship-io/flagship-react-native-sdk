@@ -13,7 +13,7 @@ import {
 } from './lib/FSTools';
 import ErrorBoundary from './lib/ErrorBoundary';
 import FsLogger from './lib/FsLogger';
-
+import { View } from 'react-native';
 const initState = {
     log: null
 };
@@ -22,6 +22,21 @@ const FsReactNativeContext = React.createContext({
     state: { ...initState },
     setState: null
 });
+
+const displayReactNativeBoundary = ({
+    debugMode,
+    children,
+    isCollapse,
+    error,
+    onClickCollapse
+}) => {
+    return (
+        <>
+            <View>Safe mode</View>
+            {children}
+        </>
+    );
+};
 
 const FlagshipProvider = ({
     children,
@@ -50,6 +65,9 @@ const FlagshipProvider = ({
                 {...otherProps}
                 envId={envId}
                 config={config}
+                reactNative={{
+                    handleErrorDisplay: displayReactNativeBoundary
+                }}
                 visitorData={{
                     /// Check the visitor id is null ?
                     id:
