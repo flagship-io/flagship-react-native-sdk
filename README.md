@@ -14,14 +14,14 @@
 **Visit [https://developers.flagship.io/](https://developers.flagship.io/) to get started with Flagship.**
 
 ## Docs
-
-- [Installation](https://developers.flagship.io/go/v1.0/#installation)
-- [Get Started](https://developers.flagship.io/go/v1.0/#getting-started)
-- [Initialize and start](https://developers.flagship.io/go/v1.0/#initialize-and-start-the-library)
-- [Create a visitor](https://developers.flagship.io/go/v1.0/#create-a-visitor)
-- [Campaign integration](https://developers.flagship.io/go/v1.0/#campaign-integration)
-- [Hit tracking](https://developers.flagship.io/go/v1.0/#hit-tracking)
-- [Release Notes](https://developers.flagship.io/go/v1.0/#releases)
+react-native/v0.1.x/
+- [Installation](https://developers.flagship.io/react-native/v0.1.x/#installation)
+- [Get Started](https://developers.flagship.io/react-native/v0.1.x/#getting-started)
+- [Initialize and start](https://developers.flagship.io/react-native/v0.1.x/#initialize-and-start-the-library)
+- [Create a visitor](https://developers.flagship.io/react-native/v0.1.x/#create-a-visitor)
+- [Campaign integration](https://developers.flagship.io/react-native/v0.1.x/#campaign-integration)
+- [Hit tracking](https://developers.flagship.io/react-native/v0.1.x/#hit-tracking)
+- [Release Notes](https://developers.flagship.io/react-native/v0.1.x/#releases)
 
 ## Examples
 
@@ -29,6 +29,8 @@
 
 ## Contributors
 
+- Adel Ferguen [@ABTastyAdel](https://github.com/ABTastyAdel)
+- Emilien Domenge [@ABTastyAdel](https://github.com/Emidomenge)
 - Guillaume Jacquart [@guillaumejacquart](https://github.com/guillaumejacquart)
 
 ## Licence
