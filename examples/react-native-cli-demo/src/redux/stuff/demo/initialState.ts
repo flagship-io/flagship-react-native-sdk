@@ -14,4 +14,7 @@ export default {
     ...hit,
     selected: null,
   },
+  safeMode: {
+    triggerTest: false,
+  },
 };

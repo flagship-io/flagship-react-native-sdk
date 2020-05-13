@@ -40,8 +40,8 @@ interface Props {
 }
 
 const EditArguments: React.SFC<Props> = ({navigation}) => {
-  const params = useSelector<RootState>(
-    (state) => state.demo.getModifications.params,
+  const params = useSelector(
+    (state: RootState) => state.demo.getModifications.params,
   );
   const dispatch = useDispatch();
   const [newReqModif, updateReqModif] = React.useState({

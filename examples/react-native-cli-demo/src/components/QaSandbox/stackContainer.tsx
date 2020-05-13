@@ -8,6 +8,7 @@ import GetModificationsDemo from './components/TestFeatures/GetModificationsDemo
 import SendHitDemo from './components/TestFeatures/SendHitDemo';
 import EditArguments from './components/TestFeatures/GetModificationsDemo/components/EditArguments';
 import EditHitPayload from './components/TestFeatures/SendHitDemo/components/EditHitPayload';
+import SafeModeDemo from './components/TestFeatures/SafeModeDemo';
 // const styles = StyleSheet.create({});
 
 // REACT NAVIGATION: begin
@@ -20,6 +21,7 @@ export type RootStackParamList = {
   SendHitDemo: {};
   EditModificationsArgs: {};
   EditHitPayload: {};
+  SafeModeDemo: {};
 };
 const Stack = createStackNavigator<RootStackParamList>();
 // REACT NAVIGATION: end
@@ -58,6 +60,11 @@ const DevSandbox: React.SFC<Props> = () => {
         name="SendHitDemo"
         component={SendHitDemo}
         options={{title: 'useFlagship hook (send hit)'}}
+      />
+      <Stack.Screen
+        name="SafeModeDemo"
+        component={SafeModeDemo}
+        options={{title: 'Safe Mode'}}
       />
       {/* 3rd Level */}
       <Stack.Screen

@@ -1,6 +1,7 @@
 import {
   DEMO_UPDATE_HIT_PAYLOAD,
   DEMO_SET_CURRENT_HIT_SELECTED,
+  DEMO_TOGGLE_SAFE_MODE,
   DEMO_SET_USE_MODIFICATIONS_PARAMS,
   DEMO_RESET,
 } from './../../glossary';
@@ -35,6 +36,14 @@ const demoReducer = (
     case DEMO_SET_USE_MODIFICATIONS_PARAMS:
       newState.getModifications.params = action.payload;
       return newState;
+    case DEMO_TOGGLE_SAFE_MODE:
+      return {
+        ...state,
+        safeMode: {
+          ...state.safeMode,
+          triggerTest: action.payload,
+        },
+      };
     case DEMO_RESET:
       return {...initialState};
     default:

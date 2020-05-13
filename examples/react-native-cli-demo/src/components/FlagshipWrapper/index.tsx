@@ -23,7 +23,7 @@ const FlagshipWrapper = () => {
     </View>
   );
   const sdkSettings = useSelector((state: RootState) => state.sdkSettings);
-
+  const safeModeRedux = useSelector((state: RootState) => state.demo.safeMode);
   const dispatch = useDispatch();
   const context: {[key: string]: number | boolean | string} = {};
   sdkSettings.visitorContext.forEach(({key, value}) => {
@@ -34,6 +34,9 @@ const FlagshipWrapper = () => {
       envId={sdkSettings.envId || ''}
       onUpdate={({fsModifications}) => {
         dispatch(setFsModifications(fsModifications));
+        if (safeModeRedux.triggerTest) {
+          throw new Error('Crash test react native');
+        }
       }}
       config={{...sdkSettings.config}}
       onInitStart={() => {
