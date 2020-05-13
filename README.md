@@ -30,7 +30,7 @@ react-native/v0.1.x/
 ## Contributors
 
 - Adel Ferguen [@ABTastyAdel](https://github.com/ABTastyAdel)
-- Emilien Domenge [@ABTastyAdel](https://github.com/Emidomenge)
+- Emilien Domenge [@Emidomenge](https://github.com/Emidomenge)
 - Guillaume Jacquart [@guillaumejacquart](https://github.com/guillaumejacquart)
 
 ## Licence
