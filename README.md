@@ -16,9 +16,8 @@ https://doc-flagship-staging.netlify.app/reactnative/v0.1.x/
 - [Installation](https://doc-flagship-staging.netlify.app/reactnative/v0.1.x/#installation)
 - [Get Started](https://doc-flagship-staging.netlify.app/reactnative/v0.1.x/#getting-started)
 - [Initialize and start](https://doc-flagship-staging.netlify.app/reactnative/v0.1.x/#initialize-and-start-the-library)
-- [Create a visitor](https://doc-flagship-staging.netlify.app/reactnative/v0.1.x/#create-a-visitor)
 - [Campaign integration](https://doc-flagship-staging.netlify.app/reactnative/v0.1.x/#campaign-integration)
-- [Hit tracking](https://doc-flagship-staging.netlify.app/reactnative/v0.1.x/#hit-tracking)
+- [Hit tracking](https://doc-flagship-staging.netlify.app/reactnative/v0.1.x/##summary-118)
 - [Release Notes](https://doc-flagship-staging.netlify.app/reactnative/v0.1.x/#releases)
 
 ## Examples
