@@ -17,7 +17,7 @@
     },
     "dependencies": {
         "@flagship.io/js-sdk-logs": "0.0.4",
-        "@flagship.io/react-sdk": "0.0.23"
+        "@flagship.io/react-sdk": "^1.0.0"
     },
     "peerDependencies": {
         "react-native": "^16.8.0"
