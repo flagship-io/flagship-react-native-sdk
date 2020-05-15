@@ -1,6 +1,6 @@
 {
     "name": "@flagship.io/react-native-sdk",
-    "version": "0.0.5",
+    "version": "1.0.1",
     "description": "Flagship SDK for React Native",
     "main": "index.js",
     "scripts": {
@@ -17,7 +17,7 @@
     },
     "dependencies": {
         "@flagship.io/js-sdk-logs": "0.0.4",
-        "@flagship.io/react-sdk": "0.0.23"
+        "@flagship.io/react-sdk": "^1.0.1"
     },
     "peerDependencies": {
         "react-native": "^16.8.0"

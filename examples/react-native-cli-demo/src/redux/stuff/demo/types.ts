@@ -24,4 +24,7 @@ export type DemoState = {
     event: EventHit;
     selected: string;
   };
+  safeMode: {
+    triggerTest: boolean;
+  };
 };

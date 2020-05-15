@@ -32,8 +32,8 @@ interface Props {
 }
 
 const GetModificationsDemo: React.SFC<Props> = ({navigation}) => {
-  const params = useSelector<RootState>(
-    (state) => state.demo.getModifications.params,
+  const params = useSelector(
+    (state: RootState) => state.demo.getModifications.params,
   );
   const fsModifications = useFsModifications(params);
   return (

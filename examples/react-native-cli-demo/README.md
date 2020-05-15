@@ -1,8 +1,8 @@
 # Sample of React Native CLI using [Flagship - React Native SDK](../../README.md)
 
-<div style="text-align:center">
-<img src="./src/assets/demo_reana.gif"/>
-</div>
+<p align="center">
+<img src="./src/assets/demo_reana.gif"  alt="demo gif"/>
+</p>
 
 ## Getting Started
 
