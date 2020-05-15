@@ -13,12 +13,12 @@
 
 https://doc-flagship-staging.netlify.app/reactnative/v0.1.x/ 
 ## Docs
-- [Installation](https://doc-flagship-staging.netlify.app/reactnative/v0.1.x/#installation)
-- [Get Started](https://doc-flagship-staging.netlify.app/reactnative/v0.1.x/#getting-started)
-- [Initialize and start](https://doc-flagship-staging.netlify.app/reactnative/v0.1.x/#initialize-and-start-the-library)
-- [Campaign integration](https://doc-flagship-staging.netlify.app/reactnative/v0.1.x/#campaign-integration)
-- [Hit tracking](https://doc-flagship-staging.netlify.app/reactnative/v0.1.x/##summary-118)
-- [Release Notes](https://doc-flagship-staging.netlify.app/reactnative/v0.1.x/#releases)
+- [Installation](https://doc-flagship-staging.netlify.app/reactnative/v1.x.x/#installation)
+- [Get Started](https://doc-flagship-staging.netlify.app/reactnative/v1.x.x/#getting-started)
+- [Initialize and start](https://doc-flagship-staging.netlify.app/reactnative/v1.x.x/#getting-started)
+- [Campaign integration](https://doc-flagship-staging.netlify.app/reactnative/v1.x.x/#campaign-synchronization)
+- [Hit tracking](https://doc-flagship-staging.netlify.app/reactnative/v1.x.x/#hit-tracking)
+- [Release Notes](https://doc-flagship-staging.netlify.app/reactnative/v1.x.x/#release-notes)
 
 ## Examples
 
