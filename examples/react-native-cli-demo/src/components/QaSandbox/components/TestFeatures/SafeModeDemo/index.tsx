@@ -32,14 +32,29 @@ interface Props {
 
 const SafeModeDemo: React.SFC<Props> = ({navigation}) => {
   const safeModeRedux = useSelector((state: RootState) => state.demo.safeMode);
+  const settingsRedux = useSelector(
+    (state: RootState) => state.sdkSettings.config,
+  );
   const dispatch = useDispatch();
   useFsSynchronize([safeModeRedux]);
   return (
     <SafeAreaView>
       <ScrollView style={[s.ph3, styles.body]}>
+        <View style={{paddingTop: 16}}>
+          {safeModeRedux.triggerTest && <Text>An error has been thrown.</Text>}
+        </View>
         <View style={{paddingTop: 200}}>
-          {safeModeRedux.triggerTest && (
-            <Text>An error has been thrown. Safe mode should be enabled.</Text>
+          {!settingsRedux.enableErrorLayout && (
+            <Text>
+              NOTE: "enableErrorLayout" is set to "false" which means you won't
+              see the debug banner.
+            </Text>
+          )}
+          {settingsRedux.nodeEnv === 'production' && (
+            <Text>
+              NOTE: "nodeEnd" is set to "production" which means you won't see
+              the debug banner.
+            </Text>
           )}
           <Button
             title={

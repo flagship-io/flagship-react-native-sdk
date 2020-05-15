@@ -13,7 +13,7 @@ import {
 } from './lib/FSTools';
 import ErrorBoundary from './lib/ErrorBoundary';
 import FsLogger from './lib/FsLogger';
-import { View, Text } from 'react-native';
+import { View, Text, SafeAreaView, Button } from 'react-native';
 const initState = {
     log: null
 };
@@ -32,38 +32,40 @@ const displayReactNativeBoundary = ({
 }) => {
     return (
         <>
-            <SafeAreaView>
-                <View
-                    style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        paddingTop: 8,
-                        paddingBottom: 16,
-                        backgroundColor: 'red'
-                    }}
-                >
-                    <Text style={{ color: 'white', fontSize: 16 }} />
-                    <Button
-                        onPress={onClickCollapse}
-                        title={isCollapse ? 'Close view' : 'Safe mode: ON'}
-                        color="white"
-                    />
-                </View>
-                {isCollapse && (
-                    <View>
-                        <Text
-                            style={{
-                                fontWeight: 'bold',
-                                fontSize: 20,
-                                marginTop: 16
-                            }}
-                        >
-                            Details:
-                        </Text>
-                        <Text style={{ marginTop: 8 }}>{error.stack}</Text>
+            {debugMode && (
+                <SafeAreaView>
+                    <View
+                        style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            paddingTop: 8,
+                            paddingBottom: 16,
+                            backgroundColor: 'red'
+                        }}
+                    >
+                        <Text style={{ color: 'white', fontSize: 16 }} />
+                        <Button
+                            onPress={onClickCollapse}
+                            title={isCollapse ? 'Close view' : 'Safe mode: ON'}
+                            color="white"
+                        />
                     </View>
-                )}
-            </SafeAreaView>
+                    {isCollapse && (
+                        <View>
+                            <Text
+                                style={{
+                                    fontWeight: 'bold',
+                                    fontSize: 20,
+                                    marginTop: 16
+                                }}
+                            >
+                                Details:
+                            </Text>
+                            <Text style={{ marginTop: 8 }}>{error.stack}</Text>
+                        </View>
+                    )}
+                </SafeAreaView>
+            )}
             {!isCollapse && children}
         </>
     );
