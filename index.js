@@ -118,9 +118,7 @@ const FlagshipProvider = ({
                 }}
                 /// Set the cache on any update
                 onUpdate = {(fsModifications)=>{
-
-                   console.log(fsModifications);
-                    setCacheFromPhone()
+                    setCacheFromPhone(fsModifications);
                 }
                 }
                 /// Provide the cache at the start 
