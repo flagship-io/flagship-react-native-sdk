@@ -13,7 +13,7 @@ export default function App() {
             <FlagshipProvider
                 envId="bn1ab7m56qolupi5sa0g"
                 visitorData={{
-                    id: 'randomVisitor',
+                    id: null,
                     context: { ...state }
                 }}
                 config={{

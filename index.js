@@ -83,7 +83,7 @@ const FlagshipProvider = ({
     envId,
     onError,
     config,
-    visitorData
+    visitorData,
     ...otherProps
 }) => {
     const [state, setState] = React.useState({
