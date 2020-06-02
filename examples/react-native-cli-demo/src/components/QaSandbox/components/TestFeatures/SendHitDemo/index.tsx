@@ -35,7 +35,7 @@ interface Props {
 
 const SendHitDemo: React.SFC<Props> = ({navigation}) => {
   const {hit: fsHit} = useFlagship();
-  const hitInfo = useSelector<RootState>((state) => state.demo.sendHit);
+  const hitInfo = useSelector((state: RootState) => state.demo.sendHit);
   const dispatch = useDispatch();
   const [isHitSent, toggleHitSend] = React.useState(false);
   return (

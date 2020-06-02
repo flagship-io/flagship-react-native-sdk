@@ -6,23 +6,26 @@
 
 <h3 align="center">Bring your features to life</h3>
 
-<a  href='https://github.com/jpoles1/gopherbadger'  target='_blank'>![gopherbadger-tag-do-not-edit](https://img.shields.io/badge/Go%20Coverage-0%25-brightgreen.svg?longCache=true&style=flat)</a> 
- [![license](https://badgen.now.sh/badge/license/Apache)](./LICENSE)
-
+ 
+[![license](https://badgen.now.sh/badge/license/Apache)](./LICENSE)
+ 
 **Visit [https://developers.flagship.io/](https://developers.flagship.io/) to get started with Flagship.**
 
 https://doc-flagship-staging.netlify.app/reactnative/v0.1.x/ 
 ## Docs
-- [Installation](https://doc-flagship-staging.netlify.app/reactnative/v1.x.x/#installation)
-- [Get Started](https://doc-flagship-staging.netlify.app/reactnative/v1.x.x/#getting-started)
-- [Initialize and start](https://doc-flagship-staging.netlify.app/reactnative/v1.x.x/#getting-started)
-- [Campaign integration](https://doc-flagship-staging.netlify.app/reactnative/v1.x.x/#campaign-synchronization)
-- [Hit tracking](https://doc-flagship-staging.netlify.app/reactnative/v1.x.x/#hit-tracking)
-- [Release Notes](https://doc-flagship-staging.netlify.app/reactnative/v1.x.x/#release-notes)
 
+- [Installation](https://doc-flagship-staging.netlify.app/reactnative/v0.1.x/#installation)
+- [Get Started](https://doc-flagship-staging.netlify.app/reactnative/v0.1.x/#getting-started)
+- [Initialize and start](https://doc-flagship-staging.netlify.app/reactnative/v0.1.x/#initialize-and-start-the-library)
+- [Campaign integration](https://doc-flagship-staging.netlify.app/reactnative/v0.1.x/#campaign-integration)
+- [Hit tracking](https://doc-flagship-staging.netlify.app/reactnative/v0.1.x/##summary-118)
+- [Release Notes](https://doc-flagship-staging.netlify.app/reactnative/v0.1.x/#releases)
+
+ 
 ## Examples
-
+ 
 - [Ecommerce App](./examples/ecommerce)
+ 
 
 ## Contributors
 
