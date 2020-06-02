@@ -10,7 +10,14 @@ import {
 import {
     generateFlagshipId,
     checkValidityPatternForEnvId
+
 } from './lib/FSTools';
+
+import {
+    getCacheFromPhone,
+    setCacheFromPhone
+} from './lib/FSStorage';
+
 import ErrorBoundary from './lib/ErrorBoundary';
 import FsLogger from './lib/FsLogger';
 import { View, Text, SafeAreaView, Button } from 'react-native';
@@ -76,7 +83,7 @@ const FlagshipProvider = ({
     envId,
     onError,
     config,
-    visitorData,
+    visitorData
     ...otherProps
 }) => {
     const [state, setState] = React.useState({
@@ -109,6 +116,11 @@ const FlagshipProvider = ({
                             : visitorData.id,
                     context: visitorData.context
                 }}
+                onUpdate = {()=>{
+                    setCacheFromPhone()
+                }
+                }
+                
             >
                 {children}
             </ReactFlagshipProvider>
