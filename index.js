@@ -116,8 +116,10 @@ const FlagshipProvider = ({
                             : visitorData.id,
                     context: visitorData.context
                 }}
-                /// Set the cache
-                onUpdate = {()=>{
+                /// Set the cache on any update
+                onUpdate = {(fsModifications)=>{
+
+                   console.log(fsModifications);
                     setCacheFromPhone()
                 }
                 }
