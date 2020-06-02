@@ -116,11 +116,15 @@ const FlagshipProvider = ({
                             : visitorData.id,
                     context: visitorData.context
                 }}
+                /// Set the cache
                 onUpdate = {()=>{
                     setCacheFromPhone()
                 }
                 }
-                
+                /// Provide the cache at the start 
+                initialModifications = {
+                    getCacheFromPhone()
+                }
             >
                 {children}
             </ReactFlagshipProvider>
