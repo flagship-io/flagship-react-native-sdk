@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import FlagshipProvider from '@flagship.io/react-native-sdk';
+import FlagshipProvider from 'flagship-react-native-sdk';
 import Container from './src/Container';
 import { StatusBar } from 'react-native';
 import FlagshipLoading from './src/FlagshipLoading';
