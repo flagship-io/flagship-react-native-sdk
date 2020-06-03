@@ -7,7 +7,7 @@ import {
     Image,
     SafeAreaView
 } from 'react-native';
-import { useFsModifications } from 'flagship-react-native-sdk';
+import { useFsModifications } from '@flagship.io/react-native-sdk';
 
 const styles = StyleSheet.create({
     container: {
