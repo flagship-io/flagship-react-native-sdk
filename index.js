@@ -116,12 +116,12 @@ const FlagshipProvider = ({
                             : visitorData.id,
                     context: visitorData.context
                 }}
-                /// Set the cache on any update
+                /// Update the modification stored in device's cache
                 onUpdate = {(fsModifications)=>{
                     setCacheFromPhone(fsModifications);
                 }
                 }
-                /// Provide the cache at the start 
+                /// Provide the cached modification from device at the start 
                 initialModifications = {
                     getCacheFromPhone()
                 }
