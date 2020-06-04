@@ -122,9 +122,7 @@ const FlagshipProvider = ({
                 }
                 }
                 /// Provide the cached modification from device at the start 
-                initialModifications = {
-                    getCacheFromPhone()
-                }
+                initialModifications = {getCacheFromPhone()}
             >
                 {children}
             </ReactFlagshipProvider>
