@@ -30,7 +30,3 @@ https://doc-flagship-staging.netlify.app/reactnative/v0.1.x/
 - Adel Ferguen [@ABTastyAdel](https://github.com/ABTastyAdel)
 - Emilien Domenge [@Emidomenge](https://github.com/Emidomenge)
 - Guillaume Jacquart [@guillaumejacquart](https://github.com/guillaumejacquart)
-
-## Licence
-
-[Apache License.](https://github.com/abtasty/flagship-react-native-sdk/blob/master/LICENSE)
