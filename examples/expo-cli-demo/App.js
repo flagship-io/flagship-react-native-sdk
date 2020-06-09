@@ -7,6 +7,8 @@ import FlagshipLoading from './src/FlagshipLoading';
 
 export default function App() {
     const [state, setState] = React.useState({ isVip: true, isAuth: true });
+
+    
     return (
         <>
             <StatusBar barStyle="dark-content" />

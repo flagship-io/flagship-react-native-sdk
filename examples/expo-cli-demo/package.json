@@ -8,8 +8,7 @@
     "eject": "expo eject"
   },
   "dependencies": {
-    "@flagship.io/react-native-sdk": "^1.0.1",
-    "@flagship.io/react-sdk": "^1.0.1",
+    "@flagship.io/react-native-sdk": "https://github.com/ABTastyAdel/flagship-react-native-sdk.git",
     "@react-native-community/async-storage": "^1.11.0",
     "expo": "~37.0.3",
     "react": "~16.9.0",
