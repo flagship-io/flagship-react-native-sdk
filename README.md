@@ -187,36 +187,17 @@ This is all available props which you can use inside the `FlagshipProvider` reac
           <td>undefined</td>
           <td>This is component which will be render when Flagship is loading on <b>first initialization</b> only.<br>By default, the value is <i>undefined</i> which means it will display your app and it might display default modifications value for a very short moment.</td>
         </tr>
-    </tbody>
-</table>
-
-## "config" prop
-
-This is all available settings which you can set on the SDK.
-
-Here are the attributes which you can set inside the SDK settings object:
-
-<table class="table table-bordered table-striped">
-    <thead>
-    <tr>
-        <th style="width: 100px;">Argument</th>
-        <th style="width: 50px;">Type</th>
-        <th style="width: 50px;">Default</th>
-        <th>Description</th>
-    </tr>
-    </thead>
-    <tbody>
-        <tr>
+         <tr>
           <td>fetchNow</td>
           <td>boolean</td>
           <td>false</td>
-          <td>Decide to fetch automatically modifications data when creating a new <a href='README.md#flagshipvisitor-class'>FlagshipVisitor</a>.</td>
+          <td>Decide to fetch automatically modifications when SDK is initialized.</td>
         </tr>
         <tr>
           <td>activateNow</td>
           <td>boolean</td>
           <td>false</td>
-          <td>Decide to trigger automatically the data when creating a new <a href='README.md#flagshipvisitor-class'>FlagshipVisitor</a>.<br><b>NOTE</b>: when set to <i>true</i>, it will implicitly set <i>fetchNow=true</i> as well.</td>
+          <td>Decide to trigger automatically the data when SDK is initialized.<br><b>Note</b>: when set to <i>true</i>, it will implicitly set <i>fetchNow=true</i> as well.</td>
         </tr>
         <tr>
           <td>enableConsoleLogs</td>
@@ -225,10 +206,16 @@ Here are the attributes which you can set inside the SDK settings object:
           <td>Enable it to display logs on the console when SDK is running.<br>This will only display logs such as <i>Warnings</i>, <i>Errors</i>, <i>Fatal errors</i> and <i>Info</i>.</td>
         </tr>
         <tr>
+          <td>enableSafeMode</td>
+          <td>boolean</td>
+          <td>false</td>
+          <td>Enable it to run the SDK into a safe mode when an error might occurs through the SDK.<br>When safe mode is triggered, default modifications will be returned and other function will just be executed without doing anything.<br><b>NOTE</b>: This feature is currently catching errors globally (SDK + your app) which might leads to unexpected SDK safe mode if the error comes from your app. We're working on that issue.</td>
+        </tr>
+        <tr>
           <td>enableErrorLayout</td>
           <td>boolean</td>
           <td>false</td>
-          <td>This is a small layout visible at the bottom of the screen. It is displayed only when an unexpected error occurred in the SDK. By default, it's set to <i>false</i> and if set to <i>true</i>, it will be only visible in a node environment other than <i>production</i>. Here a <a href='./src/assets/img/errorLayout.png'>screenshot</a> to have a look.</td>
+          <td>When safe mode is enabled, this will display a small layout at the bottom of the screen, only when an unexpected error occurred in the SDK. By default, it's set to <i>false</i> and if set to <i>true</i>, it will be only visible in a node environment other than <i>production</i>. Here a <a href='./src/assets/img/errorLayout.png'>screenshot</a> of how it looks like.</td>
         </tr>
         <tr>
           <td>nodeEnv</td>
@@ -252,8 +239,7 @@ Here are the attributes which you can set inside the SDK settings object:
           <td>null</td>
           <td>If you want to use the <a href="http://developers.flagship.io/api/v2/">Decision API V2</a>, you must contact the support team so they'll provide you an API Key to authenticate the calls.</td>
         </tr>
-</tbody>
-
+    </tbody>
 </table>
 
 # Flagship Hooks
