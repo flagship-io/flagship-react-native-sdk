@@ -96,6 +96,8 @@ const FlagshipProvider = ({
         }
         return <ErrorBoundary>{children}</ErrorBoundary>;
     }
+
+    // with freeze (few ms)
     if (state.isLoadingCache) {
         getCacheFromPhone(state.log).then((data) =>
             setState({
@@ -106,6 +108,18 @@ const FlagshipProvider = ({
         );
         return null;
     }
+
+    // asynchrone (running default values instead)
+    // if (state.isLoadingCache) {
+    //     getCacheFromPhone(state.log).then((data) =>
+    //         setState({
+    //             ...state,
+    //             isLoadingCache: false,
+    //             phoneCacheModifications: [...data]
+    //         })
+    //     );
+    // }
+
     return (
         <FsReactNativeContext.Provider value={{ state, setState }}>
             <ReactFlagshipProvider
@@ -116,18 +130,18 @@ const FlagshipProvider = ({
                     handleErrorDisplay: displayReactNativeBoundary
                 }}
                 visitorData={{
-                    /// Check the visitor id is null ?
+                    // Check the visitor id is null ?
                     id:
                         visitorData.id == null
                             ? generateFlagshipId()
                             : visitorData.id,
                     context: visitorData.context
                 }}
-                /// Update the modifications stored in device's cache
+                // Update the modifications stored in device's cache
                 onUpdate={(fsModifications) => {
                     setCacheFromPhone(fsModifications, state.log);
                 }}
-                /// Provide the cached modifications from device at the start
+                // Provide the cached modifications from device at the start
                 initialModifications={state.phoneCacheModifications}
             >
                 {children}
