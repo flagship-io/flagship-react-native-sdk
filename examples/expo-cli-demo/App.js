@@ -8,7 +8,6 @@ import FlagshipLoading from './src/FlagshipLoading';
 export default function App() {
     const [state, setState] = React.useState({ isVip: true, isAuth: true });
 
-    
     return (
         <>
             <StatusBar barStyle="dark-content" />
@@ -18,6 +17,7 @@ export default function App() {
                     id: null,
                     context: { ...state }
                 }}
+                nodeEnv="development"
                 config={{
                     fetchNow: true,
                     enableConsoleLogs: true
