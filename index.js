@@ -18,7 +18,9 @@ import ErrorBoundary from './lib/ErrorBoundary';
 import FsLogger from './lib/FsLogger';
 import { View, Text, SafeAreaView, Button } from 'react-native';
 const initState = {
-    log: null
+    log: null,
+    isLoadingCache: true,
+    phoneCacheModifications: null
 };
 
 const FsReactNativeContext = React.createContext({
@@ -94,7 +96,16 @@ const FlagshipProvider = ({
         }
         return <ErrorBoundary>{children}</ErrorBoundary>;
     }
-
+    if (state.isLoadingCache) {
+        getCacheFromPhone(state.log).then((data) =>
+            setState({
+                ...state,
+                isLoadingCache: false,
+                phoneCacheModifications: [...data]
+            })
+        );
+        return null;
+    }
     return (
         <FsReactNativeContext.Provider value={{ state, setState }}>
             <ReactFlagshipProvider
@@ -117,7 +128,7 @@ const FlagshipProvider = ({
                     setCacheFromPhone(fsModifications, state.log);
                 }}
                 /// Provide the cached modifications from device at the start
-                initialModifications={getCacheFromPhone(state.log)}
+                initialModifications={state.phoneCacheModifications}
             >
                 {children}
             </ReactFlagshipProvider>
