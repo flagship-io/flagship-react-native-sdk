@@ -10,13 +10,9 @@ import {
 import {
     generateFlagshipId,
     checkValidityPatternForEnvId
-
 } from './lib/FSTools';
 
-import {
-    getCacheFromPhone,
-    setCacheFromPhone
-} from './lib/FSStorage';
+import { getCacheFromPhone, setCacheFromPhone } from './lib/FSStorage';
 
 import ErrorBoundary from './lib/ErrorBoundary';
 import FsLogger from './lib/FsLogger';
@@ -117,12 +113,11 @@ const FlagshipProvider = ({
                     context: visitorData.context
                 }}
                 /// Update the modifications stored in device's cache
-                onUpdate = {(fsModifications)=>{
-                    setCacheFromPhone(fsModifications);
-                }
-                }
-                /// Provide the cached modifications from device at the start 
-                initialModifications = {getCacheFromPhone()}
+                onUpdate={(fsModifications) => {
+                    setCacheFromPhone(fsModifications, state.log);
+                }}
+                /// Provide the cached modifications from device at the start
+                initialModifications={getCacheFromPhone(state.log)}
             >
                 {children}
             </ReactFlagshipProvider>
