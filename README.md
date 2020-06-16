@@ -16,6 +16,7 @@ Flagship features are accessible using Flagship hooks, have a look to the docume
 -   Safe mode ✅ (= your app won't crash if SDK fails unexpectedly)
 -   <a href="examples/expo-cli-demo/README.md">Simple Demo</a> made with expo CLI.
 -   <a href="examples/react-native-cli-demo/README.md">Advanced Demo</a> made with react native CLI.
+-   <a href="./RELEASENOTES.md">Release notes</a> available to stay in touch 👍
 
 # Getting Started
 
@@ -353,6 +354,25 @@ Most used hook from the Flagship React Native SDK. Through this hook, you can ac
           <td>modifications</td>
           <td>object</td>
           <td>An <i>object</i> where each key is a modification with corresponding value
+          </td>
+        </tr>
+        <tr>
+          <td>getModificationInfo</td>
+          <td>function</td>
+          <td><b>Returns a promise</b> with an object containing informations about modification matching the key specified in argument.<br>
+  <table> 
+              <tbody><tr>
+                  <th style="width:25%">Argument</th>
+                  <th style="width:25%">Type</th>
+                  <th>Description</th>
+                </tr>  
+                <tr>
+                  <td><em>key</em></td>
+                  <td>string</td>
+                  <td>The modification key.</td>
+                </tr>
+              </tbody>
+            </table> 
           </td>
         </tr>
         <tr>
@@ -763,14 +783,14 @@ onClick={() => setToggle(!toggle)}
           <td><b>Required</b>. The name of your item.</td>
         </tr>
         <tr>
+          <td>code</td>
+          <td>string</td>
+          <td><b>Required</b>. Specifies the SKU or item code.</td>
+        </tr>
+        <tr>
           <td>price</td>
           <td>number</td>
           <td><b>Optional</b>. Specifies the price for a single item / unit.</td>
-        </tr>
-        <tr>
-          <td>code</td>
-          <td>string</td>
-          <td><b>Optional</b>. Specifies the SKU or item code.</td>
         </tr>
         <tr>
           <td>category</td>
