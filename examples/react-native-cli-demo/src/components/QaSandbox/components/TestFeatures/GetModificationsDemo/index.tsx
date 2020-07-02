@@ -59,6 +59,9 @@ const GetModificationsDemo: React.SFC<Props> = ({navigation}) => {
           <Text style={[s.mt4, s.f3]}>Hook output:</Text>
           <View>
             <JSONTree data={fsModifications} theme={themeJsonTree} />
+            <Button title = "getinfo" onPress = {()=>{
+              navigation.navigate('GetModificationInfo');
+            }}></Button>
           </View>
         </View>
         {/* RESULT */}
