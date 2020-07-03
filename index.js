@@ -108,18 +108,6 @@ const FlagshipProvider = ({
         );
         return null;
     }
-
-    // asynchrone (running default values instead)
-    // if (state.isLoadingCache) {
-    //     getCacheFromPhone(state.log).then((data) =>
-    //         setState({
-    //             ...state,
-    //             isLoadingCache: false,
-    //             phoneCacheModifications: [...data]
-    //         })
-    //     );
-    // }
-
     return (
         <FsReactNativeContext.Provider value={{ state, setState }}>
             <ReactFlagshipProvider
