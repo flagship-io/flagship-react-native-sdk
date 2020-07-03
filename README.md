@@ -485,6 +485,34 @@ const { hit: fsHit } = useFlagship();
 </Button>
 ```
 
+> **Demo 3:**
+
+```
+  import { useFlagship } from '@flagship.io/react-native-sdk';
+
+  const { getModificationInfo: fsGetInfo } = useFlagship();
+
+// insider render function:
+
+        <Button title="Get modification info" onPress={() => {
+
+          fsGetInfo(key).then( infos => {
+
+            /// Read informations related to modification 
+
+            /// the shape if infos : { “campaignId”: “xxxx”, “variationGroupId”: “xxxx“, “variationId”: “xxxx”}
+            
+          }).catch(error => {
+
+            console.log(error);
+
+          });
+
+        }}></Button>
+
+```
+
+
 ## `useFsModifications`
 
 This will give you the modification saved in the SDK cache.
