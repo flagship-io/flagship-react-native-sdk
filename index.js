@@ -105,9 +105,16 @@ const FlagshipProvider = ({
                 isLoadingCache: false,
                 phoneCacheModifications: [...data]
             })
-        );
+        ).catch(error => {
+            setState({
+                ...state,
+                isLoadingCache: false
+            })
+            state.log.warn('getCacheFromPhone - error: ' + error)
+         });
         return null;
     }
+
     return (
         <FsReactNativeContext.Provider value={{ state, setState }}>
             <ReactFlagshipProvider
