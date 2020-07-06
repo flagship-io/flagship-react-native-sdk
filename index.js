@@ -99,19 +99,21 @@ const FlagshipProvider = ({
 
     // with freeze (few ms)
     if (state.isLoadingCache) {
-        getCacheFromPhone(state.log).then((data) =>
-            setState({
-                ...state,
-                isLoadingCache: false,
-                phoneCacheModifications: [...data]
-            })
-        ).catch(error => {
-            setState({
-                ...state,
-                isLoadingCache: false
-            })
-            state.log.warn('getCacheFromPhone - error: ' + error)
-         });
+        getCacheFromPhone(state.log)
+            .then((data) =>
+                setState({
+                    ...state,
+                    isLoadingCache: false,
+                    phoneCacheModifications: [...data]
+                })
+            )
+            .catch((error) => {
+                setState({
+                    ...state,
+                    isLoadingCache: false
+                });
+                state.log.warn('getCacheFromPhone - error: ' + error);
+            });
         return null;
     }
 

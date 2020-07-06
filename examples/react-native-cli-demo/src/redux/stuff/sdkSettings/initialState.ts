@@ -22,5 +22,4 @@ export default {
     flagshipApi: 'https://decision-api.flagship.io/v1/',
     apiKey: null,
   },
-  fsModifications: [],
 };

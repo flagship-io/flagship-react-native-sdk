@@ -1,17 +1,16 @@
-import React from 'react';
+import FlagshipProvider from '@flagship.io/react-native-sdk';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {NavigationContainer} from '@react-navigation/native';
-import FlagshipProvider from '@flagship.io/react-native-sdk';
-import {useSelector, useDispatch} from 'react-redux';
-import {View, Image, Text} from 'react-native';
+import React from 'react';
+import {Text, View} from 'react-native';
+import NativeTachyons, {styles as s} from 'react-native-style-tachyons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import {useDispatch, useSelector} from 'react-redux';
 
-import QaSbStackContainer from '../QaSandbox/stackContainer';
-import Home from '../Home';
 import {RootState} from '../../redux/rootReducer';
 import {setFsModifications} from '../../redux/stuff/sdkSettings/actions';
-import {SafeAreaView} from 'react-native-safe-area-context';
-import NativeTachyons, {styles as s} from 'react-native-style-tachyons';
+import Home from '../Home';
+import QaSbStackContainer from '../QaSandbox/stackContainer';
 
 // REACT NAVIGATION: begin
 const Tab = createBottomTabNavigator();
