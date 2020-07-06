@@ -59,13 +59,6 @@ const GetModificationsDemo: React.SFC<Props> = ({navigation}) => {
           <Text style={[s.mt4, s.f3]}>Hook output:</Text>
           <View>
             <JSONTree data={fsModifications} theme={themeJsonTree} />
-
-            <Button
-              title="Get Modification info"
-              onPress={() => {
-                navigation.navigate('GetModificationInfo');
-              }}
-            />
           </View>
         </View>
         {/* RESULT */}
@@ -83,6 +76,13 @@ const GetModificationsDemo: React.SFC<Props> = ({navigation}) => {
         )}
         {/* BOTTOM MENU */}
         <View style={[{borderTopColor: 'black', borderTopWidth: 1}, s.pv2]}>
+          <Button
+            title="Get Modification info"
+            containerStyle={[s.mv1]}
+            onPress={() => {
+              navigation.navigate('GetModificationInfo');
+            }}
+          />
           <Button
             title="Go back"
             containerStyle={[s.mv1]}

@@ -48,7 +48,7 @@ const GetModificationInfo: React.SFC<Props> = ({navigation}) => {
         </Text>
 
         <Text style={styles.label}>
-          VariationGroupId is:
+          VariationGroupId is:{' '}
           <Text style={styles.labelBis}>{variationGroupId}</Text>
         </Text>
 
@@ -62,12 +62,18 @@ const GetModificationInfo: React.SFC<Props> = ({navigation}) => {
             console.log(key);
             fsGetInfo(key)
               .then((infos) => {
-                /// set the varriation group id
-                setVariationGroupId(infos.variationGroupId);
-                /// set the campaig id
-                setCampaignId(infos.campaignId);
-                /// set the variation id
-                setVariationId(infos.variationId);
+                if (infos === null) {
+                  setVariationGroupId('null');
+                  setCampaignId('null');
+                  setVariationId('null');
+                } else {
+                  /// set the varriation group id
+                  setVariationGroupId(infos.variationGroupId);
+                  /// set the campaig id
+                  setCampaignId(infos.campaignId);
+                  /// set the variation id
+                  setVariationId(infos.variationId);
+                }
               })
               .catch((error) => {
                 setVariationGroupId('error: ' + error);
