@@ -1,16 +1,16 @@
 import React from 'react';
-import {View, Text, StyleSheet, SafeAreaView} from 'react-native';
-import NativeTachyons, {styles as s} from 'react-native-style-tachyons';
-import {Colors} from 'react-native/Libraries/NewAppScreen';
-import {ScrollView} from 'react-native-gesture-handler';
+import { View, Text, StyleSheet, SafeAreaView } from 'react-native';
+import NativeTachyons, { styles as s } from 'react-native-style-tachyons';
+import { Colors } from 'react-native/Libraries/NewAppScreen';
+import { ScrollView } from 'react-native-gesture-handler';
 import JSONTree from 'react-native-json-tree';
-import {StackNavigationProp} from '@react-navigation/stack';
-import {Button} from 'react-native-elements';
-import {RootStackParamList} from '../../../stackContainer';
-import {useFsModifications} from '@flagship.io/react-native-sdk';
-import {themeJsonTree} from '../../../../../assets/commonStyles';
-import {useSelector} from 'react-redux';
-import {RootState} from '../../../../../redux/rootReducer';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { Button } from 'react-native-elements';
+import { RootStackParamList } from '../../../stackContainer';
+import { useFsModifications, useFlagship } from '@flagship.io/react-native-sdk';
+import { themeJsonTree } from '../../../../../assets/commonStyles';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../../../redux/rootReducer';
 
 const styles = StyleSheet.create({
   body: {
@@ -31,7 +31,7 @@ interface Props {
   navigation: ScreenNavigationProp;
 }
 
-const GetModificationsDemo: React.SFC<Props> = ({navigation}) => {
+const GetModificationsDemo: React.SFC<Props> = ({ navigation }) => {
   const params = useSelector(
     (state: RootState) => state.demo.getModifications.params,
   );
@@ -48,7 +48,7 @@ const GetModificationsDemo: React.SFC<Props> = ({navigation}) => {
           <Button
             title="Edit argument"
             containerStyle={[s.mv3]}
-            buttonStyle={{backgroundColor: 'black'}}
+            buttonStyle={{ backgroundColor: 'black' }}
             onPress={() => {
               navigation.navigate('EditModificationsArgs');
             }}
@@ -59,6 +59,11 @@ const GetModificationsDemo: React.SFC<Props> = ({navigation}) => {
           <Text style={[s.mt4, s.f3]}>Hook output:</Text>
           <View>
             <JSONTree data={fsModifications} theme={themeJsonTree} />
+
+
+            <Button title="Get Modification info" onPress={() => {
+              navigation.navigate('GetModificationInfo');
+            }}></Button>
           </View>
         </View>
         {/* RESULT */}
@@ -75,7 +80,7 @@ const GetModificationsDemo: React.SFC<Props> = ({navigation}) => {
           </View>
         )}
         {/* BOTTOM MENU */}
-        <View style={[{borderTopColor: 'black', borderTopWidth: 1}, s.pv2]}>
+        <View style={[{ borderTopColor: 'black', borderTopWidth: 1 }, s.pv2]}>
           <Button
             title="Go back"
             containerStyle={[s.mv1]}
