@@ -16,7 +16,7 @@ export default {
   config: {
     fetchNow: true,
     activateNow: false,
-    enableConsoleLogs: false,
+    enableConsoleLogs: true,
     enableErrorLayout: false,
     nodeEnv: 'production',
     flagshipApi: 'https://decision-api.flagship.io/v1/',
