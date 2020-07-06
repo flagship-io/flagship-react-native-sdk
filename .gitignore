@@ -21,3 +21,5 @@ examples/expo-cli-demo/.expo/
 examples/react-native-cli-demo/android/app/src/main/assets/index.android.bundle
 
 examples/react-native-cli-demo/android/app/src/main/res/raw/
+
+.idea/
