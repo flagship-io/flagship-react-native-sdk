@@ -7,7 +7,7 @@ import JSONTree from 'react-native-json-tree';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {Button} from 'react-native-elements';
 import {RootStackParamList} from '../../../stackContainer';
-import {useFsModifications} from '@flagship.io/react-native-sdk';
+import {useFsModifications, useFlagship} from '@flagship.io/react-native-sdk';
 import {themeJsonTree} from '../../../../../assets/commonStyles';
 import {useSelector} from 'react-redux';
 import {RootState} from '../../../../../redux/rootReducer';
@@ -76,6 +76,13 @@ const GetModificationsDemo: React.SFC<Props> = ({navigation}) => {
         )}
         {/* BOTTOM MENU */}
         <View style={[{borderTopColor: 'black', borderTopWidth: 1}, s.pv2]}>
+          <Button
+            title="Get Modification info"
+            containerStyle={[s.mv1]}
+            onPress={() => {
+              navigation.navigate('GetModificationInfo');
+            }}
+          />
           <Button
             title="Go back"
             containerStyle={[s.mv1]}

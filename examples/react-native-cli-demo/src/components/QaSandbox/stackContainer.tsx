@@ -9,6 +9,9 @@ import SendHitDemo from './components/TestFeatures/SendHitDemo';
 import EditArguments from './components/TestFeatures/GetModificationsDemo/components/EditArguments';
 import EditHitPayload from './components/TestFeatures/SendHitDemo/components/EditHitPayload';
 import SafeModeDemo from './components/TestFeatures/SafeModeDemo';
+
+import GetModificationInfo from './components/TestFeatures/GetModificationsDemo/components/GetModificationInfo';
+
 // const styles = StyleSheet.create({});
 
 // REACT NAVIGATION: begin
@@ -22,6 +25,7 @@ export type RootStackParamList = {
   EditModificationsArgs: {};
   EditHitPayload: {};
   SafeModeDemo: {};
+  GetModificationInfo:{};
 };
 const Stack = createStackNavigator<RootStackParamList>();
 // REACT NAVIGATION: end
@@ -81,6 +85,11 @@ const DevSandbox: React.SFC<Props> = () => {
         name="EditHitPayload"
         component={EditHitPayload}
         options={{title: 'Modify hit payload'}}
+      />
+      <Stack.Screen
+        name="GetModificationInfo"
+        component={GetModificationInfo}
+        options={{title: 'getModificationInfo'}}
       />
     </Stack.Navigator>
   );

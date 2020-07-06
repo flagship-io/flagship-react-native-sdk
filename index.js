@@ -11,11 +11,16 @@ import {
     generateFlagshipId,
     checkValidityPatternForEnvId
 } from './lib/FSTools';
+
+import { getCacheFromPhone, setCacheFromPhone } from './lib/FSStorage';
+
 import ErrorBoundary from './lib/ErrorBoundary';
 import FsLogger from './lib/FsLogger';
 import { View, Text, SafeAreaView, Button } from 'react-native';
 const initState = {
-    log: null
+    log: null,
+    isLoadingCache: true,
+    phoneCacheModifications: null
 };
 
 const FsReactNativeContext = React.createContext({
@@ -92,6 +97,26 @@ const FlagshipProvider = ({
         return <ErrorBoundary>{children}</ErrorBoundary>;
     }
 
+    // with freeze (few ms)
+    if (state.isLoadingCache) {
+        getCacheFromPhone(state.log)
+            .then((data) =>
+                setState({
+                    ...state,
+                    isLoadingCache: false,
+                    phoneCacheModifications: [...data]
+                })
+            )
+            .catch((error) => {
+                setState({
+                    ...state,
+                    isLoadingCache: false
+                });
+                state.log.warn('getCacheFromPhone - error: ' + error);
+            });
+        return null;
+    }
+
     return (
         <FsReactNativeContext.Provider value={{ state, setState }}>
             <ReactFlagshipProvider
@@ -102,13 +127,19 @@ const FlagshipProvider = ({
                     handleErrorDisplay: displayReactNativeBoundary
                 }}
                 visitorData={{
-                    /// Check the visitor id is null ?
+                    // Check the visitor id is null ?
                     id:
                         visitorData.id == null
                             ? generateFlagshipId()
                             : visitorData.id,
                     context: visitorData.context
                 }}
+                // Update the modifications stored in device's cache
+                onUpdate={(fsModifications) => {
+                    setCacheFromPhone(fsModifications, state.log);
+                }}
+                // Provide the cached modifications from device at the start
+                initialModifications={state.phoneCacheModifications}
             >
                 {children}
             </ReactFlagshipProvider>
