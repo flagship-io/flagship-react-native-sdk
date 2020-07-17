@@ -11,6 +11,7 @@ import {RootState} from '../../redux/rootReducer';
 import {setFsModifications} from '../../redux/stuff/sdkSettings/actions';
 import Home from '../Home';
 import QaSbStackContainer from '../QaSandbox/stackContainer';
+import {updateFsVisitor} from '../../redux/stuff/fsVisitor/actions';
 
 // REACT NAVIGATION: begin
 const Tab = createBottomTabNavigator();
@@ -31,8 +32,9 @@ const FlagshipWrapper = () => {
   return (
     <FlagshipProvider
       envId={sdkSettings.envId || ''}
-      onUpdate={({fsModifications}) => {
+      onUpdate={({fsModifications}, fsVisitor) => {
         dispatch(setFsModifications(fsModifications));
+        dispatch(updateFsVisitor(fsVisitor));
         if (safeModeRedux.triggerTest) {
           throw new Error('Crash test react native');
         }

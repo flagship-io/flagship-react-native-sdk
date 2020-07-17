@@ -14,18 +14,24 @@ import GetModificationInfo from './components/TestFeatures/GetModificationsDemo/
 
 // const styles = StyleSheet.create({});
 
+export type NewVisitorContextParams = {
+  key: string;
+  type: 'string' | 'boolean' | 'number';
+  value: any;
+};
+
 // REACT NAVIGATION: begin
 export type RootStackParamList = {
   QaSandbox: {};
   SdkSettings: {};
   CurrentSettings: {};
-  NewVisitorContext: {};
+  NewVisitorContext: NewVisitorContextParams;
   GetModificationsDemo: {};
   SendHitDemo: {};
   EditModificationsArgs: {};
   EditHitPayload: {};
   SafeModeDemo: {};
-  GetModificationInfo:{};
+  GetModificationInfo: {};
 };
 const Stack = createStackNavigator<RootStackParamList>();
 // REACT NAVIGATION: end

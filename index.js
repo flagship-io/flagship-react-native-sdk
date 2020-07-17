@@ -80,6 +80,7 @@ const FlagshipProvider = ({
     envId,
     onError,
     enableConsoleLogs,
+    onUpdate,
     nodeEnv,
     visitorData,
     ...otherProps
@@ -139,8 +140,9 @@ const FlagshipProvider = ({
                     context: visitorData.context
                 }}
                 // Update the modifications stored in device's cache
-                onUpdate={(fsModifications) => {
-                    setCacheFromPhone(fsModifications, state.log);
+                onUpdate={(data, fsVisitor) => {
+                    setCacheFromPhone(data, state.log);
+                    onUpdate(data, fsVisitor);
                 }}
                 // Provide the cached modifications from device at the start
                 initialModifications={state.phoneCacheModifications}
