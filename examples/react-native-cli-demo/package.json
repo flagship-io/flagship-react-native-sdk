@@ -5,6 +5,7 @@
   "scripts": {
     "android": "react-native run-android",
     "ios": "cd ./ios && pod install && cd ../ && react-native run-ios",
+    "clear:cache": "watchman watch-del-all && rm -rf $TMPDIR/react-* && rm -rf node_modules/ && npm cache verify && npm install && npm start -- --reset-cache",
     "start": "react-native link && react-native start",
     "create:android:apk": "npm run build:android && cd android && ./gradlew assembleRelease && cd ../",
     "build:android": "react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res",
@@ -13,7 +14,7 @@
   },
   "dependencies": {
     "@expo/vector-icons": "^10.0.6",
-    "@flagship.io/react-native-sdk": "https://github.com/abtasty/flagship-react-native-sdk.git#develop",
+    "@flagship.io/react-native-sdk": "^1.0.1",
     "@react-native-community/async-storage": "^1.8.1",
     "@react-native-community/cli-platform-android": "^4.10.1",
     "@react-native-community/masked-view": "^0.1.6",
