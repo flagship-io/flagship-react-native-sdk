@@ -1,22 +1,21 @@
-import React from 'react';
 import {
     FlagshipProvider as ReactFlagshipProvider,
-    useFsModifications,
+    useFlagship,
     useFsActivate,
-    useFsSynchronize,
-    useFlagship
+    useFsModifications,
+    useFsSynchronize
 } from '@flagship.io/react-sdk';
-
-import {
-    generateFlagshipId,
-    checkValidityPatternForEnvId
-} from './lib/FSTools';
-
-import { getCacheFromPhone, setCacheFromPhone } from './lib/FSStorage';
+import React from 'react';
+import { Button, SafeAreaView, Text, View } from 'react-native';
 
 import ErrorBoundary from './lib/ErrorBoundary';
 import FsLogger from './lib/FsLogger';
-import { View, Text, SafeAreaView, Button } from 'react-native';
+import { getCacheFromPhone, setCacheFromPhone } from './lib/FSStorage';
+import {
+    checkValidityPatternForEnvId,
+    generateFlagshipId
+} from './lib/FSTools';
+
 const initState = {
     log: null,
     isLoadingCache: true,
@@ -80,13 +79,14 @@ const FlagshipProvider = ({
     children,
     envId,
     onError,
-    config,
+    enableConsoleLogs,
+    nodeEnv,
     visitorData,
     ...otherProps
 }) => {
     const [state, setState] = React.useState({
         ...initState,
-        log: FsLogger.getLogger(config)
+        log: FsLogger.getLogger({ nodeEnv, enableConsoleLogs })
     });
 
     // Check the envId
@@ -122,7 +122,11 @@ const FlagshipProvider = ({
             <ReactFlagshipProvider
                 {...otherProps}
                 envId={envId}
-                config={config}
+                /* V1 */
+                {...otherProps.config}
+                /* V2 */
+                // enableConsoleLogs={enableConsoleLogs}
+                // nodeEnv={nodeEnv}
                 reactNative={{
                     handleErrorDisplay: displayReactNativeBoundary
                 }}

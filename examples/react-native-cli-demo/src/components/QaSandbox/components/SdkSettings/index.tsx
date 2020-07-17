@@ -1,7 +1,7 @@
 import {StackNavigationProp} from '@react-navigation/stack';
 import React, {useEffect, useState} from 'react';
 import {SafeAreaView, StyleSheet, View, Switch, Text} from 'react-native';
-import {Button, Input, CheckBox} from 'react-native-elements';
+import {Button, Input, CheckBox, Slider} from 'react-native-elements';
 import {ScrollView} from 'react-native-gesture-handler';
 import NativeTachyons, {styles as s} from 'react-native-style-tachyons';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -174,6 +174,48 @@ const SdkSettings: React.SFC<Props> = ({navigation}) => {
             }
           />
         </View>
+        <View style={[s.mv2, s.ph2]}>
+          <Text style={[s.f5, s.mb2]}>decisionMode:</Text>
+          <CheckBox
+            title={'API'}
+            checked={config.decisionMode === 'API'}
+            onPress={() =>
+              updateLocalConfig({
+                ...config,
+                decisionMode: 'API',
+              })
+            }
+          />
+          <CheckBox
+            title={'Bucketing'}
+            checked={config.decisionMode === 'Bucketing'}
+            onPress={() =>
+              updateLocalConfig({
+                ...config,
+                decisionMode: 'Bucketing',
+              })
+            }
+          />
+        </View>
+        {config.decisionMode === 'Bucketing' && (
+          <View style={[s.mv2, s.ph2]}>
+            <Text style={[s.f5, s.mb2]}>pollingInterval:</Text>
+            <Slider
+              value={config.pollingInterval}
+              maximumValue={10}
+              minimumValue={1}
+              step={1}
+              onValueChange={(value) =>
+                updateLocalConfig({
+                  ...config,
+                  // pollingInterval: Math.ceil((100 * value) / 10),
+                  pollingInterval: value,
+                })
+              }
+            />
+            <Text>{config.pollingInterval} minute(s)</Text>
+          </View>
+        )}
         <View>
           <Text style={[s.f5, s.mb2]}>flagshipApi:</Text>
           <Input

@@ -15,6 +15,8 @@ export default {
   ],
   config: {
     fetchNow: true,
+    decisionMode: 'API',
+    pollingInterval: 5,
     activateNow: false,
     enableConsoleLogs: true,
     enableErrorLayout: false,
