@@ -125,7 +125,7 @@ const FlagshipProvider = ({
                 envId={envId}
                 /* V1 */
                 {...otherProps.config}
-                /* V2 */
+                /*  TODO: V2 */
                 // enableConsoleLogs={enableConsoleLogs}
                 // nodeEnv={nodeEnv}
                 reactNative={{
