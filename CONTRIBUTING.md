@@ -41,3 +41,5 @@ Troubleshoot:
     react-native run-android --variant=release
 
     ```
+
+4.  The .apk is located in **examples/react-native-cli-demo/android/app/build/outputs/apk/release**
