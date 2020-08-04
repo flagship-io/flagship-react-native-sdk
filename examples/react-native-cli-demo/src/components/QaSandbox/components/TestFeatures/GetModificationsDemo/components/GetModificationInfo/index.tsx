@@ -57,10 +57,8 @@ const GetModificationInfo: React.SFC<Props> = ({navigation}) => {
           title="Get modification info"
           containerStyle={[s.mv3]}
           onPress={() => {
-            console.log('-----------');
-
-            console.log(key);
-            fsGetInfo(key)
+            if (fsGetInfo != null){
+              fsGetInfo(key)
               .then((infos) => {
                 if (infos === null) {
                   setVariationGroupId('null');
@@ -80,7 +78,9 @@ const GetModificationInfo: React.SFC<Props> = ({navigation}) => {
                 setCampaignId('-----------');
                 setVariationId('-----------');
                 console.log(error);
+                return
               });
+            }
           }}
         />
 
