@@ -40,6 +40,12 @@ npm run start:withClearCache
 
 ## Create an .apk file
 
+**IMPORTANT**: Make sure your android folder is containing the last code source. To do so, run:
+
+```
+npm run build:android
+```
+
 ### with Android Studio:
 
 1. Open Android Studio

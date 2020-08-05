@@ -2,9 +2,9 @@ import React, {useState} from 'react';
 import {View, Text, StyleSheet, SafeAreaView, TextInput} from 'react-native';
 import NativeTachyons, {styles as s} from 'react-native-style-tachyons';
 import {StackNavigationProp} from '@react-navigation/stack';
-import {Button} from 'react-native-elements';
+import {Button} from 'react-native';
 import {RootStackParamList} from '../../../stackContainer';
-import {useFsModifications, useFlagship} from '@flagship.io/react-native-sdk';
+import {useFlagship} from '@flagship.io/react-native-sdk';
 
 interface Props {
   // Nothing
@@ -37,26 +37,7 @@ const GetModificationInfo: React.SFC<Props> = ({navigation}) => {
           style={styles.input}
           value={key}
           onChangeText={(txt) => setKey(txt)}
-        />
-
-        <Text style={styles.label}>
-          variationId is: <Text style={styles.labelBis}>{variationId}</Text>
-        </Text>
-
-        <Text style={styles.label}>
-          CampaignId is: <Text style={styles.labelBis}>{campaignId}</Text>
-        </Text>
-
-        <Text style={styles.label}>
-          VariationGroupId is:{' '}
-          <Text style={styles.labelBis}>{variationGroupId}</Text>
-        </Text>
-
-        <Button
-          style={styles.label}
-          title="Get modification info"
-          containerStyle={[s.mv3]}
-          onPress={() => {
+          onEndEditing={() => {
             if (fsGetInfo != null) {
               fsGetInfo(key)
                 .then((infos) => {
@@ -88,13 +69,26 @@ const GetModificationInfo: React.SFC<Props> = ({navigation}) => {
           }}
         />
 
-        <Button
-          style={styles.label}
-          title="Go back"
-          onPress={() => {
-            navigation.goBack();
-          }}
-        />
+        <Text style={styles.label}>
+          variationId is: <Text style={styles.labelBis}>{variationId}</Text>
+        </Text>
+
+        <Text style={styles.label}>
+          CampaignId is: <Text style={styles.labelBis}>{campaignId}</Text>
+        </Text>
+
+        <Text style={styles.label}>
+          VariationGroupId is:{' '}
+          <Text style={styles.labelBis}>{variationGroupId}</Text>
+        </Text>
+        <View style={[s.mv3]}>
+          <Button
+            title="Go back"
+            onPress={() => {
+              navigation.goBack();
+            }}
+          />
+        </View>
       </View>
     </SafeAreaView>
   );
