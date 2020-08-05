@@ -26,7 +26,19 @@ npm run android
 
 ## Create an .apk file
 
-Troubleshoot:
+### with Android Studio:
+
+1. Open Android Studio
+
+2. Open "Build" in the Menu
+
+3. "Build bundle(s) / APK(s)" > "Build APK"
+
+4. Generated .apk file is located in `android/app/build/outputs/apk/debug/app-debug.apk`
+
+NOTE: You can switch between "debug" / "release" variant if you click on "Build Variants" vertical tabs
+
+### with CLI:
 
 1.  [Resource and asset merger: Duplicate resources app:mergeReleaseResources](https://github.com/facebook/react-native/issues/22234#issuecomment-437812451)
 
@@ -57,18 +69,18 @@ Troubleshoot:
 3.  Run:
 
     ```
-    npm run create:android:apk:v2
+    npm run create:android:debug
 
     ```
 
 which executes:
 
     ```
-    react-native run-android --variant=release
+    react-native run-android --variant=debug
 
     ```
 
-4.  The .apk is located in **examples/react-native-cli-demo/android/app/build/outputs/apk/release**
+4.  The .apk is located in **examples/react-native-cli-demo/android/app/build/outputs/apk/debug**
 
 ## Libraries used
 
