@@ -7,6 +7,11 @@ const FsVisitorReducer = (
   action: FsVisitorAction,
 ): FsVisitorState => {
   let bucket;
+
+  if (!action.payload) {
+    return state;
+  }
+
   switch (action.type) {
     case FS_VISITOR_UPDATE:
       bucket = action.payload.bucket || initialState.bucket;

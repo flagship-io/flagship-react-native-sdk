@@ -10,7 +10,9 @@
 
 • `npm install`
 
-## Start the project
+## Run in local in 2 steps
+
+### STEP 1 - Put the project on your phone locally
 
 - iOS:
 
@@ -22,6 +24,18 @@ npm run ios
 
 ```
 npm run android
+```
+
+### STEP 2 - Run react-native on your computer
+
+```
+npm start
+```
+
+or with no cache
+
+```
+npm run start:withClearCache
 ```
 
 ## Create an .apk file

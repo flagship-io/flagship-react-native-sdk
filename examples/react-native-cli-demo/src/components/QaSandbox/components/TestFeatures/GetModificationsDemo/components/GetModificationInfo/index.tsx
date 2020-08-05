@@ -57,29 +57,33 @@ const GetModificationInfo: React.SFC<Props> = ({navigation}) => {
           title="Get modification info"
           containerStyle={[s.mv3]}
           onPress={() => {
-            if (fsGetInfo != null){
+            if (fsGetInfo != null) {
               fsGetInfo(key)
-              .then((infos) => {
-                if (infos === null) {
-                  setVariationGroupId('null');
-                  setCampaignId('null');
-                  setVariationId('null');
-                } else {
-                  /// set the varriation group id
-                  setVariationGroupId(infos.variationGroupId);
-                  /// set the campaig id
-                  setCampaignId(infos.campaignId);
-                  /// set the variation id
-                  setVariationId(infos.variationId);
-                }
-              })
-              .catch((error) => {
-                setVariationGroupId('error: ' + error);
-                setCampaignId('-----------');
-                setVariationId('-----------');
-                console.log(error);
-                return
-              });
+                .then((infos) => {
+                  if (infos === null) {
+                    setVariationGroupId('null');
+                    setCampaignId('null');
+                    setVariationId('null');
+                  } else {
+                    /// set the varriation group id
+                    setVariationGroupId(infos.variationGroupId);
+                    /// set the campaig id
+                    setCampaignId(infos.campaignId);
+                    /// set the variation id
+                    setVariationId(infos.variationId);
+                  }
+                })
+                .catch((error) => {
+                  setVariationGroupId('error: ' + error);
+                  setCampaignId('-----------');
+                  setVariationId('-----------');
+                  console.log(error);
+                  return;
+                });
+            } else {
+              setVariationGroupId('getModificationInfo is null');
+              setCampaignId('-----------');
+              setVariationId('-----------');
             }
           }}
         />
