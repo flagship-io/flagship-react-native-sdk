@@ -294,17 +294,17 @@ PODS:
     - React-cxxreact (= 0.62.2)
     - React-jsi (= 0.62.2)
     - ReactCommon/callinvoker (= 0.62.2)
-  - RNCAsyncStorage (1.11.0):
+  - RNCAsyncStorage (1.10.0):
     - React
   - RNCMaskedView (0.1.10):
     - React
-  - RNCPicker (1.6.5):
+  - RNCPicker (1.4.0):
     - React
   - RNGestureHandler (1.6.1):
     - React
-  - RNReanimated (1.9.0):
+  - RNReanimated (1.8.0):
     - React
-  - RNScreens (2.9.0):
+  - RNScreens (2.7.0):
     - React
   - RNVectorIcons (6.6.0):
     - React
@@ -489,12 +489,12 @@ SPEC CHECKSUMS:
   React-RCTText: fae545b10cfdb3d247c36c56f61a94cfd6dba41d
   React-RCTVibration: 4356114dbcba4ce66991096e51a66e61eda51256
   ReactCommon: ed4e11d27609d571e7eee8b65548efc191116eb3
-  RNCAsyncStorage: db711e29e5e0500d9bd21aa0c2e397efa45302b1
+  RNCAsyncStorage: b34d2399d3e25db01d5b881949b503bd3c224d57
   RNCMaskedView: f5c7d14d6847b7b44853f7acb6284c1da30a3459
-  RNCPicker: 55b9b4240d0a9eba8733d02616775d4040de2e7d
+  RNCPicker: 27350bff586cd1b43b5816c16718514d61394f01
   RNGestureHandler: 8f09cd560f8d533eb36da5a6c5a843af9f056b38
-  RNReanimated: b5ccb50650ba06f6e749c7c329a1bc3ae0c88b43
-  RNScreens: c526239bbe0e957b988dacc8d75ac94ec9cb19da
+  RNReanimated: 955cf4068714003d2f1a6e2bae3fb1118f359aff
+  RNScreens: cf198f915f8a2bf163de94ca9f5bfc8d326c3706
   RNVectorIcons: 0bb4def82230be1333ddaeee9fcba45f0b288ed4
   Yoga: 3ebccbdd559724312790e7742142d062476b698e
   YogaKit: f782866e155069a2cca2517aafea43200b01fd5a
