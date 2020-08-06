@@ -111,3 +111,4 @@ which executes:
 - [grid](https://github.com/GeekyAnts/react-native-easy-grid)
 - [font-awesome-icons](https://fontawesome.com/icons?d=gallery&q=cross&m=free)
 - [redux-persist](https://github.com/rt2zz/redux-persist)
+- [react-native-local-notification](https://github.com/EmilScherdin/react-native-local-notification)

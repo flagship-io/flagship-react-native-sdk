@@ -46,13 +46,8 @@ const FlagshipWrapper = () => {
     <SafeAreaProvider>
       <SafeAreaView style={{flex: 1, position: 'relative'}}>
         <NavigationContainer>
-          <View
-            style={
-              (mainStyles.container,
-              {zIndex: 222, backgroundColor: 'rgba(255, 255, 255, 0.1)'})
-            }>
-            <LocalNotification ref={inputRef} />
-          </View>
+          <LocalNotification ref={inputRef} duration={3000} />
+
           <FlagshipProvider
             envId={sdkSettings.envId || ''}
             onUpdate={({fsModifications}, fsVisitor) => {
@@ -62,32 +57,39 @@ const FlagshipWrapper = () => {
                 throw new Error('Crash test react native');
               }
             }}
-            config={{...sdkSettings.config}}
+            fetchNow={sdkSettings.config && sdkSettings.config.fetchNow}
+            pollingInterval={
+              sdkSettings.config && sdkSettings.config.pollingInterval
+            }
+            decisionMode={sdkSettings.config && sdkSettings.config.decisionMode}
+            enableConsoleLogs={
+              sdkSettings.config && sdkSettings.config.enableConsoleLogs
+            }
+            enableErrorLayout={
+              sdkSettings.config && sdkSettings.config.enableErrorLayout
+            }
+            nodeEnv={sdkSettings.config && sdkSettings.config.nodeEnv}
+            flagshipApi={sdkSettings.config && sdkSettings.config.flagshipApi}
+            apiKey={sdkSettings.config && sdkSettings.config.apiKey}
             onInitStart={() => {
               console.log('init start');
             }}
             onInitDone={() => {
               console.log('init done');
-              inputRef.current.showNotification({
-                title: 'Notification title',
-                text: 'init done',
-                onPress: () => alert('hello short'),
-                onHide: () => alert('Byeeeee'),
-              });
             }}
             onBucketingSuccess={(data) => {
               console.log('test bucketing success');
               inputRef.current.showNotification({
-                title: 'Notification title',
-                text: 'This is ' + data.status,
-                onPress: () => alert('hello short'),
+                title: 'Bucketing polling success',
+                text: 'Status code="' + data.status + '"',
+                onPress: () => console.log('coquin'),
                 onHide: () => alert('Byeeeee'),
               });
             }}
             onBucketingFail={(error) => {
               inputRef.current.showNotification({
-                title: 'Notification title',
-                text: 'This is an error: ' + error.stack,
+                title: 'Bucketing polling fail',
+                text: 'with error: ' + error.stack,
                 onPress: () => alert('hello short'),
                 onHide: () => alert('Byeeeee'),
               });
