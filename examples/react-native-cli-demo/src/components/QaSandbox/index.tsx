@@ -29,37 +29,35 @@ interface Props {
 
 const SandboxElement: React.SFC<Props> = ({navigation}) => {
   return (
-    <SafeAreaView>
-      <ScrollView style={styles.body}>
-        <View style={[s.f3, s.pv3, s.tc]}>
-          <Button
-            {...commonMenuButtonStyle}
-            title="Edit SDK Setting"
-            onPress={() => navigation.navigate('SdkSettings')}
-          />
-          <Button
-            {...commonMenuButtonStyle}
-            title="See current Redux state"
-            onPress={() => navigation.navigate('CurrentSettings')}
-          />
-          <Button
-            {...commonMenuButtonStyle}
-            title="Get Modifications Demo"
-            onPress={() => navigation.navigate('GetModificationsDemo')}
-          />
-          <Button
-            {...commonMenuButtonStyle}
-            title="Send Hit Demo"
-            onPress={() => navigation.navigate('SendHitDemo')}
-          />
-          <Button
-            {...commonMenuButtonStyle}
-            title="Safe Mode Demo"
-            onPress={() => navigation.navigate('SafeModeDemo')}
-          />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
+    <ScrollView style={styles.body}>
+      <View style={[s.f3, s.pv3, s.tc]}>
+        <Button
+          {...commonMenuButtonStyle}
+          title="Edit SDK Setting"
+          onPress={() => navigation.navigate('SdkSettings')}
+        />
+        <Button
+          {...commonMenuButtonStyle}
+          title="See current Redux state"
+          onPress={() => navigation.navigate('CurrentSettings')}
+        />
+        <Button
+          {...commonMenuButtonStyle}
+          title="Get Modifications Demo"
+          onPress={() => navigation.navigate('GetModificationsDemo')}
+        />
+        <Button
+          {...commonMenuButtonStyle}
+          title="Send Hit Demo"
+          onPress={() => navigation.navigate('SendHitDemo')}
+        />
+        <Button
+          {...commonMenuButtonStyle}
+          title="Safe Mode Demo"
+          onPress={() => navigation.navigate('SafeModeDemo')}
+        />
+      </View>
+    </ScrollView>
   );
 };
 
