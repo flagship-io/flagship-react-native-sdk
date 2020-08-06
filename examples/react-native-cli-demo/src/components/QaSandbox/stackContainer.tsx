@@ -11,6 +11,7 @@ import EditHitPayload from './components/TestFeatures/SendHitDemo/components/Edi
 import SafeModeDemo from './components/TestFeatures/SafeModeDemo';
 
 import GetModificationInfo from './components/TestFeatures/GetModificationsDemo/components/GetModificationInfo';
+import HttpLogger from './components/HttpLogger';
 
 // const styles = StyleSheet.create({});
 
@@ -32,6 +33,7 @@ export type RootStackParamList = {
   EditHitPayload: {};
   SafeModeDemo: {};
   GetModificationInfo: {};
+  HttpLogger: {};
 };
 const Stack = createStackNavigator<RootStackParamList>();
 // REACT NAVIGATION: end
@@ -65,6 +67,11 @@ const DevSandbox: React.SFC<Props> = () => {
         name="GetModificationsDemo"
         component={GetModificationsDemo}
         options={{title: 'useFsModifications hook'}}
+      />
+      <Stack.Screen
+        name="HttpLogger"
+        component={HttpLogger}
+        options={{title: 'Http network'}}
       />
       <Stack.Screen
         name="SendHitDemo"

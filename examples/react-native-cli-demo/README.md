@@ -112,3 +112,4 @@ which executes:
 - [font-awesome-icons](https://fontawesome.com/icons?d=gallery&q=cross&m=free)
 - [redux-persist](https://github.com/rt2zz/redux-persist)
 - [react-native-local-notification](https://github.com/EmilScherdin/react-native-local-notification)
+- [react-native-network-logger](https://www.npmjs.com/package/react-native-network-logger)

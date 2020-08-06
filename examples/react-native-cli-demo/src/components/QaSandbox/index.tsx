@@ -56,6 +56,11 @@ const SandboxElement: React.SFC<Props> = ({navigation}) => {
           title="Safe Mode Demo"
           onPress={() => navigation.navigate('SafeModeDemo')}
         />
+        <Button
+          {...commonMenuButtonStyle}
+          title="Http request logs"
+          onPress={() => navigation.navigate('HttpLogger')}
+        />
       </View>
     </ScrollView>
   );
