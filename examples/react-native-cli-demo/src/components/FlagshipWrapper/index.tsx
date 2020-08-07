@@ -82,16 +82,14 @@ const FlagshipWrapper = () => {
               inputRef.current.showNotification({
                 title: 'Bucketing polling success',
                 text: 'Status code="' + data.status + '"',
-                onPress: () => console.log('coquin'),
-                onHide: () => alert('Byeeeee'),
+                onPress: () => console.log('onPress'),
+                onHide: () => console.log('onHide'),
               });
             }}
             onBucketingFail={(error) => {
               inputRef.current.showNotification({
                 title: 'Bucketing polling fail',
                 text: 'with error: ' + error.stack,
-                onPress: () => alert('hello short'),
-                onHide: () => alert('Byeeeee'),
               });
             }}
             visitorData={{
