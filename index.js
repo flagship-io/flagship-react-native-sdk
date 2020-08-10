@@ -10,7 +10,11 @@ import { Button, SafeAreaView, Text, View } from 'react-native';
 
 import ErrorBoundary from './lib/ErrorBoundary';
 import FsLogger from './lib/FsLogger';
-import { getCacheFromPhone, setCacheFromPhone } from './lib/FSStorage';
+import {
+    getCacheFromPhone,
+    setModificationsCacheFromPhone,
+    setBucketingCacheFromPhone
+} from './lib/FSStorage';
 import {
     checkValidityPatternForEnvId,
     generateFlagshipId
@@ -19,7 +23,10 @@ import {
 const initState = {
     log: null,
     isLoadingCache: true,
-    phoneCacheModifications: null
+    phoneCache: {
+        modifications: null,
+        bucketing: null
+    }
 };
 
 const FsReactNativeContext = React.createContext({
@@ -81,6 +88,7 @@ const FlagshipProvider = ({
     onError,
     enableConsoleLogs,
     onUpdate,
+    onBucketingSuccess,
     nodeEnv,
     visitorData,
     ...otherProps
@@ -105,7 +113,10 @@ const FlagshipProvider = ({
                 setState({
                     ...state,
                     isLoadingCache: false,
-                    phoneCacheModifications: [...data]
+                    phoneCache: {
+                        modifications: [...data.modifications],
+                        bucketing: data.bucketing
+                    }
                 })
             )
             .catch((error) => {
@@ -126,6 +137,8 @@ const FlagshipProvider = ({
                 /* V1 */
                 {...otherProps.config}
                 /*  TODO: V2 */
+                initialBucketing={state.phoneCache.bucketing}
+                initialModifications={state.phoneCache.modifications}
                 // enableConsoleLogs={enableConsoleLogs}
                 // nodeEnv={nodeEnv}
                 reactNative={{
@@ -141,11 +154,13 @@ const FlagshipProvider = ({
                 }}
                 // Update the modifications stored in device's cache
                 onUpdate={(data, fsVisitor) => {
-                    setCacheFromPhone(data, state.log);
+                    setModificationsCacheFromPhone(data, state.log);
                     onUpdate(data, fsVisitor);
                 }}
-                // Provide the cached modifications from device at the start
-                initialModifications={state.phoneCacheModifications}
+                onBucketingSuccess={(data) => {
+                    setBucketingCacheFromPhone(data, state.log);
+                    onBucketingSuccess(data);
+                }}
             >
                 {children}
             </ReactFlagshipProvider>
