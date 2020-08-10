@@ -78,7 +78,6 @@ const FlagshipWrapper = () => {
               console.log('init done');
             }}
             onBucketingSuccess={(data) => {
-              console.log('test bucketing success');
               inputRef.current.showNotification({
                 title: 'Bucketing polling success',
                 text: 'Status code="' + data.status + '"',
