@@ -5,8 +5,9 @@ import {Button} from 'react-native-elements';
 import {ScrollView} from 'react-native-gesture-handler';
 import NativeTachyons, {styles as s} from 'react-native-style-tachyons';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
-
+import {useFsSynchronize} from '@flagship.io/react-sdk';
 import {RootStackParamList} from '../../stackContainer';
+import LocalNotification from 'react-native-local-notification';
 
 const styles = StyleSheet.create({
   body: {
@@ -24,13 +25,28 @@ interface Props {
 }
 
 const UseFlagshipDemo: React.SFC<Props> = ({navigation}) => {
-  //   const {} = route.params;
+  const [toggle, setToggle] = React.useState(false);
+  useFsSynchronize([toggle], false); // trigger a synchronize when "toggle" value change.
+
+  const inputRef = React.useRef('localNotification');
   return (
     <SafeAreaView>
       <ScrollView>
+        <LocalNotification ref={inputRef} duration={3000} />
         <View style={styles.body}>
           {/* BOTTOM MENU */}
           <View style={[{borderTopColor: 'black', borderTopWidth: 1}, s.pv2]}>
+            <Button
+              title="Synchronize Modifications"
+              containerStyle={[s.mv1]}
+              onPress={() => {
+                setToggle(!toggle);
+                inputRef.current.showNotification({
+                  text: 'Sync modifs done ✔️',
+                  title: '',
+                });
+              }}
+            />
             <Button
               title="Get Modification info"
               containerStyle={[s.mv1]}

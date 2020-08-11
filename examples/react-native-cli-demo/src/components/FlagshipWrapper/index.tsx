@@ -8,7 +8,6 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import {useDispatch, useSelector} from 'react-redux';
 
 import {RootState} from '../../redux/rootReducer';
-import {setFsModifications} from '../../redux/stuff/sdkSettings/actions';
 import Home from '../Home';
 import QaSbStackContainer from '../QaSandbox/stackContainer';
 import {updateFsVisitor} from '../../redux/stuff/fsVisitor/actions';
@@ -51,26 +50,20 @@ const FlagshipWrapper = () => {
           <FlagshipProvider
             envId={sdkSettings.envId || ''}
             onUpdate={({fsModifications}, fsVisitor) => {
-              dispatch(setFsModifications(fsModifications));
+              // dispatch(setFsModifications(fsModifications)); // TODO: to move another reducer
               dispatch(updateFsVisitor(fsVisitor));
               if (safeModeRedux.triggerTest) {
                 throw new Error('Crash test react native');
               }
             }}
-            fetchNow={sdkSettings.config && sdkSettings.config.fetchNow}
-            pollingInterval={
-              sdkSettings.config && sdkSettings.config.pollingInterval
-            }
-            decisionMode={sdkSettings.config && sdkSettings.config.decisionMode}
-            enableConsoleLogs={
-              sdkSettings.config && sdkSettings.config.enableConsoleLogs
-            }
-            enableErrorLayout={
-              sdkSettings.config && sdkSettings.config.enableErrorLayout
-            }
-            nodeEnv={sdkSettings.config && sdkSettings.config.nodeEnv}
-            flagshipApi={sdkSettings.config && sdkSettings.config.flagshipApi}
-            apiKey={sdkSettings.config && sdkSettings.config.apiKey}
+            fetchNow={sdkSettings.fetchNow}
+            pollingInterval={sdkSettings.pollingInterval}
+            decisionMode={sdkSettings.decisionMode}
+            enableConsoleLogs={sdkSettings.enableConsoleLogs}
+            enableErrorLayout={sdkSettings.enableErrorLayout}
+            nodeEnv={sdkSettings.nodeEnv}
+            flagshipApi={sdkSettings.flagshipApi}
+            apiKey={sdkSettings.apiKey}
             onInitStart={() => {
               console.log('init start');
             }}

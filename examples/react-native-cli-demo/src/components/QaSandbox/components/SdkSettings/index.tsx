@@ -62,9 +62,7 @@ const SdkSettings: React.SFC<Props> = ({navigation}) => {
   const stateVisId = useSelector(
     (state: RootState) => state.sdkSettings.visitorId,
   );
-  const stateConfig = useSelector(
-    (state: RootState) => state.sdkSettings.config,
-  );
+  const stateConfig = useSelector((state: RootState) => state.sdkSettings);
   const [envId, setEnvId] = React.useState<string | undefined>(undefined);
   const [visId, setVisitorId] = React.useState<string | undefined>(undefined);
   const [config, updateLocalConfig] = React.useState(stateConfig);

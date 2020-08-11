@@ -2,8 +2,15 @@ export type SdkSettingsState = {
   envId: string | undefined;
   visitorId: string | undefined;
   visitorContext: Array<visitorContextElement>;
-  config: any;
-  fsModifications: any[];
+  fetchNow: boolean;
+  decisionMode: string;
+  pollingInterval: number | null;
+  activateNow: boolean;
+  enableConsoleLogs: boolean;
+  enableErrorLayout: boolean;
+  nodeEnv: string;
+  flagshipApi: string;
+  apiKey: null | string;
 };
 
 export type SetEnvIdAction = {

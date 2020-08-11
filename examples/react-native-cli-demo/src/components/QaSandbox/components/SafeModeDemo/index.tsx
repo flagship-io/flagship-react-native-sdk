@@ -32,9 +32,7 @@ interface Props {
 
 const SafeModeDemo: React.SFC<Props> = ({navigation}) => {
   const safeModeRedux = useSelector((state: RootState) => state.demo.safeMode);
-  const settingsRedux = useSelector(
-    (state: RootState) => state.sdkSettings.config,
-  );
+  const settingsRedux = useSelector((state: RootState) => state.sdkSettings);
   const dispatch = useDispatch();
   useFsSynchronize([safeModeRedux]);
   return (
