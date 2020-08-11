@@ -85,7 +85,7 @@ const GetModificationInfo: React.SFC<Props> = ({navigation}) => {
           <Button
             title="Go back"
             onPress={() => {
-              navigation.goBack();
+              navigation.navigate('QaSandbox');
             }}
           />
         </View>

@@ -6,10 +6,10 @@ import {ScrollView} from 'react-native-gesture-handler';
 import NativeTachyons, {styles as s} from 'react-native-style-tachyons';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 import {useFsSynchronize} from '@flagship.io/react-native-sdk';
-import {RootStackParamList} from '../../../stackContainer';
-import {RootState} from '../../../../../redux/rootReducer';
+import {RootStackParamList} from '../../stackContainer';
+import {RootState} from '../../../../redux/rootReducer';
 import {useSelector, useDispatch} from 'react-redux';
-import {toggleSafeMode} from '../../../../../redux/stuff/demo/actions';
+import {toggleSafeMode} from '../../../../redux/stuff/demo/actions';
 
 const styles = StyleSheet.create({
   body: {

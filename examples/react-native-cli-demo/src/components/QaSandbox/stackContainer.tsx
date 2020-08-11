@@ -4,11 +4,11 @@ import QaSandboxElement from './index';
 import SdkSettings from './components/SdkSettings';
 import ReduxStateInfo from './components/ReduxStateInfo';
 import NewVisitorContext from './components/SdkSettings/components/NewVisitorContext';
-import GetModificationsDemo from './components/TestFeatures/GetModificationsDemo';
+import GetModificationsDemo from './components/UseFsModificationsDemo';
 import SendHitDemo from './components/UseFlagshipDemo/components/SendHitDemo';
-import EditArguments from './components/TestFeatures/GetModificationsDemo/components/EditArguments';
+import EditArguments from './components/UseFsModificationsDemo/components/EditArguments';
 import EditHitPayload from './components/UseFlagshipDemo/components/SendHitDemo/components/EditHitPayload';
-import SafeModeDemo from './components/TestFeatures/SafeModeDemo';
+import SafeModeDemo from './components/SafeModeDemo';
 
 import GetModificationInfo from './components/UseFlagshipDemo/components/GetModificationInfo';
 import HttpLogger from './components/HttpLogger';

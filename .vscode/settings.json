@@ -13,9 +13,7 @@
         "titleBar.inactiveForeground": "#e7e7e799",
         "statusBar.background": "#eb5424",
         "statusBarItem.hoverBackground": "#ef7853",
-        "statusBar.foreground": "#e7e7e7",
-        "statusBar.border": "#eb5424",
-        "titleBar.border": "#eb5424"
+        "statusBar.foreground": "#e7e7e7"
     },
     "peacock.color": "#eb5424",
     "javascript.preferences.quoteStyle": "single",
@@ -27,8 +25,9 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "typescript.updateImportsOnFileMove.enabled": "always",
     "javascript.updateImportsOnFileMove.enabled": "always",
-    "typescript.preferences.importModuleSpecifier": "non-relative",
-    "javascript.preferences.importModuleSpecifier": "non-relative",
+    "typescript.preferences.importModuleSpecifier": "auto",
+    "javascript.preferences.importModuleSpecifier": "auto",
+    "typescript.tsdk": "node_modules/typescript/lib",
     "[javascript]": {
         "editor.defaultFormatter": "esbenp.prettier-vscode",
         "editor.formatOnSave": true

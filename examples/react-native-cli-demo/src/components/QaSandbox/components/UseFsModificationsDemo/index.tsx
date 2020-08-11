@@ -6,11 +6,11 @@ import {ScrollView} from 'react-native-gesture-handler';
 import JSONTree from 'react-native-json-tree';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {Button} from 'react-native-elements';
-import {RootStackParamList} from '../../../stackContainer';
+import {RootStackParamList} from '../../stackContainer';
 import {useFsModifications, useFlagship} from '@flagship.io/react-native-sdk';
-import {themeJsonTree} from '../../../../../assets/commonStyles';
+import {themeJsonTree} from '../../../../assets/commonStyles';
 import {useSelector} from 'react-redux';
-import {RootState} from '../../../../../redux/rootReducer';
+import {RootState} from '../../../../redux/rootReducer';
 
 const styles = StyleSheet.create({
   body: {

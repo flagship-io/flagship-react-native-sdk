@@ -6,16 +6,13 @@ import {ScrollView} from 'react-native-gesture-handler';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {Button, Input, ButtonGroup, CheckBox} from 'react-native-elements';
 import {useSelector, useDispatch} from 'react-redux';
-import {RootState} from '../../../../../../../redux/rootReducer';
-import {appColors} from '../../../../../../../assets/commonStyles';
+import {RootState} from '../../../../../../redux/rootReducer';
+import {appColors} from '../../../../../../assets/commonStyles';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import {
-  commonInputStyle,
-  commonIconStyle,
-} from './../../../../SdkSettings/index';
-import ErrorBlock from '../../../../../../common/ErrorBlock';
-import {setModificationsParams} from '../../../../../../../redux/stuff/demo/actions';
-import {RootStackParamList} from '../../../../../stackContainer';
+import {commonInputStyle, commonIconStyle} from '../../../SdkSettings/index';
+import ErrorBlock from '../../../../../common/ErrorBlock';
+import {setModificationsParams} from '../../../../../../redux/stuff/demo/actions';
+import {RootStackParamList} from '../../../../stackContainer';
 
 const styles = StyleSheet.create({
   body: {
