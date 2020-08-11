@@ -10,7 +10,7 @@ import EditArguments from './components/TestFeatures/GetModificationsDemo/compon
 import EditHitPayload from './components/UseFlagshipDemo/components/SendHitDemo/components/EditHitPayload';
 import SafeModeDemo from './components/TestFeatures/SafeModeDemo';
 
-import GetModificationInfo from './components/TestFeatures/GetModificationsDemo/components/GetModificationInfo';
+import GetModificationInfo from './components/UseFlagshipDemo/components/GetModificationInfo';
 import HttpLogger from './components/HttpLogger';
 import UseFlagshipDemo from './components/UseFlagshipDemo';
 

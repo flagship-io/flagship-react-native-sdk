@@ -3,12 +3,8 @@ import {View, Text, StyleSheet, SafeAreaView, Switch} from 'react-native';
 import NativeTachyons, {styles as s} from 'react-native-style-tachyons';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 import {ScrollView} from 'react-native-gesture-handler';
-import JSONTree from 'react-native-json-tree';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {Button, Input, ButtonGroup, CheckBox} from 'react-native-elements';
-import {RootStackParamList} from '../../../stackContainer';
-import {useFsModifications} from '@flagship.io/react-native-sdk';
-import {themeJsonTree} from '../../../../../assets/commonStyles';
 import {useSelector, useDispatch} from 'react-redux';
 import {RootState} from '../../../../../../../redux/rootReducer';
 import {appColors} from '../../../../../../../assets/commonStyles';
@@ -19,6 +15,7 @@ import {
 } from './../../../../SdkSettings/index';
 import ErrorBlock from '../../../../../../common/ErrorBlock';
 import {setModificationsParams} from '../../../../../../../redux/stuff/demo/actions';
+import {RootStackParamList} from '../../../../../stackContainer';
 
 const styles = StyleSheet.create({
   body: {
