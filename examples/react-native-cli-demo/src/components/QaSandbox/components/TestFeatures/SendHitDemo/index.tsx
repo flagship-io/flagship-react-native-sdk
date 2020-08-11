@@ -26,7 +26,7 @@ interface Props {
 
 type ScreenNavigationProp = StackNavigationProp<
   RootStackParamList,
-  'GetModificationsDemo'
+  'SendHitDemo'
 >;
 
 interface Props {

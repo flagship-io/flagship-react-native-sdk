@@ -12,6 +12,7 @@ import SafeModeDemo from './components/TestFeatures/SafeModeDemo';
 
 import GetModificationInfo from './components/TestFeatures/GetModificationsDemo/components/GetModificationInfo';
 import HttpLogger from './components/HttpLogger';
+import UseFlagshipDemo from './components/UseFlagshipDemo';
 
 // const styles = StyleSheet.create({});
 
@@ -23,17 +24,28 @@ export type NewVisitorContextParams = {
 
 // REACT NAVIGATION: begin
 export type RootStackParamList = {
+  // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+  // 1st Level
+  // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
   QaSandbox: {};
+  // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+  // 2nd Level
+  // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
   SdkSettings: {};
   CurrentSettings: {};
+  UseFsModificationsDemo: {};
+  UseFlagshipDemo: {};
+  SafeModeDemo: {};
+  HttpLogger: {};
+  // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+  // 3rd Level
+  // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
   NewVisitorContext: NewVisitorContextParams;
-  GetModificationsDemo: {};
-  SendHitDemo: {};
   EditModificationsArgs: {};
   EditHitPayload: {};
-  SafeModeDemo: {};
+  GetModificationsDemo: {};
   GetModificationInfo: {};
-  HttpLogger: {};
+  SendHitDemo: {};
 };
 const Stack = createStackNavigator<RootStackParamList>();
 // REACT NAVIGATION: end
@@ -46,13 +58,21 @@ const DevSandbox: React.SFC<Props> = () => {
   // const {name} = route.params;
   return (
     <Stack.Navigator initialRouteName="QaSandbox">
-      {/* 1st Level */}
+      {/*
+      @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+      1st Level
+      @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+       */}
       <Stack.Screen
         name="QaSandbox"
         component={QaSandboxElement}
         options={{title: 'QA Sandbox View'}}
       />
-      {/* 2nd Level */}
+      {/* 
+      @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+      2nd Level
+      @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+       */}
       <Stack.Screen
         name="SdkSettings"
         component={SdkSettings}
@@ -64,26 +84,30 @@ const DevSandbox: React.SFC<Props> = () => {
         options={{title: 'Redux state'}}
       />
       <Stack.Screen
-        name="GetModificationsDemo"
+        name="UseFsModificationsDemo"
         component={GetModificationsDemo}
-        options={{title: 'useFsModifications hook'}}
+        options={{title: 'useFsModifications Demo'}}
       />
       <Stack.Screen
-        name="HttpLogger"
-        component={HttpLogger}
-        options={{title: 'Http network'}}
-      />
-      <Stack.Screen
-        name="SendHitDemo"
-        component={SendHitDemo}
-        options={{title: 'useFlagship hook (send hit)'}}
+        name="UseFlagshipDemo"
+        component={UseFlagshipDemo}
+        options={{title: 'useFlagship Demo'}}
       />
       <Stack.Screen
         name="SafeModeDemo"
         component={SafeModeDemo}
         options={{title: 'Safe Mode'}}
       />
-      {/* 3rd Level */}
+      <Stack.Screen
+        name="HttpLogger"
+        component={HttpLogger}
+        options={{title: 'Http network'}}
+      />
+      {/*
+      @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+      3rd Level
+      @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+       */}
       <Stack.Screen
         name="NewVisitorContext"
         component={NewVisitorContext}
@@ -103,6 +127,11 @@ const DevSandbox: React.SFC<Props> = () => {
         name="GetModificationInfo"
         component={GetModificationInfo}
         options={{title: 'getModificationInfo'}}
+      />
+      <Stack.Screen
+        name="SendHitDemo"
+        component={SendHitDemo}
+        options={{title: 'Send hit demo'}}
       />
     </Stack.Navigator>
   );

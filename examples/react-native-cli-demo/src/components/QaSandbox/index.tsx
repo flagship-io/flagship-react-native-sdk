@@ -43,13 +43,13 @@ const SandboxElement: React.SFC<Props> = ({navigation}) => {
         />
         <Button
           {...commonMenuButtonStyle}
-          title="Get Modifications Demo"
-          onPress={() => navigation.navigate('GetModificationsDemo')}
+          title="useFsModifications Demo"
+          onPress={() => navigation.navigate('UseFsModificationsDemo')}
         />
         <Button
           {...commonMenuButtonStyle}
-          title="Send Hit Demo"
-          onPress={() => navigation.navigate('SendHitDemo')}
+          title="useFlagship Demo"
+          onPress={() => navigation.navigate('UseFlagshipDemo')}
         />
         <Button
           {...commonMenuButtonStyle}

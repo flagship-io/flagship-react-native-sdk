@@ -77,13 +77,6 @@ const GetModificationsDemo: React.SFC<Props> = ({navigation}) => {
         {/* BOTTOM MENU */}
         <View style={[{borderTopColor: 'black', borderTopWidth: 1}, s.pv2]}>
           <Button
-            title="Get Modification info"
-            containerStyle={[s.mv1]}
-            onPress={() => {
-              navigation.navigate('GetModificationInfo');
-            }}
-          />
-          <Button
             title="Go back"
             containerStyle={[s.mv1]}
             onPress={() => {
