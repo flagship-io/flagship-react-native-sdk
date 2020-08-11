@@ -5,9 +5,9 @@ import SdkSettings from './components/SdkSettings';
 import ReduxStateInfo from './components/ReduxStateInfo';
 import NewVisitorContext from './components/SdkSettings/components/NewVisitorContext';
 import GetModificationsDemo from './components/TestFeatures/GetModificationsDemo';
-import SendHitDemo from './components/TestFeatures/SendHitDemo';
+import SendHitDemo from './components/UseFlagshipDemo/components/SendHitDemo';
 import EditArguments from './components/TestFeatures/GetModificationsDemo/components/EditArguments';
-import EditHitPayload from './components/TestFeatures/SendHitDemo/components/EditHitPayload';
+import EditHitPayload from './components/UseFlagshipDemo/components/SendHitDemo/components/EditHitPayload';
 import SafeModeDemo from './components/TestFeatures/SafeModeDemo';
 
 import GetModificationInfo from './components/TestFeatures/GetModificationsDemo/components/GetModificationInfo';

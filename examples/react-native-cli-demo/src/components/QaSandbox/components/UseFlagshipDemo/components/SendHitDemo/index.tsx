@@ -6,13 +6,13 @@ import {ScrollView} from 'react-native-gesture-handler';
 import JSONTree from 'react-native-json-tree';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {Button, CheckBox, Overlay} from 'react-native-elements';
-import {RootStackParamList} from '../../../stackContainer';
+import {RootStackParamList} from '../../../../stackContainer';
 import {useFlagship} from '@flagship.io/react-native-sdk';
-import {themeJsonTree} from '../../../../../assets/commonStyles';
-import hit from '../../../../../mock/hit';
+import {themeJsonTree} from '../../../../../../assets/commonStyles';
+import hit from '../../../../../../mock/hit';
 import {useSelector, useDispatch} from 'react-redux';
-import {RootState} from '../../../../../redux/rootReducer';
-import {setCurrentHitSelected} from '../../../../../redux/stuff/demo/actions';
+import {RootState} from '../../../../../../redux/rootReducer';
+import {setCurrentHitSelected} from '../../../../../../redux/stuff/demo/actions';
 
 const styles = StyleSheet.create({
   body: {
