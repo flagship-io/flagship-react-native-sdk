@@ -4,6 +4,7 @@ import {
   DecisionApiCampaign,
   BucketingApiResponse,
   DecisionApiResponseData,
+  ModificationsInternalStatus,
 } from '@flagship.io/js-sdk';
 
 export type UpdateFsVisitor = {
@@ -24,6 +25,7 @@ export type FsVisitorState = {
     visitorContext: null | FlagshipVisitorContext;
   } | null;
   fetchedModifications?: DecisionApiCampaign[] | null;
+  modificationsInternalStatus: ModificationsInternalStatus | null;
 };
 
 export type FsVisitorAction = UpdateFsVisitor;

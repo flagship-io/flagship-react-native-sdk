@@ -50,7 +50,6 @@ const FlagshipWrapper = () => {
           <FlagshipProvider
             envId={sdkSettings.envId || ''}
             onUpdate={({fsModifications}, fsVisitor) => {
-              // dispatch(setFsModifications(fsModifications)); // TODO: to move another reducer
               dispatch(updateFsVisitor(fsVisitor));
               if (safeModeRedux.triggerTest) {
                 throw new Error('Crash test react native');

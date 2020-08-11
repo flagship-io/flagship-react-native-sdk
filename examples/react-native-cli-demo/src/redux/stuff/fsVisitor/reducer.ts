@@ -28,6 +28,7 @@ const FsVisitorReducer = (
           visitorContext: bucket.visitorContext,
         },
         fetchedModifications: action.payload.fetchedModifications,
+        modificationsInternalStatus: action.payload.modificationsInternalStatus,
       };
 
     default:

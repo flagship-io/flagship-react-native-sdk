@@ -13,6 +13,7 @@ const initialState: FsVisitorState = {
     visitorContext: null,
   },
   fetchedModifications: null,
+  modificationsInternalStatus: null,
 };
 
 export default initialState;
