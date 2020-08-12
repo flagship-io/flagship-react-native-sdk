@@ -39,8 +39,6 @@ const FlagshipWrapper = () => {
     context[key] = value;
   });
   const inputRef = React.useRef('localNotification');
-
-  // const Notification = () => ;
   return (
     <SafeAreaProvider>
       <SafeAreaView style={{flex: 1, position: 'relative'}}>

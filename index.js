@@ -137,10 +137,11 @@ const FlagshipProvider = ({
                 /* V1 */
                 {...otherProps.config}
                 /*  TODO: V2 */
+                // onError  // NOTE: don't need to give to REACT SDK
                 initialBucketing={state.phoneCache.bucketing}
                 initialModifications={state.phoneCache.modifications}
-                // enableConsoleLogs={enableConsoleLogs}
-                // nodeEnv={nodeEnv}
+                enableConsoleLogs={enableConsoleLogs}
+                nodeEnv={nodeEnv}
                 reactNative={{
                     handleErrorDisplay: displayReactNativeBoundary
                 }}
