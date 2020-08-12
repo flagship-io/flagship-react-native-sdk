@@ -3,14 +3,15 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "android": "react-native run-android",
+    "android": "npm run build:android && react-native run-android",
     "ios": "cd ./ios && pod install && cd ../ && react-native run-ios",
     "clear:cache": "watchman watch-del-all && rm -rf $TMPDIR/react-* && rm -rf node_modules/ && npm cache verify && npm install && npm start -- --reset-cache",
     "start": "react-native link && react-native start",
-    "create:android:release": "react-native run-android --variant=release && mv ./android/app/build/outputs/apk/release/app-release.apk ./",
-    "create:android:debug": "react-native run-android --variant=debug && mv ./android/app/build/outputs/apk/debug/app-debug.apk ./",
+    "create:android:release": "npm run build:android && react-native run-android --variant=release && mv ./android/app/build/outputs/apk/release/app-release.apk ./",
+    "create:android:debug": "npm run build:android && react-native run-android --variant=debug && mv ./android/app/build/outputs/apk/debug/app-debug.apk ./",
     "build:android": "react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res",
     "test": "jest",
+    "log:android": "react-native log-android",
     "lint": "eslint ."
   },
   "dependencies": {
