@@ -18,6 +18,7 @@ import {
 } from './../../../../redux//stuff/sdkSettings/actions';
 import VisitorSettings from './components/VisitorSettings';
 import {RootState} from '../../../../redux/rootReducer';
+import {apiV2, apiV1} from '../../../../settings';
 
 const styles = StyleSheet.create({
   body: {
@@ -214,23 +215,58 @@ const SdkSettings: React.SFC<Props> = ({navigation}) => {
             <Text>{config.pollingInterval} minute(s)</Text>
           </View>
         )}
-        <View>
+        <View style={[s.mv2, s.ph2]}>
           <Text style={[s.f5, s.mb2]}>flagshipApi:</Text>
-          <Input
-            {...commonInputStyle}
-            autoCorrect={false}
-            autoCapitalize={'none'}
-            autoCompleteType={'off'}
-            value={(config.flagshipApi || '').toString()}
-            placeholder="null"
-            onChangeText={(txt) =>
+          <CheckBox
+            title={apiV1}
+            checked={config.flagshipApi === apiV1}
+            onPress={() =>
               updateLocalConfig({
                 ...config,
-                flagshipApi: txt === '' ? null : txt,
+                flagshipApi: apiV1,
               })
             }
           />
+          <CheckBox
+            title={apiV2}
+            checked={config.flagshipApi === apiV2}
+            onPress={() =>
+              updateLocalConfig({
+                ...config,
+                flagshipApi: apiV2,
+              })
+            }
+          />
+          <CheckBox
+            title={'custom'}
+            checked={
+              config.flagshipApi !== apiV2 && config.flagshipApi !== apiV1
+            }
+            onPress={() =>
+              updateLocalConfig({
+                ...config,
+                flagshipApi: null,
+              })
+            }
+          />
+          {config.flagshipApi !== apiV2 && config.flagshipApi !== apiV1 && (
+            <Input
+              {...commonInputStyle}
+              autoCorrect={false}
+              autoCapitalize={'none'}
+              autoCompleteType={'off'}
+              value={(config.flagshipApi || '').toString()}
+              placeholder="null"
+              onChangeText={(txt) =>
+                updateLocalConfig({
+                  ...config,
+                  flagshipApi: txt === '' ? null : txt,
+                })
+              }
+            />
+          )}
         </View>
+
         <View style={[s.mt3]}>
           <Text style={[s.f5, s.mb2]}>apiKey:</Text>
           <Input
