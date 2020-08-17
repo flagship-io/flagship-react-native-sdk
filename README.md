@@ -9,7 +9,7 @@
 <div style='display: flex; justify-content: space-around;'>
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 [![Apache2.0](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0)
@@ -58,19 +58,20 @@ Following demos illustrate how the SDK is used in practice ☕
 
 ## Contributors
 
-## Licence
-
 <!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
 <!-- prettier-ignore-start -->
 <!-- markdownlint-disable -->
 <table>
   <tr>
     <td align="center"><a href="https://www.domenge.fr/"><img src="https://avatars0.githubusercontent.com/u/15636263?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Emilien Domenge</b></sub></a><br /><a href="https://github.com/abtasty/flagship-react-native-sdk/commits?author=Emidomenge" title="Code">💻</a> <a href="https://github.com/abtasty/flagship-react-native-sdk/commits?author=Emidomenge" title="Documentation">📖</a> <a href="#example-Emidomenge" title="Examples">💡</a> <a href="#maintenance-Emidomenge" title="Maintenance">🚧</a></td>
+    <td align="center"><a href="https://github.com/ABTastyAdel"><img src="https://avatars3.githubusercontent.com/u/17567522?v=4?s=100" width="100px;" alt=""/><br /><sub><b>ABTastyAdel</b></sub></a><br /><a href="https://github.com/abtasty/flagship-react-native-sdk/commits?author=ABTastyAdel" title="Code">💻</a> <a href="https://github.com/abtasty/flagship-react-native-sdk/commits?author=ABTastyAdel" title="Documentation">📖</a> <a href="#maintenance-ABTastyAdel" title="Maintenance">🚧</a></td>
   </tr>
 </table>
 
 <!-- markdownlint-restore -->
 <!-- prettier-ignore-end -->
 <!-- ALL-CONTRIBUTORS-LIST:END -->
+
+## Licence
 
 [Apache License.](https://github.com/abtasty/flagship-react-native-sdk/blob/master/LICENSE)
