@@ -9,6 +9,8 @@
         "publish": "npm run update:expo-cli-demo && npm run update:react-cli-demo && git add . && git commit -m\"Post publish update\" && git push",
         "update:expo-cli-demo": "cd ./examples/expo-cli-demo && npm install @flagship.io/react-native-sdk@latest --save && cd ../../",
         "update:react-cli-demo": "cd ./examples/react-native-cli-demo && npm install @flagship.io/react-native-sdk@latest --save && cd ../../",
+        "contributors:add": "all-contributors add",
+        "contributors:generate": "all-contributors generate",
         "release": "np"
     },
     "repository": {
@@ -33,6 +35,7 @@
     "license": "Apache-2.0",
     "devDependencies": {
         "@react-native-community/eslint-config": "^1.1.0",
+        "all-contributors-cli": "^6.17.2",
         "eslint": "^6.8.0",
         "eslint-config-prettier": "^6.11.0",
         "eslint-loader": "^3.0.3",
