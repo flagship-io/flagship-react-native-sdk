@@ -9,7 +9,9 @@
 <div style='display: flex; justify-content: space-around;'>
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+
 [![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#contributors-)
+
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 [![Apache2.0](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0)
@@ -29,7 +31,6 @@
     -   [useFlagship](http://developers.flagship.io/reactNative/v2.x.x/#useflagship)
     -   [useFsModifications](http://developers.flagship.io/reactNative/v2.x.x/#usefsmodifications)
     -   [useFsActivate](http://developers.flagship.io/reactNative/v2.x.x/#usefsactivate)
-    -   [useFsSynchronize](http://developers.flagship.io/reactNative/v2.x.x/#usefssynchronize)
 
 -   [Hit tracking](http://developers.flagship.io/reactNative/v2.x.x/#hit)
 -   [Release Notes](https://github.com/abtasty/flagship-react-native-sdk/blob/master/RELEASENOTES.md)
@@ -70,6 +71,7 @@ Following demos illustrate how the SDK is used in practice ☕
 
 <!-- markdownlint-restore -->
 <!-- prettier-ignore-end -->
+
 <!-- ALL-CONTRIBUTORS-LIST:END -->
 
 ## Licence

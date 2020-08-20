@@ -2,8 +2,7 @@ import {
     FlagshipProvider as ReactFlagshipProvider,
     useFlagship,
     useFsActivate,
-    useFsModifications,
-    useFsSynchronize
+    useFsModifications
 } from '@flagship.io/react-sdk';
 import React from 'react';
 import { Button, SafeAreaView, Text, View } from 'react-native';
@@ -173,7 +172,7 @@ const FlagshipProvider = ({
 export const FsReactNativeConsumer = FsReactNativeContext.Consumer;
 
 // Flagship Hooks
-export { useFsActivate, useFsModifications, useFsSynchronize, useFlagship };
+export { useFsActivate, useFsModifications, useFlagship };
 
 // Flagship Provider overloaded
 export default FlagshipProvider;

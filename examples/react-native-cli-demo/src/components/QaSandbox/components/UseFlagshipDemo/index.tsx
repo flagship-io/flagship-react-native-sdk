@@ -5,7 +5,7 @@ import {Button} from 'react-native-elements';
 import {ScrollView} from 'react-native-gesture-handler';
 import NativeTachyons, {styles as s} from 'react-native-style-tachyons';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
-import {useFsSynchronize} from '@flagship.io/react-sdk';
+import {useFlagship} from '@flagship.io/react-sdk';
 import {RootStackParamList} from '../../stackContainer';
 import LocalNotification from 'react-native-local-notification';
 
@@ -25,9 +25,7 @@ interface Props {
 }
 
 const UseFlagshipDemo: React.SFC<Props> = ({navigation}) => {
-  const [toggle, setToggle] = React.useState(false);
-  useFsSynchronize([toggle], false); // trigger a synchronize when "toggle" value change.
-
+  const {synchronizeModifications} = useFlagship();
   const inputRef = React.useRef('localNotification');
   return (
     <SafeAreaView>
@@ -40,10 +38,18 @@ const UseFlagshipDemo: React.SFC<Props> = ({navigation}) => {
               title="Synchronize Modifications"
               containerStyle={[s.mv1]}
               onPress={() => {
-                setToggle(!toggle);
-                inputRef.current.showNotification({
-                  text: 'Sync modifs done ✔️',
-                  title: '',
+                synchronizeModifications().then((statusCode) => {
+                  if (statusCode > 300) {
+                    inputRef.current.showNotification({
+                      text: 'Sync modifs failed with status=' + statusCode,
+                      title: '',
+                    });
+                  } else {
+                    inputRef.current.showNotification({
+                      text: 'Sync modifs done ✔️ with status=' + statusCode,
+                      title: '',
+                    });
+                  }
                 });
               }}
             />

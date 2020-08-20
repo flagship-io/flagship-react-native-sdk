@@ -5,7 +5,7 @@ import {Button} from 'react-native-elements';
 import {ScrollView} from 'react-native-gesture-handler';
 import NativeTachyons, {styles as s} from 'react-native-style-tachyons';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
-import {useFsSynchronize} from '@flagship.io/react-native-sdk';
+import {useFlagship} from '@flagship.io/react-native-sdk';
 import {RootStackParamList} from '../../stackContainer';
 import {RootState} from '../../../../redux/rootReducer';
 import {useSelector, useDispatch} from 'react-redux';
@@ -34,7 +34,11 @@ const SafeModeDemo: React.SFC<Props> = ({navigation}) => {
   const safeModeRedux = useSelector((state: RootState) => state.demo.safeMode);
   const settingsRedux = useSelector((state: RootState) => state.sdkSettings);
   const dispatch = useDispatch();
-  useFsSynchronize([safeModeRedux]);
+  const {synchronizeModifications}: any = useFlagship();
+
+  React.useEffect(() => {
+    synchronizeModifications();
+  }, [safeModeRedux, synchronizeModifications]);
   return (
     <SafeAreaView>
       <ScrollView style={[s.ph3, styles.body]}>
