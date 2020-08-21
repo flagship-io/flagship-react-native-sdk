@@ -121,7 +121,9 @@ const EditArguments: React.SFC<Props> = ({navigation}) => {
               autoCompleteType={'off'}
               value={(newReqModif.key || '').toString()}
               placeholder="key..."
-              onChangeText={(txt) => updateReqModif({...newReqModif, key: txt})}
+              onChangeText={(txt) => {
+                updateReqModif({...newReqModif, key: txt || null});
+              }}
               leftIcon={<Icon name="key" {...commonIconStyle} />}
             />
             {newReqModif.key && (
@@ -169,28 +171,37 @@ const EditArguments: React.SFC<Props> = ({navigation}) => {
                   />
                 </View>
               )}
-            {newReqModif.defaultValueType &&
+            {newReqModif.defaultValueType !== null &&
               newReqModif.defaultValueType !== 'boolean' && (
                 <Input
                   {...commonInputStyle}
                   autoCorrect={false}
                   autoCapitalize={'none'}
                   autoCompleteType={'off'}
-                  value={(newReqModif.defaultValue || '').toString()}
+                  value={newReqModif.defaultValue}
                   placeholder="value..."
-                  onChangeText={(txt) =>
+                  keyboardType={
+                    (newReqModif.defaultValueType === 'number' &&
+                      'number-pad') ||
+                    'default'
+                  }
+                  onChangeText={(txt) => {
+                    let newValue =
+                      newReqModif.defaultValueType === 'number'
+                        ? parseInt(txt)
+                        : txt;
+                    if (!newValue && newValue !== 0) {
+                      newValue = null;
+                    }
                     updateReqModif({
                       ...newReqModif,
-                      defaultValue:
-                        newReqModif.defaultValueType === 'number'
-                          ? parseInt(txt)
-                          : txt,
-                    })
-                  }
+                      defaultValue: newValue,
+                    });
+                  }}
                   leftIcon={<Icon name="quote-right" {...commonIconStyle} />}
                 />
               )}
-            {newReqModif.defaultValue && (
+            {newReqModif.defaultValue !== null && (
               <View>
                 <Text style={[s.f5, s.pv2]}>Activate:</Text>
                 <View>
