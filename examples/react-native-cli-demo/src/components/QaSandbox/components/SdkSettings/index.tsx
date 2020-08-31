@@ -1,7 +1,7 @@
 import {StackNavigationProp} from '@react-navigation/stack';
 import React, {useEffect, useState} from 'react';
-import {SafeAreaView, StyleSheet, View, Switch, Text} from 'react-native';
-import {Button, Input, CheckBox, Slider} from 'react-native-elements';
+import {SafeAreaView, StyleSheet, Switch, Text, View} from 'react-native';
+import {Button, CheckBox, Input, Slider} from 'react-native-elements';
 import {ScrollView} from 'react-native-gesture-handler';
 import NativeTachyons, {styles as s} from 'react-native-style-tachyons';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -10,15 +10,11 @@ import {useDispatch, useSelector} from 'react-redux';
 
 import {storeData} from '../../../../../src/lib/localStorage';
 import commonStyles, {appColors} from '../../../../assets/commonStyles';
-import {RootStackParamList} from '../..//stackContainer';
-import {
-  setEnvIdAction,
-  setVisitorIdAction,
-  updateConfig,
-} from './../../../../redux//stuff/sdkSettings/actions';
-import VisitorSettings from './components/VisitorSettings';
 import {RootState} from '../../../../redux/rootReducer';
-import {apiV2, apiV1} from '../../../../settings';
+import {apiV1, apiV2} from '../../../../settings';
+import {RootStackParamList} from '../..//stackContainer';
+import {updateConfig} from './../../../../redux//stuff/sdkSettings/actions';
+import VisitorSettings from './components/VisitorSettings';
 
 const styles = StyleSheet.create({
   body: {
@@ -54,10 +50,6 @@ export const commonIconStyle = {
 const SdkSettings: React.SFC<Props> = ({navigation}) => {
   //   const mySomethingState = useSelector(state => state.something);
   const dispatch = useDispatch();
-
-  const visitorContext = useSelector(
-    (state: RootState) => state.sdkSettings.visitorContext,
-  );
 
   const stateEnvId = useSelector((state: RootState) => state.sdkSettings.envId);
   const stateVisId = useSelector(
@@ -201,8 +193,8 @@ const SdkSettings: React.SFC<Props> = ({navigation}) => {
             <Text style={[s.f5, s.mb2]}>pollingInterval:</Text>
             <Slider
               value={config.pollingInterval}
-              maximumValue={10}
-              minimumValue={1}
+              maximumValue={60 * 5}
+              minimumValue={5}
               step={1}
               onValueChange={(value) =>
                 updateLocalConfig({
@@ -212,9 +204,25 @@ const SdkSettings: React.SFC<Props> = ({navigation}) => {
                 })
               }
             />
-            <Text>{config.pollingInterval} minute(s)</Text>
+            <Text>{config.pollingInterval} second(s)</Text>
           </View>
         )}
+        <View style={[s.mv2, s.ph2]}>
+          <Text style={[s.f5, s.mb2]}>timeout:</Text>
+          <Slider
+            value={config.timeout}
+            maximumValue={2}
+            minimumValue={0.0001}
+            step={0.0001}
+            onValueChange={(value) =>
+              updateLocalConfig({
+                ...config,
+                timeout: value,
+              })
+            }
+          />
+          <Text>{config.timeout} second(s)</Text>
+        </View>
         <View style={[s.mv2, s.ph2]}>
           <Text style={[s.f5, s.mb2]}>flagshipApi:</Text>
           <CheckBox

@@ -1,9 +1,10 @@
-export type SdkSettingsState = {
+import {FlagshipSdkConfig} from '@flagship.io/js-sdk';
+
+export interface SdkSettingsState extends FlagshipSdkConfig {
   envId: string | undefined;
   visitorId: string | undefined;
   visitorContext: Array<visitorContextElement>;
   fetchNow: boolean;
-  decisionMode: string;
   pollingInterval: number | null;
   activateNow: boolean;
   enableConsoleLogs: boolean;
@@ -11,7 +12,7 @@ export type SdkSettingsState = {
   nodeEnv: string;
   flagshipApi: string;
   apiKey: null | string;
-};
+}
 
 export type SetEnvIdAction = {
   type: string;

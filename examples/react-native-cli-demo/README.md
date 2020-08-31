@@ -110,6 +110,7 @@ which executes:
 - [react-native-json-tree](https://www.npmjs.com/package/react-native-json-tree)
 - [grid](https://github.com/GeekyAnts/react-native-easy-grid)
 - [font-awesome-icons](https://fontawesome.com/icons?d=gallery&q=cross&m=free)
+- [react-icons MaterialCommunityIcons ONLY !](https://oblador.github.io/react-native-vector-icons/)
 - [redux-persist](https://github.com/rt2zz/redux-persist)
 - [react-native-local-notification](https://github.com/EmilScherdin/react-native-local-notification)
 - [react-native-network-logger](https://www.npmjs.com/package/react-native-network-logger)
