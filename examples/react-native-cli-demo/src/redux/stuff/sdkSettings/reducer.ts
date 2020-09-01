@@ -2,7 +2,6 @@ import {
   SDK_SETTINGS_SET_ENV_ID,
   SDK_SETTINGS_SET_VISITOR_ID,
   SDK_SETTINGS_SET_VISITOR_CONTEXT,
-  SDK_SETTINGS_SET_FS_MODIFICATIONS,
   SDK_SETTINGS_RESET,
   SDK_SETTINGS_UPDATE_CONFIG,
 } from './../../glossary';
@@ -20,16 +19,12 @@ const sdkSettingsReducer = (
       return {...state, visitorId: action.payload as any};
     case SDK_SETTINGS_SET_VISITOR_CONTEXT:
       return {...state, visitorContext: [...action.payload]};
-    case SDK_SETTINGS_SET_FS_MODIFICATIONS:
-      return {...state, fsModifications: action.payload as any[]};
     case SDK_SETTINGS_RESET:
       return {...initialState};
     case SDK_SETTINGS_UPDATE_CONFIG:
       return {
         ...state,
-        config: {
-          ...(action.payload as any),
-        },
+        ...(action.payload as any),
       };
     default:
       return state;

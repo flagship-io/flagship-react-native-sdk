@@ -1,6 +1,6 @@
-import { StyleSheet } from 'react-native';
-import { Colors } from 'react-native/Libraries/NewAppScreen';
-import NativeTachyons, { styles as s } from 'react-native-style-tachyons';
+import {StyleSheet} from 'react-native';
+import {Colors} from 'react-native/Libraries/NewAppScreen';
+import NativeTachyons, {styles as s} from 'react-native-style-tachyons';
 
 // ICONS: https://fontawesome.com/icons?d=gallery&q=user&m=free
 
@@ -37,7 +37,7 @@ export const themeJsonTree = {
 
 export const commonMenuButtonStyle = {
   containerStyle: [s.mv3],
-  buttonStyle: [{ height: 60 }],
+  buttonStyle: [{height: 60}],
   type: 'outline',
 };
 

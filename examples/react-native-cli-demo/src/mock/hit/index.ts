@@ -7,7 +7,7 @@ import {
   ScreenHit,
   ItemHit,
   EventHit,
-} from '@flagship.io/react-native-sdk';
+} from '../../components/QaSandbox/components/UseFlagshipDemo/components/GetModificationInfo/node_modules/@flagship.io/react-native-sdk';
 
 const hit: {
   transaction: TransactionHit;

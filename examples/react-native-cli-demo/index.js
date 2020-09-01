@@ -7,7 +7,9 @@ import App from './App';
 import {name as appName} from './app.json';
 import NativeTachyons from 'react-native-style-tachyons';
 import {StyleSheet} from 'react-native';
+import {startNetworkLogging} from 'react-native-network-logger';
 
+startNetworkLogging();
 AppRegistry.registerComponent(appName, () => {
   NativeTachyons.build(
     {

@@ -35,6 +35,7 @@ interface Props {
 const ReduxStateInfo: React.SFC<Props> = ({navigation}) => {
   const sdkSettings = useSelector((state: RootState) => state.sdkSettings);
   const demo = useSelector((state: RootState) => state.demo);
+  const fsVisitor = useSelector((state: RootState) => state.fsVisitor);
   const dispatch = useDispatch();
   return (
     <SafeAreaView>
@@ -46,6 +47,10 @@ const ReduxStateInfo: React.SFC<Props> = ({navigation}) => {
         <Text style={[s.mt4, s.f3]}>state.demo:</Text>
         <View>
           <JSONTree data={demo} theme={themeJsonTree} />
+        </View>
+        <Text style={[s.mt4, s.f3]}>state.fsVisitor:</Text>
+        <View>
+          <JSONTree data={fsVisitor} theme={themeJsonTree} />
         </View>
         <Button
           title="Reset"

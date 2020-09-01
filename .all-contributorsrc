@@ -1,0 +1,38 @@
+{
+  "projectName": "flagship-react-native-sdk",
+  "projectOwner": "abtasty",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": true,
+  "commitConvention": "gitmoji",
+  "contributors": [
+    {
+      "login": "Emidomenge",
+      "name": "Emilien Domenge",
+      "avatar_url": "https://avatars0.githubusercontent.com/u/15636263?v=4",
+      "profile": "https://www.domenge.fr/",
+      "contributions": [
+        "code",
+        "doc",
+        "example",
+        "maintenance"
+      ]
+    },
+    {
+      "login": "ABTastyAdel",
+      "name": "ABTastyAdel",
+      "avatar_url": "https://avatars3.githubusercontent.com/u/17567522?v=4",
+      "profile": "https://github.com/ABTastyAdel",
+      "contributions": [
+        "code",
+        "doc",
+        "maintenance"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7
+}

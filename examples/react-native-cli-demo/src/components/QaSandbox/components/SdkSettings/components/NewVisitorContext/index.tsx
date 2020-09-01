@@ -9,9 +9,13 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import {commonInputStyle, commonIconStyle} from '../..';
 import {StackNavigationProp} from '@react-navigation/stack';
 import {setVisitorContextAction} from '../../../../../../redux/stuff/sdkSettings/actions';
-import {RootStackParamList} from '../../../../stackContainer';
+import {
+  RootStackParamList,
+  NewVisitorContextParams,
+} from '../../../../stackContainer';
 import {RootState} from '../../../../../../redux/rootReducer';
 import ErrorBlock from '../../../../../common/ErrorBlock';
+import {RouteProp} from '@react-navigation/native';
 
 const styles = StyleSheet.create({
   body: {
@@ -26,22 +30,40 @@ type ScreenNavigationProp = StackNavigationProp<
 
 interface Props {
   navigation: ScreenNavigationProp;
+  route: RouteProp<RootStackParamList, 'NewVisitorContext'>;
 }
 
-const NewVisitorContext: React.SFC<Props> = ({navigation}) => {
+const NewVisitorContext: React.SFC<Props> = ({navigation, route: {params}}) => {
   const visitorContext = useSelector(
     (state: RootState) => state.sdkSettings.visitorContext,
   );
   const dispatch = useDispatch();
 
-  const [value, setValue] = React.useState<string | boolean | number | null>(
-    null,
-  );
-  const [key, setKey] = React.useState<string | null>(null);
-  const [type, setType] = React.useState<number | null>(null);
-  const [error, setError] = React.useState<string | null>(null);
+  const valueFromRoute: NewVisitorContextParams = params || {
+    key: null,
+    type: null,
+    value: null,
+  };
 
   const types = ['boolean', 'string', 'number'];
+
+  const getIndex = (): null | number => {
+    let result = null;
+    types.forEach((el, index) => {
+      if (el === valueFromRoute.type) {
+        result = index;
+      }
+    });
+
+    return result;
+  };
+
+  const [value, setValue] = React.useState<string | boolean | number | null>(
+    valueFromRoute.value,
+  );
+  const [key, setKey] = React.useState<string | null>(valueFromRoute.key);
+  const [type, setType] = React.useState<number | null>(getIndex());
+  const [error, setError] = React.useState<string | null>(null);
   return (
     <SafeAreaView>
       <ScrollView style={[s.ph3, styles.body]}>
@@ -49,6 +71,7 @@ const NewVisitorContext: React.SFC<Props> = ({navigation}) => {
         <View style={[s.f3, s.pv3, s.tc]}>
           <Input
             {...commonInputStyle}
+            defaultValue={key}
             autoCorrect={false}
             autoCapitalize={'none'}
             autoCompleteType={'off'}

@@ -1,7 +1,7 @@
 import {StackNavigationProp} from '@react-navigation/stack';
 import React, {useEffect, useState} from 'react';
 import {SafeAreaView, StyleSheet, View, Switch, Text} from 'react-native';
-import {Button, Input, CheckBox} from 'react-native-elements';
+import {Button, Input, CheckBox, Slider} from 'react-native-elements';
 import {ScrollView} from 'react-native-gesture-handler';
 import NativeTachyons, {styles as s} from 'react-native-style-tachyons';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -18,6 +18,7 @@ import {
 } from './../../../../redux//stuff/sdkSettings/actions';
 import VisitorSettings from './components/VisitorSettings';
 import {RootState} from '../../../../redux/rootReducer';
+import {apiV2, apiV1} from '../../../../settings';
 
 const styles = StyleSheet.create({
   body: {
@@ -62,9 +63,7 @@ const SdkSettings: React.SFC<Props> = ({navigation}) => {
   const stateVisId = useSelector(
     (state: RootState) => state.sdkSettings.visitorId,
   );
-  const stateConfig = useSelector(
-    (state: RootState) => state.sdkSettings.config,
-  );
+  const stateConfig = useSelector((state: RootState) => state.sdkSettings);
   const [envId, setEnvId] = React.useState<string | undefined>(undefined);
   const [visId, setVisitorId] = React.useState<string | undefined>(undefined);
   const [config, updateLocalConfig] = React.useState(stateConfig);
@@ -174,23 +173,100 @@ const SdkSettings: React.SFC<Props> = ({navigation}) => {
             }
           />
         </View>
-        <View>
-          <Text style={[s.f5, s.mb2]}>flagshipApi:</Text>
-          <Input
-            {...commonInputStyle}
-            autoCorrect={false}
-            autoCapitalize={'none'}
-            autoCompleteType={'off'}
-            value={(config.flagshipApi || '').toString()}
-            placeholder="null"
-            onChangeText={(txt) =>
+        <View style={[s.mv2, s.ph2]}>
+          <Text style={[s.f5, s.mb2]}>decisionMode:</Text>
+          <CheckBox
+            title={'API'}
+            checked={config.decisionMode === 'API'}
+            onPress={() =>
               updateLocalConfig({
                 ...config,
-                flagshipApi: txt === '' ? null : txt,
+                decisionMode: 'API',
+              })
+            }
+          />
+          <CheckBox
+            title={'Bucketing'}
+            checked={config.decisionMode === 'Bucketing'}
+            onPress={() =>
+              updateLocalConfig({
+                ...config,
+                decisionMode: 'Bucketing',
               })
             }
           />
         </View>
+        {config.decisionMode === 'Bucketing' && (
+          <View style={[s.mv2, s.ph2]}>
+            <Text style={[s.f5, s.mb2]}>pollingInterval:</Text>
+            <Slider
+              value={config.pollingInterval}
+              maximumValue={10}
+              minimumValue={1}
+              step={1}
+              onValueChange={(value) =>
+                updateLocalConfig({
+                  ...config,
+                  // pollingInterval: Math.ceil((100 * value) / 10),
+                  pollingInterval: value,
+                })
+              }
+            />
+            <Text>{config.pollingInterval} minute(s)</Text>
+          </View>
+        )}
+        <View style={[s.mv2, s.ph2]}>
+          <Text style={[s.f5, s.mb2]}>flagshipApi:</Text>
+          <CheckBox
+            title={apiV1}
+            checked={config.flagshipApi === apiV1}
+            onPress={() =>
+              updateLocalConfig({
+                ...config,
+                flagshipApi: apiV1,
+              })
+            }
+          />
+          <CheckBox
+            title={apiV2}
+            checked={config.flagshipApi === apiV2}
+            onPress={() =>
+              updateLocalConfig({
+                ...config,
+                flagshipApi: apiV2,
+              })
+            }
+          />
+          <CheckBox
+            title={'custom'}
+            checked={
+              config.flagshipApi !== apiV2 && config.flagshipApi !== apiV1
+            }
+            onPress={() =>
+              updateLocalConfig({
+                ...config,
+                flagshipApi: null,
+              })
+            }
+          />
+          {config.flagshipApi !== apiV2 && config.flagshipApi !== apiV1 && (
+            <Input
+              {...commonInputStyle}
+              autoCorrect={false}
+              autoCapitalize={'none'}
+              autoCompleteType={'off'}
+              value={(config.flagshipApi || '').toString()}
+              placeholder="null"
+              onChangeText={(txt) =>
+                updateLocalConfig({
+                  ...config,
+                  flagshipApi: txt === '' ? null : txt,
+                })
+              }
+            />
+          )}
+        </View>
+
         <View style={[s.mt3]}>
           <Text style={[s.f5, s.mb2]}>apiKey:</Text>
           <Input
@@ -215,9 +291,7 @@ const SdkSettings: React.SFC<Props> = ({navigation}) => {
             storeData('envId', "envId || ''");
             storeData('visId', "visId || ''");
             storeData('visContext', 'visitorContext.toString()');
-            dispatch(setEnvIdAction(envId as string));
-            dispatch(setVisitorIdAction(visId as string));
-            dispatch(updateConfig(config));
+            dispatch(updateConfig({...config, envId, visitorId: visId}));
             navigation.navigate('QaSandbox');
           }}
         />

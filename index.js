@@ -1,21 +1,31 @@
-import React from 'react';
 import {
     FlagshipProvider as ReactFlagshipProvider,
-    useFsModifications,
+    useFlagship,
     useFsActivate,
-    useFsSynchronize,
-    useFlagship
+    useFsModifications
 } from '@flagship.io/react-sdk';
+import React from 'react';
+import { Button, SafeAreaView, Text, View } from 'react-native';
 
-import {
-    generateFlagshipId,
-    checkValidityPatternForEnvId
-} from './lib/FSTools';
 import ErrorBoundary from './lib/ErrorBoundary';
 import FsLogger from './lib/FsLogger';
-import { View, Text, SafeAreaView, Button } from 'react-native';
+import {
+    getCacheFromPhone,
+    setModificationsCacheFromPhone,
+    setBucketingCacheFromPhone
+} from './lib/FSStorage';
+import {
+    checkValidityPatternForEnvId,
+    generateFlagshipId
+} from './lib/FSTools';
+
 const initState = {
-    log: null
+    log: null,
+    isLoadingCache: true,
+    phoneCache: {
+        modifications: null,
+        bucketing: null
+    }
 };
 
 const FsReactNativeContext = React.createContext({
@@ -75,13 +85,16 @@ const FlagshipProvider = ({
     children,
     envId,
     onError,
-    config,
+    enableConsoleLogs,
+    onUpdate,
+    onBucketingSuccess,
+    nodeEnv,
     visitorData,
     ...otherProps
 }) => {
     const [state, setState] = React.useState({
         ...initState,
-        log: FsLogger.getLogger(config)
+        log: FsLogger.getLogger({ nodeEnv, enableConsoleLogs })
     });
 
     // Check the envId
@@ -92,22 +105,61 @@ const FlagshipProvider = ({
         return <ErrorBoundary>{children}</ErrorBoundary>;
     }
 
+    // with freeze (few ms)
+    if (state.isLoadingCache) {
+        getCacheFromPhone(state.log)
+            .then((data) =>
+                setState({
+                    ...state,
+                    isLoadingCache: false,
+                    phoneCache: {
+                        modifications: [...data.modifications],
+                        bucketing: data.bucketing
+                    }
+                })
+            )
+            .catch((error) => {
+                setState({
+                    ...state,
+                    isLoadingCache: false
+                });
+                state.log.warn('getCacheFromPhone - error: ' + error);
+            });
+        return null;
+    }
+
     return (
         <FsReactNativeContext.Provider value={{ state, setState }}>
             <ReactFlagshipProvider
                 {...otherProps}
                 envId={envId}
-                config={config}
+                /* V1 */
+                {...otherProps.config}
+                /*  TODO: V2 */
+                // onError  // NOTE: don't need to give to REACT SDK
+                initialBucketing={state.phoneCache.bucketing}
+                initialModifications={state.phoneCache.modifications}
+                enableConsoleLogs={enableConsoleLogs}
+                nodeEnv={nodeEnv}
                 reactNative={{
                     handleErrorDisplay: displayReactNativeBoundary
                 }}
                 visitorData={{
-                    /// Check the visitor id is null ?
+                    // Check the visitor id is null ?
                     id:
                         visitorData.id == null
                             ? generateFlagshipId()
                             : visitorData.id,
                     context: visitorData.context
+                }}
+                // Update the modifications stored in device's cache
+                onUpdate={(data, fsVisitor) => {
+                    setModificationsCacheFromPhone(data, state.log);
+                    onUpdate(data, fsVisitor);
+                }}
+                onBucketingSuccess={(data) => {
+                    setBucketingCacheFromPhone(data, state.log);
+                    onBucketingSuccess(data);
                 }}
             >
                 {children}
@@ -120,7 +172,7 @@ const FlagshipProvider = ({
 export const FsReactNativeConsumer = FsReactNativeContext.Consumer;
 
 // Flagship Hooks
-export { useFsActivate, useFsModifications, useFsSynchronize, useFlagship };
+export { useFsActivate, useFsModifications, useFlagship };
 
 // Flagship Provider overloaded
 export default FlagshipProvider;
