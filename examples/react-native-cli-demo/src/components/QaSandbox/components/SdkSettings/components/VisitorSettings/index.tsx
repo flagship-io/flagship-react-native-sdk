@@ -86,7 +86,7 @@ const VisitorSettings: React.SFC<Props> = ({
         }}
       />
       <Grid>
-        <Col size={3}>
+        <Col size={2}>
           {visitorContext.map((context, index) => {
             switch (context.type) {
               case 'bool':
@@ -101,7 +101,7 @@ const VisitorSettings: React.SFC<Props> = ({
             }
           })}
         </Col>
-        <Col size={8}>
+        <Col size={7}>
           {visitorContext.map((context, index) => {
             switch (context.type) {
               case 'bool':
@@ -151,17 +151,33 @@ const VisitorSettings: React.SFC<Props> = ({
             }
           })}
         </Col>
-        <Col size={1}>
+
+        <Col size={3}>
           {visitorContext.map((context, index) => {
             return (
-              <Button
-                key={index + index}
-                icon={<Icon name="times" size={12} color="white" />}
-                buttonStyle={[{backgroundColor: appColors.red}]}
-                title=""
-                onPress={() => deleteVisContext(index)}
-                containerStyle={styles.customButtonDelete}
-              />
+              <View
+                style={[s.flex, {flexDirection: 'row'}]}
+                key={index + index + index}>
+                <Button
+                  icon={<Icon name="edit" size={12} color="white" />}
+                  buttonStyle={[
+                    {backgroundColor: appColors.blue, width: 40},
+                    s.mr2,
+                  ]}
+                  title=""
+                  onPress={() => {
+                    navigation.navigate('NewVisitorContext', {...context});
+                  }}
+                  containerStyle={styles.customButtonDelete}
+                />
+                <Button
+                  icon={<Icon name="times" size={12} color="white" />}
+                  buttonStyle={[{backgroundColor: appColors.red, width: 40}]}
+                  title=""
+                  onPress={() => deleteVisContext(index)}
+                  containerStyle={styles.customButtonDelete}
+                />
+              </View>
             );
           })}
         </Col>

@@ -2,6 +2,9 @@ import {
   IFlagshipVisitor,
   FlagshipVisitorContext,
   DecisionApiCampaign,
+  BucketingApiResponse,
+  DecisionApiResponseData,
+  ModificationsInternalStatus,
 } from '@flagship.io/js-sdk';
 
 export type UpdateFsVisitor = {
@@ -14,8 +17,15 @@ export type FsVisitorState = {
   envId?: string;
   context?: FlagshipVisitorContext;
   isAllModificationsFetched?: boolean;
-  bucket?: any | null;
+  bucket?: {
+    data: null | BucketingApiResponse;
+    computedData: null | DecisionApiResponseData;
+    envId: null | string;
+    visitorId: null | string;
+    visitorContext: null | FlagshipVisitorContext;
+  } | null;
   fetchedModifications?: DecisionApiCampaign[] | null;
+  modificationsInternalStatus: ModificationsInternalStatus | null;
 };
 
 export type FsVisitorAction = UpdateFsVisitor;

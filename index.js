@@ -1,26 +1,31 @@
-import React from 'react';
 import {
     FlagshipProvider as ReactFlagshipProvider,
-    useFsModifications,
+    useFlagship,
     useFsActivate,
-    useFsSynchronize,
-    useFlagship
+    useFsModifications
 } from '@flagship.io/react-sdk';
-
-import {
-    generateFlagshipId,
-    checkValidityPatternForEnvId
-} from './lib/FSTools';
-
-import { getCacheFromPhone, setCacheFromPhone } from './lib/FSStorage';
+import React from 'react';
+import { Button, SafeAreaView, Text, View } from 'react-native';
 
 import ErrorBoundary from './lib/ErrorBoundary';
 import FsLogger from './lib/FsLogger';
-import { View, Text, SafeAreaView, Button } from 'react-native';
+import {
+    getCacheFromPhone,
+    setModificationsCacheFromPhone,
+    setBucketingCacheFromPhone
+} from './lib/FSStorage';
+import {
+    checkValidityPatternForEnvId,
+    generateFlagshipId
+} from './lib/FSTools';
+
 const initState = {
     log: null,
     isLoadingCache: true,
-    phoneCacheModifications: null
+    phoneCache: {
+        modifications: null,
+        bucketing: null
+    }
 };
 
 const FsReactNativeContext = React.createContext({
@@ -80,13 +85,16 @@ const FlagshipProvider = ({
     children,
     envId,
     onError,
-    config,
+    enableConsoleLogs,
+    onUpdate,
+    onBucketingSuccess,
+    nodeEnv,
     visitorData,
     ...otherProps
 }) => {
     const [state, setState] = React.useState({
         ...initState,
-        log: FsLogger.getLogger(config)
+        log: FsLogger.getLogger({ nodeEnv, enableConsoleLogs })
     });
 
     // Check the envId
@@ -104,7 +112,10 @@ const FlagshipProvider = ({
                 setState({
                     ...state,
                     isLoadingCache: false,
-                    phoneCacheModifications: [...data]
+                    phoneCache: {
+                        modifications: [...data.modifications],
+                        bucketing: data.bucketing
+                    }
                 })
             )
             .catch((error) => {
@@ -122,7 +133,14 @@ const FlagshipProvider = ({
             <ReactFlagshipProvider
                 {...otherProps}
                 envId={envId}
-                config={config}
+                /* V1 */
+                {...otherProps.config}
+                /*  TODO: V2 */
+                // onError  // NOTE: don't need to give to REACT SDK
+                initialBucketing={state.phoneCache.bucketing}
+                initialModifications={state.phoneCache.modifications}
+                enableConsoleLogs={enableConsoleLogs}
+                nodeEnv={nodeEnv}
                 reactNative={{
                     handleErrorDisplay: displayReactNativeBoundary
                 }}
@@ -135,11 +153,14 @@ const FlagshipProvider = ({
                     context: visitorData.context
                 }}
                 // Update the modifications stored in device's cache
-                onUpdate={(fsModifications) => {
-                    setCacheFromPhone(fsModifications, state.log);
+                onUpdate={(data, fsVisitor) => {
+                    setModificationsCacheFromPhone(data, state.log);
+                    onUpdate(data, fsVisitor);
                 }}
-                // Provide the cached modifications from device at the start
-                initialModifications={state.phoneCacheModifications}
+                onBucketingSuccess={(data) => {
+                    setBucketingCacheFromPhone(data, state.log);
+                    onBucketingSuccess(data);
+                }}
             >
                 {children}
             </ReactFlagshipProvider>
@@ -151,7 +172,7 @@ const FlagshipProvider = ({
 export const FsReactNativeConsumer = FsReactNativeContext.Consumer;
 
 // Flagship Hooks
-export { useFsActivate, useFsModifications, useFsSynchronize, useFlagship };
+export { useFsActivate, useFsModifications, useFlagship };
 
 // Flagship Provider overloaded
 export default FlagshipProvider;

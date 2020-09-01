@@ -7,9 +7,9 @@ import NativeTachyons, {styles as s} from 'react-native-style-tachyons';
 import {Colors} from 'react-native/Libraries/NewAppScreen';
 import {useDispatch, useSelector} from 'react-redux';
 
-import {updateHitPayload} from '../../../../../../../redux/stuff/demo/actions';
-import {commonInputStyle} from '../../../../SdkSettings';
-import {RootStackParamList} from '../../../stackContainer';
+import {updateHitPayload} from '../../../../../../../../redux/stuff/demo/actions';
+import {commonInputStyle} from '../../../../../SdkSettings';
+import {RootStackParamList} from '../../../../../../stackContainer';
 
 const styles = StyleSheet.create({
   body: {

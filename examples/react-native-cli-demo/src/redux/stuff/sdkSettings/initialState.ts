@@ -1,5 +1,5 @@
 export default {
-  envId: 'bkk9glocmjcg0vtmdlo0',
+  envId: 'bn1ab7m56qolupi5sa0g',
   visitorId: 'test-visitor-reana-qa',
   visitorContext: [
     {
@@ -13,13 +13,13 @@ export default {
       type: 'boolean',
     },
   ],
-  config: {
-    fetchNow: true,
-    activateNow: false,
-    enableConsoleLogs: true,
-    enableErrorLayout: false,
-    nodeEnv: 'production',
-    flagshipApi: 'https://decision-api.flagship.io/v1/',
-    apiKey: null,
-  },
+  fetchNow: true,
+  decisionMode: 'API',
+  pollingInterval: 5,
+  activateNow: false,
+  enableConsoleLogs: true,
+  enableErrorLayout: false,
+  nodeEnv: 'production',
+  flagshipApi: 'https://decision-api.flagship.io/v1/',
+  apiKey: null,
 };

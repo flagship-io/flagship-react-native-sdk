@@ -2,9 +2,9 @@ import React, {useState} from 'react';
 import {View, Text, StyleSheet, SafeAreaView, TextInput} from 'react-native';
 import NativeTachyons, {styles as s} from 'react-native-style-tachyons';
 import {StackNavigationProp} from '@react-navigation/stack';
-import {Button} from 'react-native-elements';
+import {Button} from 'react-native';
 import {RootStackParamList} from '../../../stackContainer';
-import {useFsModifications, useFlagship} from '@flagship.io/react-native-sdk';
+import {useFlagship} from '@flagship.io/react-native-sdk';
 
 interface Props {
   // Nothing
@@ -37,6 +37,36 @@ const GetModificationInfo: React.SFC<Props> = ({navigation}) => {
           style={styles.input}
           value={key}
           onChangeText={(txt) => setKey(txt)}
+          onEndEditing={() => {
+            if (fsGetInfo != null) {
+              fsGetInfo(key)
+                .then((infos) => {
+                  if (infos === null) {
+                    setVariationGroupId('null');
+                    setCampaignId('null');
+                    setVariationId('null');
+                  } else {
+                    /// set the varriation group id
+                    setVariationGroupId(infos.variationGroupId);
+                    /// set the campaig id
+                    setCampaignId(infos.campaignId);
+                    /// set the variation id
+                    setVariationId(infos.variationId);
+                  }
+                })
+                .catch((error) => {
+                  setVariationGroupId('error: ' + error);
+                  setCampaignId('-----------');
+                  setVariationId('-----------');
+                  console.log(error);
+                  return;
+                });
+            } else {
+              setVariationGroupId('getModificationInfo is null');
+              setCampaignId('-----------');
+              setVariationId('-----------');
+            }
+          }}
         />
 
         <Text style={styles.label}>
@@ -51,46 +81,14 @@ const GetModificationInfo: React.SFC<Props> = ({navigation}) => {
           VariationGroupId is:{' '}
           <Text style={styles.labelBis}>{variationGroupId}</Text>
         </Text>
-
-        <Button
-          style={styles.label}
-          title="Get modification info"
-          containerStyle={[s.mv3]}
-          onPress={() => {
-            console.log('-----------');
-
-            console.log(key);
-            fsGetInfo(key)
-              .then((infos) => {
-                if (infos === null) {
-                  setVariationGroupId('null');
-                  setCampaignId('null');
-                  setVariationId('null');
-                } else {
-                  /// set the varriation group id
-                  setVariationGroupId(infos.variationGroupId);
-                  /// set the campaig id
-                  setCampaignId(infos.campaignId);
-                  /// set the variation id
-                  setVariationId(infos.variationId);
-                }
-              })
-              .catch((error) => {
-                setVariationGroupId('error: ' + error);
-                setCampaignId('-----------');
-                setVariationId('-----------');
-                console.log(error);
-              });
-          }}
-        />
-
-        <Button
-          style={styles.label}
-          title="Go back"
-          onPress={() => {
-            navigation.goBack();
-          }}
-        />
+        <View style={[s.mv3]}>
+          <Button
+            title="Go back"
+            onPress={() => {
+              navigation.navigate('QaSandbox');
+            }}
+          />
+        </View>
       </View>
     </SafeAreaView>
   );
