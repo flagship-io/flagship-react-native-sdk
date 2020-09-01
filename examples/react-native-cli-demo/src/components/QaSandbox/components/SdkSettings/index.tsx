@@ -212,8 +212,8 @@ const SdkSettings: React.SFC<Props> = ({navigation}) => {
           <Slider
             value={config.timeout}
             maximumValue={2}
-            minimumValue={0.0001}
-            step={0.0001}
+            minimumValue={0.01}
+            step={0.02}
             onValueChange={(value) =>
               updateLocalConfig({
                 ...config,
