@@ -299,7 +299,8 @@ const SdkSettings: React.SFC<Props> = ({navigation}) => {
             storeData('envId', "envId || ''");
             storeData('visId', "visId || ''");
             storeData('visContext', 'visitorContext.toString()');
-            dispatch(updateConfig({...config, envId, visitorId: visId}));
+            dispatch(updateConfig({...config, envId, visitorId: visId,timeout:config.timeout,
+            }));
             navigation.navigate('QaSandbox');
           }}
         />

@@ -43,39 +43,56 @@ const EditHitPayload: React.SFC<Props> = ({navigation}) => {
         <View style={[]}>
           <Text style={[s.f3, s.pv3]}>Editing {hitType}:</Text>
           <View>
-            {Object.keys(payload.data).map((key) => {
-              return (
-                <View key={key}>
-                  <View style={[s.flex, s.aic, {flexDirection: 'row'}]}>
-                    <Text style={[s.f5, s.pv2, s.b]}>{key}:</Text>
-                    <Text style={[s.f6, {color: 'gray'}]}>{` ${typeof payload
-                      .data[key]}`}</Text>
-                  </View>
-                  <Input
-                    {...commonInputStyle}
-                    autoCorrect={false}
-                    autoCapitalize={'none'}
-                    autoCompleteType={'off'}
-                    value={(payload.data[key] || '').toString()}
-                    placeholder="..."
-                    onChangeText={
-                      (txt) => {
-                        const inputType = typeof payload.data[key];
-                        updatePayload({
-                          ...payload,
-                          data: {
-                            ...payload.data,
-                            [key]: inputType === 'number' ? parseInt(txt) : txt,
-                          },
-                        });
+            {Object.keys(payload.data)
+              .sort(function (a, b) {
+                if (a < b) {
+                  return -1;
+                }
+                if (a > b) {
+                  return 1;
+                }
+                return 0;
+              })
+              .map((key) => {
+                return (
+                  <View key={key}>
+                    <View style={[s.flex, s.aic, {flexDirection: 'row'}]}>
+                      <Text style={[s.f5, s.pv2, s.b]}>{key}:</Text>
+                      <Text style={[s.f6, {color: 'gray'}]}>{` ${typeof payload
+                        .data[key]}`}</Text>
+                    </View>
+                    <Input
+                      {...commonInputStyle}
+                      key={key + 'input'}
+                      autoCorrect={false}
+                      autoCapitalize={'none'}
+                      autoCompleteType={'off'}
+                      value={(payload.data[key] || '').toString()}
+                      placeholder="..."
+                      keyboardType={
+                        (typeof payload.data[key] === 'number' &&
+                          'number-pad') ||
+                        'default'
                       }
-                      // updateReqModif({...newReqModif, key: txt})
-                    }
-                    // leftIcon={<Icon name="key" {...commonIconStyle} />}
-                  />
-                </View>
-              );
-            })}
+                      onChangeText={
+                        (txt) => {
+                          const inputType = typeof payload.data[key];
+                          updatePayload({
+                            ...payload,
+                            data: {
+                              ...payload.data,
+                              [key]:
+                                inputType === 'number' ? parseInt(txt) : txt,
+                            },
+                          });
+                        }
+                        // updateReqModif({...newReqModif, key: txt})
+                      }
+                      // leftIcon={<Icon name="key" {...commonIconStyle} />}
+                    />
+                  </View>
+                );
+              })}
             <View style={[s.mt3]}>
               <Text style={[s.b]}>{'NOTE: '}</Text>
               <Text>
