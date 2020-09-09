@@ -4,7 +4,7 @@
     "description": "Flagship SDK for React Native",
     "main": "index.js",
     "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 0",
+        "test": "jest",
         "build": "npm install @flagship.io/react-sdk@latest --save && exit 0",
         "publish": "npm run update:expo-cli-demo && npm run update:react-cli-demo && git add . && git commit -m\"Post publish update\" && git push",
         "update:expo-cli-demo": "cd ./examples/expo-cli-demo && npm install @flagship.io/react-native-sdk@latest --save && cd ../../",
@@ -43,8 +43,25 @@
         "eslint-plugin-jsx-a11y": "^6.2.3",
         "eslint-plugin-react": "^7.19.0",
         "eslint-plugin-react-hooks": "^4.0.0",
+        "jest": "^26.4.2",
         "np": "^6.2.3",
         "prettier": "^2.0.5",
-        "prettier-eslint": "^9.0.1"
+        "prettier-eslint": "^9.0.1",
+        "jest-react-native": "^18.0.0",
+        "@babel/core": "^7.10.4",
+        "@testing-library/jest-native": "^3.1.0"
+    },
+    "jest": {
+        "preset": "react-native",
+        "setupFilesAfterEnv": [
+            "@testing-library/jest-native/extend-expect"
+        ],
+        "transform": {
+            "^.+\\.js$": "<rootDir>/node_modules/react-native/jest/preprocessor.js"
+        },
+        "testPathIgnorePatterns": [
+            "example"
+        ],
+        "automock": false
     }
 }
