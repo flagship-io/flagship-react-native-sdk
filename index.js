@@ -145,17 +145,23 @@ const FlagshipProvider = ({
                     handleErrorDisplay: displayReactNativeBoundary,
                     httpCallback: (axiosFct, cancelToken, { timeout }) => {
                         return new Promise((resolve, reject) => {
-                            axiosFct().then((data) => resolve(data));
+                            var isOk = false;
+                            axiosFct().then((data) => {
+                                isOk = true;
+                                resolve(data);
+                            });
                             setTimeout(() => {
-                                cancelToken.cancel();
-                                reject(
-                                    new Error(
-                                        `Request has timed out (after ${
-                                            timeout * 1000
-                                        }ms).`
-                                    )
-                                );
-                            }, timeout);
+                                if (!isOk) {
+                                    cancelToken.cancel();
+                                    reject(
+                                        new Error(
+                                            `Request has timed out (after ${
+                                                timeout * 1000
+                                            }ms).`
+                                        )
+                                    );
+                                }
+                            }, timeout * 1000);
                         });
                     }
                 }}
