@@ -145,8 +145,7 @@ const FlagshipProvider = ({
                     handleErrorDisplay: displayReactNativeBoundary,
                     httpCallback: (axiosFct, cancelToken, { timeout }) => {
                         return new Promise((resolve, reject) => {
-                            axiosFct().then((data) => resolve(data));
-                            setTimeout(() => {
+                            const tempTimeout = setTimeout(() => {
                                 cancelToken.cancel();
                                 reject(
                                     new Error(
@@ -155,7 +154,11 @@ const FlagshipProvider = ({
                                         }ms).`
                                     )
                                 );
-                            }, timeout);
+                            }, timeout * 1000);
+                            axiosFct().then((data) => {
+                                clearTimeout(tempTimeout);
+                                resolve(data);
+                            });
                         });
                     }
                 }}
