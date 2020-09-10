@@ -13,7 +13,10 @@ import commonStyles, {appColors} from '../../../../assets/commonStyles';
 import {RootState} from '../../../../redux/rootReducer';
 import {apiV1, apiV2} from '../../../../settings';
 import {RootStackParamList} from '../..//stackContainer';
-import {updateConfig} from './../../../../redux//stuff/sdkSettings/actions';
+import {
+  updateConfig,
+  setVisitorContextAction,
+} from './../../../../redux//stuff/sdkSettings/actions';
 import VisitorSettings from './components/VisitorSettings';
 
 const styles = StyleSheet.create({
@@ -55,15 +58,26 @@ const SdkSettings: React.SFC<Props> = ({navigation}) => {
   const stateVisId = useSelector(
     (state: RootState) => state.sdkSettings.visitorId,
   );
+  const stateVisContext = useSelector(
+    (state: RootState) => state.sdkSettings.visitorContext,
+  );
   const stateConfig = useSelector((state: RootState) => state.sdkSettings);
   const [envId, setEnvId] = React.useState<string | undefined>(undefined);
   const [visId, setVisitorId] = React.useState<string | undefined>(undefined);
+  const [visContext, updateVisitorContext] = React.useState([]);
   const [config, updateLocalConfig] = React.useState(stateConfig);
 
   useEffect(() => {
     setEnvId(stateEnvId);
     setVisitorId(stateVisId);
-  }, [stateEnvId, stateVisId]);
+    updateVisitorContext(stateVisContext);
+  }, [stateEnvId, stateVisId, stateVisContext]);
+
+  const deleteVisContext = (index) => {
+    const newContext = JSON.parse(JSON.stringify(visContext));
+    newContext.splice(index, 1);
+    updateVisitorContext(newContext);
+  };
 
   return (
     <SafeAreaView>
@@ -83,7 +97,9 @@ const SdkSettings: React.SFC<Props> = ({navigation}) => {
 
         <VisitorSettings
           visitorId={visId}
+          visitorContext={visContext}
           onChangeVisId={(txt) => setVisitorId(txt)}
+          onContextDelete={(index) => deleteVisContext(index)}
           navigation={navigation}
         />
 
@@ -299,7 +315,16 @@ const SdkSettings: React.SFC<Props> = ({navigation}) => {
             storeData('envId', "envId || ''");
             storeData('visId', "visId || ''");
             storeData('visContext', 'visitorContext.toString()');
-            dispatch(updateConfig({...config, envId, visitorId: visId}));
+            dispatch(
+              updateConfig({
+                ...config,
+                envId,
+                visitorId: visId,
+                timeout: config.timeout,
+              }),
+            );
+
+            dispatch(setVisitorContextAction(visContext));
             navigation.navigate('QaSandbox');
           }}
         />

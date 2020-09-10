@@ -47,6 +47,10 @@ const FlagshipWrapper = () => {
 
           <FlagshipProvider
             envId={sdkSettings.envId || ''}
+            visitorData={{
+              id: sdkSettings.visitorId || '',
+              context,
+            }}
             onUpdate={({fsModifications}, fsVisitor) => {
               dispatch(updateFsVisitor(fsVisitor));
               if (safeModeRedux.triggerTest) {
@@ -81,10 +85,6 @@ const FlagshipWrapper = () => {
                 title: 'Bucketing polling fail',
                 text: 'with error: ' + error.stack,
               });
-            }}
-            visitorData={{
-              id: sdkSettings.visitorId || '',
-              context,
             }}
             loadingComponent={<FsLoadingProvider />}>
             <Tab.Navigator>

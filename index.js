@@ -84,7 +84,6 @@ const displayReactNativeBoundary = ({
 const FlagshipProvider = ({
     children,
     envId,
-    onError,
     enableConsoleLogs,
     onUpdate,
     onBucketingSuccess,
@@ -99,9 +98,6 @@ const FlagshipProvider = ({
 
     // Check the envId
     if (!checkValidityPatternForEnvId(envId)) {
-        if (onError) {
-            onError();
-        }
         return <ErrorBoundary>{children}</ErrorBoundary>;
     }
 
@@ -136,13 +132,30 @@ const FlagshipProvider = ({
                 /* V1 */
                 {...otherProps.config}
                 /*  TODO: V2 */
-                // onError  // NOTE: don't need to give to REACT SDK
                 initialBucketing={state.phoneCache.bucketing}
                 initialModifications={state.phoneCache.modifications}
                 enableConsoleLogs={enableConsoleLogs}
                 nodeEnv={nodeEnv}
                 reactNative={{
-                    handleErrorDisplay: displayReactNativeBoundary
+                    handleErrorDisplay: displayReactNativeBoundary,
+                    httpCallback: (axiosFct, cancelToken, { timeout }) => {
+                        return new Promise((resolve, reject) => {
+                            const tempTimeout = setTimeout(() => {
+                                cancelToken.cancel();
+                                reject(
+                                    new Error(
+                                        `Request has timed out (after ${
+                                            timeout * 1000
+                                        }ms).`
+                                    )
+                                );
+                            }, timeout * 1000);
+                            axiosFct().then((data) => {
+                                clearTimeout(tempTimeout);
+                                resolve(data);
+                            });
+                        });
+                    }
                 }}
                 visitorData={{
                     // Check the visitor id is null ?
