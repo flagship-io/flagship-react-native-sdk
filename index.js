@@ -89,6 +89,7 @@ const FlagshipProvider = ({
     onUpdate,
     onBucketingSuccess,
     nodeEnv,
+    timeout, // TODO: freeze at the moment
     visitorData,
     ...otherProps
 }) => {
