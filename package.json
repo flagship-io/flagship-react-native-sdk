@@ -21,8 +21,10 @@
         "@flagship.io/js-sdk-logs": "^0.1.2",
         "@flagship.io/react-sdk": "^2.0.0",
         "@react-native-community/async-storage": "^1.11.0",
+        "react": "^16.13.1",
         "react-native": "^0.63.2",
-        "react-native-murmurhash": "^1.0.2"
+        "react-native-murmurhash": "^1.0.2",
+        "react-test-renderer": "^16.13.1"
     },
     "peerDependencies": {
         "react-native": "^16.8.0"
@@ -36,7 +38,10 @@
     "homepage": "https://github.com/abtasty/flagship-react-native-sdk#readme",
     "license": "Apache-2.0",
     "devDependencies": {
+        "@babel/core": "^7.10.4",
         "@react-native-community/eslint-config": "^1.1.0",
+        "@testing-library/jest-native": "^3.1.0",
+        "@testing-library/react-hooks": "^3.4.1",
         "all-contributors-cli": "^6.17.2",
         "eslint": "^6.8.0",
         "eslint-config-prettier": "^6.11.0",
@@ -46,12 +51,10 @@
         "eslint-plugin-react": "^7.19.0",
         "eslint-plugin-react-hooks": "^4.0.0",
         "jest": "^26.4.2",
+        "jest-react-native": "^18.0.0",
         "np": "^6.2.3",
         "prettier": "^2.0.5",
-        "prettier-eslint": "^9.0.1",
-        "jest-react-native": "^18.0.0",
-        "@babel/core": "^7.10.4",
-        "@testing-library/jest-native": "^3.1.0"
+        "prettier-eslint": "^9.0.1"
     },
     "jest": {
         "preset": "react-native",
