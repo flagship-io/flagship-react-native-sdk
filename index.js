@@ -143,7 +143,25 @@ const FlagshipProvider = ({
                 enableConsoleLogs={enableConsoleLogs}
                 nodeEnv={nodeEnv}
                 reactNative={{
-                    handleErrorDisplay: displayReactNativeBoundary
+                    handleErrorDisplay: displayReactNativeBoundary,
+                    httpCallback: (axiosFct, cancelToken, { timeout }) => {
+                        return new Promise((resolve, reject) => {
+                            const tempTimeout = setTimeout(() => {
+                                cancelToken.cancel();
+                                reject(
+                                    new Error(
+                                        `Request has timed out (after ${
+                                            timeout * 1000
+                                        }ms).`
+                                    )
+                                );
+                            }, timeout * 1000);
+                            axiosFct().then((data) => {
+                                clearTimeout(tempTimeout);
+                                resolve(data);
+                            });
+                        });
+                    }
                 }}
                 visitorData={{
                     // Check the visitor id is null ?
