@@ -61,6 +61,7 @@ const FlagshipWrapper = () => {
             nodeEnv={sdkSettings.nodeEnv}
             flagshipApi={sdkSettings.flagshipApi}
             apiKey={sdkSettings.apiKey}
+            timeout={sdkSettings.timeout}
             onInitStart={() => {
               console.log('init start');
             }}
@@ -106,7 +107,7 @@ const FlagshipWrapper = () => {
                 options={{
                   tabBarIcon: ({color, size}) => (
                     <MaterialCommunityIcons
-                      name="settings"
+                      name="beaker-outline"
                       color={color}
                       size={size}
                     />

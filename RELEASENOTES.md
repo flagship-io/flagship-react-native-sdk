@@ -1,5 +1,11 @@
 # Flagship REACT NATIVE SDK - Release notes
 
+## ➡️ Version 2.0.2
+
+### New features 🎉
+
+-   `timeout` setting added. It specify the timeout duration when fetching campaigns via API mode (`decisionMode = "API"`), defined in **seconds**. Minimal value should be greater than 0. More to come on this setting soon...
+
 ## ➡️ Version 2.0.1
 
 ### New features 🎉
