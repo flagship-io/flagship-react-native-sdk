@@ -1,5 +1,17 @@
 # Flagship REACT NATIVE SDK - Release notes
 
+## ➡️ Version 2.0.3
+
+### Bug fixes 🐛
+
+-   Fix Flagship decision API V2 which was not used when `apiKey` props is defined.
+
+-   Fix `loadingComponent` not ignored when `fetchNow` is set to `false`.
+
+### Breaking changes ⚠️
+
+-   `fetchNow` prop is now `true` by default.
+
 ## ➡️ Version 2.0.2
 
 ### New features 🎉
@@ -230,10 +242,6 @@ Be aware that `apiKey` will be mandatory in the next major release as it will us
         ```
 
 ### Breaking changes #4 ⚠️
-
--   `fetchNow` prop is now `true` by default.
-
-### Breaking changes #5 ⚠️
 
 -   `useFsSynchronize` has been removed. Campaigns synchronization is now handle using `useFlagship` hook:
 
