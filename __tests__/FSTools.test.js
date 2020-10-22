@@ -2,14 +2,18 @@ import { checkValidityPatternForEnvId, maFct } from '../lib/FSTools';
 
 import { generateFlagshipId, maFctBis } from '../lib/FSTools';
 
-test('Testing with valide checkValidityPatternForEnvId', () => {
-    expect(checkValidityPatternForEnvId('bkk9glocmjcg0vtmdlng')).toBeTruthy();
-});
+describe('Tools Suite Tests', () => {
+    it('should validate True for envId', () => {
+        expect(
+            checkValidityPatternForEnvId('bkk9glocmjcg0vtmdlng')
+        ).toBeTruthy();
+    });
 
-test('Testing with invalide checkValidityPatternForEnvId', () => {
-    expect(checkValidityPatternForEnvId('bkk9glocmjcg0vlng')).toBeFalsy();
-});
+    it('should return invalidate for envId', () => {
+        expect(checkValidityPatternForEnvId('bkk9glocmjcg0vlng')).toBeFalsy();
+    });
 
-test('Testing generateFlagshipId', () => {
-    expect(generateFlagshipId()).toBeDefined();
+    it('should generate flagship id', () => {
+        expect(generateFlagshipId()).toBeDefined();
+    });
 });

@@ -7,71 +7,41 @@ import {
 
 import { renderHook, act } from '@testing-library/react-hooks';
 
-//// test hooks
+import { hitTransaction } from '../__mocks__/Hit/Hits';
 
-test('useFsModifications', () => {
-    const fsRequestModif = [
-        {
-            key: 'redColor',
-            defaultValue: 'red',
-            activate: true
-        },
-        {
-            key: 'greenColor',
-            defaultValue: 'green',
-            activate: true
-        },
-        {
-            key: 'blueColor',
-            defaultValue: 'blue',
-            activate: true
-        }
-    ];
+import { fsRequestModif } from '../__mocks__/FSRequest/requestModification';
 
-    const { result } = renderHook(() => useFsModifications(fsRequestModif));
-    expect(result.current.redColor).toBe('red');
-    expect(result.current.greenColor).toBe('green');
-    expect(result.current.blueColor).toBe('blue');
-});
+// Tests for hooks
 
-test('useFsModifications', () => {
-    const { result } = renderHook(() => useFsActivate(['key1', 'key2']));
-});
+describe('Hooks Suite Tests', () => {
+    it('should useFsModifications work correctly', () => {
+        const { result } = renderHook(() => useFsModifications(fsRequestModif));
+        expect(result.current.redColor).toBe('red');
+        expect(result.current.greenColor).toBe('green');
+        expect(result.current.blueColor).toBe('blue');
+    });
 
-test('useFlagship', () => {
-    const { result } = renderHook(() => useFlagship());
+    it('should useFsActivate work correctly', () => {
+        const { result } = renderHook(() => useFsActivate(['key1', 'key2']));
+    });
 
-    expect(typeof result.current.getModificationInfo).toBe('function');
+    it('should useFlagship work correctly', () => {
+        const { result } = renderHook(() => useFlagship());
 
-    expect(typeof result.current.synchronizeModifications).toBe('function');
+        expect(typeof result.current.getModificationInfo).toBe('function');
 
-    expect(typeof result.current.startBucketingPolling).toBe('function');
+        expect(typeof result.current.synchronizeModifications).toBe('function');
 
-    expect(typeof result.current.stopBucketingPolling).toBe('function');
+        expect(typeof result.current.startBucketingPolling).toBe('function');
 
-    expect(typeof result.current.hiwt).toBeDefined();
+        expect(typeof result.current.stopBucketingPolling).toBe('function');
 
-    expect(typeof result.current.status).toBeDefined();
+        expect(typeof result.current.hiwt).toBeDefined();
 
-    const hitTest = result.current.hit;
+        expect(typeof result.current.status).toBeDefined();
 
-    const mockHit = {
-        type: 'Transaction',
-        data: {
-            transactionId: '12451342423',
-            affiliation: 'myAffiliation',
-            totalRevenue: 999,
-            shippingCost: 888,
-            shippingMethod: 'myShippingMethod',
-            currency: 'myCurrency',
-            taxes: 1234444,
-            paymentMethod: 'myPaymentMethod',
-            itemCount: 2,
-            couponCode: 'myCOUPON',
-            documentLocation:
-                'http%3A%2F%2Fabtastylab.com%2F60511af14f5e48764b83d36ddb8ece5a%2F',
-            pageTitle: 'myScreen'
-        }
-    };
-    hitTest.send(mockHit);
+        const hitTest = result.current.hit;
+
+        hitTest.send(hitTransaction);
+    });
 });
