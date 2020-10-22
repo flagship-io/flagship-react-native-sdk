@@ -8,7 +8,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 import {
     modificationAnswer,
     emptyModificationAnswer
-} from '../__mocks__/apiAnswers/apiAnswers';
+} from '../__mocks__/ApiAnswers/ApiAnswers';
 
 describe('Local Storage Suite Tests', () => {
     it('should set & get modifications', async () => {
