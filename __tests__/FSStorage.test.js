@@ -4,11 +4,10 @@ import {
 } from '../lib/FSStorage';
 import FsLogger from '../lib/FsLogger';
 import AsyncStorage from '@react-native-community/async-storage';
-
 import {
     modificationAnswer,
     emptyModificationAnswer
-} from '../__mocks__/ApiResponse/ApiAnswers';
+} from '../__mocks__/ApiResponse/apiAnswers';
 
 describe('Local Storage Suite Tests', () => {
     it('should set & get modifications', async () => {
@@ -26,7 +25,7 @@ describe('Local Storage Suite Tests', () => {
             expect.arrayContaining(data);
 
             // Read first object
-            const fsModif = data['modifications'][0]; // Hard access , because we know the mock response don't have an empty array
+            const fsModif = data.modifications[0]; // Hard access , because we know the mock response don't have an empty array
 
             // VariationGroupId
             expect(fsModif.variationGroupId).toBe('bqjhehmirtfg026713jg');
@@ -54,15 +53,15 @@ describe('Local Storage Suite Tests', () => {
             FsLogger.getLogger()
         );
         return getCacheFromPhone(FsLogger.getLogger()).then((data) => {
-            expect.arrayContaining(data['modifications']);
-            expect(data['modifications'].length).toBe(0);
+            expect.arrayContaining(data.modifications);
+            expect(data.modifications.length).toBe(0);
         });
     });
 
     it('should set & get correctly with null object', async () => {
         setModificationsCacheFromPhone(null, FsLogger.getLogger());
         return getCacheFromPhone(FsLogger.getLogger()).then((data) => {
-            expect(data['modifications'].length).toBe(0);
+            expect(data.modifications.length).toBe(0);
         });
     });
 });
