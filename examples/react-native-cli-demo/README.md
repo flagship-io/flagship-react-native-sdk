@@ -35,7 +35,23 @@ npm start
 or with no cache
 
 ```
-npm run start:withClearCache
+npm run clear:cache
+```
+
+### STEP 3 - If you have this error:
+
+![https://i.imgur.com/GTkRaze.png](Duplicate React Error)
+
+You should remove the react dependency:
+
+```
+rm -rf ./node_modules/@flagship.io/react-native-sdk/node_modules/react
+```
+
+then:
+
+```
+npm start
 ```
 
 ## Create an .apk file

@@ -1,5 +1,6 @@
 export default {
   envId: 'bn1ab7m56qolupi5sa0g',
+  apiKey: 'M2FYdfXsJ12tjJQuadw7y9DZojqNGBvecpjGXY93',
   visitorId: 'test-visitor-reana-qa',
   visitorContext: [
     {
@@ -21,6 +22,5 @@ export default {
   enableConsoleLogs: true,
   enableErrorLayout: false,
   nodeEnv: 'production',
-  flagshipApi: 'https://decision-api.flagship.io/v1/',
-  apiKey: null,
+  flagshipApi: 'https://decision.flagship.io/v2/',
 };
