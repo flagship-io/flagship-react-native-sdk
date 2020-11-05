@@ -2,6 +2,10 @@
 
 ## ➡️ Version 2.0.3
 
+### New features 🎉
+
+-   `onInitStart`, `onUpdate` and `onInitDone` prop is triggered in a better way.
+
 ### Bug fixes 🐛
 
 -   Fix Flagship decision API V2 which was not used when `apiKey` props is defined.
