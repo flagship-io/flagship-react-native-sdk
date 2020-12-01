@@ -33,19 +33,17 @@ const FlagshipWrapper = () => {
       <Text style={[s.f4]}>Loading...</Text>
     </View>
   );
-  const sdkSettingsRedux = useSelector((state: RootState) => state.sdkSettings);
+  const sdkSettings = useSelector((state: RootState) => state.sdkSettings);
   const safeModeRedux = useSelector((state: RootState) => state.demo.safeMode);
   const dispatch = useDispatch();
   const context: {[key: string]: number | boolean | string} = {};
 
-  const [sdkSettings, updateSettings] = useState(sdkSettingsRedux);
-  sdkSettingsRedux.visitorContext.forEach(({key, value}) => {
+  sdkSettings.visitorContext.forEach(({key, value}) => {
     context[key] = value;
   });
   const inputRef = React.useRef('localNotification');
 
   useEffect(() => {
-    updateSettings((c) => ({...c, ...sdkSettingsRedux}));
     inputRef?.current?.showNotification &&
       inputRef?.current?.showNotification({
         title: 'Settings updated',
@@ -53,8 +51,7 @@ const FlagshipWrapper = () => {
         onPress: () => console.log('onPress'),
         onHide: () => console.log('onHide'),
       });
-  }, [sdkSettingsRedux]);
-
+  }, [sdkSettings]);
   return (
     <SafeAreaProvider>
       <SafeAreaView style={{flex: 1, position: 'relative'}}>
@@ -69,12 +66,12 @@ const FlagshipWrapper = () => {
               if (safeModeRedux.triggerTest) {
                 throw new Error('Crash test react native');
               } else {
-                inputRef.current.showNotification({
-                  title: '[dev] onUpdate triggered',
-                  text: 'with data: ' + JSON.stringify(other),
-                  onPress: () => console.log('onPress'),
-                  onHide: () => console.log('onHide'),
-                });
+                // inputRef.current.showNotification({
+                //   title: '[dev] onUpdate triggered',
+                //   text: '',
+                //   onPress: () => console.log('onPress'),
+                //   onHide: () => console.log('onHide'),
+                // });
               }
             }}
             fetchNow={sdkSettings.fetchNow}
