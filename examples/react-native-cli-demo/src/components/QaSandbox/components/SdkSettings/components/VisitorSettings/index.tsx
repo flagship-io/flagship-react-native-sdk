@@ -5,10 +5,11 @@ import {Col, Grid} from 'react-native-easy-grid';
 import {Badge, Button, Input} from 'react-native-elements';
 import NativeTachyons, {styles as s} from 'react-native-style-tachyons';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import {useSelector} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {RootStackParamList} from 'src/components/QaSandbox/stackContainer';
 import {RootState} from 'src/redux/rootReducer';
 
+import {setVisitorContextAction} from '../../../../../../redux/stuff/sdkSettings/actions';
 import {commonIconStyle, commonInputStyle} from './../..';
 import commonStyles, {appColors} from './../../../../../../assets/commonStyles';
 
@@ -30,20 +31,25 @@ type ScreenNavigationProp = StackNavigationProp<
 
 interface Props {
   visitorId: string | undefined;
-  visitorContext: [{[key: string]: any}];
   onChangeVisId: (text: string) => void;
-  onContextDelete: (index: number) => void;
   navigation: ScreenNavigationProp;
 }
 
 const VisitorSettings: React.SFC<Props> = ({
   visitorId,
   onChangeVisId,
-  onContextDelete,
-  visitorContext,
-  // onContextUpdate,
   navigation,
 }) => {
+  const visitorContext = useSelector(
+    (state: RootState) => state.sdkSettings.visitorContext,
+  );
+  const dispatch = useDispatch();
+
+  const deleteVisContext = (index) => {
+    visitorContext.splice(index, 1);
+    dispatch(setVisitorContextAction(visitorContext));
+  };
+
   const BoolBadge = () => (
     <Badge value="Bool" status="success" containerStyle={styles.customRow} />
   );
@@ -168,7 +174,7 @@ const VisitorSettings: React.SFC<Props> = ({
                   icon={<Icon name="times" size={12} color="white" />}
                   buttonStyle={[{backgroundColor: appColors.red, width: 40}]}
                   title=""
-                  onPress={() => onContextDelete(index)}
+                  onPress={() => deleteVisContext(index)}
                   containerStyle={styles.customButtonDelete}
                 />
               </View>

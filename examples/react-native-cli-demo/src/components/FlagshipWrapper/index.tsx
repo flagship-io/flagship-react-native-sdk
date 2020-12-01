@@ -47,10 +47,7 @@ const FlagshipWrapper = () => {
 
           <FlagshipProvider
             envId={sdkSettings.envId || ''}
-            visitorData={{
-              id: sdkSettings.visitorId || '',
-              context,
-            }}
+            apiKey={sdkSettings.apiKey}
             onUpdate={({fsModifications}, fsVisitor) => {
               dispatch(updateFsVisitor(fsVisitor));
               if (safeModeRedux.triggerTest) {
@@ -64,8 +61,8 @@ const FlagshipWrapper = () => {
             enableErrorLayout={sdkSettings.enableErrorLayout}
             nodeEnv={sdkSettings.nodeEnv}
             flagshipApi={sdkSettings.flagshipApi}
-            apiKey={sdkSettings.apiKey}
             timeout={sdkSettings.timeout}
+            loadingComponent={<FsLoadingProvider />}
             onInitStart={() => {
               console.log('init start');
             }}
@@ -86,7 +83,10 @@ const FlagshipWrapper = () => {
                 text: 'with error: ' + error.stack,
               });
             }}
-            loadingComponent={<FsLoadingProvider />}>
+            visitorData={{
+              id: sdkSettings.visitorId || '',
+              context,
+            }}>
             <Tab.Navigator>
               <Tab.Screen
                 name="Home"

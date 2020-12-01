@@ -84,10 +84,12 @@ const displayReactNativeBoundary = ({
 const FlagshipProvider = ({
     children,
     envId,
+    onError,
     enableConsoleLogs,
     onUpdate,
     onBucketingSuccess,
     nodeEnv,
+    timeout, // TODO: freeze at the moment
     visitorData,
     ...otherProps
 }) => {
@@ -98,6 +100,9 @@ const FlagshipProvider = ({
 
     // Check the envId
     if (!checkValidityPatternForEnvId(envId)) {
+        if (onError) {
+            onError();
+        }
         return <ErrorBoundary>{children}</ErrorBoundary>;
     }
 
@@ -132,6 +137,7 @@ const FlagshipProvider = ({
                 /* V1 */
                 {...otherProps.config}
                 /*  TODO: V2 */
+                // onError  // NOTE: don't need to give to REACT SDK
                 initialBucketing={state.phoneCache.bucketing}
                 initialModifications={state.phoneCache.modifications}
                 enableConsoleLogs={enableConsoleLogs}
