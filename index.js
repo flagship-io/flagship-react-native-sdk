@@ -4,7 +4,7 @@ import {
     useFsActivate,
     useFsModifications
 } from '@flagship.io/react-sdk';
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { Button, SafeAreaView, Text, View } from 'react-native';
 
 import ErrorBoundary from './lib/ErrorBoundary';
@@ -12,7 +12,8 @@ import FsLogger from './lib/FsLogger';
 import {
     getCacheFromPhone,
     setModificationsCacheFromPhone,
-    setBucketingCacheFromPhone
+    setBucketingCacheFromPhone,
+    setVisitorReconciliationInCache
 } from './lib/FSStorage';
 import {
     checkValidityPatternForEnvId,
@@ -98,6 +99,29 @@ const FlagshipProvider = ({
         ...initState,
         log: FsLogger.getLogger({ nodeEnv, enableConsoleLogs })
     });
+
+    // NOTE: temporary code (should be replace by code from JS SDK)
+    const previousIsAuthenticated = useRef(
+        visitorData.isAuthenticated || false
+    );
+    useEffect(() => {
+        const isBeingAuthenticated =
+            previousIsAuthenticated.current === false &&
+            visitorData.isAuthenticated === true;
+
+        if (isBeingAuthenticated) {
+            setVisitorReconciliationInCache(
+                { id: visitorData.id, anonymousId: visitorData.anonymousId },
+                state.log
+            );
+        } else {
+            setVisitorReconciliationInCache(
+                { id: visitorData.id, anonymousId: null },
+                state.log
+            );
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [visitorData.isAuthenticated]);
 
     // Check the envId
     if (!checkValidityPatternForEnvId(envId)) {
