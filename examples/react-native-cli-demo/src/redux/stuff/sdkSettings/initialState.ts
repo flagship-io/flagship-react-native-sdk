@@ -21,6 +21,7 @@ export default {
   timeout: 2, // seconds
   activateNow: false,
   enableConsoleLogs: true,
+  enableClientCache: true,
   enableErrorLayout: false,
   nodeEnv: 'production',
   flagshipApi: 'https://decision.flagship.io/v2/',

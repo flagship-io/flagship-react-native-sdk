@@ -88,6 +88,7 @@ const FlagshipProvider = ({
     envId,
     onError,
     enableConsoleLogs,
+    enableClientCache,
     onUpdate,
     onBucketingSuccess,
     nodeEnv,
@@ -95,33 +96,67 @@ const FlagshipProvider = ({
     visitorData,
     ...otherProps
 }) => {
+    const enableClientCacheValue =
+        !enableClientCache && typeof enableClientCache !== 'boolean'
+            ? true
+            : enableClientCache;
     const [state, setState] = React.useState({
         ...initState,
         log: FsLogger.getLogger({ nodeEnv, enableConsoleLogs })
     });
 
+    const determineVisitorId = () => {
+        // check if defined
+        if (!visitorData.id) {
+            // check if something local storage
+            if (state.phoneCache?.visitor?.id) {
+                return state.phoneCache.visitor.id;
+            }
+            // return random generated visitor id otherwise
+            return FlagshipCommon.createVisitorId();
+        }
+
+        // return the defined value otherwise
+        return visitorData.id;
+    };
+
+    const visitorIdValue = determineVisitorId();
+    const previousVisitorId = useRef();
     // NOTE: temporary code (should be replace by code from JS SDK)
     const previousIsAuthenticated = useRef(
         visitorData.isAuthenticated || false
     );
+
     useEffect(() => {
+        // do nothing if cache not enabled
+        if (!enableClientCacheValue) {
+            return;
+        }
+
         const isBeingAuthenticated =
             previousIsAuthenticated.current === false &&
             visitorData.isAuthenticated === true;
-
+        const isBeingAnonymous =
+            previousIsAuthenticated.current === true &&
+            visitorData.isAuthenticated === false;
+        previousIsAuthenticated.current = visitorData.isAuthenticated; // refresh the value
         if (isBeingAuthenticated) {
             setVisitorReconciliationInCache(
-                { id: visitorData.id, anonymousId: visitorData.anonymousId },
+                {
+                    id: visitorIdValue,
+                    anonymousId: previousVisitorId.current || null
+                },
                 state.log
             );
-        } else {
+        } else if (isBeingAnonymous) {
             setVisitorReconciliationInCache(
-                { id: visitorData.id, anonymousId: null },
+                { id: visitorIdValue, anonymousId: null },
                 state.log
             );
         }
+        previousVisitorId.current = visitorIdValue;
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [visitorData.isAuthenticated]);
+    }, [visitorData.isAuthenticated, visitorData.id]);
 
     // Check the envId
     if (!checkValidityPatternForEnvId(envId)) {
@@ -131,7 +166,7 @@ const FlagshipProvider = ({
         return <ErrorBoundary>{children}</ErrorBoundary>;
     }
 
-    // with freeze (few ms)
+    // NOTE: with freeze (few ms) + load cache only once
     if (state.isLoadingCache) {
         getCacheFromPhone(state.log)
             .then((data) =>
@@ -139,8 +174,9 @@ const FlagshipProvider = ({
                     ...state,
                     isLoadingCache: false,
                     phoneCache: {
-                        modifications: [...data.modifications],
-                        bucketing: data.bucketing
+                        modifications: data.modifications,
+                        bucketing: data.bucketing,
+                        visitor: data.visitor
                     }
                 })
             )
@@ -154,6 +190,21 @@ const FlagshipProvider = ({
         return null;
     }
 
+    const determineVisitorAnonymousId = () => {
+        // first of all, if an id is specified, leave
+        if (visitorData.id) {
+            return null;
+        }
+
+        // check if something local storage
+        if (state.phoneCache?.visitor?.anonymousId) {
+            return state.phoneCache.visitor.anonymousId;
+        }
+
+        // null otherwise
+        return null;
+    };
+
     return (
         <FsReactNativeContext.Provider value={{ state, setState }}>
             <ReactFlagshipProvider
@@ -165,9 +216,11 @@ const FlagshipProvider = ({
                 // onError  // NOTE: don't need to give to REACT SDK
                 initialBucketing={state.phoneCache.bucketing}
                 initialModifications={state.phoneCache.modifications}
+                // enableClientCache={enableClientCacheValue} // NOTE: not needed because handled at this level
                 enableConsoleLogs={enableConsoleLogs}
                 nodeEnv={nodeEnv}
                 reactNative={{
+                    anonymousId: determineVisitorAnonymousId(),
                     handleErrorDisplay: displayReactNativeBoundary,
                     httpCallback: (axiosFct, cancelToken, { timeout }) => {
                         return new Promise((resolve, reject) => {
@@ -181,19 +234,21 @@ const FlagshipProvider = ({
                                     )
                                 );
                             }, timeout * 1000);
-                            axiosFct().then((data) => {
-                                clearTimeout(tempTimeout);
-                                resolve(data);
-                            });
+                            axiosFct()
+                                .then((data) => {
+                                    clearTimeout(tempTimeout);
+                                    resolve(data);
+                                })
+                                .catch((e) => {
+                                    clearTimeout(tempTimeout);
+                                    reject(e);
+                                });
                         });
                     }
                 }}
                 visitorData={{
                     ...visitorData,
-                    id:
-                        visitorData.id == null
-                            ? FlagshipCommon.createVisitorId()
-                            : visitorData.id
+                    id: visitorIdValue
                 }}
                 // Update the modifications stored in device's cache
                 onUpdate={(data, fsVisitor) => {

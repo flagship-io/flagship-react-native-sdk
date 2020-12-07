@@ -136,6 +136,21 @@ const SdkSettings: React.SFC<Props> = ({navigation}) => {
         </View>
         <View
           style={[s.flex, s.mv2, s.ph2, s.jcsb, s.aic, {flexDirection: 'row'}]}>
+          <Text style={[s.f5]}>enableClientCache:</Text>
+          <Switch
+            thumbColor={config.enableClientCache ? 'white' : appColors.red}
+            ios_backgroundColor="white"
+            onValueChange={() => {
+              updateLocalConfig((c) => ({
+                ...c,
+                enableClientCache: !config.enableClientCache,
+              }));
+            }}
+            value={!!config.enableClientCache}
+          />
+        </View>
+        <View
+          style={[s.flex, s.mv2, s.ph2, s.jcsb, s.aic, {flexDirection: 'row'}]}>
           <Text style={[s.f5]}>enableErrorLayout:</Text>
           <Switch
             thumbColor={config.enableErrorLayout ? 'white' : appColors.red}
