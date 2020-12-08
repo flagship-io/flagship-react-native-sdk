@@ -1,5 +1,9 @@
 # Flagship REACT NATIVE SDK - Release notes
 
+## ➡️ Version 2.0.4
+
+-   function `getModificationInfo` output now contains a new attribute `isReference` (`boolean`) telling you if the modification is the reference (`true`) or not (`false`).
+
 ## ➡️ Version 2.0.3
 
 ### New features 🎉
