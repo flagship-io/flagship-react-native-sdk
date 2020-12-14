@@ -19,13 +19,13 @@
   },
   "dependencies": {
     "@flagship.io/js-sdk-logs": "^0.1.2",
-    "@flagship.io/react-sdk": "fs-react-sdk-d58b39d8-9a0f-4bbf-b8f4-a6b7eba70935.tgz",
+    "@flagship.io/react-sdk": "fs-react-sdk-d00a9d32-fa9e-48fc-b9ee-3ce2a27709cf.tgz",
     "@react-native-community/async-storage": "^1.11.0",
     "react": "^16.13.1",
     "react-native": "^0.63.2",
     "react-native-murmurhash": "^1.0.2",
     "react-test-renderer": "^16.13.1",
-    "@flagship.io/js-sdk": "fs-js-sdk-d58b39d8-9a0f-4bbf-b8f4-a6b7eba70935.tgz"
+    "@flagship.io/js-sdk": "fs-js-sdk-d00a9d32-fa9e-48fc-b9ee-3ce2a27709cf.tgz"
   },
   "peerDependencies": {
     "react-native": "^16.8.0"
