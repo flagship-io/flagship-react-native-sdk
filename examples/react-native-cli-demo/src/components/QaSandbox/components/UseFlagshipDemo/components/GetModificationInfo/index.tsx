@@ -27,6 +27,7 @@ const GetModificationInfo: React.SFC<Props> = ({navigation}) => {
   const [campaignId, setCampaignId] = useState('-------------');
   const [variationGroupId, setVariationGroupId] = useState('-------------');
   const [variationId, setVariationId] = useState('-------------');
+  const [isRef, setRef] = useState('-------------');
 
   return (
     <SafeAreaView>
@@ -45,6 +46,7 @@ const GetModificationInfo: React.SFC<Props> = ({navigation}) => {
                     setVariationGroupId('null');
                     setCampaignId('null');
                     setVariationId('null');
+                    setRef('null');
                   } else {
                     /// set the varriation group id
                     setVariationGroupId(infos.variationGroupId);
@@ -52,12 +54,14 @@ const GetModificationInfo: React.SFC<Props> = ({navigation}) => {
                     setCampaignId(infos.campaignId);
                     /// set the variation id
                     setVariationId(infos.variationId);
+                    setRef(infos.isReference.toString());
                   }
                 })
                 .catch((error) => {
                   setVariationGroupId('error: ' + error);
                   setCampaignId('-----------');
                   setVariationId('-----------');
+                  setRef('-----------');
                   console.log(error);
                   return;
                 });
@@ -65,6 +69,7 @@ const GetModificationInfo: React.SFC<Props> = ({navigation}) => {
               setVariationGroupId('getModificationInfo is null');
               setCampaignId('-----------');
               setVariationId('-----------');
+              setRef('-----------');
             }
           }}
         />
@@ -80,6 +85,9 @@ const GetModificationInfo: React.SFC<Props> = ({navigation}) => {
         <Text style={styles.label}>
           VariationGroupId is:{' '}
           <Text style={styles.labelBis}>{variationGroupId}</Text>
+        </Text>
+        <Text style={styles.label}>
+          is reference ?: <Text style={styles.labelBis}>{isRef}</Text>
         </Text>
         <View style={[s.mv3]}>
           <Button
