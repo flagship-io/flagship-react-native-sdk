@@ -24,8 +24,7 @@
         "react": "^16.13.1",
         "react-native": "^0.63.2",
         "react-native-murmurhash": "^1.0.2",
-        "react-test-renderer": "^16.13.1",
-        "@flagship.io/js-sdk": "fs-js-sdk-d00a9d32-fa9e-48fc-b9ee-3ce2a27709cf.tgz"
+        "react-test-renderer": "^16.13.1"
     },
     "peerDependencies": {
         "react-native": "^16.8.0"
