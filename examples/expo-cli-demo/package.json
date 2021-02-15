@@ -8,7 +8,7 @@
     "eject": "expo eject"
   },
   "dependencies": {
-    "@flagship.io/react-native-sdk": "^2.0.3",
+    "@flagship.io/react-native-sdk": "^2.0.4",
     "expo": "~37.0.3",
     "react": "~16.9.0",
     "react-dom": "~16.9.0",
