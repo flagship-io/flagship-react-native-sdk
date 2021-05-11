@@ -103,6 +103,13 @@ const FlagshipWrapper = () => {
                 text: 'with error: ' + error.stack,
               });
             }}
+            onError={(error) => {
+              inputRef.current.showNotification({
+                title: 'SDK error',
+                text: 'with error: ' + error.stack,
+              });
+            }}
+            enableClientCache={false}
             visitorData={{
               id: sdkSettings.visitorId || '',
               context,

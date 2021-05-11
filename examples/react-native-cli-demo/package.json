@@ -47,7 +47,7 @@
     "redux-thunk": "^2.3.0"
   },
   "peerDependencies": {
-    "react": "16.11.0"
+    "react": "16.13.1"
   },
   "devDependencies": {
     "@babel/core": "^7.6.2",
