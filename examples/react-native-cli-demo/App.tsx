@@ -1,6 +1,6 @@
 import 'react-native-gesture-handler';
 
-import AsyncStorage from '@react-native-community/async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import React from 'react';
 import {StatusBar} from 'react-native';
 import {ThemeProvider} from 'react-native-elements';

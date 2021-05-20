@@ -3,7 +3,7 @@ import {
     setModificationsCacheFromPhone
 } from '../lib/FSStorage';
 import FsLogger from '../lib/FsLogger';
-import AsyncStorage from '@react-native-community/async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import {
     modificationAnswer,
     emptyModificationAnswer

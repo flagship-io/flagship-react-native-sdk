@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "android": "npm run build:android && react-native run-android",
+    "android": "react-native run-android",
     "ios": "cd ./ios && pod install && cd ../ && react-native run-ios",
     "clear:cache": "watchman watch-del-all && rm -rf $TMPDIR/react-* && rm -rf node_modules/ && npm cache verify && npm install && npm start -- --reset-cache",
     "start": "react-native link && react-native start",
@@ -12,12 +12,13 @@
     "build:android": "react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res",
     "test": "jest",
     "log:android": "react-native log-android",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "haul": "haul start"
   },
   "dependencies": {
     "@expo/vector-icons": "^10.0.6",
-    "@flagship.io/react-native-sdk": "^2.0.4",
-    "@react-native-community/async-storage": "^1.8.1",
+    "@flagship.io/react-native-sdk": "^2.1.1-alpha.0",
+    "@react-native-async-storage/async-storage": "^1.15.4",
     "@react-native-community/cli-platform-android": "^4.10.1",
     "@react-native-community/masked-view": "^0.1.6",
     "@react-native-community/picker": "^1.3.0",
@@ -52,6 +53,8 @@
   "devDependencies": {
     "@babel/core": "^7.6.2",
     "@babel/runtime": "^7.6.2",
+    "@haul-bundler/babel-preset-react-native": "^0.16.0",
+    "@haul-bundler/preset-0.60": "^0.18.1",
     "@react-native-community/eslint-config": "^0.0.5",
     "@types/jest": "^24.0.24",
     "@types/react-native": "^0.60.25",
