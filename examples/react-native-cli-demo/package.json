@@ -17,7 +17,7 @@
   },
   "dependencies": {
     "@expo/vector-icons": "^10.0.6",
-    "@flagship.io/react-native-sdk": "^2.1.1-alpha.0",
+    "@flagship.io/react-native-sdk": "^2.1.1",
     "@react-native-async-storage/async-storage": "^1.15.4",
     "@react-native-community/cli-platform-android": "^4.10.1",
     "@react-native-community/masked-view": "^0.1.6",
@@ -30,7 +30,7 @@
     "@types/react": "^16.9.21",
     "events": "^3.1.0",
     "native-base": "^2.13.8",
-    "react-native": "0.62.2",
+    "react-native": "0.64.2",
     "react-native-gesture-handler": "^1.6.0",
     "react-native-json-tree": "^1.2.0",
     "react-native-local-notification": "https://github.com/Emidomenge/react-native-local-notification.git",
@@ -48,14 +48,14 @@
     "redux-thunk": "^2.3.0"
   },
   "peerDependencies": {
-    "react": "16.13.1"
+    "react": "17.0.1"
   },
   "devDependencies": {
+    "@react-native-community/eslint-config": "^0.0.5",
     "@babel/core": "^7.6.2",
     "@babel/runtime": "^7.6.2",
     "@haul-bundler/babel-preset-react-native": "^0.16.0",
     "@haul-bundler/preset-0.60": "^0.18.1",
-    "@react-native-community/eslint-config": "^0.0.5",
     "@types/jest": "^24.0.24",
     "@types/react-native": "^0.60.25",
     "@types/react-redux": "^7.1.7",

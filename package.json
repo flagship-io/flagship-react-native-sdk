@@ -1,6 +1,6 @@
 {
     "name": "@flagship.io/react-native-sdk",
-    "version": "2.1.1",
+    "version": "2.1.5",
     "description": "Flagship SDK for React Native",
     "main": "index.js",
     "scripts": {
@@ -18,7 +18,7 @@
     },
     "dependencies": {
         "@flagship.io/js-sdk-logs": "^0.1.4",
-        "@flagship.io/react-sdk": "^2.1.1",
+        "@flagship.io/react-sdk": "^2.1.5",
         "@react-native-async-storage/async-storage": "^1.15.4",
         "react": "^16.13.1",
         "react-dom": "16.13.1",
