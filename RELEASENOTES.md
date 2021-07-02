@@ -1,5 +1,15 @@
 # Flagship REACT NATIVE SDK - Release notes
+
+## ➡️ Version 2.1.5
+
+Minor bug fixes & improvements
+
+## ➡️ Version 2.1.2
+
+Minor bug fixes & improvements
+
 ## ➡️ Version 2.1.1
+
 Minor bug fixes & improvements
 
 ## ➡️ Version 2.1.0
@@ -84,7 +94,7 @@ Here an example:
 
     -   Change the value of `visitorData.isAuthenticated` from `true` to `false`
     -   Make sure `visitorData.id` has a new unique value.
-    
+
 ## ➡️ Version 2.0.4
 
 ### Improvements 💪
@@ -340,7 +350,6 @@ Be aware that `apiKey` will be mandatory in the next major release as it will us
 
 -   `useFsSynchronize` has been removed. Campaigns synchronization is now handle using `useFlagship` hook:
 
-
     -   **BEFORE**:
 
         ```jsx
@@ -356,7 +365,7 @@ Be aware that `apiKey` will be mandatory in the next major release as it will us
             <>
                 <Button
                     onClick={() => {
-                       // [...] (Update the value of "listenedValue" )
+                        // [...] (Update the value of "listenedValue" )
                     }}
                 >
                     Test
@@ -396,7 +405,7 @@ Be aware that `apiKey` will be mandatory in the next major release as it will us
                     Trigger a synchronize
                 </Button>
             </>
-        )
+        );
         ```
 
 ## ➡️ Version 1.1.0
