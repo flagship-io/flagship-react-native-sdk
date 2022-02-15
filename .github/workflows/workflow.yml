@@ -27,5 +27,3 @@ jobs:
               run: npm run test -- --coverage --watchAll=false
             - name: Upload to codecov
               uses: codecov/codecov-action@v2
-            - name: Update codecov
-              run: bash <(curl -s https://codecov.io/bash)
