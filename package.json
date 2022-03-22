@@ -5,7 +5,7 @@
     "main": "index.js",
     "scripts": {
         "test": "jest",
-        "build": "npm install @flagship.io/react-sdk@latest --save && exit 0",
+        "build": "npm install && exit 0",
         "update:expo-cli-demo": "cd ./examples/expo-cli-demo && npm install @flagship.io/react-native-sdk@latest --save && cd ../../",
         "update:react-cli-demo": "cd ./examples/react-native-cli-demo && npm install @flagship.io/react-native-sdk@latest --save && cd ../../",
         "contributors:add": "all-contributors add",
@@ -17,14 +17,11 @@
         "url": "git+https://github.com/abtasty/flagship-react-native-sdk.git"
     },
     "dependencies": {
-        "@flagship.io/js-sdk-logs": "^0.1.4",
-        "@flagship.io/react-sdk": "^2.1.5",
-        "@react-native-async-storage/async-storage": "^1.15.4",
-        "react": "^16.13.1",
-        "react-dom": "16.13.1",
-        "react-native": "^0.63.2",
-        "react-native-murmurhash": "^1.0.2",
-        "react-test-renderer": "16.13.1"
+        "@flagship.io/react-sdk": "^3.0.3-alpha.1",
+        "@react-native-async-storage/async-storage": "^1.17.0"
+    },
+    "peerDependencies": {
+        "react": ">=0.60.0"
     },
     "keywords": [
         "mobile",
