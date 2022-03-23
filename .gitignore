@@ -13,6 +13,8 @@ example/ExpoCli/*.orig.*
 example/ExpoCli/web-build/
 example/ExpoCli/web-report/
 
+*/**/**/node_modules
+
 dist
 
 # macOS
