@@ -14,16 +14,12 @@ export const FlagshipProvider: React.FC<FlagshipProviderProps> = (props) => {
         visitorCacheImplementation,
         hitCacheImplementation
     } = props;
-    const defaultVisitorCache =
-        visitorCacheImplementation || new DefaultVisitorCache();
-    const defaultHitCache = hitCacheImplementation || new DefaultHitCache();
-
     return (
         <ReactFlagshipProvider
             {...props}
             language = {2}
-            visitorCacheImplementation={defaultVisitorCache}
-            hitCacheImplementation={defaultHitCache}
+            visitorCacheImplementation={visitorCacheImplementation || new DefaultVisitorCache()}
+            hitCacheImplementation={hitCacheImplementation || new DefaultHitCache()}
         >
             <>{children}</>
         </ReactFlagshipProvider>
