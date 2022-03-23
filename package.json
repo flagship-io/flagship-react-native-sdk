@@ -1,6 +1,6 @@
 {
   "name": "@flagship.io/react-native-sdk",
-  "version": "2.1.5",
+  "version": "3.0.0-alpha.1",
   "description": "Flagship SDK for React Native",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -9,24 +9,24 @@
     "README.md"
   ],
   "scripts": {
-    "dev": "tsc --watch",
-    "test": "jest",
-    "lint": "eslint . --ext .tsx",
-    "clean": "rm -rf dist && mkdir dist",
-    "build:es": "BABEL_ENV=es babel src --extensions '.ts,.tsx' --out-dir dist --copy-files",
-    "build:types": "tsc --noEmit false --declaration --emitDeclarationOnly --outDir dist",
-    "build": "yarn clean && yarn build:es && yarn build:types"
+    "dev": "cross-env tsc --watch",
+    "test": "cross-env jest",
+    "lint": "cross-env eslint . --ext .tsx",
+    "clean": "cross-env rm -rf dist && mkdir dist",
+    "build:es": "cross-env BABEL_ENV=es babel src --extensions '.ts,.tsx' --out-dir dist --copy-files",
+    "build:types": "cross-env tsc --noEmit false --declaration --emitDeclarationOnly --outDir dist",
+    "build": "cross-env yarn clean && yarn build:es && yarn build:types"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/abtasty/flagship-react-native-sdk.git"
   },
   "dependencies": {
-    "@flagship.io/react-sdk": "^3.0.3-alpha.2",
+    "@flagship.io/react-sdk": "^3.0.3-alpha.3",
     "@react-native-async-storage/async-storage": "^1.17.0"
   },
   "peerDependencies": {
-    "react": ">=0.60.0"
+    "react-native": ">=0.60.0"
   },
   "keywords": [
     "mobile",
@@ -44,11 +44,13 @@
     "@babel/preset-typescript": "^7.14.5",
     "@react-native-community/eslint-config": "^1.1.0",
     "@testing-library/jest-native": "^3.1.0",
+    "@testing-library/react": "^12.1.4",
     "@testing-library/react-hooks": "^3.4.1",
     "@types/jest": "^27.4.1",
     "@types/react": "^17.0.42",
     "@types/react-native": "^0.67.3",
     "@types/react-test-renderer": "^17.0.1",
+    "cross-env": "^7.0.3",
     "eslint": "^6.8.0",
     "eslint-config-prettier": "^6.11.0",
     "eslint-loader": "^3.0.3",
@@ -56,11 +58,14 @@
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-react": "^7.19.0",
     "eslint-plugin-react-hooks": "^4.0.0",
-    "jest": "^26.4.2",
+    "jest": "^27.5.1",
     "jest-react-native": "^18.0.0",
     "metro-react-native-babel-preset": "^0.69.1",
     "prettier": "^2.0.5",
     "prettier-eslint": "^9.0.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-native": "^0.67.4",
     "ts-jest": "^27.1.3",
     "typescript": "^4.6.2"
   }
