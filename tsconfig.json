@@ -1,0 +1,12 @@
+{
+    "compilerOptions": {
+        "esModuleInterop": true,
+        "noEmit": true,
+        "strict": true,
+        "skipLibCheck": true,
+        "lib": ["esnext", "dom"],
+        "target": "es5",
+        "jsx": "react"
+    },
+    "include": ["src/**/*"]
+}
