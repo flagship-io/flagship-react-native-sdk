@@ -1119,12 +1119,13 @@
     follow-redirects "^1.14.5"
     node-fetch "2.6.2"
 
-"@flagship.io/react-sdk@^3.0.3-alpha.3":
-  version "3.0.3-alpha.3"
-  resolved "https://registry.yarnpkg.com/@flagship.io/react-sdk/-/react-sdk-3.0.3-alpha.3.tgz#3f3d2546fc2f8b9a2fe58c8b41a2a208fb97f42b"
-  integrity sha512-OIGnmjurdzG5vYZS6/gdsxUQjs3KdzP8bzC6rSIKNhhQv/3rNqPfnKzIRsjgkqwjkBXYeANIK/25bU3uvY6X1g==
+"@flagship.io/react-sdk@^3.0.3-alpha.4":
+  version "3.0.3-alpha.4"
+  resolved "https://registry.yarnpkg.com/@flagship.io/react-sdk/-/react-sdk-3.0.3-alpha.4.tgz#2d146f9ffa46b4e968c74945c972bf961dc42e44"
+  integrity sha512-tKdek9vABUj+llSCk8OUSwsymFFrk0fFtXNkgCoaHRn93UOMpt4aajloa/iyjkXIUwdGSKl2dt6unfxMhWs6hw==
   dependencies:
     "@flagship.io/js-sdk" "^3.0.5-alpha.0"
+    core-js "^3.18.1"
     encoding "^0.1.13"
 
 "@hapi/hoek@^9.0.0":
