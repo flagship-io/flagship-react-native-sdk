@@ -1,8 +1,13 @@
 {
     "name": "@flagship.io/react-native-sdk",
-    "version": "2.1.5",
+    "version": "2.1.6-alpha.0",
     "description": "Flagship SDK for React Native",
     "main": "index.js",
+    "files": [
+        "lib/*",
+        "CONTRIBUTING.md",
+        "README.md"
+    ],
     "scripts": {
         "test": "jest",
         "build": "npm install @flagship.io/react-sdk@latest --save && exit 0",
@@ -16,15 +21,13 @@
         "type": "git",
         "url": "git+https://github.com/abtasty/flagship-react-native-sdk.git"
     },
+    "peerDependencies": {
+        "react-native": ">=0.60.0"
+    },
     "dependencies": {
         "@flagship.io/js-sdk-logs": "^0.1.4",
-        "@flagship.io/react-sdk": "^2.1.5",
-        "@react-native-async-storage/async-storage": "^1.15.4",
-        "react": "^16.13.1",
-        "react-dom": "16.13.1",
-        "react-native": "^0.63.2",
-        "react-native-murmurhash": "^1.0.2",
-        "react-test-renderer": "16.13.1"
+        "@flagship.io/react-sdk": "^2.1.10",
+        "@react-native-async-storage/async-storage": "^1.15.4"
     },
     "keywords": [
         "mobile",
@@ -51,7 +54,8 @@
         "jest-react-native": "^18.0.0",
         "np": "^6.2.3",
         "prettier": "^2.0.5",
-        "prettier-eslint": "^9.0.1"
+        "prettier-eslint": "^9.0.1",
+        "react-test-renderer": "16.13.1"
     },
     "jest": {
         "preset": "react-native",
