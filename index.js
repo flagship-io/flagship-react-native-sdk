@@ -15,10 +15,7 @@ import {
     setBucketingCacheFromPhone,
     setVisitorReconciliationInCache
 } from './lib/FSStorage';
-import {
-    checkValidityPatternForEnvId,
-    generateFlagshipId
-} from './lib/FSTools';
+import { checkValidityPatternForEnvId } from './lib/FSTools';
 import { FlagshipCommon } from '@flagship.io/js-sdk-logs';
 
 const initState = {
@@ -248,11 +245,15 @@ const FlagshipProvider = ({
                 // Update the modifications stored in device's cache
                 onUpdate={(data, fsVisitor) => {
                     setModificationsCacheFromPhone(data, state.log);
-                    onUpdate(data, fsVisitor);
+                    if (onUpdate) {
+                        onUpdate(data, fsVisitor);
+                    }
                 }}
                 onBucketingSuccess={(data) => {
                     setBucketingCacheFromPhone(data, state.log);
-                    onBucketingSuccess(data);
+                    if (onBucketingSuccess) {
+                        onBucketingSuccess(data);
+                    }
                 }}
             >
                 {children}
