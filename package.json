@@ -22,7 +22,7 @@
         "url": "git+https://github.com/abtasty/flagship-react-native-sdk.git"
     },
     "peerDependencies": {
-        "react-native": ">=0.60.0"
+        "react-native": ">=0.60.6"
     },
     "dependencies": {
         "@flagship.io/js-sdk-logs": "^0.1.4",
@@ -55,7 +55,10 @@
         "np": "^6.2.3",
         "prettier": "^2.0.5",
         "prettier-eslint": "^9.0.1",
-        "react-test-renderer": "16.13.1"
+        "react-test-renderer": "16.13.1",
+        "react": "^16.8.6",
+        "react-dom": "16.8.6",
+        "react-native": "^0.60.6"
     },
     "jest": {
         "preset": "react-native",
