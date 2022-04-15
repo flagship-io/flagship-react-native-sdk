@@ -1,16 +1,16 @@
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { ScrollView, StyleSheet } from 'react-native';
 import { Text, View, Button, TextInput, Switch } from '../components/Themed';
 import globalStyles from '../constants/GlobalStyles';
 import { DecisionMode } from '@flagship.io/react-native-sdk';
 import { Picker } from '@react-native-picker/picker';
-import { placeholder } from '@babel/types';
+import { appContext } from '../context/AppContext';
 
 export type Config = {
     envId?: string;
     apiKey?: string;
-    decisionMode?: string;
-    timeout?: number
+    decisionMode?: DecisionMode;
+    timeout: number
     visitorId?: string
     isAuthenticated?:boolean
     hasConsented?: boolean
@@ -32,13 +32,73 @@ interface LineContainerInputSwitchProps {
 
 export default function ConfigurationScreen() {
     const [config, setConfig] = useState<Config>({
+        context:"{}",
         timeout:2,
         hasConsented: true
     });
 
+    const { state, setState } = useContext(appContext)
+
+    useEffect(()=>{
+        let context = "{}"
+        try {
+            context = JSON.stringify(state.visitorData.context||{})
+        } catch (error) {
+            
+        }
+
+        console.log('config state', state);
+        
+        setConfig({
+            envId: state.envId,
+            apiKey: state.apiKey,
+            decisionMode: state.decisionMode,
+            timeout: state.timeout,
+            visitorId: state.visitorData.id,
+            isAuthenticated: state.visitorData.isAuthenticated,
+            hasConsented: state.visitorData.hasConsented,
+            context
+        })
+    }, [JSON.stringify(state)])
+
     const onResetPress = () => {
-        //
+        setConfig({
+            context:"{}",
+            timeout:2,
+            hasConsented: true,
+            decisionMode: DecisionMode.DECISION_API
+        })
     };
+
+    const onStartPress = () =>{
+        if (!setState) {
+            return;
+        }
+        let context = {}
+        try {
+            context = JSON.parse(config.context||"{}")
+        } catch (error) {
+            
+        }
+
+        console.log('config', config);
+        
+        
+        setState(prev=>({
+            ...prev,
+            apiKey: config.apiKey || "",
+            envId: config.envId || "",
+            decisionMode: config.decisionMode,
+            timeout: config.timeout,
+            visitorData:{
+                ...prev.visitorData,
+                id: config.visitorId,
+                context: context,
+                isAuthenticated: config.isAuthenticated,
+                hasConsented: config.hasConsented
+            }
+        }))
+    }
 
     
     const lineTextInputStyle = useMemo(()=>[styles.lineInputText, globalStyles.textInput],[])
@@ -79,8 +139,8 @@ export default function ConfigurationScreen() {
 
     return (
         <ScrollView style={styles.container}>
-            <View>
-                <Button title="Reset" onPress={onResetPress} />
+            <View style={styles.containerResetButton}>
+                <Button title="Reset" onPress={onResetPress}/>
             </View>
 
             {lineContainerInputText({
@@ -111,13 +171,14 @@ export default function ConfigurationScreen() {
                     selectedValue={config.decisionMode}
                     onValueChange={(itemValue) =>
                         setConfig((prev) => ({
+                            ...prev,
                             decisionMode: itemValue,
-                            ...prev
+                            
                         }))
                     }
                 >
-                    <Picker.Item label="API" value="API" />
-                    <Picker.Item label="BUCKETING" value="BUCKETING" />
+                    <Picker.Item label="API" value={DecisionMode.DECISION_API} />
+                    <Picker.Item label="BUCKETING" value={DecisionMode.BUCKETING} />
                 </Picker>
             </View>
 
@@ -170,7 +231,7 @@ export default function ConfigurationScreen() {
                 />
             </View>
             <View>
-                <Button title="Start" onPress={onResetPress} />
+                <Button title="Start" onPress={onStartPress} />
             </View>
         </ScrollView>
     );
@@ -191,6 +252,10 @@ const styles = StyleSheet.create({
         height:180,
         marginBottom: 10
     },
+    containerResetButton:{
+        marginBottom:10,
+        alignItems:"flex-end"
+    },
     lineInputText: {
         flex: 2
     },
@@ -202,9 +267,8 @@ const styles = StyleSheet.create({
     },
     inputContext:{
         minHeight: 150,
-        maxHeight:150
+        maxHeight:150,
+        textAlignVertical: 'top',
+        padding:10
     },
-    resetButton:{
-        width:"30%"
-    }
 });

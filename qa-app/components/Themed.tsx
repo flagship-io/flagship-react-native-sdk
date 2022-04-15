@@ -1,5 +1,5 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import { Text as DefaultText, View as DefaultView, Button as DefaultButton, TextInput as DefaultTextInput, Switch as DefaultSwitch, Pressable } from 'react-native';
+import React, { Children, useCallback, useEffect, useState } from 'react';
+import { Text as DefaultText, View as DefaultView, Button as DefaultButton, TextInput as DefaultTextInput, Switch as DefaultSwitch, TouchableHighlight as DefaultTouchableHighlight } from 'react-native';
 import { debounce } from "lodash"
 
 import Colors from '../constants/Colors';
@@ -26,7 +26,7 @@ type ThemeProps = {
 
 export type TextProps = ThemeProps & DefaultText['props'];
 export type ViewProps = ThemeProps & DefaultView['props'];
-export type ButtonProps = ThemeProps & DefaultButton['props']
+export type ButtonProps = ThemeProps & DefaultTouchableHighlight['props']  & { title: string}
 export type TextInputProps = ThemeProps & DefaultTextInput['props']
 export type SwitchProps = ThemeProps & DefaultSwitch['props']
 
@@ -45,9 +45,24 @@ export function View(props: ViewProps) {
 }
 
 export function Button(props: ButtonProps){
-  const {lightColor, darkColor,  ...otherProps } = props;
+  const {lightColor, darkColor, style, title, children,  ...otherProps } = props;
   const tint = useThemeColor({ light: lightColor, dark: darkColor }, 'tint');
-  return <DefaultButton  color={tint} {...otherProps} />
+  const tint2 = useThemeColor({ light: lightColor, dark: darkColor }, 'tint2');
+
+  return (
+  <DefaultTouchableHighlight
+    underlayColor={tint2}
+  style={[{
+    backgroundColor:tint, 
+    minHeight:50, 
+    minWidth:70, 
+    justifyContent:'center', 
+    alignItems:'center',
+    borderRadius:5
+    
+    },style]}  {...otherProps}>
+    <Text>{title}</Text>
+  </DefaultTouchableHighlight>)
 }
 
 
