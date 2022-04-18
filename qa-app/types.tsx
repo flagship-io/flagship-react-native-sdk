@@ -7,6 +7,7 @@ import { DecisionMode } from '@flagship.io/react-native-sdk';
 import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
 import { CompositeScreenProps, NavigatorScreenParams } from '@react-navigation/native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
+import { StyleProp, TextStyle, ViewStyle } from 'react-native';
 
 declare global {
   namespace ReactNavigation {
@@ -26,6 +27,7 @@ export type RootStackScreenProps<Screen extends keyof RootStackParamList> = Nati
 export type RootTabParamList = {
   Configuration: undefined;
   User: undefined;
+  GetFlag: undefined
 };
 
 export type RootTabScreenProps<Screen extends keyof RootTabParamList> = CompositeScreenProps<
@@ -54,6 +56,7 @@ export interface LineContainerInputTextProps {
 export interface LineContainerInputTextReadyOnlyProps {
   label?: string
   value?: string;
+  height?:number
 }
 
 export interface LineContainerInputSwitchProps {

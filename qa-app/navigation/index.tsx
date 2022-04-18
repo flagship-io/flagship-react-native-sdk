@@ -13,6 +13,7 @@ import { ColorSchemeName } from 'react-native';
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
 import Configuration from '../screens/Configuration';
+import GetFlag from '../screens/GetFlag';
 import UserScreen from '../screens/UserScreen';
 import { RootStackParamList, RootTabParamList } from '../types';
 
@@ -68,6 +69,14 @@ function BottomTabNavigator() {
         options={{
           title: 'Visitor',
           tabBarIcon: ({ color }) => <TabBarIcon name="user" color={color} />,
+        }}
+      />
+       <BottomTab.Screen
+        name="GetFlag"
+        component={GetFlag}
+        options={{
+          title: 'GetFlag',
+          tabBarIcon: ({ color }) => <TabBarIcon name='flag' color={color} />,
         }}
       />
     </BottomTab.Navigator>
