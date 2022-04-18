@@ -3,6 +3,7 @@
  * https://reactnavigation.org/docs/typescript/
  */
 
+import { DecisionMode } from '@flagship.io/react-native-sdk';
 import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
 import { CompositeScreenProps, NavigatorScreenParams } from '@react-navigation/native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
@@ -24,10 +25,39 @@ export type RootStackScreenProps<Screen extends keyof RootStackParamList> = Nati
 
 export type RootTabParamList = {
   Configuration: undefined;
-  TabTwo: undefined;
+  User: undefined;
 };
 
 export type RootTabScreenProps<Screen extends keyof RootTabParamList> = CompositeScreenProps<
   BottomTabScreenProps<RootTabParamList, Screen>,
   NativeStackScreenProps<RootStackParamList>
 >;
+
+export type Config = {
+  envId?: string;
+  apiKey?: string;
+  decisionMode?: DecisionMode;
+  timeout: number
+  visitorId?: string
+  isAuthenticated?:boolean
+  hasConsented?: boolean
+  context?: string
+};
+
+export interface LineContainerInputTextProps {
+  label?: string
+  value?: string;
+  placeHolder?: string;
+  onChangeText: (text: string) => void;
+}
+
+export interface LineContainerInputTextReadyOnlyProps {
+  label?: string
+  value?: string;
+}
+
+export interface LineContainerInputSwitchProps {
+  label?: string
+  value?: boolean;
+  onValueChange: (value: boolean) => void;
+}

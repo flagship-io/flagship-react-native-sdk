@@ -5,30 +5,8 @@ import globalStyles from '../constants/GlobalStyles';
 import { DecisionMode } from '@flagship.io/react-native-sdk';
 import { Picker } from '@react-native-picker/picker';
 import { appContext } from '../context/AppContext';
+import { Config, LineContainerInputSwitchProps, LineContainerInputTextProps } from '../types';
 
-export type Config = {
-    envId?: string;
-    apiKey?: string;
-    decisionMode?: DecisionMode;
-    timeout: number
-    visitorId?: string
-    isAuthenticated?:boolean
-    hasConsented?: boolean
-    context?: string
-};
-
-interface LineContainerInputTextProps {
-    label?: string
-    value?: string;
-    placeHolder?: string;
-    onChangeText: (text: string) => void;
-}
-
-interface LineContainerInputSwitchProps {
-    label?: string
-    value?: boolean;
-    onValueChange: (value: boolean) => void;
-}
 
 export default function ConfigurationScreen() {
     const [config, setConfig] = useState<Config>({
