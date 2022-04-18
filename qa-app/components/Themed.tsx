@@ -1,5 +1,8 @@
 import React, { Children, useCallback, useEffect, useState } from 'react';
-import { Text as DefaultText, View as DefaultView, Button as DefaultButton, TextInput as DefaultTextInput, Switch as DefaultSwitch, TouchableHighlight as DefaultTouchableHighlight } from 'react-native';
+import { Text as DefaultText, View as DefaultView, 
+  Button as DefaultButton, 
+  TextInput as DefaultTextInput, Switch as DefaultSwitch, 
+  TouchableHighlight as DefaultTouchableHighlight, ActivityIndicator as DefaultActivityIndicator } from 'react-native';
 import { debounce } from "lodash"
 
 import Colors from '../constants/Colors';
@@ -26,9 +29,10 @@ type ThemeProps = {
 
 export type TextProps = ThemeProps & DefaultText['props'];
 export type ViewProps = ThemeProps & DefaultView['props'];
-export type ButtonProps = ThemeProps & DefaultTouchableHighlight['props']  & { title: string}
+export type ButtonProps = ThemeProps & DefaultTouchableHighlight['props']  & { title: string, isLoading?:boolean}
 export type TextInputProps = ThemeProps & DefaultTextInput['props']
 export type SwitchProps = ThemeProps & DefaultSwitch['props']
+export type ActivityIndicatorProps = ThemeProps & DefaultActivityIndicator['props']
 
 export function Text(props: TextProps) {
   const { style, lightColor, darkColor, ...otherProps } = props;
@@ -45,7 +49,7 @@ export function View(props: ViewProps) {
 }
 
 export function Button(props: ButtonProps){
-  const {lightColor, darkColor, style, title, children,  ...otherProps } = props;
+  const {lightColor, darkColor, style, title, children,isLoading,  ...otherProps } = props;
   const tint = useThemeColor({ light: lightColor, dark: darkColor }, 'tint');
   const tint2 = useThemeColor({ light: lightColor, dark: darkColor }, 'tint2');
 
@@ -61,7 +65,10 @@ export function Button(props: ButtonProps){
     borderRadius:5
     
     },style]}  {...otherProps}>
-    <Text>{title}</Text>
+      <DefaultView style={{ flexDirection:'row' }}>
+      <Text>{title}</Text>
+      {isLoading && <ActivityIndicator color={'white'} />}
+      </DefaultView>
   </DefaultTouchableHighlight>)
 }
 
@@ -107,4 +114,9 @@ export const Switch = React.memo((props: SwitchProps)=>{
     true: tint,
     false: tabIconDefault
   }} {...otherPros} />
+})
+
+export const ActivityIndicator = React.memo((props: ActivityIndicatorProps)=>{
+  const {lightColor, darkColor, ...otherPros} = props;
+  return <DefaultActivityIndicator  {...otherPros} />
 })
