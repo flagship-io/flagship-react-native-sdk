@@ -2,11 +2,10 @@ import { useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { ScrollView, StyleSheet } from 'react-native';
 import { Text, View, Button, TextInput, Switch } from '../components/Themed';
 import globalStyles from '../constants/GlobalStyles';
-import { DecisionMode } from '@flagship.io/react-native-sdk';
+import { DecisionMode, useFlagship } from '@flagship.io/react-native-sdk';
 import { Picker } from '@react-native-picker/picker';
 import { appContext } from '../context/AppContext';
 import { Config, LineContainerInputSwitchProps, LineContainerInputTextProps } from '../types';
-
 
 export default function ConfigurationScreen() {
     const [config, setConfig] = useState<Config>({
@@ -17,10 +16,16 @@ export default function ConfigurationScreen() {
 
     const { state, setState } = useContext(appContext)
 
+    const fs = useFlagship()
+
+    useEffect(()=>{
+        setConfig(prev=>({...prev, context: JSON.stringify(fs.context, null, 4)}))
+    }, [JSON.stringify(fs.context)])
+
     useEffect(()=>{
         let context = "{}"
         try {
-            context = JSON.stringify(state.visitorData.context||{})
+            context = JSON.stringify(state.visitorData.context||{},null, 4)
         } catch (error) {
             
         }
@@ -56,9 +61,6 @@ export default function ConfigurationScreen() {
         } catch (error) {
             
         }
-
-        console.log('config', config);
-        
         
         setState(prev=>({
             ...prev,
