@@ -13,7 +13,7 @@ import { ColorSchemeName } from 'react-native';
 import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
 import Configuration from '../screens/Configuration';
-import TabTwoScreen from '../screens/TabTwoScreen';
+import UserScreen from '../screens/UserScreen';
 import { RootStackParamList, RootTabParamList } from '../types';
 
 export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
@@ -63,11 +63,11 @@ function BottomTabNavigator() {
         })}
       />
       <BottomTab.Screen
-        name="TabTwo"
-        component={TabTwoScreen}
+        name="User"
+        component={UserScreen}
         options={{
-          title: 'Tab Two',
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          title: 'Visitor',
+          tabBarIcon: ({ color }) => <TabBarIcon name="user" color={color} />,
         }}
       />
     </BottomTab.Navigator>
