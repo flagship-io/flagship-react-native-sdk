@@ -1,7 +1,7 @@
 import { useCallback, useContext, useMemo, useState } from 'react';
 import { ScrollView, StyleSheet } from 'react-native';
 
-import { Text, View, TextInput } from '../components/Themed';
+import { Text, View, TextInput, Button } from '../components/Themed';
 import {
     LineContainerInputTextProps,
     LineContainerInputTextReadyOnlyProps
@@ -13,6 +13,8 @@ import { useFlagship } from '@flagship.io/react-native-sdk';
 export default function TabTwoScreen() {
     const [visitorId, setVisitorId] = useState('');
     const fs = useFlagship();
+    const [_, setToggleAuthenticate] = useState(false)
+    const [isFetching, setIsFetching] = useState(false)
 
     const lineTextInputStyle = useMemo(
         () => [styles.lineInputText, globalStyles.textInput],
@@ -22,6 +24,24 @@ export default function TabTwoScreen() {
         () => [styles.lineLabel, globalStyles.label],
         []
     );
+
+    const unauthenticate = ()=>{
+        fs.unauthenticate()
+        setToggleAuthenticate(prev=> !prev)
+    }
+
+    const authenticate = ()=>{
+        fs.authenticate(visitorId)
+        setVisitorId("")
+        setToggleAuthenticate(prev=> !prev)
+    }
+
+    const fetchFlags = ()=>{
+        setIsFetching(true)
+        fs.fetchFlags().finally(()=>{
+            setIsFetching(false)
+        })
+    }
  
     function lineContainerInputReadyOnlyText(
         props: LineContainerInputTextReadyOnlyProps
@@ -40,7 +60,7 @@ export default function TabTwoScreen() {
     }
 
     return (
-        <ScrollView style={styles.container}>
+        <View style={styles.container}>
             <View style={styles.container1} >
                 {lineContainerInputReadyOnlyText({
                     label: 'Visitor id',
@@ -53,7 +73,7 @@ export default function TabTwoScreen() {
                 })}
             </View>
             <View style={styles.container2}>
-                <View>
+                <View style={styles.inputContainer}>
                     <Text style={labelStyle}>Authenticate visitor id</Text>
                     <TextInput
                         style={lineTextInputStyle}
@@ -66,8 +86,11 @@ export default function TabTwoScreen() {
                         )}
                     />
                 </View>
+                <Button style={styles.btn} title="Authenticate" onPress={authenticate} />
+                <Button style={styles.btn} title="Unauthenticate" onPress={unauthenticate} />
+                <Button style={styles.btn} isLoading={isFetching} title="Fetch flags" onPress={fetchFlags} />
             </View>
-        </ScrollView>
+        </View>
     );
 }
 
@@ -77,22 +100,28 @@ const styles = StyleSheet.create({
       padding: 20,
     },
     container1:{
-      backgroundColor:'red'
+        flex:1
     },
     container2:{
-      marginTop: 100,
-      backgroundColor:"gray"
+      flex:1,
+    },
+    inputContainer:{
+        marginBottom: 30,
+        height:80
     },
     lineInputText: {
         flex: 2
     },
     lineContainer: {
         flexDirection: 'row',
-        flex: 1,
         justifyContent: 'space-between',
-        marginBottom: 10
+        alignItems:'flex-start',
+        marginBottom: 10,
     },
     lineLabel: {
         flex: 1
+    },
+    btn:{
+        marginBottom: 10,
     }
 });
