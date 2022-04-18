@@ -26,7 +26,7 @@
     },
     "dependencies": {
         "@flagship.io/js-sdk-logs": "^0.1.4",
-        "@flagship.io/react-sdk": "^2.1.10",
+        "@flagship.io/react-sdk": "^2.1.11",
         "@react-native-async-storage/async-storage": "^1.15.4"
     },
     "keywords": [
@@ -55,10 +55,10 @@
         "np": "^6.2.3",
         "prettier": "^2.0.5",
         "prettier-eslint": "^9.0.1",
-        "react-test-renderer": "16.13.1",
         "react": "^16.8.6",
         "react-dom": "16.8.6",
-        "react-native": "^0.60.6"
+        "react-native": "^0.60.6",
+        "react-test-renderer": "16.13.1"
     },
     "jest": {
         "preset": "react-native",

@@ -752,10 +752,10 @@
   resolved "https://registry.yarnpkg.com/@flagship.io/js-sdk-logs/-/js-sdk-logs-0.1.4.tgz#9825d2182391069c8acab2544d305b5333ef2e55"
   integrity sha512-35bvO+tRrCSFxpXkjPRENBQV8DkxXcTEao40ncXWoXR1KEyLPPS/MtAPqJLQrRQ0r8LRA/62BCjlUZeVsPmSMg==
 
-"@flagship.io/js-sdk@^2.2.12":
-  version "2.2.12"
-  resolved "https://registry.yarnpkg.com/@flagship.io/js-sdk/-/js-sdk-2.2.12.tgz#41f842e5789058b84bec950ddda5f370c7c3b4fd"
-  integrity sha512-nwu8WXmrhTRgLEKp8hTbWtuWITUc50S8/iTnOH0b6+gUiyc7mf5Npbw2sVyX/gd2F4zTwahYHRG2BjpdvlCosg==
+"@flagship.io/js-sdk@^2.2.13":
+  version "2.2.13"
+  resolved "https://registry.yarnpkg.com/@flagship.io/js-sdk/-/js-sdk-2.2.13.tgz#d723b2e18ab42dfd6bd16bf61942a33321bb3bd7"
+  integrity sha512-3p3d82HIvDyEa9aYeR39mNqSlOX11W56pkfl/XtE1aB++E4gjw+L1q/3/Q9R9NhSSCz3cET5G2qfxzq+x4fqVA==
   dependencies:
     "@flagship.io/js-sdk-logs" "^0.1.4"
     axios "^0.21.1"
@@ -763,12 +763,12 @@
     react-native-murmurhash "^1.1.0"
     validate.js "^0.13.1"
 
-"@flagship.io/react-sdk@^2.1.10":
-  version "2.1.10"
-  resolved "https://registry.yarnpkg.com/@flagship.io/react-sdk/-/react-sdk-2.1.10.tgz#85138f95b3056fe179083bd8be8749b01067012b"
-  integrity sha512-8fu3ET3hggfHI4eky0Tb11DnN9ke4XZ4o7SrfgGMIYUUMlqpt8q5PJLKPILQZAvbuRWIA+uyiczKLJwMjt105w==
+"@flagship.io/react-sdk@^2.1.11":
+  version "2.1.11"
+  resolved "https://registry.yarnpkg.com/@flagship.io/react-sdk/-/react-sdk-2.1.11.tgz#102a5819b8eba839ef28bbfdf9aa57b09362b88d"
+  integrity sha512-t0G277bT351OHsqUi6IB66bPm6DK9o/WL1Y3ioINddS8xycOVvGf/h9zSo8BpIeb1z86DzMgJBeTj0Th0i1s7g==
   dependencies:
-    "@flagship.io/js-sdk" "^2.2.12"
+    "@flagship.io/js-sdk" "^2.2.13"
     "@flagship.io/js-sdk-logs" "^0.1.3"
     use-ssr "^1.0.23"
 
