@@ -24,8 +24,6 @@ export default function ConfigurationScreen() {
         } catch (error) {
             
         }
-
-        console.log('config state', state);
         
         setConfig({
             envId: state.envId,
