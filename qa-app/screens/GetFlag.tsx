@@ -7,6 +7,7 @@ import { View, Text, Button } from "../components/Themed";
 import GlobalStyles from "../constants/GlobalStyles";
 import {IFlag, useFlagship} from '@flagship.io/react-native-sdk'
 import LineContainerSwitch from "../components/LineContainerSwitch";
+import Color from '../constants/Colors'
 
 
 const FlagTypes = [
@@ -52,8 +53,6 @@ export default function GetFlag(){
                 break;
         }
         const currentFlag = fs.getFlag(flagParam.key, defaultValue)
-        console.log('currentFlag', currentFlag);
-        
         setFlag(currentFlag)
     }
 
@@ -119,16 +118,17 @@ export default function GetFlag(){
                 setFlagParam((prev) => ({  ...prev, userExposed }));
                 }, [flagParam.userExposed])} />
 
+<View style={styles.btnContainer}>
+                <Button style={styles.btn} title="Get Flag" onPress={getFlag} />
+                <Button isLoading={userExposedLoading} style={styles.btn} title="User exposed" onPress={userExposed} />
+            </View>
             <View style={styles.flagContainer}>
                 <LineContainerInputReadyOnlyText height={150} label="Flag Value" value={flagValue} />
                 <LineContainerInputReadyOnlyText label="Flag exists" value={flagExists} />
                 <LineContainerInputReadyOnlyText height={200} label="Flag metadata" value={flagMetadata} />
             </View>
 
-            <View>
-                <Button style={styles.btn} title="Get Flag" onPress={getFlag} />
-                <Button isLoading={userExposedLoading} style={styles.btn} title="User exposed" onPress={userExposed} />
-            </View>
+           
         </ScrollView>
     )
 }
@@ -155,6 +155,10 @@ const styles = StyleSheet.create({
         flex: 2
     },
     flagContainer:{
+        borderColor: Color.dark.tint2,
+        borderWidth: 1,
+        marginBottom: 30,
+        padding:10,
     },
     lineLabel: {
         flex: 1
@@ -167,6 +171,10 @@ const styles = StyleSheet.create({
         maxHeight:150,
         textAlignVertical: 'top',
         padding:10
+    },
+    btnContainer:{
+        marginTop:20,
+        marginBottom:20
     },
     btn:{
         marginBottom: 10,
