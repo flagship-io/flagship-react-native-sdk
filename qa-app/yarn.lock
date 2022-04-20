@@ -6085,6 +6085,11 @@ react-native-codegen@^0.0.6:
     jscodeshift "^0.11.0"
     nullthrows "^1.1.1"
 
+react-native-network-logger@^1.12.0:
+  version "1.12.0"
+  resolved "https://registry.yarnpkg.com/react-native-network-logger/-/react-native-network-logger-1.12.0.tgz#a82528b3ac3cc2c7ded09ac37a0bba2e6030d032"
+  integrity sha512-3Esss/+caz0d53vuKOYS5i9YtNn76O2AvnKMwQovtXbpJs0Fc4oyJhNJ50YWNQBCKJ5aHqWUEYNE4Ryp5GLmeQ==
+
 react-native-safe-area-context@3.3.2:
   version "3.3.2"
   resolved "https://registry.yarnpkg.com/react-native-safe-area-context/-/react-native-safe-area-context-3.3.2.tgz#9549a2ce580f2374edb05e49d661258d1b8bcaed"
