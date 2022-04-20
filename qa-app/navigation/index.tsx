@@ -14,6 +14,7 @@ import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
 import Configuration from '../screens/Configuration';
 import GetFlag from '../screens/GetFlag';
+import HitsScreen from '../screens/HitsScreen';
 import HttpLogScreen from '../screens/HttpLogScreen';
 import UserScreen from '../screens/UserScreen';
 import { RootStackParamList, RootTabParamList } from '../types';
@@ -78,6 +79,14 @@ function BottomTabNavigator() {
         options={{
           title: 'GetFlag',
           tabBarIcon: ({ color }) => <TabBarIcon name='flag' color={color} />,
+        }}
+      />
+      <BottomTab.Screen
+        name="Hits"
+        component={HitsScreen}
+        options={{
+          title: 'Hits',
+          tabBarIcon: ({ color }) => <TabBarIcon name='pied-piper' color={color} />,
         }}
       />
       <BottomTab.Screen

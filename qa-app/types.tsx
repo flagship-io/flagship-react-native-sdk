@@ -29,6 +29,7 @@ export type RootTabParamList = {
   User: undefined;
   GetFlag: undefined;
   HttpLog: undefined;
+  Hits: undefined
 };
 
 export type RootTabScreenProps<Screen extends keyof RootTabParamList> = CompositeScreenProps<
