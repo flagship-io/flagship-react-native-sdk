@@ -7,9 +7,9 @@ import Navigation from './navigation';
 import { FlagshipProvider } from "@flagship.io/react-native-sdk";
 import React, { useState } from 'react';
 import { appContext, AppState, defaultContext } from './context/AppContext';
+import { startNetworkLogging } from 'react-native-network-logger';
 
-
-
+startNetworkLogging()
 
 export default function App() {
 

@@ -14,6 +14,7 @@ import Colors from '../constants/Colors';
 import useColorScheme from '../hooks/useColorScheme';
 import Configuration from '../screens/Configuration';
 import GetFlag from '../screens/GetFlag';
+import HttpLogScreen from '../screens/HttpLogScreen';
 import UserScreen from '../screens/UserScreen';
 import { RootStackParamList, RootTabParamList } from '../types';
 
@@ -77,6 +78,14 @@ function BottomTabNavigator() {
         options={{
           title: 'GetFlag',
           tabBarIcon: ({ color }) => <TabBarIcon name='flag' color={color} />,
+        }}
+      />
+      <BottomTab.Screen
+        name="HttpLog"
+        component={HttpLogScreen}
+        options={{
+          title: 'Http logs',
+          tabBarIcon: ({ color }) => <TabBarIcon name='neuter' color={color} />,
         }}
       />
     </BottomTab.Navigator>
