@@ -59,7 +59,7 @@ export default function GetFlag() {
     }, [flagParam.key, flagParam.default, flagParam.type]);
 
     const userExposed = useCallback(() => {
-        if (!flag) {
+        if (!flag || userExposedLoading) {
             return;
         }
         setUserExposedLoading(true);

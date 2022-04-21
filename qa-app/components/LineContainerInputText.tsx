@@ -10,8 +10,6 @@ function LineContainerInputText({
     placeHolder,
     label
 }: LineContainerInputTextProps) {
-    console.log('LineContainerInputText', label);
-
     return (
         <View style={styles.lineContainer}>
             <Text style={styles.lineLabel}>{label}</Text>
