@@ -1,8 +1,8 @@
-import { useCallback, useContext, useEffect, useMemo, useState } from 'react';
+import { useCallback, useContext, useEffect, useState } from 'react';
 import { ScrollView, StyleSheet } from 'react-native';
 import { Text, View, Button, TextInput } from '../components/Themed';
 import globalStyles from '../constants/GlobalStyles';
-import { DecisionMode, useFlagship } from '@flagship.io/react-native-sdk';
+import { DecisionMode, FlagshipStatus, useFlagship } from '@flagship.io/react-native-sdk';
 import { Picker } from '@react-native-picker/picker';
 import { appContext } from '../context/AppContext';
 import { Config } from '../types';
@@ -83,6 +83,7 @@ export default function ConfigurationScreen() {
     return (
         <ScrollView style={styles.container}>
             <View style={styles.containerResetButton}>
+                <Text>SDK Status:  {FlagshipStatus[state.status]}</Text>
                 <Button title="Reset" onPress={onResetPress}/>
             </View>
 
@@ -197,7 +198,8 @@ const styles = StyleSheet.create({
     },
     containerResetButton:{
         marginBottom:10,
-        alignItems:"flex-end"
+        flexDirection:'row',
+        justifyContent:"space-between"
     },
     lineInputText: {
         flex: 2
