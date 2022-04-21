@@ -1,4 +1,4 @@
-import { DecisionMode } from "@flagship.io/react-native-sdk"
+import { DecisionMode, FlagshipStatus } from "@flagship.io/react-native-sdk"
 import React, { Dispatch, SetStateAction } from "react"
 
 export type AppState = {
@@ -12,7 +12,8 @@ export type AppState = {
       isAuthenticated?: boolean,
       hasConsented?: boolean
     },
-    logs: string
+    logs: string,
+    status: FlagshipStatus
   }
   
   export type AppContext = {
@@ -28,7 +29,8 @@ export type AppState = {
       visitorData: {
           hasConsented: true
       },
-      logs:""
+      logs:"",
+      status: FlagshipStatus.NOT_INITIALIZED
     }
   }
 

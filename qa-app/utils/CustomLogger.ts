@@ -4,9 +4,9 @@ import { AppState } from "../context/AppContext";
 
 export class CustomLogger implements IFlagshipLogManager {
 
-    setState:Dispatch<SetStateAction<AppState>>
-    constructor(setState: Dispatch<SetStateAction<AppState>>){
-        this.setState = setState
+    updatedLog: (text:string)=>void
+    constructor( updatedLog:(text:string)=>void){
+        this.updatedLog = updatedLog
     }
     emergency(message: string, tag: string): void {
         this.log(LogLevel.EMERGENCY, message, tag);
@@ -39,7 +39,7 @@ export class CustomLogger implements IFlagshipLogManager {
           return value.toString().length === 1 ? `0${value}` : value
         }
     
-        const out = `[${getTwoDigit(now.getFullYear())}-${
+        const logs = `[${getTwoDigit(now.getFullYear())}-${
           getTwoDigit(
             now.getMonth()
           )
@@ -50,15 +50,8 @@ export class CustomLogger implements IFlagshipLogManager {
         }:${getTwoDigit(now.getMinutes())}] [Flagship SDK] [${
           LogLevel[level]
         }] [${tag}] : ${message}`
-        
-        this.setState(prev => {
-            let logs  = prev.logs;
-            logs += out + "\n\n";
-            return {
-                ...prev,
-                logs
-            }
-        })
+
+        this.updatedLog(logs)
     }
 
 }

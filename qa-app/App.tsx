@@ -32,7 +32,16 @@ export default function App() {
           decisionMode={appState.decisionMode}
           timeout={appState.timeout}
           visitorData={appState.visitorData}
-          logManager={new CustomLogger(setAppState)}
+          logManager={new CustomLogger((newLogs)=>{
+            setAppState(prev=>{
+              let logs = prev.logs
+              logs += newLogs + "\n\n"
+              return {...prev, logs}
+            })
+          })}
+          statusChangedCallback = {status=>{
+            setAppState(prev=>({...prev, status}))
+          }}
         >
         <Navigation colorScheme={colorScheme} />
         <StatusBar />

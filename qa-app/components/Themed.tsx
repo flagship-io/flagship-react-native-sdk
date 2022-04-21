@@ -82,7 +82,7 @@ export const Button = React.memo((props: ButtonProps) => {
             style={[
                 {
                     backgroundColor: tint,
-                    height: 40,
+                    height: 50,
                     width: 70,
                     justifyContent: 'center',
                     alignItems: 'center',
