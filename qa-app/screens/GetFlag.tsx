@@ -124,8 +124,8 @@ export default function GetFlag() {
                 label="userExposed"
                 value={flagParam.userExposed}
                 onValueChange={useCallback(
-                    (userExposed) => {
-                        setFlagParam((prev) => ({ ...prev, userExposed }));
+                    (value) => {
+                        setFlagParam((prev) => ({ ...prev, userExposed:value }));
                     },
                     [flagParam.userExposed]
                 )}
