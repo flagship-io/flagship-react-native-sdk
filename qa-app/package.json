@@ -15,7 +15,7 @@
   },
   "dependencies": {
     "@expo/vector-icons": "^12.0.0",
-    "@flagship.io/react-native-sdk": "^3.0.0-alpha.2",
+    "@flagship.io/react-native-sdk": "^3.0.0-alpha.4",
     "@react-native-picker/picker": "2.2.1",
     "@react-navigation/bottom-tabs": "^6.0.5",
     "@react-navigation/native": "^6.0.2",
