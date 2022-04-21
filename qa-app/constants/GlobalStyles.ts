@@ -1,7 +1,9 @@
+import { StyleSheet } from "react-native"
+
 const defaultHeight = 40
 const defaultFontSize = 15
 
-export default {
+export default StyleSheet.create({
     textInput:{
         height: defaultHeight,
         paddingLeft:5, 
@@ -10,7 +12,7 @@ export default {
         fontSize:defaultFontSize
     },
     label:{
-        textAlignVertical:'center',
+        textAlignVertical: 'center',
         fontSize:defaultFontSize
     }
-}
+})

@@ -58,7 +58,7 @@ export function View(props: ViewProps) {
     return <DefaultView style={[{ backgroundColor }, style]} {...otherProps} />;
 }
 
-export function Button(props: ButtonProps) {
+export const Button = React.memo((props: ButtonProps) => {
     const {
         lightColor,
         darkColor,
@@ -74,14 +74,16 @@ export function Button(props: ButtonProps) {
         'tint2'
     );
 
+    console.log('Button', title);
+
     return (
         <DefaultTouchableHighlight
             underlayColor={tint2}
             style={[
                 {
                     backgroundColor: tint,
-                    minHeight: 50,
-                    minWidth: 70,
+                    height: 40,
+                    width: 70,
                     justifyContent: 'center',
                     alignItems: 'center',
                     borderRadius: 5
@@ -96,7 +98,7 @@ export function Button(props: ButtonProps) {
             </DefaultView>
         </DefaultTouchableHighlight>
     );
-}
+});
 
 export const TextInput = React.memo((props: TextInputProps) => {
     const [text, setText] = useState<string | undefined>();

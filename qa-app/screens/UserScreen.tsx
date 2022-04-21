@@ -1,82 +1,54 @@
-import { useCallback, useContext, useMemo, useState } from 'react';
-import { ScrollView, StyleSheet } from 'react-native';
+import { useCallback, useState } from 'react';
+import { StyleSheet } from 'react-native';
 
 import { Text, View, TextInput, Button } from '../components/Themed';
-import {
-    LineContainerInputTextProps,
-    LineContainerInputTextReadyOnlyProps
-} from '../types';
 import globalStyles from '../constants/GlobalStyles';
-import { appContext } from '../context/AppContext';
 import { useFlagship } from '@flagship.io/react-native-sdk';
+import LineContainerInputReadyOnlyText from '../components/LineContainerInputReadyOnlyText';
 
-export default function TabTwoScreen() {
+export default function UserScreen() {
     const [visitorId, setVisitorId] = useState('');
     const fs = useFlagship();
-    const [_, setToggleAuthenticate] = useState(false)
-    const [isFetching, setIsFetching] = useState(false)
+    const [_, setToggleAuthenticate] = useState(false);
+    const [isFetching, setIsFetching] = useState(false);
 
-    const lineTextInputStyle = useMemo(
-        () => [styles.lineInputText, globalStyles.textInput],
-        []
-    );
-    const labelStyle = useMemo(
-        () => [styles.lineLabel, globalStyles.label],
-        []
-    );
+    const unauthenticate = useCallback(() => {
+        fs.unauthenticate();
+        setToggleAuthenticate((prev) => !prev);
+    }, []);
 
-    const unauthenticate = ()=>{
-        fs.unauthenticate()
-        setToggleAuthenticate(prev=> !prev)
-    }
+    const authenticate = useCallback(() => {
+        fs.authenticate(visitorId);
+        setVisitorId('');
+        setToggleAuthenticate((prev) => !prev);
+    }, [visitorId]);
 
-    const authenticate = ()=>{
-        fs.authenticate(visitorId)
-        setVisitorId("")
-        setToggleAuthenticate(prev=> !prev)
-    }
-
-    const fetchFlags = ()=>{
-        setIsFetching(true)
-        fs.fetchFlags().finally(()=>{
-            setIsFetching(false)
-        })
-    }
- 
-    function lineContainerInputReadyOnlyText(
-        props: LineContainerInputTextReadyOnlyProps
-    ) {
-        return (
-            <View style={styles.lineContainer}>
-                <Text style={labelStyle}>{props.label}</Text>
-                <TextInput
-                    editable={false}
-                    selectTextOnFocus={false}
-                    style={lineTextInputStyle}
-                    value={props.value}
-                />
-            </View>
-        );
-    }
+    const fetchFlags = useCallback(() => {
+        setIsFetching(true);
+        fs.fetchFlags().finally(() => {
+            setIsFetching(false);
+        });
+    }, [fs.status]);
 
     return (
         <View style={styles.container}>
-            <View style={styles.container1} >
-                {lineContainerInputReadyOnlyText({
-                    label: 'Visitor id',
-                    value: fs.visitorId
-                })}
-
-                {lineContainerInputReadyOnlyText({
-                    label: 'Anonymous id',
-                    value: fs.anonymousId
-                })}
+            <View style={styles.container1}>
+                <LineContainerInputReadyOnlyText
+                    label={'Visitor id'}
+                    value={fs.visitorId}
+                />
+                <LineContainerInputReadyOnlyText
+                    label={'Anonymous id'}
+                    value={fs.anonymousId || undefined}
+                />
             </View>
             <View style={styles.container2}>
                 <View style={styles.inputContainer}>
-                    <Text style={labelStyle}>Authenticate visitor id</Text>
+                    <Text style={styles.lineLabel}>
+                        Authenticate visitor id
+                    </Text>
                     <TextInput
-                        style={lineTextInputStyle}
+                        style={styles.lineInputText}
                         value={visitorId}
                         onChangeText={useCallback(
                             (text) => {
@@ -86,9 +58,22 @@ export default function TabTwoScreen() {
                         )}
                     />
                 </View>
-                <Button style={styles.btn} title="Authenticate" onPress={authenticate} />
-                <Button style={styles.btn} title="Unauthenticate" onPress={unauthenticate} />
-                <Button style={styles.btn} isLoading={isFetching} title="Fetch flags" onPress={fetchFlags} />
+                <Button
+                    style={styles.btn}
+                    title="Authenticate"
+                    onPress={authenticate}
+                />
+                <Button
+                    style={styles.btn}
+                    title="Unauthenticate"
+                    onPress={unauthenticate}
+                />
+                <Button
+                    style={styles.btn}
+                    isLoading={isFetching}
+                    title="Fetch flags"
+                    onPress={fetchFlags}
+                />
             </View>
         </View>
     );
@@ -96,32 +81,35 @@ export default function TabTwoScreen() {
 
 const styles = StyleSheet.create({
     container: {
-      flex:1,
-      padding: 20,
+        flex: 1,
+        padding: 20
     },
-    container1:{
-        flex:1
+    container1: {
+        flex: 1
     },
-    container2:{
-      flex:1,
+    container2: {
+        flex: 1
     },
-    inputContainer:{
+    inputContainer: {
         marginBottom: 30,
-        height:80
+        height: 80
     },
     lineInputText: {
-        flex: 2
+        flex: 2,
+        ...globalStyles.textInput
     },
     lineContainer: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        alignItems:'flex-start',
-        marginBottom: 10,
+        alignItems: 'flex-start',
+        marginBottom: 10
     },
     lineLabel: {
-        flex: 1
+        flex: 1,
+        ...globalStyles.label
     },
-    btn:{
+    btn: {
         marginBottom: 10,
+        width: '100%'
     }
 });

@@ -3,7 +3,7 @@ import React from 'react';
 import NetworkLogger from 'react-native-network-logger';
 
 function HttpLogScreen(){
-    return (<NetworkLogger />)
+    return (<NetworkLogger theme={'dark'} />)
 }
 
-export default React.memo(HttpLogScreen);
+export default HttpLogScreen;

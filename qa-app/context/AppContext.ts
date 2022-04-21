@@ -11,7 +11,8 @@ export type AppState = {
       context?: Record<string, any>,
       isAuthenticated?: boolean,
       hasConsented?: boolean
-    }
+    },
+    logs: string
   }
   
   export type AppContext = {
@@ -26,7 +27,8 @@ export type AppState = {
       timeout: 2,
       visitorData: {
           hasConsented: true
-      }
+      },
+      logs:""
     }
   }
 

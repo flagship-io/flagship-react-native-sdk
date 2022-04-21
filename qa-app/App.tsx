@@ -8,6 +8,7 @@ import { FlagshipProvider } from "@flagship.io/react-native-sdk";
 import React, { useState } from 'react';
 import { appContext, AppState, defaultContext } from './context/AppContext';
 import { startNetworkLogging } from 'react-native-network-logger';
+import { CustomLogger } from './utils/CustomLogger';
 
 startNetworkLogging()
 
@@ -31,6 +32,7 @@ export default function App() {
           decisionMode={appState.decisionMode}
           timeout={appState.timeout}
           visitorData={appState.visitorData}
+          logManager={new CustomLogger(setAppState)}
         >
         <Navigation colorScheme={colorScheme} />
         <StatusBar />

@@ -1,11 +1,13 @@
 import { useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { ScrollView, StyleSheet } from 'react-native';
-import { Text, View, Button, TextInput, Switch } from '../components/Themed';
+import { Text, View, Button, TextInput } from '../components/Themed';
 import globalStyles from '../constants/GlobalStyles';
 import { DecisionMode, useFlagship } from '@flagship.io/react-native-sdk';
 import { Picker } from '@react-native-picker/picker';
 import { appContext } from '../context/AppContext';
-import { Config, LineContainerInputSwitchProps, LineContainerInputTextProps } from '../types';
+import { Config } from '../types';
+import LineContainerInputText from '../components/LineContainerInputText';
+import LineContainerSwitch from '../components/LineContainerSwitch';
 
 export default function ConfigurationScreen() {
     const [config, setConfig] = useState<Config>({
@@ -78,70 +80,33 @@ export default function ConfigurationScreen() {
         }))
     }
 
-    
-    const lineTextInputStyle = useMemo(()=>[styles.lineInputText, globalStyles.textInput],[])
-    const labelStyle = useMemo(()=>[styles.lineLabel, globalStyles.label], [])
-    const lineTextInputContextStyle = useMemo(()=>[styles.lineInputText, globalStyles.textInput, styles.inputContext],[])
-
-    function lineContainerInputText(props: LineContainerInputTextProps) {        
-        return (
-            <View style={styles.lineContainer}>
-                <Text style={labelStyle}>
-                    {props.label}
-                </Text>
-                <TextInput
-                    style={lineTextInputStyle}
-                    value={props.value}
-                    placeholder={props.placeHolder}
-                    onChangeText={props.onChangeText}
-                />
-            </View>
-        );
-    }
-
-    function lineContainerSwitch(props: LineContainerInputSwitchProps) {
-        return (
-            <View style={styles.lineContainer}>
-                <Text style={labelStyle}>
-                    {props.label}
-                </Text>
-                <Switch
-                    style={lineTextInputStyle}
-                    value={props.value}
-                    onValueChange={props.onValueChange}
-                />
-            </View>
-        );
-    }
-
-
     return (
         <ScrollView style={styles.container}>
             <View style={styles.containerResetButton}>
                 <Button title="Reset" onPress={onResetPress}/>
             </View>
 
-            {lineContainerInputText({
-                label:"Env ID",
-                value: config.envId,
-                onChangeText: useCallback((text) => {
+            <LineContainerInputText
+                label={"Env ID"}
+                value= {config.envId}
+                onChangeText = {useCallback((text) => {
                     setConfig((prev) => ({ ...prev, envId: text }));
-                }, [config.envId]),
-                placeHolder: 'Put the env ID'
-            })}
+                }, [config.envId])}
+                placeHolder = {'Put the env ID'}
+            />
 
-            {lineContainerInputText({
-                label: "Api key",
-                value: config.apiKey,
-                onChangeText: useCallback((text) => {
+            <LineContainerInputText
+                label={"Api key"}
+                value = {config.apiKey}
+                onChangeText= {useCallback((text) => {
                     setConfig((prev) => ({  ...prev, apiKey: text }));
-                },[config.apiKey]),
-                placeHolder: 'Put the api key'
-            })}
+                },[config.apiKey])}
+                placeHolder= {'Put the api key'}
+            />
             
 
             <View style={styles.lineContainer}>
-                <Text style={labelStyle}>
+                <Text style={styles.lineLabel}>
                     Decision Mode
                 </Text>
                 <Picker
@@ -160,47 +125,47 @@ export default function ConfigurationScreen() {
                 </Picker>
             </View>
 
-            {lineContainerInputText({
-                label:"Timeout (sec)",
-                value: `${config.timeout}`,
-                onChangeText: useCallback((text) => {
+            <LineContainerInputText
+                label={"Timeout (sec)"}
+                value= {`${config.timeout}`}
+                onChangeText= {useCallback((text) => {
                     setConfig((prev) => ({ ...prev, timeout: Number(text) }));
-                },[config.timeout]),
-                placeHolder: 'Put the time'
-            })}
+                },[config.timeout])}
+                placeHolder={'Put the time'}
+            />
 
-            {lineContainerInputText({
-                label:"Visitor id",
-                value: config.visitorId,
-                onChangeText: useCallback((text) => {
+            <LineContainerInputText
+                label ={"Visitor id"}
+                value= {config.visitorId}
+                onChangeText ={ useCallback((text) => {
                     setConfig((prev) => ({  ...prev, visitorId: text }));
-                }, [config.visitorId]),
-                placeHolder: 'Put the visitor ID'
-            })} 
+                }, [config.visitorId])}
+                placeHolder= {'Put the visitor ID'}
+            />
 
-            {lineContainerSwitch({
-                label:"Authenticated",
-                value: config.isAuthenticated,
-                onValueChange: useCallback((isAuthenticated) => {
+            <LineContainerSwitch
+                label={"Authenticated"}
+                value={config.isAuthenticated}
+                onValueChange= {useCallback((isAuthenticated) => {
                     setConfig((prev) => ({  ...prev, isAuthenticated }));
-                }, [config.isAuthenticated])
-            })} 
+                }, [config.isAuthenticated])}
+            /> 
 
-            {lineContainerSwitch({
-                label:"Consent",
-                value: config.hasConsented,
-                onValueChange: useCallback((hasConsented) => {
+            <LineContainerSwitch
+                label = {"Consent"}
+                value = {config.hasConsented}
+                onValueChange= {useCallback((hasConsented) => {
                     setConfig((prev) => ({  ...prev, hasConsented }));
-                }, [config.hasConsented])
-            })}
+                }, [config.hasConsented])}
+            />
 
             <View style={styles.lineContainerContext}>
-                <Text style={labelStyle}>
+                <Text style={styles.lineLabel}>
                     Context
                 </Text>
                 <TextInput
                     multiline
-                    style={lineTextInputContextStyle}
+                    style={styles.inputContext}
                     value={config.context}
                     placeholder={'{"isVip": true}'}
                     onChangeText={useCallback((context) => {
@@ -209,7 +174,7 @@ export default function ConfigurationScreen() {
                 />
             </View>
             <View>
-                <Button title="Start" onPress={onStartPress} />
+                <Button style={styles.startBtn} title="Start" onPress={onStartPress} />
             </View>
         </ScrollView>
     );
@@ -238,15 +203,22 @@ const styles = StyleSheet.create({
         flex: 2
     },
     lineLabel: {
-        flex: 1
+        flex: 1,
+        ...globalStyles.label
     },
     picker: {
         backgroundColor: 'white',
     },
     inputContext:{
+        flex: 2,
         minHeight: 150,
         maxHeight:150,
         textAlignVertical: 'top',
-        padding:10
+        padding:10,
+        ...globalStyles.textInput
     },
+    startBtn:{
+        width:"100%",
+        marginTop:20
+    }
 });

@@ -16,6 +16,7 @@ import Configuration from '../screens/Configuration';
 import GetFlag from '../screens/GetFlag';
 import HitsScreen from '../screens/HitsScreen';
 import HttpLogScreen from '../screens/HttpLogScreen';
+import SdkLoggerScreen from '../screens/SdkLoggerScreen';
 import UserScreen from '../screens/UserScreen';
 import { RootStackParamList, RootTabParamList } from '../types';
 
@@ -87,6 +88,14 @@ function BottomTabNavigator() {
         options={{
           title: 'Hits',
           tabBarIcon: ({ color }) => <TabBarIcon name='pied-piper' color={color} />,
+        }}
+      />
+      <BottomTab.Screen
+        name="SdkLogs"
+        component={SdkLoggerScreen}
+        options={{
+          title: 'Sdk logs',
+          tabBarIcon: ({ color }) => <TabBarIcon name='neuter' color={color} />,
         }}
       />
       <BottomTab.Screen

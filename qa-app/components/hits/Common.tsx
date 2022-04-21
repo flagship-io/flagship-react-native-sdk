@@ -88,6 +88,7 @@ const styles = StyleSheet.create({
     },
     btn: {
         marginTop: 20,
-        marginBottom: 30
+        marginBottom: 30,
+        width: '100%'
     }
 });
