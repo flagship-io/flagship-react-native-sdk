@@ -87,7 +87,7 @@ function BottomTabNavigator() {
         component={HitsScreen}
         options={{
           title: 'Hits',
-          tabBarIcon: ({ color }) => <TabBarIcon name='pied-piper' color={color} />,
+          tabBarIcon: ({ color }) => <TabBarIcon name='bullseye' color={color} />,
         }}
       />
       <BottomTab.Screen
@@ -95,7 +95,7 @@ function BottomTabNavigator() {
         component={SdkLoggerScreen}
         options={{
           title: 'Sdk logs',
-          tabBarIcon: ({ color }) => <TabBarIcon name='neuter' color={color} />,
+          tabBarIcon: ({ color }) => <TabBarIcon  name="file" color={color} />,
         }}
       />
       <BottomTab.Screen
@@ -103,7 +103,7 @@ function BottomTabNavigator() {
         component={HttpLogScreen}
         options={{
           title: 'Http logs',
-          tabBarIcon: ({ color }) => <TabBarIcon name='neuter' color={color} />,
+          tabBarIcon: ({ color }) => <TabBarIcon name='wifi' color={color} />,
         }}
       />
     </BottomTab.Navigator>
