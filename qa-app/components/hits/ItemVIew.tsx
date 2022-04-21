@@ -5,7 +5,7 @@ import Common from './Common';
 
 function ItemView() {
     const [item, setItem] = useState<IItem>({
-        type: HitType.TRANSACTION
+        type: HitType.ITEM
     } as any);
 
     return (
