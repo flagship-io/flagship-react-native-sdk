@@ -74,8 +74,6 @@ export const Button = React.memo((props: ButtonProps) => {
         'tint2'
     );
 
-    console.log('Button', title);
-
     return (
         <DefaultTouchableHighlight
             underlayColor={tint2}
@@ -148,6 +146,7 @@ export const TextInput = React.memo((props: TextInputProps) => {
                 },
                 style
             ]}
+            autoCapitalize="none"
             value={text}
             onChangeText={onChangeText}
             placeholderTextColor={tabIconDefault}
