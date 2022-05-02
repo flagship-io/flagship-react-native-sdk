@@ -2,7 +2,7 @@ import {
   VisitorCacheDTO,
   IVisitorCacheImplementation,
 } from "@flagship.io/js-sdk";
-import syncStorage from "../helper/SyncStorage2";
+import syncStorage from "../helper/SyncStorage";
 
 export const VISITOR_PREFIX = "FS_VISITOR_CACHE_";
 export class DefaultVisitorCache implements IVisitorCacheImplementation {
