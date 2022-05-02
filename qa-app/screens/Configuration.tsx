@@ -1,6 +1,6 @@
 import React, { useCallback, useContext, useEffect, useState } from 'react';
 import { Modal, ScrollView, StyleSheet } from 'react-native';
-import { Text, View, Button, TextInput } from '../components/Themed';
+import { Text, View, Button, TextInput, useThemeColor } from '../components/Themed';
 import globalStyles from '../constants/GlobalStyles';
 import {
     DecisionMode,
@@ -24,6 +24,8 @@ export default function ConfigurationScreen() {
     });
 
     const { state, setState } = useContext(appContext);
+
+    const textColor = useThemeColor({}, 'text');
 
     const fs = useFlagship();
 
@@ -213,7 +215,7 @@ export default function ConfigurationScreen() {
                     <FontAwesome
                         size={30}
                         name="edit"
-                        color={'white'}
+                        color={textColor}
                         onPress={() =>
                             setConfig((prev) => ({ ...prev, showModal: true }))
                         }
