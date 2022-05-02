@@ -1,9 +1,22 @@
-import { jest, expect, it, describe } from '@jest/globals'
+import { jest as mockJest, expect, it, describe } from '@jest/globals'
 import { HitCacheDTO, HitType } from '../../src'
 import { DefaultHitCache, FS_HIT_PREFIX } from '../../src/cache/DefaultHitCache'
 import mockAsyncStorage from '@react-native-async-storage/async-storage/jest/async-storage-mock';
+import { SpyInstance } from "jest-mock";
 
 const HIT_CACHE_VERSION = 1, SDK_APP="APP"
+
+
+let mockSyncStorageGet:SpyInstance<any, unknown[]>
+
+
+mockJest.mock("../../src/helper/SyncStorage",()=>{
+  const syncStorage = mockJest.requireActual("../../src/helper/SyncStorage") as any;
+  console.log('syncStorage', syncStorage.default);
+  
+  mockSyncStorageGet = mockJest.spyOn(syncStorage.default,'get')
+  return syncStorage.default
+})
 
 describe('Test DefaultHitCache', () => {
   const defaultHitCache = new DefaultHitCache()
@@ -43,9 +56,9 @@ describe('Test DefaultHitCache', () => {
     expect(mockAsyncStorage.removeItem).toHaveBeenCalledWith(`${FS_HIT_PREFIX}${visitorId}`)
   })
 
-  it('should ',async () => {
-    mockAsyncStorage.getItem.mockReturnValue(JSON.stringify(visitorData))
-    const data = await defaultHitCache.lookupHits(visitorId)
+  it('should ', () => {
+    mockSyncStorageGet.mockReturnValue(JSON.stringify(visitorData))
+    const data = defaultHitCache.lookupHits(visitorId)
     expect(data).toEqual(visitorData)
     expect(mockAsyncStorage.removeItem).toBeCalledTimes(1)
   })
