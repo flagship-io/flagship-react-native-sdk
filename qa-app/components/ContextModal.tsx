@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { FlatList, StyleSheet } from 'react-native';
 import Layout from '../constants/Layout';
 import { generateUUID } from '../utils/helper';
-import { Button, TextInput, View } from './Themed';
+import { Button, TextInput, useThemeColor, View } from './Themed';
 
 type Props = {
     context?: Record<string, any>;
@@ -22,16 +22,24 @@ function ContextModal({ context, onUpdated }: Props) {
         const objectContext: Record<string, string> = context || {};
         const arrayContext = Object.entries(objectContext).map(
             ([key, value]) => {
-                return { key, value, id: generateUUID() };
+                return { key, value: typeof value === 'string'? value : JSON.stringify(value), id: generateUUID() };
             }
         );
         setCurrentContext(arrayContext);
     }, [context]);
 
+    const textColor = useThemeColor({}, 'text');
+
     const onPressUpdate = () => {
         const objectContext: Record<string, string> = {};
         currentContext.forEach((item) => {
-            objectContext[item.key] = item.value;
+            let value = item.value
+            try {
+                value = JSON.parse(item.value)
+            } catch (error) {
+                
+            }
+            objectContext[item.key] =value;
         });
         onUpdated(objectContext);
     };
@@ -91,7 +99,7 @@ function ContextModal({ context, onUpdated }: Props) {
                     style={styles.renderRemoveBtn}
                     size={30}
                     name="remove"
-                    color={'white'}
+                    color={textColor}
                     onPress={() => {
                         onRenderItemRemove(item);
                     }}
@@ -106,7 +114,7 @@ function ContextModal({ context, onUpdated }: Props) {
                 <FontAwesome
                     size={30}
                     name="plus"
-                    color={'white'}
+                    color={textColor}
                     onPress={onPressAdd}
                 />
             </View>
