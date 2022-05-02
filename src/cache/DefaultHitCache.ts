@@ -1,5 +1,5 @@
 import { HitCacheDTO, IHitCacheImplementation } from '@flagship.io/react-sdk';
-import syncStorage from '../helper/syncStorage';
+import syncStorage from '../helper/SyncStorage2';
 
 export const FS_HIT_PREFIX = 'FS_DEFAULT_HIT_CACHE_';
 export class DefaultHitCache implements IHitCacheImplementation {
