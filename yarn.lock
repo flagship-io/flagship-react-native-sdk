@@ -1107,10 +1107,10 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
-"@flagship.io/js-sdk@^3.0.5":
-  version "3.0.5"
-  resolved "https://registry.yarnpkg.com/@flagship.io/js-sdk/-/js-sdk-3.0.5.tgz#8ebf2533c51c99a79fae3d91eaf33752ea643b47"
-  integrity sha512-KUxG/dKY10JEUsz1Mx1jkicXsgIq9h+WWE9B7ImkNStoghMl6wbFpPMvUuv/2WZD/YXotTYGNFkB+QAwgS9syg==
+"@flagship.io/js-sdk@^3.0.7-alpha.2":
+  version "3.0.7-alpha.2"
+  resolved "https://registry.yarnpkg.com/@flagship.io/js-sdk/-/js-sdk-3.0.7-alpha.2.tgz#7f9318f597e3c359f22f9333d07c6f2fde02d143"
+  integrity sha512-HSwDq4e99T82F0m2sPQdwFRiwTq4+h9vQOddQ6vvWAd6MFLmlXv1Nf7JlbfC8ftsebB7stuILUkJqxGla2pvWA==
   dependencies:
     "@babel/runtime" "^7.15.4"
     abort-controller "^3.0.0"
@@ -1119,41 +1119,12 @@
     follow-redirects "^1.14.5"
     node-fetch "2.6.2"
 
-"@flagship.io/js-sdk@^3.0.6":
-  version "3.0.6"
-  resolved "https://registry.yarnpkg.com/@flagship.io/js-sdk/-/js-sdk-3.0.6.tgz#69e1a186a95eda1423e3d22f5dda020334906712"
-  integrity sha512-F7QtdkhHKHCZaiJ0/OY+j8thvvBmJWnRwRGmc6Vt68Kg1/aTPIjZo9MlYTdnRYi1qxdk9qe43knKACc5JMBFYg==
+"@flagship.io/react-sdk@^3.0.4-alpha.2":
+  version "3.0.4-alpha.2"
+  resolved "https://registry.yarnpkg.com/@flagship.io/react-sdk/-/react-sdk-3.0.4-alpha.2.tgz#586bdcab8b8f1f36b805f31694f5788817a111d0"
+  integrity sha512-GvEkfSILUmHZfratMr5F0zzpOjYCwdywd5ChrDatENKMi+chjtXn6lzlMwgH6fjY/NY35o5MEKcFAUvIwuYs4w==
   dependencies:
-    "@babel/runtime" "^7.15.4"
-    abort-controller "^3.0.0"
-    core-js "^3.18.1"
-    events "^3.3.0"
-    follow-redirects "^1.14.5"
-    node-fetch "2.6.2"
-
-"@flagship.io/react-native-sdk@^3.0.0-alpha.3":
-  version "3.0.0-alpha.3"
-  resolved "https://registry.yarnpkg.com/@flagship.io/react-native-sdk/-/react-native-sdk-3.0.0-alpha.3.tgz#16bcbe32df3df70c10c531b132b1698b478926a4"
-  integrity sha512-Y8rA+3mVBLIArCc8OgZzwwJFnxq9SzaRgibmIF1uiOQt34YYtoJjVQY4wbpxOlI433FGdZ8e3nTltAhm+aT+aw==
-  dependencies:
-    "@flagship.io/react-sdk" "^3.0.4-alpha.0"
-    "@react-native-async-storage/async-storage" "^1.17.0"
-
-"@flagship.io/react-sdk@^3.0.4-alpha.0":
-  version "3.0.4-alpha.0"
-  resolved "https://registry.yarnpkg.com/@flagship.io/react-sdk/-/react-sdk-3.0.4-alpha.0.tgz#48d12eb26e2ef513a705a1deead74eb076f6c2df"
-  integrity sha512-jB5DyF3XCp/yFq8+PsH1EjjTKuPF74mzQoPEaMsacxWs72Zbo0mn4bqLrPtWQrCOq/8C1aog6VLjiGf5Etl5ew==
-  dependencies:
-    "@flagship.io/js-sdk" "^3.0.5"
-    core-js "^3.18.1"
-    encoding "^0.1.13"
-
-"@flagship.io/react-sdk@^3.0.4-alpha.1":
-  version "3.0.4-alpha.1"
-  resolved "https://registry.yarnpkg.com/@flagship.io/react-sdk/-/react-sdk-3.0.4-alpha.1.tgz#697f11ea1afb8e9f8b13a97ee855d25dd2490ffa"
-  integrity sha512-Zh2Dn64CkgIR6V33laEbBpxOhIqSzi6OLajmNUCLYl6TjTPrGh33uS5u6vQcpCv5stctCf7qXocubHbRqoASBg==
-  dependencies:
-    "@flagship.io/js-sdk" "^3.0.6"
+    "@flagship.io/js-sdk" "^3.0.7-alpha.2"
     core-js "^3.18.1"
     encoding "^0.1.13"
 
