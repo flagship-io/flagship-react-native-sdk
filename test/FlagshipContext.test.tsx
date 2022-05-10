@@ -5,6 +5,8 @@ import { FlagshipProvider } from '../src/index';
 import React from 'react';
 import { DefaultVisitorCache } from '../src/cache/DefaultVisitorCache';
 import { DefaultHitCache } from '../src/cache/DefaultHitCache';
+import { Platform } from 'react-native';
+import { SDK_DEVICE_TYPE, SDK_FIRST_TIME_INIT, SDK_OS_NAME, SDK_OS_VERSION_CODE } from '../src/FlagshipContext';
 
 let reactFlagshipProvider: any;
 let reactProps:any;
@@ -29,7 +31,9 @@ jest.mock('@flagship.io/react-sdk', () => {
 describe('Name of the group', () => {
     const visitorData = {
         id: 'visitor_id',
-        context: {},
+        context: {
+            isReactNative: true
+        },
         isAuthenticated: false,
         hasConsented: true
     };
@@ -61,9 +65,18 @@ describe('Name of the group', () => {
         );
 
         await waitFor(() => {
-            expect(reactFlagshipProvider).toBeCalledTimes(1);
+            expect(reactFlagshipProvider).toBeCalledTimes(2);
             expect(reactProps.visitorCacheImplementation).toBeInstanceOf(DefaultVisitorCache)
             expect(reactProps.hitCacheImplementation).toBeInstanceOf(DefaultHitCache)
+            expect(reactProps.visitorData).toEqual(expect.objectContaining({
+                ...visitorData,
+                context:{
+                ...visitorData.context,
+                [SDK_DEVICE_TYPE]: Platform.Version,
+                [SDK_OS_NAME]: Platform.OS,
+                [SDK_OS_VERSION_CODE]: Platform.Version,
+                [SDK_FIRST_TIME_INIT]: true
+            }}))
         });
     });
 });
