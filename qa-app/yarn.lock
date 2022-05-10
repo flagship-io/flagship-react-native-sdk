@@ -1278,10 +1278,10 @@
     lodash.pick "^4.4.0"
     lodash.template "^4.5.0"
 
-"@flagship.io/js-sdk@^3.0.7-alpha.2":
-  version "3.0.7-alpha.2"
-  resolved "https://registry.yarnpkg.com/@flagship.io/js-sdk/-/js-sdk-3.0.7-alpha.2.tgz#7f9318f597e3c359f22f9333d07c6f2fde02d143"
-  integrity sha512-HSwDq4e99T82F0m2sPQdwFRiwTq4+h9vQOddQ6vvWAd6MFLmlXv1Nf7JlbfC8ftsebB7stuILUkJqxGla2pvWA==
+"@flagship.io/js-sdk@^3.0.7-alpha.3":
+  version "3.0.7-alpha.3"
+  resolved "https://registry.yarnpkg.com/@flagship.io/js-sdk/-/js-sdk-3.0.7-alpha.3.tgz#4cd6f489b529b63dac711f7908d98eecb453bdf2"
+  integrity sha512-f8huNZMCvIC+paOCccW6vCi8lUpyKZU4CiImM2pj75clx0yXEXKXgSop+5VkfnmlCcGE5LB38qD3QoTBOrWiRg==
   dependencies:
     "@babel/runtime" "^7.15.4"
     abort-controller "^3.0.0"
@@ -1290,20 +1290,20 @@
     follow-redirects "^1.14.5"
     node-fetch "2.6.2"
 
-"@flagship.io/react-native-sdk@^3.0.0-alpha.5":
-  version "3.0.0-alpha.5"
-  resolved "https://registry.yarnpkg.com/@flagship.io/react-native-sdk/-/react-native-sdk-3.0.0-alpha.5.tgz#1ec3787431c4e492c8526b52ef2082cae9694ad0"
-  integrity sha512-NZBZ/D9beRQRojLVrXGhtNLipA4ASwcqy+Q6z6SxT7HAkTFL1WGwld26a9KclhtAT22AY1N55Zo4ESAXr+vjnw==
+"@flagship.io/react-native-sdk@3.0.0-alpha.7":
+  version "3.0.0-alpha.7"
+  resolved "https://registry.yarnpkg.com/@flagship.io/react-native-sdk/-/react-native-sdk-3.0.0-alpha.7.tgz#7f28bb4ee0b4206bcad606016d09c6ffb844b2ea"
+  integrity sha512-scTOFwpq2xyDIZa95lE132KDcCg0JzyHr8U4rGDA8fLdx5s0f7N6ZZCjiY143kGjXSvS2DJ3aZ9z/TP09mlhkQ==
   dependencies:
-    "@flagship.io/react-sdk" "^3.0.4-alpha.2"
+    "@flagship.io/react-sdk" "^3.0.4-alpha.3"
     "@react-native-async-storage/async-storage" "^1.17.0"
 
-"@flagship.io/react-sdk@^3.0.4-alpha.2":
-  version "3.0.4-alpha.2"
-  resolved "https://registry.yarnpkg.com/@flagship.io/react-sdk/-/react-sdk-3.0.4-alpha.2.tgz#586bdcab8b8f1f36b805f31694f5788817a111d0"
-  integrity sha512-GvEkfSILUmHZfratMr5F0zzpOjYCwdywd5ChrDatENKMi+chjtXn6lzlMwgH6fjY/NY35o5MEKcFAUvIwuYs4w==
+"@flagship.io/react-sdk@^3.0.4-alpha.3":
+  version "3.0.4-alpha.3"
+  resolved "https://registry.yarnpkg.com/@flagship.io/react-sdk/-/react-sdk-3.0.4-alpha.3.tgz#581fece7ba03b2ccec844f90a8cda2a4691ae6dc"
+  integrity sha512-oiC76izZ9A5aiL5VrYATnILax8piEVbTnW9kiw/6ZcrGjEW7tw4iF7uHs3kFQGkELA54bKe1DvCOd3TVSa64dQ==
   dependencies:
-    "@flagship.io/js-sdk" "^3.0.7-alpha.2"
+    "@flagship.io/js-sdk" "^3.0.7-alpha.3"
     core-js "^3.18.1"
     encoding "^0.1.13"
 
