@@ -7,6 +7,8 @@ import { DefaultVisitorCache } from '../src/cache/DefaultVisitorCache';
 import { DefaultHitCache } from '../src/cache/DefaultHitCache';
 import { Platform } from 'react-native';
 import { SDK_DEVICE_TYPE, SDK_FIRST_TIME_INIT, SDK_OS_NAME, SDK_OS_VERSION_CODE } from '../src/FlagshipContext';
+import  { DeviceType,getDeviceTypeAsync, osName, osVersion, modelName}  from 'expo-device';
+
 
 let reactFlagshipProvider: any;
 let reactProps:any;
@@ -72,9 +74,9 @@ describe('Name of the group', () => {
                 ...visitorData,
                 context:{
                 ...visitorData.context,
-                [SDK_DEVICE_TYPE]: Platform.Version,
-                [SDK_OS_NAME]: Platform.OS,
-                [SDK_OS_VERSION_CODE]: Platform.Version,
+                [SDK_DEVICE_TYPE]: DeviceType[1],
+                [SDK_OS_NAME]:  osName ?? "",
+                [SDK_OS_VERSION_CODE]:osVersion ?? "",
                 [SDK_FIRST_TIME_INIT]: true
             }}))
         });

@@ -1290,6 +1290,18 @@
     follow-redirects "^1.14.5"
     node-fetch "2.6.2"
 
+"@flagship.io/js-sdk@^3.0.7-alpha.4":
+  version "3.0.7-alpha.4"
+  resolved "https://registry.yarnpkg.com/@flagship.io/js-sdk/-/js-sdk-3.0.7-alpha.4.tgz#86ebb669ced4325f2d6f4ab2cbb5396f84645d65"
+  integrity sha512-KZGbEWz1FGOHFX+9P/CMBCwUQK2FYQUEXZoJow+oceH4IJTsdfzDffC84UYzZtsTPbbsSjikNkO0cXUoDnXepQ==
+  dependencies:
+    "@babel/runtime" "^7.15.4"
+    abort-controller "^3.0.0"
+    core-js "^3.18.1"
+    events "^3.3.0"
+    follow-redirects "^1.14.5"
+    node-fetch "2.6.2"
+
 "@flagship.io/react-native-sdk@3.0.0-alpha.7":
   version "3.0.0-alpha.7"
   resolved "https://registry.yarnpkg.com/@flagship.io/react-native-sdk/-/react-native-sdk-3.0.0-alpha.7.tgz#7f28bb4ee0b4206bcad606016d09c6ffb844b2ea"
@@ -1304,6 +1316,15 @@
   integrity sha512-oiC76izZ9A5aiL5VrYATnILax8piEVbTnW9kiw/6ZcrGjEW7tw4iF7uHs3kFQGkELA54bKe1DvCOd3TVSa64dQ==
   dependencies:
     "@flagship.io/js-sdk" "^3.0.7-alpha.3"
+    core-js "^3.18.1"
+    encoding "^0.1.13"
+
+"@flagship.io/react-sdk@^3.0.4-alpha.4":
+  version "3.0.4-alpha.4"
+  resolved "https://registry.yarnpkg.com/@flagship.io/react-sdk/-/react-sdk-3.0.4-alpha.4.tgz#867de73385557ac0c94a516ba9ca7d58f31d0c99"
+  integrity sha512-AYHwGCBgNl2yCKPGDIlBCoiZJSBi+lYM5/1hEqrGely7HpnVkk3y9iCuZMam0/M2FObnlNLUYgHb6KHlcxuzSw==
+  dependencies:
+    "@flagship.io/js-sdk" "^3.0.7-alpha.4"
     core-js "^3.18.1"
     encoding "^0.1.13"
 
@@ -3275,6 +3296,13 @@ expo-constants@~13.0.0, expo-constants@~13.0.2:
   dependencies:
     "@expo/config" "^6.0.6"
     uuid "^3.3.2"
+
+expo-device@~4.1.0:
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/expo-device/-/expo-device-4.1.1.tgz#5de94144113ffb7fa0f37fa3d70e452113954c10"
+  integrity sha512-It0SGtKcvzQSf+Co6zdPdB63zZvG2/rDolB1lqswMNKj03Y7KVU41s5tcQCqNczj7tmeN3CJy7A8YhYGKdb7gA==
+  dependencies:
+    ua-parser-js "^0.7.19"
 
 expo-error-recovery@~3.0.5:
   version "3.0.5"
@@ -7152,7 +7180,7 @@ typescript@~4.3.5:
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.3.5.tgz#4d1c37cc16e893973c45a06886b7113234f119f4"
   integrity sha512-DqQgihaQ9cUrskJo9kIyW/+g0Vxsk8cDtZ52a3NGh0YNTfpUSArXSohyUGnvbPazEPLu398C0UxmKSOrPumUzA==
 
-ua-parser-js@^0.7.30:
+ua-parser-js@^0.7.19, ua-parser-js@^0.7.30:
   version "0.7.31"
   resolved "https://registry.yarnpkg.com/ua-parser-js/-/ua-parser-js-0.7.31.tgz#649a656b191dffab4f21d5e053e27ca17cbff5c6"
   integrity sha512-qLK/Xe9E2uzmYI3qLeOmI0tEOt+TBBQyUIAh4aAgU05FVYzeZrKUdkAZfBNVGRaHVgV0TDkdEngJSw/SyQchkQ==

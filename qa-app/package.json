@@ -16,6 +16,7 @@
   "dependencies": {
     "@expo/vector-icons": "^12.0.0",
     "@flagship.io/react-native-sdk": "3.0.0-alpha.7",
+    "@flagship.io/react-sdk": "^3.0.4-alpha.4",
     "@react-native-picker/picker": "2.2.1",
     "@react-navigation/bottom-tabs": "^6.0.5",
     "@react-navigation/native": "^6.0.2",
@@ -23,6 +24,7 @@
     "expo": "~44.0.0",
     "expo-asset": "~8.4.4",
     "expo-constants": "~13.0.0",
+    "expo-device": "~4.1.0",
     "expo-font": "~10.0.4",
     "expo-linking": "~3.0.0",
     "expo-splash-screen": "~0.14.0",
