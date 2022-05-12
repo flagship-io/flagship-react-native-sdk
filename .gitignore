@@ -34,3 +34,4 @@ examples/react-native-cli-demo/ios/reactnativeqa.xcodeproj/project.pbxproj
 .idea/
 
 examples/react-native-cli-demo/app-debug.apk
+dist/
