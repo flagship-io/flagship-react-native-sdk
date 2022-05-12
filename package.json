@@ -1,6 +1,6 @@
 {
   "name": "@flagship.io/react-native-sdk",
-  "version": "3.0.0-alpha.2",
+  "version": "3.0.0-alpha.7",
   "description": "Flagship SDK for React Native",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -22,7 +22,7 @@
     "url": "git+https://github.com/abtasty/flagship-react-native-sdk.git"
   },
   "dependencies": {
-    "@flagship.io/react-sdk": "^3.0.3-alpha.4",
+    "@flagship.io/react-sdk": "^3.0.4",
     "@react-native-async-storage/async-storage": "^1.17.0"
   },
   "peerDependencies": {
@@ -47,6 +47,7 @@
     "@testing-library/react": "^12.1.4",
     "@testing-library/react-hooks": "^3.4.1",
     "@types/jest": "^27.4.1",
+    "@types/lodash": "^4.14.181",
     "@types/react": "^17.0.42",
     "@types/react-native": "^0.67.3",
     "@types/react-test-renderer": "^17.0.1",
