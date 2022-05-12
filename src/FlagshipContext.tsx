@@ -37,7 +37,7 @@ export const FlagshipProvider: React.FC<FlagshipProviderProps> = (props) => {
                 context:{
                     ...visitorData?.context,
                     [OS_NAME]: Platform.OS,
-                    [OS_VERSION_CODE]:Platform.Version,
+                    [OS_VERSION_CODE]:Platform.Version?.toString(),
                     [SDK_FIRST_TIME_INIT]: !firstTimeInit
                 }
             })

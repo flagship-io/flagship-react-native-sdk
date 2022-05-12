@@ -1278,10 +1278,10 @@
     lodash.pick "^4.4.0"
     lodash.template "^4.5.0"
 
-"@flagship.io/js-sdk@^3.0.7-alpha.3":
-  version "3.0.7-alpha.3"
-  resolved "https://registry.yarnpkg.com/@flagship.io/js-sdk/-/js-sdk-3.0.7-alpha.3.tgz#4cd6f489b529b63dac711f7908d98eecb453bdf2"
-  integrity sha512-f8huNZMCvIC+paOCccW6vCi8lUpyKZU4CiImM2pj75clx0yXEXKXgSop+5VkfnmlCcGE5LB38qD3QoTBOrWiRg==
+"@flagship.io/js-sdk@^3.0.7":
+  version "3.0.7"
+  resolved "https://registry.yarnpkg.com/@flagship.io/js-sdk/-/js-sdk-3.0.7.tgz#7709d25e933568aed4488f6c47fa0e7fe2b7fcaa"
+  integrity sha512-nzPPTUNndO6akRGJjKTDcGKz3hHwo7P9tPX+qnGMU1FTjDdx6kzRoV3tLnzf8+2fFY5ZL7cdIz6lxlzFwG2gsg==
   dependencies:
     "@babel/runtime" "^7.15.4"
     abort-controller "^3.0.0"
@@ -1290,41 +1290,20 @@
     follow-redirects "^1.14.5"
     node-fetch "2.6.2"
 
-"@flagship.io/js-sdk@^3.0.7-alpha.4":
-  version "3.0.7-alpha.4"
-  resolved "https://registry.yarnpkg.com/@flagship.io/js-sdk/-/js-sdk-3.0.7-alpha.4.tgz#86ebb669ced4325f2d6f4ab2cbb5396f84645d65"
-  integrity sha512-KZGbEWz1FGOHFX+9P/CMBCwUQK2FYQUEXZoJow+oceH4IJTsdfzDffC84UYzZtsTPbbsSjikNkO0cXUoDnXepQ==
+"@flagship.io/react-native-sdk@^3.0.0":
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/@flagship.io/react-native-sdk/-/react-native-sdk-3.0.0.tgz#27ed527270b6abcaad6f8fd7824016ea9f2b49ee"
+  integrity sha512-BQxaJIH/16PWV2Nnb9mOZV0ORmRIisrXce1DD41fwRUauB9UYtcdDQET1EmGyL5+gQgLNZ+WqLrj53QoC/En2A==
   dependencies:
-    "@babel/runtime" "^7.15.4"
-    abort-controller "^3.0.0"
-    core-js "^3.18.1"
-    events "^3.3.0"
-    follow-redirects "^1.14.5"
-    node-fetch "2.6.2"
-
-"@flagship.io/react-native-sdk@3.0.0-alpha.7":
-  version "3.0.0-alpha.7"
-  resolved "https://registry.yarnpkg.com/@flagship.io/react-native-sdk/-/react-native-sdk-3.0.0-alpha.7.tgz#7f28bb4ee0b4206bcad606016d09c6ffb844b2ea"
-  integrity sha512-scTOFwpq2xyDIZa95lE132KDcCg0JzyHr8U4rGDA8fLdx5s0f7N6ZZCjiY143kGjXSvS2DJ3aZ9z/TP09mlhkQ==
-  dependencies:
-    "@flagship.io/react-sdk" "^3.0.4-alpha.3"
+    "@flagship.io/react-sdk" "^3.0.4"
     "@react-native-async-storage/async-storage" "^1.17.0"
 
-"@flagship.io/react-sdk@^3.0.4-alpha.3":
-  version "3.0.4-alpha.3"
-  resolved "https://registry.yarnpkg.com/@flagship.io/react-sdk/-/react-sdk-3.0.4-alpha.3.tgz#581fece7ba03b2ccec844f90a8cda2a4691ae6dc"
-  integrity sha512-oiC76izZ9A5aiL5VrYATnILax8piEVbTnW9kiw/6ZcrGjEW7tw4iF7uHs3kFQGkELA54bKe1DvCOd3TVSa64dQ==
+"@flagship.io/react-sdk@^3.0.4":
+  version "3.0.4"
+  resolved "https://registry.yarnpkg.com/@flagship.io/react-sdk/-/react-sdk-3.0.4.tgz#a72ac8a70f5bf8725889d96aa7085d882089605b"
+  integrity sha512-IOTT0MAbi4uBTUw8GIcqXrMBBnJpiZpO+T1mSdTXfaWgvSWo9LAFqClJy5fMjfOMfMuN9+X0KrZ1IikmZmjDOQ==
   dependencies:
-    "@flagship.io/js-sdk" "^3.0.7-alpha.3"
-    core-js "^3.18.1"
-    encoding "^0.1.13"
-
-"@flagship.io/react-sdk@^3.0.4-alpha.4":
-  version "3.0.4-alpha.4"
-  resolved "https://registry.yarnpkg.com/@flagship.io/react-sdk/-/react-sdk-3.0.4-alpha.4.tgz#867de73385557ac0c94a516ba9ca7d58f31d0c99"
-  integrity sha512-AYHwGCBgNl2yCKPGDIlBCoiZJSBi+lYM5/1hEqrGely7HpnVkk3y9iCuZMam0/M2FObnlNLUYgHb6KHlcxuzSw==
-  dependencies:
-    "@flagship.io/js-sdk" "^3.0.7-alpha.4"
+    "@flagship.io/js-sdk" "^3.0.7"
     core-js "^3.18.1"
     encoding "^0.1.13"
 
@@ -1607,9 +1586,9 @@
     fastq "^1.6.0"
 
 "@react-native-async-storage/async-storage@^1.17.0":
-  version "1.17.3"
-  resolved "https://registry.yarnpkg.com/@react-native-async-storage/async-storage/-/async-storage-1.17.3.tgz#fa7010aa9b6a811ff653df3698a90d3c173dd6a6"
-  integrity sha512-2dxdlGwBjBP2qYu6F72U7cRRFshISYiNEWCaQNOJtxUERCMaYRWcniYqhL248KSbGUMpRhFCEtliztsiGoYYMA==
+  version "1.17.4"
+  resolved "https://registry.yarnpkg.com/@react-native-async-storage/async-storage/-/async-storage-1.17.4.tgz#f03837565f085c487bc9e8a9f1862c3e4e3f8fb6"
+  integrity sha512-c6GglKBRaWkjNyYd0FM8f0/neQEcwQom4MjZNqYSsIz55LcddJb7W8GM/n2dkzZ0JnaMylMX3+Vo+fpmkFEGTQ==
   dependencies:
     merge-options "^3.0.4"
 
@@ -2857,9 +2836,9 @@ core-js@^1.0.0:
   integrity sha1-ZSKUwUZR2yj6k70tX/KYOk8IxjY=
 
 core-js@^3.18.1:
-  version "3.21.1"
-  resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.21.1.tgz#f2e0ddc1fc43da6f904706e8e955bc19d06a0d94"
-  integrity sha512-FRq5b/VMrWlrmCzwRrpDYNxyHP9BcAZC+xHJaqTgIE5091ZV1NTmyh0sGOg5XqpnHvR0svdy0sv1gWA1zmhxig==
+  version "3.22.5"
+  resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.22.5.tgz#a5f5a58e663d5c0ebb4e680cd7be37536fb2a9cf"
+  integrity sha512-VP/xYuvJ0MJWRAobcmQ8F2H6Bsn+s7zqAAjFaHGBMc5AQm7zaelhD1LGduFn2EehEcQcU+br6t+fwbpQ5d1ZWA==
 
 core-util-is@~1.0.0:
   version "1.0.3"
@@ -3597,9 +3576,9 @@ flow-parser@^0.121.0:
   integrity sha512-1gIBiWJNR0tKUNv8gZuk7l9rVX06OuLzY9AoGio7y/JT4V1IZErEMEq2TJS+PFcw/y0RshZ1J/27VfK1UQzYVg==
 
 follow-redirects@^1.14.5:
-  version "1.14.9"
-  resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.14.9.tgz#dd4ea157de7bfaf9ea9b3fbd85aa16951f78d8d7"
-  integrity sha512-MQDfihBQYMcyy5dhRDJUHcw7lb2Pv/TuE6xP1vyraLukNDHKbDxDNaOE3NbCAdKQApno+GPRyo1YAp89yCjK4w==
+  version "1.15.0"
+  resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.15.0.tgz#06441868281c86d0dda4ad8bdaead2d02dca89d4"
+  integrity sha512-aExlJShTV4qOUOL7yF1U5tvLCB0xQuudbf6toyYA0E/acBNw71mvjFTnLaRp50aQaYocMR0a/RMMBIHeZnGyjQ==
 
 fontfaceobserver@^2.1.0:
   version "2.1.0"
