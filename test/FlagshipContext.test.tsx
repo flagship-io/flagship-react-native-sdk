@@ -1,13 +1,12 @@
-import { DecisionMode } from '@flagship.io/react-sdk';
+import { DecisionMode, OS_NAME, OS_VERSION_CODE } from '@flagship.io/react-sdk';
 // import { SpyInstance, Mock } from 'jest-mock';
 import { render, waitFor } from '@testing-library/react';
 import { FlagshipProvider } from '../src/index';
 import React from 'react';
 import { DefaultVisitorCache } from '../src/cache/DefaultVisitorCache';
 import { DefaultHitCache } from '../src/cache/DefaultHitCache';
+import { SDK_FIRST_TIME_INIT } from '../src/FlagshipContext';
 import { Platform } from 'react-native';
-import { SDK_DEVICE_TYPE, SDK_FIRST_TIME_INIT, SDK_OS_NAME, SDK_OS_VERSION_CODE } from '../src/FlagshipContext';
-import  { DeviceType,getDeviceTypeAsync, osName, osVersion, modelName}  from 'expo-device';
 
 
 let reactFlagshipProvider: any;
@@ -74,9 +73,8 @@ describe('Name of the group', () => {
                 ...visitorData,
                 context:{
                 ...visitorData.context,
-                [SDK_DEVICE_TYPE]: DeviceType[1],
-                [SDK_OS_NAME]:  osName ?? "",
-                [SDK_OS_VERSION_CODE]:osVersion ?? "",
+                [OS_NAME]:  Platform.OS,
+                [OS_VERSION_CODE]: Platform.Version,
                 [SDK_FIRST_TIME_INIT]: true
             }}))
         });
