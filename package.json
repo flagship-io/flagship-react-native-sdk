@@ -1,6 +1,6 @@
 {
   "name": "@flagship.io/react-native-sdk",
-  "version": "3.0.2",
+  "version": "3.0.3",
   "description": "Flagship SDK for React Native",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -13,16 +13,15 @@
     "test": "cross-env jest",
     "lint": "cross-env eslint . --ext .tsx",
     "clean": "cross-env rm -rf dist && mkdir dist",
-    "build:es": "cross-env BABEL_ENV=es babel src --extensions '.ts,.tsx' --out-dir dist --copy-files",
-    "build:types": "cross-env tsc --noEmit false --declaration --emitDeclarationOnly --outDir dist",
-    "build": "cross-env yarn clean && yarn build:es && yarn build:types"
+    "build:prod": "NODE_ENV=production cross-env yarn clean && tsc",
+    "build": "cross-env yarn clean && tsc"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/abtasty/flagship-react-native-sdk.git"
   },
   "dependencies": {
-    "@flagship.io/react-sdk": "^3.0.5",
+    "@flagship.io/react-sdk": "^3.0.7",
     "@react-native-async-storage/async-storage": "^1.17.0"
   },
   "peerDependencies": {
