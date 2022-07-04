@@ -43,8 +43,10 @@ export const FlagshipProvider: React.FC<FlagshipProviderProps> = (props) => {
             })
             AsyncStorage.setItem(SDK_FIRST_TIME_INIT, SDK_FIRST_TIME_INIT)
         }
-        // Load the predefined context
-        loadPredefinedContext()
+        if(visitorData){
+            // Load the predefined context
+            loadPredefinedContext()
+        }
     },[JSON.stringify(visitorData)])
     
     return (
