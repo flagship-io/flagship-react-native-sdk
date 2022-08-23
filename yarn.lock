@@ -1114,10 +1114,10 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
-"@flagship.io/js-sdk@^3.0.11":
-  version "3.0.11"
-  resolved "https://registry.yarnpkg.com/@flagship.io/js-sdk/-/js-sdk-3.0.11.tgz#bc0ff6fbb623251c588165bfac171ab871eab6fa"
-  integrity sha512-2nVeYK65Le4Miz4n1B1mMUrUBqmSpyOoI+sNqBUrhsu/CTrhD2V3hNUkcrniRBhHP5P9jLYGsab4UNZSt1S2iw==
+"@flagship.io/js-sdk@^3.0.12":
+  version "3.0.12"
+  resolved "https://registry.yarnpkg.com/@flagship.io/js-sdk/-/js-sdk-3.0.12.tgz#4d18db9a4f40176a60959e340fbce9262df8491b"
+  integrity sha512-b1XXwkMZhLUTBH+02QHFWOn5NrqJFZmYyDCO+rkgULAwRNsLWW1n+VgHjLrmc5iH9EGggeEK8FCuUoqYUF8YKQ==
   dependencies:
     "@babel/runtime" "^7.18.9"
     abort-controller "^3.0.0"
@@ -1126,12 +1126,12 @@
     follow-redirects "^1.15.1"
     node-fetch "^2.6.7"
 
-"@flagship.io/react-sdk@^3.0.8":
-  version "3.0.8"
-  resolved "https://registry.yarnpkg.com/@flagship.io/react-sdk/-/react-sdk-3.0.8.tgz#9444582ed107b4d742f51c4394780e260c07302a"
-  integrity sha512-84ro8Ot6JnjADHjVIy40magPse722g0sppx0I5xPxz2v6dgTfpbjQMpko9oN+9sfgTCumfEJaAI5mBBW4h8a5A==
+"@flagship.io/react-sdk@^3.0.9":
+  version "3.0.9"
+  resolved "https://registry.yarnpkg.com/@flagship.io/react-sdk/-/react-sdk-3.0.9.tgz#f265932da36d3d10e32fb96526d3fbea71255c03"
+  integrity sha512-PuCzop716Bno4th3v7bxTFzOCJI1gyF/RLqw6dtwN6lkZptnwpDnJ4E0JFMUfTiZzyUno6F1r3wHuhdWdzoNuA==
   dependencies:
-    "@flagship.io/js-sdk" "^3.0.11"
+    "@flagship.io/js-sdk" "^3.0.12"
     core-js "^3.24.1"
     encoding "^0.1.13"
 

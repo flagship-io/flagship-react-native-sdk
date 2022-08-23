@@ -14,10 +14,9 @@ export interface FlagshipProviderProps extends ReactFlagshipProviderProps {}
 // Predefined context keys 
 export const SDK_FIRST_TIME_INIT    = "sdk_firstTimeInit"
 
-export const FlagshipProvider: React.FC<FlagshipProviderProps> = (props) => {
-    const { children, visitorCacheImplementation, hitCacheImplementation, visitorData } = props;
+export const FlagshipProvider: React.FC<FlagshipProviderProps> = ({ children, visitorCacheImplementation, hitCacheImplementation, visitorData, ...props }) => {
+    
     const [newVisitorData, setNewVisitorData] = useState<VisitorData|null>(null)
-
 
     useEffect(()=>{
 
