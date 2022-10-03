@@ -14,14 +14,15 @@
     "lint": "cross-env eslint . --ext .tsx",
     "clean": "cross-env rm -rf dist && mkdir dist",
     "build:prod": "NODE_ENV=production cross-env yarn clean && tsc",
-    "build": "cross-env yarn clean && tsc"
+    "build": "cross-env yarn clean && npm run generate:version && tsc",
+    "generate:version": "genversion --es6 src/sdkVersion.ts"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/abtasty/flagship-react-native-sdk.git"
   },
   "dependencies": {
-    "@flagship.io/react-sdk": "^3.0.9",
+    "@flagship.io/react-sdk": "^3.0.12",
     "@react-native-async-storage/async-storage": "^1.17.8"
   },
   "peerDependencies": {
@@ -58,6 +59,7 @@
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-react": "^7.19.0",
     "eslint-plugin-react-hooks": "^4.0.0",
+    "genversion": "^3.1.1",
     "jest": "^27.5.1",
     "jest-react-native": "^18.0.0",
     "metro-react-native-babel-preset": "^0.69.1",
