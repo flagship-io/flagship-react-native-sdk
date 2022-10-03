@@ -8,6 +8,7 @@ import { DefaultHitCache } from './cache/DefaultHitCache';
 import { DefaultVisitorCache } from './cache/DefaultVisitorCache';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Platform } from 'react-native';
+import { version as SDK_VERSION } from './sdkVersion';
 
 export interface FlagshipProviderProps extends ReactFlagshipProviderProps {}
 
@@ -51,6 +52,7 @@ export const FlagshipProvider: React.FC<FlagshipProviderProps> = ({ children, vi
     return (
         <ReactFlagshipProvider
             {...props}
+            sdkVersion={SDK_VERSION}
             language={2}
             visitorCacheImplementation={
                 visitorCacheImplementation || new DefaultVisitorCache()
