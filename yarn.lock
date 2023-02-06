@@ -1114,10 +1114,10 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
-"@flagship.io/js-sdk@^3.1.0":
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/@flagship.io/js-sdk/-/js-sdk-3.1.0.tgz#48979a6d93b7f3f89fb5a6a6fb8b9536bfbc2ad3"
-  integrity sha512-o6rifXHZInBsTjnj+jtuoBCLE/hzrQfkGhXMIchTn1D5CnbSGFeiKdJUHrR9t9+I2vSCdSfbPDzLchmcDNh+vg==
+"@flagship.io/js-sdk@^3.1.2-alpha.0":
+  version "3.1.2-alpha.0"
+  resolved "https://registry.yarnpkg.com/@flagship.io/js-sdk/-/js-sdk-3.1.2-alpha.0.tgz#142e76407d585c030766749a3a96f3049832550a"
+  integrity sha512-A5AVKBjLO7Jg0n2G+Pz8u5rDoeAS9I7KDqtrlB4MgyWsdjTeoyujUjkjNp/5Z4brkH0pmY7rJzen8Ko5zNZInA==
   dependencies:
     "@babel/runtime" "^7.18.9"
     abort-controller "^3.0.0"
@@ -1126,12 +1126,12 @@
     follow-redirects "^1.15.1"
     node-fetch "^2.6.7"
 
-"@flagship.io/react-sdk@^3.1.0":
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/@flagship.io/react-sdk/-/react-sdk-3.1.0.tgz#701dcb6c529912d7ae561a40d6c4af960233b985"
-  integrity sha512-CkrnCvmjTjIUyK/828o1aGA8WpzbmMe1lboFgglJ4y1jI7aBIlk4gVR0rfIH10jOlTdSxzFrFMJ6bhZnj6piag==
+"@flagship.io/react-sdk@^3.1.1-alpha.2":
+  version "3.1.1-alpha.2"
+  resolved "https://registry.yarnpkg.com/@flagship.io/react-sdk/-/react-sdk-3.1.1-alpha.2.tgz#8d2aaa8af5cbf638ba4b01c5270c3894d117a4e6"
+  integrity sha512-Yj3xMAVzL0R5VUhdYmXW5ZOQqRtzLXxRcK4h3O1w5XsvENibkHYPGmYvCGIl+FTqGv2PDmmFrri1UFimdS3F6w==
   dependencies:
-    "@flagship.io/js-sdk" "^3.1.0"
+    "@flagship.io/js-sdk" "^3.1.2-alpha.0"
     core-js "^3.24.1"
     encoding "^0.1.13"
 
@@ -1382,10 +1382,10 @@
   resolved "https://registry.yarnpkg.com/@nicolo-ribaudo/chokidar-2/-/chokidar-2-2.1.8-no-fsevents.3.tgz#323d72dd25103d0c4fbdce89dadf574a787b1f9b"
   integrity sha512-s88O1aVtXftvp5bCPB7WnmXc5IwOZZ7YPuwNPt+GtOOXpPvad1LfbmjYv+qII7zP6RU2QGnqve27dnLycEnyEQ==
 
-"@react-native-async-storage/async-storage@^1.17.8":
-  version "1.17.8"
-  resolved "https://registry.yarnpkg.com/@react-native-async-storage/async-storage/-/async-storage-1.17.8.tgz#1ccff16dd02a85117b569f36eabaa2e49be40bbd"
-  integrity sha512-GoM/11oiSQrTcb6OycIPc6yv9HdWO12WbjsZX82v0xkAwefxJ0nPEHPhaeJiUnoOlCxj44+KoEPzlHG0Y8eRhA==
+"@react-native-async-storage/async-storage@^1.17.11":
+  version "1.17.11"
+  resolved "https://registry.yarnpkg.com/@react-native-async-storage/async-storage/-/async-storage-1.17.11.tgz#7ec329c1b9f610e344602e806b04d7c928a2341d"
+  integrity sha512-bzs45n5HNcDq6mxXnSsOHysZWn1SbbebNxldBXCQs8dSvF8Aor9KCdpm+TpnnGweK3R6diqsT8lFhX77VX0NFw==
   dependencies:
     merge-options "^3.0.4"
 
