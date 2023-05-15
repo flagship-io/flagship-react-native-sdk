@@ -1454,23 +1454,22 @@
   resolved "https://registry.yarnpkg.com/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz#75a2e8b51cb758a7553d6804a5932d7aace75c39"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
-"@flagship.io/js-sdk@^3.2.1":
-  version "3.2.1"
-  resolved "https://registry.yarnpkg.com/@flagship.io/js-sdk/-/js-sdk-3.2.1.tgz#2fbd2858e1c12f8d7c8d0c92a4a49dc88c971fa5"
-  integrity sha512-VVsGiwSsPs6Lqkc+3T1vSEQkcn8oEVrDs8UrvWVQiLiNGbY/Uf52Hbq4UdJy9XAIHz1DObE11Iks0AweC9Jf4g==
+"@flagship.io/js-sdk@^3.2.3":
+  version "3.2.3"
+  resolved "https://registry.yarnpkg.com/@flagship.io/js-sdk/-/js-sdk-3.2.3.tgz#bec55fd40c30ed04026e361d189f791be0229b1e"
+  integrity sha512-+6vAuXiCf7LzNLs00EHcro8Qk/0iCol7WzPmE+jQqKJQogS5XYSdy2/pa3LViztIEVkPgXKryJMgOoNAFgrZrg==
   dependencies:
     events "^3.3.0"
     follow-redirects "^1.15.2"
     node-abort-controller "^3.1.1"
     node-fetch "^2.6.7"
 
-"@flagship.io/react-sdk@^3.2.0":
-  version "3.2.0"
-  resolved "https://registry.yarnpkg.com/@flagship.io/react-sdk/-/react-sdk-3.2.0.tgz#e2f7813116b55ada4de2b3ca8c658c9e9599fc5c"
-  integrity sha512-pfgdThoZMdnI0v8trmSDGfVblmz9MY4fNmmTcaexf2W00jApdiSY+GAk2YXAm0d27xNmcIdlYpBsnIgLElj1uQ==
+"@flagship.io/react-sdk@^3.2.1":
+  version "3.2.1"
+  resolved "https://registry.yarnpkg.com/@flagship.io/react-sdk/-/react-sdk-3.2.1.tgz#d0c410e93fadafb1c8323409f1bd8535370f0fef"
+  integrity sha512-Bewb49T/lCUiA0v3x+A23RWCRXspkAs8+f/uWYuXJxzEY2I7dsuI79QX36T1OyiXIjg0KDAoK1U4O35Mmv4GUg==
   dependencies:
-    "@flagship.io/js-sdk" "^3.2.1"
-    core-js "^3.24.1"
+    "@flagship.io/js-sdk" "^3.2.3"
     encoding "^0.1.13"
 
 "@hapi/hoek@^9.0.0":
@@ -3326,11 +3325,6 @@ core-js@^3.1.4:
   version "3.21.1"
   resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.21.1.tgz#f2e0ddc1fc43da6f904706e8e955bc19d06a0d94"
   integrity sha512-FRq5b/VMrWlrmCzwRrpDYNxyHP9BcAZC+xHJaqTgIE5091ZV1NTmyh0sGOg5XqpnHvR0svdy0sv1gWA1zmhxig==
-
-core-js@^3.24.1:
-  version "3.24.1"
-  resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.24.1.tgz#cf7724d41724154010a6576b7b57d94c5d66e64f"
-  integrity sha512-0QTBSYSUZ6Gq21utGzkfITDylE8jWC9Ne1D2MrhvlsZBI1x39OdDIVbzSqtgMndIy6BlHxBXpMGqzZmnztg2rg==
 
 core-util-is@~1.0.0:
   version "1.0.3"
