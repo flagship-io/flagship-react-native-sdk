@@ -1454,22 +1454,22 @@
   resolved "https://registry.yarnpkg.com/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz#75a2e8b51cb758a7553d6804a5932d7aace75c39"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
-"@flagship.io/js-sdk@^3.2.5":
-  version "3.2.5"
-  resolved "https://registry.yarnpkg.com/@flagship.io/js-sdk/-/js-sdk-3.2.5.tgz#5ae3c4a7b4a440132532b71a7a097a272dbd7111"
-  integrity sha512-KAn9XFpTbfFobd2SYQVDarCrRgDkvpXhZ33+gfErrnhm3y0JKsP+0zT6lzyhyLCeE5tJ+KtPwYwGevhgb646ww==
+"@flagship.io/js-sdk@^3.2.6":
+  version "3.2.6"
+  resolved "https://registry.yarnpkg.com/@flagship.io/js-sdk/-/js-sdk-3.2.6.tgz#31f21f38046fe6991779ea5ad7ca389fa2cc2556"
+  integrity sha512-ASR56LvNQeNf3OLYaQ90R8ui0zYSFgEn5wE5OiV5i+mo2BSWBz1ShYn+uDwuPTwY0GanxlHjzNplkq5z8JcZJA==
   dependencies:
     events "^3.3.0"
     follow-redirects "^1.15.2"
     node-abort-controller "^3.1.1"
     node-fetch "^2.6.7"
 
-"@flagship.io/react-sdk@^3.2.3":
-  version "3.2.3"
-  resolved "https://registry.yarnpkg.com/@flagship.io/react-sdk/-/react-sdk-3.2.3.tgz#06c26942fe2b8fa7868b5e65f22627efb9674394"
-  integrity sha512-V7rAvhCzGTSmjXJZ3l0E2k83xWTWnbpNoEA3OBk0qdLn469nwywlfpLmGNdWy09qqbMe45bArGrD/bLpDIOvhQ==
+"@flagship.io/react-sdk@^3.2.4":
+  version "3.2.4"
+  resolved "https://registry.yarnpkg.com/@flagship.io/react-sdk/-/react-sdk-3.2.4.tgz#ebfbdd941da7ab33489661b6213a87e063e129d0"
+  integrity sha512-jVc8BbPqyw23XTw8S0sFu4YcYdDMKJd7nnvR2Z3vGAOI5WL5a3aqKiHrSMwqKfd4+FXTCCqPUBI+ryOZGqNR1A==
   dependencies:
-    "@flagship.io/js-sdk" "^3.2.5"
+    "@flagship.io/js-sdk" "^3.2.6"
     encoding "^0.1.13"
 
 "@hapi/hoek@^9.0.0":
