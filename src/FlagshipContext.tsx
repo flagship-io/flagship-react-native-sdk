@@ -10,7 +10,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Platform } from 'react-native';
 import { version as SDK_VERSION } from './sdkVersion';
 
-export interface FlagshipProviderProps extends ReactFlagshipProviderProps {}
+export interface FlagshipProviderProps extends Omit<ReactFlagshipProviderProps, 'reuseVisitorIds'|'nextFetchConfig'|'sdkVersion'|"language"> {}
 
 // Predefined context keys 
 export const SDK_FIRST_TIME_INIT    = "sdk_firstTimeInit"
@@ -20,8 +20,6 @@ export const FlagshipProvider: React.FC<FlagshipProviderProps> = ({ children, vi
     const [newVisitorData, setNewVisitorData] = useState<VisitorData|null>(null)
 
     useEffect(()=>{
-
-        // Predefined context loader function
         async function loadPredefinedContext(){
             let firstTimeInit = null
             try {
@@ -33,7 +31,7 @@ export const FlagshipProvider: React.FC<FlagshipProviderProps> = ({ children, vi
 
             /// Set Visitor Data 
             setNewVisitorData({
-                ...visitorData,
+                ...visitorData as VisitorData,
                 context:{
                     ...visitorData?.context,
                     [OS_NAME]: Platform.OS,
