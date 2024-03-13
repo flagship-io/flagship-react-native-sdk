@@ -1,5 +1,4 @@
 import { DecisionMode, OS_NAME, OS_VERSION_CODE } from '@flagship.io/react-sdk';
-// import { SpyInstance, Mock } from 'jest-mock';
 import { render, waitFor } from '@testing-library/react';
 import { FlagshipProvider } from '../src/index';
 import React from 'react';
@@ -85,7 +84,7 @@ describe('Name of the group', () => {
 
     const envId = 'EnvId';
     const apiKey = 'apiKey';
-    const statusChangedCallback = jest.fn();
+    const onSdkStatusChanged = jest.fn();
     const onInitStart = jest.fn();
     const onInitDone = jest.fn();
     const onUpdate = jest.fn();
@@ -97,7 +96,7 @@ describe('Name of the group', () => {
             apiKey,
             decisionMode: DecisionMode.DECISION_API,
             visitorData:null,
-            statusChangedCallback,
+            statusChangedCallback: onSdkStatusChanged,
             onInitStart,
             onInitDone,
             onUpdate,
