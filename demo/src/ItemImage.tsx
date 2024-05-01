@@ -21,6 +21,7 @@ export const ItemImage = ({imageUrl, imageAlt}: ItemImageProps) => {
 const styles = StyleSheet.create({
   container: {
     justifyContent: 'center',
+    alignItems: 'center',
     marginBottom: 16,
   },
   image: {
