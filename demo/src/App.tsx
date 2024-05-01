@@ -1,6 +1,5 @@
 //start demo
-// path: demo/src/App.tsx
-
+//path: demo/src/App.tsx
 import React, {useState} from 'react';
 import {StyleSheet, SafeAreaView, View} from 'react-native';
 import {FlagshipProvider} from '@flagship.io/react-native-sdk';

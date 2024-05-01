@@ -1,5 +1,5 @@
-// start demo
-// path: demo/src/Item.tsx
+//start demo
+//path: demo/src/Item.tsx
 import React from 'react';
 import {View, StyleSheet, Alert, Text} from 'react-native';
 import {itemData} from './itemData';
@@ -69,5 +69,4 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
-
 //end demo
