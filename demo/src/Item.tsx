@@ -1,12 +1,9 @@
+// start demo
+// path: demo/src/Item.tsx
 import React from 'react';
-import {View, StyleSheet, Alert} from 'react-native';
+import {View, StyleSheet, Alert, Text} from 'react-native';
 import {itemData} from './itemData';
-import {
-  EventCategory,
-  HitType,
-  useFlagship,
-  useFsFlag,
-} from '@flagship.io/react-native-sdk';
+import { EventCategory, HitType, useFlagship, useFsFlag } from '@flagship.io/react-native-sdk';
 import {ItemImage} from './ItemImage';
 import {ItemDetail} from './ItemDetail';
 import {DiscountedPrice} from './DiscountedPrice';
@@ -14,13 +11,12 @@ import {ItemPrice} from './ItemPrice';
 import {AddCartButton} from './AddCartButton';
 
 export const Item = () => {
-  const {title, subtitle, refNumber, price, imageUrl, imageAlt, discountPrice} =
-    itemData;
+  const {title, subtitle, refNumber, price, imageUrl, imageAlt, discountPrice} = itemData;
 
   const fs = useFlagship();
 
   /*Step 2: Get the values of the flags for the visitor*/
-  const enableDiscountFlag = useFsFlag('fs_enable_discount', false).getValue();
+  const enableDiscountFlag = useFsFlag('fs_enable_discount', true).getValue();
   const addToCartBtnColorFlag = useFsFlag(
     'fs_add_to_cart_btn_color',
     '#556cd6',
@@ -42,6 +38,7 @@ export const Item = () => {
       <ItemDetail title={title} subtitle={subtitle} refNumber={refNumber} />
       <ItemImage imageUrl={imageUrl} imageAlt={imageAlt} />
       <View style={styles.itemContainer}>
+        <Text>Price:</Text>
         {enableDiscountFlag ? (
           <DiscountedPrice price={price} discountPrice={discountPrice} />
         ) : (
@@ -64,9 +61,13 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   itemContainer: {
+    flexDirection: 'row',
     marginBottom: 16,
+    justifyContent: 'space-between',
   },
   buttonContainer: {
     justifyContent: 'center',
   },
 });
+
+//end demo
