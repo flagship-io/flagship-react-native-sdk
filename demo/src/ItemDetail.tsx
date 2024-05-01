@@ -24,10 +24,12 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 24,
     fontWeight: '500',
+    color: '#333',
   },
   subtitle: {
     fontSize: 20,
     fontWeight: '500',
+    color: '#333',
   },
   refNumber: {
     fontSize: 14,
