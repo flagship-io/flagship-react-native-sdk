@@ -17,7 +17,7 @@ export const SDK_FIRST_TIME_INIT    = "sdk_firstTimeInit"
 
 export const FlagshipProvider: React.FC<FlagshipProviderProps> = ({ children, visitorCacheImplementation, hitCacheImplementation, visitorData, ...props }) => {
     
-    const [newVisitorData, setNewVisitorData] = useState<VisitorData|null>(null)
+    const [newVisitorData, setNewVisitorData] = useState<VisitorData|null>(visitorData)
 
     useEffect(()=>{
         async function loadPredefinedContext(){
@@ -29,9 +29,9 @@ export const FlagshipProvider: React.FC<FlagshipProviderProps> = ({ children, vi
                 Flagship.getConfig()?.logManager?.error("Error on get item from AsyncStorage", "loadPredefinedContext") 
             }
 
-            /// Set Visitor Data 
             setNewVisitorData({
                 ...visitorData as VisitorData,
+                id: Flagship.getVisitor()?.visitorId,
                 context:{
                     ...visitorData?.context,
                     [OS_NAME]: Platform.OS,
@@ -42,7 +42,6 @@ export const FlagshipProvider: React.FC<FlagshipProviderProps> = ({ children, vi
             AsyncStorage.setItem(SDK_FIRST_TIME_INIT, SDK_FIRST_TIME_INIT)
         }
         if(visitorData){
-            // Load the predefined context
             loadPredefinedContext()
         }
     },[JSON.stringify(visitorData)])
