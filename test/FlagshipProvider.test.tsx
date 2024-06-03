@@ -4,8 +4,8 @@ import { FlagshipProvider } from '../src/index';
 import React from 'react';
 import { DefaultVisitorCache } from '../src/cache/DefaultVisitorCache';
 import { DefaultHitCache } from '../src/cache/DefaultHitCache';
-import { SDK_FIRST_TIME_INIT } from '../src/FlagshipContext';
 import { Platform } from 'react-native';
+import { SDK_FIRST_TIME_INIT } from '../src/FlagshipProvider';
 
 
 let reactFlagshipProvider: any;
@@ -18,6 +18,8 @@ jest.mock('@flagship.io/react-sdk', () => {
 
     reactFlagshipProvider = flagshipProvider
     flagshipProvider.mockImplementation((props)=>{
+        const fs = flagship.Flagship.start(props.envId, props.apiKey, { fetchNow: false})
+        fs.newVisitor({visitorId: props.visitorData?.id, context: props.visitorData?.context, hasConsented: props.visitorData?.hasConsented, isAuthenticated: props.visitorData?.isAuthenticated})
         reactProps = props
         return props.children;
     })
