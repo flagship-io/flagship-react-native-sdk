@@ -1,9 +1,9 @@
-import { FlagshipProvider } from './FlagshipContext'
+import { FlagshipProvider } from './FlagshipProvider'
 
 export * from '@flagship.io/react-sdk'
 
-export { FlagshipProvider  } from './FlagshipContext'
+export { FlagshipProvider  } from './FlagshipProvider'
 
-export type { FlagshipProviderProps } from './FlagshipContext'
+export type { FlagshipProviderProps } from './FlagshipProvider'
 
 export default FlagshipProvider
