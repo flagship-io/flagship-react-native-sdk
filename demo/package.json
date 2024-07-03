@@ -10,7 +10,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "@flagship.io/react-native-sdk": "^3.3.2",
+    "@flagship.io/react-native-sdk": "^4.0.0",
     "@react-native-async-storage/async-storage": "^1.23.1",
     "react": "18.2.0",
     "react-native": "0.74.0"
