@@ -3,7 +3,12 @@
 import React from 'react';
 import {View, StyleSheet, Alert, Text} from 'react-native';
 import {itemData} from './itemData';
-import { EventCategory, HitType, useFlagship, useFsFlag } from '@flagship.io/react-native-sdk';
+import {
+  EventCategory,
+  HitType,
+  useFlagship,
+  useFsFlag,
+} from '@flagship.io/react-native-sdk';
 import {ItemImage} from './ItemImage';
 import {ItemDetail} from './ItemDetail';
 import {DiscountedPrice} from './DiscountedPrice';
@@ -11,20 +16,19 @@ import {ItemPrice} from './ItemPrice';
 import {AddCartButton} from './AddCartButton';
 
 export const Item = () => {
-  const {title, subtitle, refNumber, price, imageUrl, imageAlt, discountPrice} = itemData;
+  const {title, subtitle, refNumber, price, imageUrl, imageAlt, discountPrice} =
+    itemData;
 
   const fs = useFlagship();
 
   /*Step 2: Get the values of the flags for the visitor*/
-  const enableDiscountFlag = useFsFlag('fs_enable_discount', true).getValue();
-  const addToCartBtnColorFlag = useFsFlag(
-    'fs_add_to_cart_btn_color',
-    '#556cd6',
-  ).getValue();
+  const enableDiscountFlag = useFsFlag('fs_enable_discount').getValue(false);
+  // eslint-disable-next-line prettier/prettier
+  const addToCartBtnColorFlag = useFsFlag('fs_add_to_cart_btn_color').getValue('#556cd6');
 
   const handleAddToCart = () => {
     // Step 3: Send a hit to track an action
-    fs.hit.send({
+    fs.sendHits({
       type: HitType.EVENT,
       category: EventCategory.ACTION_TRACKING,
       action: 'add-to-cart-clicked',
