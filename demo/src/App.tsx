@@ -5,6 +5,7 @@ import {StyleSheet, SafeAreaView, View} from 'react-native';
 import {FlagshipProvider} from '@flagship.io/react-native-sdk';
 import {Item} from './Item';
 import {VipSwitch} from './VipSwitch';
+import {Loading} from './Loading';
 
 function App() {
   const [isVip, setIsVip] = useState(false);
@@ -22,7 +23,8 @@ function App() {
             context: {
               fs_is_vip: isVip,
             },
-          }}>
+          }}
+          loadingComponent={<Loading />}>
           <Item />
         </FlagshipProvider>
       </View>
