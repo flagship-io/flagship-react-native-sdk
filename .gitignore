@@ -1,37 +1,12 @@
 node_modules
 coverage
 
-example/ExpoCli/node_modules/**/*
-example/ExpoCli/.expo/*
-example/ExpoCli/npm-debug.*
-example/ExpoCli/*.jks
-example/ExpoCli/*.p8
-example/ExpoCli/*.p12
-example/ExpoCli/*.key
-example/ExpoCli/*.mobileprovision
-example/ExpoCli/*.orig.*
-example/ExpoCli/web-build/
-example/ExpoCli/web-report/
-
-*/**/**/node_modules
-
 dist
 
 # macOS
 .DS_Store
 
-
 *.tgz
 
-examples/expo-cli-demo/.expo/
-
-examples/react-native-cli-demo/android/app/src/main/assets/index.android.bundle
-
-examples/react-native-cli-demo/android/app/src/main/res/raw/
-
-examples/react-native-cli-demo/ios/reactnativeqa.xcodeproj/project.pbxproj
-
 .idea/
-
-examples/react-native-cli-demo/app-debug.apk
 dist/
