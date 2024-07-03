@@ -11,7 +11,7 @@ export const ItemImage = ({imageUrl, imageAlt}: ItemImageProps) => {
     <View style={styles.container}>
       <Image
         style={styles.image}
-        source={{uri: imageUrl}}
+        source={imageUrl}
         accessibilityLabel={imageAlt}
       />
     </View>
