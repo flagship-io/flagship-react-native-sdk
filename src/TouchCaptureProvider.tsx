@@ -1,8 +1,10 @@
+import { Flagship, IVisitorEvent } from "@flagship.io/react-sdk";
 import React, { useRef } from "react";
 import {
   View,
   GestureResponderEvent,
   StyleSheet,
+  Dimensions,
 } from "react-native";
 
 interface TouchCaptureProviderProps {
@@ -14,11 +16,28 @@ const TouchCaptureProvider: React.FC<TouchCaptureProviderProps> = ({
 }) => {
   const lastTapEvent = useRef<GestureResponderEvent | null>(null);
   const lastTapEventTime = useRef<number | null>(null);
+  const visitor = Flagship.getVisitor();
+
 
   function sendTapEvent(event: GestureResponderEvent) {
+    if (!visitor) {
+      return null;
+    }
+  
     const { pageX, pageY } = event.nativeEvent;
     console.log("sendTapEvent", pageX, pageY);
-    // Add your tap handling logic here
+    const screen = Dimensions.get("screen");
+    const timestamp = Date.now().toString().slice(-5)
+    const visitorEvent: IVisitorEvent = {
+      customerAccountId: Flagship.getConfig().envId as string,
+      visitorId: visitor.visitorId as string,
+      currentUrl: "",
+      clickPosition: `${pageY},${pageX},${timestamp},0;`,
+      screenSize:`${screen.width},${screen.height};`,
+    };
+
+    (visitor as any).sendEaiVisitorEvent(visitorEvent);
+
   }
 
   function sendMoveEvent(event: GestureResponderEvent) {
