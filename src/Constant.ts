@@ -1,0 +1,1 @@
+export const MAX_CLICK_PATH_LENGTH = 1900
