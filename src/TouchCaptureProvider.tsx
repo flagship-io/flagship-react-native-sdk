@@ -1,103 +1,138 @@
-import {
-    Flagship,
-    IVisitorEvent,
-    FlagshipContext
-} from '@flagship.io/react-sdk';
-import React, { useContext, useRef } from 'react';
+import { Flagship, IVisitorEvent, useFlagship } from '@flagship.io/react-sdk';
+import React, { useCallback, useEffect, useRef } from 'react';
 import {
     View,
     GestureResponderEvent,
     StyleSheet,
     Dimensions
 } from 'react-native';
-import { MAX_CLICK_PATH_LENGTH } from './Constant';
+import { MAX_CLICK_PATH_LENGTH, TIMEOUT_DURATION } from './Constant';
 
 interface TouchCaptureProviderProps {
     children: React.ReactNode;
 }
 
+type Coordinates = { pageX: number; pageY: number };
+
 const TouchCaptureProvider: React.FC<TouchCaptureProviderProps> = ({
     children
 }) => {
-    const lastTapEvent = useRef<GestureResponderEvent | null>(null);
-    const lastTapEventTime = useRef<number | null>(null);
-    const clickPath = useRef<string>('');
-    const clickPathTimeoutId = useRef<NodeJS.Timeout | null>(null);
-    const { state } = useContext(FlagshipContext);
+    const lastTouchCoordinates = useRef<Coordinates | null>(null);
+    const lastTouchEventTime = useRef<number | null>(null);
+    const touchPath = useRef<string>('');
+    const touchPathTimeoutId = useRef<NodeJS.Timeout | null>(null);
+    const touchPositionTimeoutId = useRef<NodeJS.Timeout | null>(null);
 
-    function sendTouchPositionEvent(event: GestureResponderEvent) {
-        const visitor = Flagship.getVisitor();
-        if (!visitor) {
-            return null;
+    const fs = useFlagship();
+    const [isEAIDataCollecting, setIsEAIDataCollecting] = React.useState(false);
+    const onEAICollectStatusChange = useCallback((status) => {
+        setIsEAIDataCollecting(status);
+    }, []);
+
+    useEffect(() => {
+        const visitor = Flagship.getVisitor() as any;
+        if (visitor) {
+            visitor.onEAICollectStatusChange(onEAICollectStatusChange);
         }
+    }, [fs]);
 
-        const { pageX, pageY } = event.nativeEvent;
-        const screen = Dimensions.get('screen');
-        const timestamp = Date.now().toString().slice(-5);
-        const visitorEvent: IVisitorEvent = {
-            customerAccountId: Flagship.getConfig().envId as string,
-            visitorId: visitor.visitorId as string,
-            currentUrl: '',
-            clickPosition: `${pageY},${pageX},${timestamp},0;`,
-            screenSize: `${screen.width},${screen.height};`
-        };
+    const sendTouchPositionEvent = useCallback(
+        ({ pageX, pageY }: Coordinates): void => {
+            const visitor = Flagship.getVisitor();
+            if (!visitor) return;
 
-        (visitor as any).sendEaiVisitorEvent(visitorEvent);
-    }
+            const screen = Dimensions.get('screen');
+            const timestamp = Date.now().toString().slice(-5);
+            const visitorEvent: IVisitorEvent = {
+                customerAccountId: Flagship.getConfig()?.envId as string,
+                visitorId: visitor.visitorId as string,
+                currentUrl: '',
+                clickPosition: `${pageY},${pageX},${timestamp},0;`,
+                screenSize: `${screen.width},${screen.height};`
+            };
 
-    function sendTouchPathEvent(): void {
-        const screen = Dimensions.get('screen');
+            (visitor as any).sendEaiVisitorEvent(visitorEvent);
+        },
+        []
+    );
+
+    const sendTouchPathEvent = useCallback((): void => {
         const visitor = Flagship.getVisitor();
-        const visitorId = visitor?.visitorId as string;
+        if (!visitor) return;
+
+        const screen = Dimensions.get('screen');
         const visitorEvent: IVisitorEvent = {
-            visitorId,
-            customerAccountId: Flagship.getConfig().envId as string,
-            clickPath: clickPath.current,
+            visitorId: visitor.visitorId || '',
+            customerAccountId: Flagship.getConfig()?.envId || '',
+            clickPath: touchPath.current,
             screenSize: `${screen.width},${screen.height};`,
             currentUrl: ''
         };
-        clickPath.current = '';
+        touchPath.current = '';
         (visitor as any).sendEaiVisitorEvent(visitorEvent);
-    }
+    }, []);
 
-    function processMoveEvent(event: GestureResponderEvent) {
-        const { pageX, pageY } = event.nativeEvent;
+    const processTouchMoveEvent = useCallback(
+        ({ pageX, pageY }: Coordinates): void => {
+            if (touchPathTimeoutId.current) {
+                clearTimeout(touchPathTimeoutId.current);
+            }
+            touchPath.current += `${pageY},${pageX},${Date.now()
+                .toString()
+                .slice(-5)};`;
 
-        console.log('sendMoveEvent', pageX, pageY);
+            if (touchPath.current.length > MAX_CLICK_PATH_LENGTH) {
+                sendTouchPathEvent();
+            }
 
-        if (clickPathTimeoutId.current) {
-            clearTimeout(clickPathTimeoutId.current);
-        }
-        clickPath.current += `${pageY},${pageX},${Date.now()
-            .toString()
-            .slice(-5)};`;
+            touchPathTimeoutId.current = setTimeout(
+                sendTouchPathEvent,
+                TIMEOUT_DURATION
+            );
+        },
+        [sendTouchPathEvent]
+    );
+    const handleTouchStart = useCallback(
+        (event: GestureResponderEvent): void => {
+            if (touchPositionTimeoutId.current) {
+                clearTimeout(touchPositionTimeoutId.current);
+            }
+            const { pageX, pageY } = event.nativeEvent;
+            const coordinates = { pageX, pageY };
+            if (lastTouchCoordinates.current) {
+                sendTouchPositionEvent(coordinates);
+            }
+            lastTouchEventTime.current = Date.now();
+            lastTouchCoordinates.current = coordinates;
 
-        if (clickPath.current.length > MAX_CLICK_PATH_LENGTH) {
-            sendTouchPathEvent();
-        }
+            touchPositionTimeoutId.current = setTimeout(() => {
+                if (lastTouchCoordinates.current) {
+                    sendTouchPositionEvent(coordinates);
+                    lastTouchEventTime.current = null;
+                    lastTouchCoordinates.current = null;
+                }
+            }, TIMEOUT_DURATION);
+        },
+        [sendTouchPositionEvent]
+    );
 
-        clickPathTimeoutId.current = setTimeout(() => {
-            sendTouchPathEvent();
-        }, 500);
-    }
+    const handleTouchMove = useCallback(
+        (event: GestureResponderEvent): void => {
+            if (
+                lastTouchEventTime.current &&
+                Date.now() - lastTouchEventTime.current < TIMEOUT_DURATION
+            ) {
+                lastTouchEventTime.current = null;
+                lastTouchCoordinates.current = null;
+            }
+            const { pageX, pageY } = event.nativeEvent;
+            processTouchMoveEvent({ pageX, pageY });
+        },
+        [processTouchMoveEvent]
+    );
 
-    function handleTouchStart(event: GestureResponderEvent) {
-        if (lastTapEvent.current) {
-            sendTouchPositionEvent(lastTapEvent.current);
-        }
-        lastTapEventTime.current = Date.now();
-        lastTapEvent.current = event;
-    }
-
-    function handleTouchMove(event: GestureResponderEvent) {
-        if (
-            lastTapEventTime.current &&
-            Date.now() - lastTapEventTime.current < 500
-        ) {
-            lastTapEventTime.current = null;
-            lastTapEvent.current = null;
-        }
-        processMoveEvent(event);
+    if (!isEAIDataCollecting) {
+        return <>{children}</>;
     }
 
     return (
