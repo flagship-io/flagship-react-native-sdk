@@ -13,7 +13,7 @@ import { DefaultVisitorCache } from './cache/DefaultVisitorCache';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Platform } from 'react-native';
 import { version as SDK_VERSION } from './sdkVersion';
-import TouchCaptureProvider from './TouchCaptureProvider';
+import { TouchCaptureProvider } from './TouchCaptureProvider';
 
 export const DEFAULT_TIME_INTERVAL = 5;
 export const DEFAULT_POOL_MAX_SIZE = 10;

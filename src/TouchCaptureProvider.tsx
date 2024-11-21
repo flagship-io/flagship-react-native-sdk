@@ -14,9 +14,7 @@ interface TouchCaptureProviderProps {
 
 type Coordinates = { pageX: number; pageY: number };
 
-const TouchCaptureProvider: React.FC<TouchCaptureProviderProps> = ({
-    children
-}) => {
+function TouchCaptureProviderFunc ({ children }: TouchCaptureProviderProps) {
     const lastTouchCoordinates = useRef<Coordinates | null>(null);
     const lastTouchEventTime = useRef<number | null>(null);
     const touchPath = useRef<string>('');
@@ -159,4 +157,4 @@ const styles = StyleSheet.create({
     }
 });
 
-export default TouchCaptureProvider;
+export const TouchCaptureProvider = React.memo(TouchCaptureProviderFunc);
