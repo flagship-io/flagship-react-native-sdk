@@ -129,16 +129,12 @@ function TouchCaptureProviderFunc ({ children }: TouchCaptureProviderProps) {
         [processTouchMoveEvent]
     );
 
-    if (!isEAIDataCollecting) {
-        return <>{children}</>;
-    }
-
     return (
         <View
             style={styles.container}
             pointerEvents="box-none"
-            onTouchStart={handleTouchStart}
-            onTouchMove={handleTouchMove}
+            onTouchStart={isEAIDataCollecting? handleTouchStart : undefined}
+            onTouchMove={isEAIDataCollecting? handleTouchMove: undefined}
         >
             {children}
         </View>
