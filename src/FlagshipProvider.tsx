@@ -27,16 +27,23 @@ export interface FlagshipProviderProps
 // Predefined context keys
 export const SDK_FIRST_TIME_INIT = 'sdk_firstTimeInit';
 
-export const FlagshipProvider: React.FC<FlagshipProviderProps> = ({
-    children,
-    visitorCacheImplementation,
-    hitCacheImplementation,
-    visitorData,
-    ...props
-}) => {
-    const [newVisitorData, setNewVisitorData] = useState<VisitorData | null>(
-        visitorData
-    );
+export const FlagshipProvider: React.FC<FlagshipProviderProps> = ({ children, visitorCacheImplementation, hitCacheImplementation, visitorData, ...props }) => {
+    
+    const [newVisitorData, setNewVisitorData] = useState<VisitorData | null>(null);
+
+    useEffect(() => {
+        if (visitorData && newVisitorData?.context && OS_NAME in newVisitorData.context) {
+            setNewVisitorData({
+                ...(visitorData as VisitorData),
+                id: visitorData.id,
+                context: {
+                    ...visitorData?.context,
+                    [OS_NAME]: Platform.OS,
+                    [OS_VERSION_CODE]: Platform.Version?.toString()
+                }
+            });
+        }
+    }, [JSON.stringify(visitorData)]);
 
     useEffect(() => {
         async function loadPredefinedContext() {
@@ -52,7 +59,7 @@ export const FlagshipProvider: React.FC<FlagshipProviderProps> = ({
 
             setNewVisitorData({
                 ...(visitorData as VisitorData),
-                id: Flagship.getVisitor()?.visitorId,
+                id: visitorData?.id,
                 context: {
                     ...visitorData?.context,
                     [OS_NAME]: Platform.OS,
@@ -60,13 +67,14 @@ export const FlagshipProvider: React.FC<FlagshipProviderProps> = ({
                     [SDK_FIRST_TIME_INIT]: !firstTimeInit
                 }
             });
+
             AsyncStorage.setItem(SDK_FIRST_TIME_INIT, SDK_FIRST_TIME_INIT);
         }
         if (visitorData) {
             loadPredefinedContext();
         }
-    }, [JSON.stringify(visitorData)]);
-
+    }, []);
+    
     return (
         <ReactFlagshipProvider
             {...props}
