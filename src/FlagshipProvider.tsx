@@ -22,34 +22,51 @@ export const SDK_FIRST_TIME_INIT    = "sdk_firstTimeInit"
 
 export const FlagshipProvider: React.FC<FlagshipProviderProps> = ({ children, visitorCacheImplementation, hitCacheImplementation, visitorData, ...props }) => {
     
-    const [newVisitorData, setNewVisitorData] = useState<VisitorData|null>(visitorData)
+    const [newVisitorData, setNewVisitorData] = useState<VisitorData | null>(null);
 
-    useEffect(()=>{
-        async function loadPredefinedContext(){
-            let firstTimeInit = null
+    useEffect(() => {
+        if (visitorData && newVisitorData?.context && OS_NAME in newVisitorData.context) {
+            setNewVisitorData({
+                ...(visitorData as VisitorData),
+                id: visitorData.id,
+                context: {
+                    ...visitorData?.context,
+                    [OS_NAME]: Platform.OS,
+                    [OS_VERSION_CODE]: Platform.Version?.toString()
+                }
+            });
+        }
+    }, [JSON.stringify(visitorData)]);
+
+    useEffect(() => {
+        async function loadPredefinedContext() {
+            let firstTimeInit = null;
             try {
-                firstTimeInit = await AsyncStorage.getItem(SDK_FIRST_TIME_INIT)
-
+                firstTimeInit = await AsyncStorage.getItem(SDK_FIRST_TIME_INIT);
             } catch (error) {
-                Flagship.getConfig()?.logManager?.error("Error on get item from AsyncStorage", "loadPredefinedContext") 
+                Flagship.getConfig()?.logManager?.error(
+                    'Error on get item from AsyncStorage',
+                    'loadPredefinedContext'
+                );
             }
 
             setNewVisitorData({
-                ...visitorData as VisitorData,
-                id: Flagship.getVisitor()?.visitorId,
-                context:{
+                ...(visitorData as VisitorData),
+                id: visitorData?.id,
+                context: {
                     ...visitorData?.context,
                     [OS_NAME]: Platform.OS,
-                    [OS_VERSION_CODE]:Platform.Version?.toString(),
+                    [OS_VERSION_CODE]: Platform.Version?.toString(),
                     [SDK_FIRST_TIME_INIT]: !firstTimeInit
                 }
-            })
-            AsyncStorage.setItem(SDK_FIRST_TIME_INIT, SDK_FIRST_TIME_INIT)
+            });
+
+            AsyncStorage.setItem(SDK_FIRST_TIME_INIT, SDK_FIRST_TIME_INIT);
         }
-        if(visitorData){
-            loadPredefinedContext()
+        if (visitorData) {
+            loadPredefinedContext();
         }
-    },[JSON.stringify(visitorData)])
+    }, []);
     
     return (
         <ReactFlagshipProvider
