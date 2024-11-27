@@ -21,7 +21,7 @@ export const DEFAULT_POOL_MAX_SIZE = 10;
 export interface FlagshipProviderProps
     extends Omit<
         ReactFlagshipProviderProps,
-        'reuseVisitorIds' | 'nextFetchConfig' | 'sdkVersion' | 'language'
+        'reuseVisitorIds' | 'nextFetchConfig' | 'sdkVersion' | 'language'|'shouldSaveInstance'
     > {}
 
 // Predefined context keys
@@ -94,6 +94,7 @@ export const FlagshipProvider: React.FC<FlagshipProviderProps> = ({ children, vi
                 hitCacheImplementation || new DefaultHitCache()
             }
             visitorData={newVisitorData}
+            shouldSaveInstance={true}
         >
             <TouchCaptureProvider>{children}</TouchCaptureProvider>
         </ReactFlagshipProvider>
