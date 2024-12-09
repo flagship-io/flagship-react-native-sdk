@@ -30,7 +30,7 @@ export const SDK_FIRST_TIME_INIT = 'sdk_firstTimeInit';
 export const FlagshipProvider: React.FC<FlagshipProviderProps> = ({ children, visitorCacheImplementation, hitCacheImplementation, visitorData, ...props }) => {
     
     const [newVisitorData, setNewVisitorData] = useState<VisitorData | null>(null);
-
+    
     useEffect(() => {
         if (visitorData && newVisitorData?.context && OS_NAME in newVisitorData.context) {
             setNewVisitorData({
