@@ -1,11 +1,12 @@
 import { DecisionMode, OS_NAME, OS_VERSION_CODE } from '@flagship.io/react-sdk';
-import { render, waitFor } from '@testing-library/react';
+import { render, waitFor } from '@testing-library/react-native';
 import { FlagshipProvider } from '../src/index';
 import React from 'react';
 import { DefaultVisitorCache } from '../src/cache/DefaultVisitorCache';
 import { DefaultHitCache } from '../src/cache/DefaultHitCache';
-import { Platform } from 'react-native';
+import { Platform, Text } from 'react-native';
 import { SDK_FIRST_TIME_INIT } from '../src/FlagshipProvider';
+
 
 
 let reactFlagshipProvider: any;
@@ -18,8 +19,8 @@ jest.mock('@flagship.io/react-sdk', () => {
 
     reactFlagshipProvider = flagshipProvider
     flagshipProvider.mockImplementation((props)=>{
-        const fs = flagship.Flagship.start(props.envId, props.apiKey, { fetchNow: false})
-        fs.newVisitor({visitorId: props.visitorData?.id, context: props.visitorData?.context, hasConsented: props.visitorData?.hasConsented, isAuthenticated: props.visitorData?.isAuthenticated})
+        // const fs = flagship.Flagship.start(props.envId, props.apiKey, { fetchNow: false})
+        // fs.newVisitor({visitorId: props.visitorData?.id, context: props.visitorData?.context, hasConsented: props.visitorData?.hasConsented, isAuthenticated: props.visitorData?.isAuthenticated})
         reactProps = props
         return props.children;
     })
@@ -59,10 +60,11 @@ describe('Name of the group', () => {
             onUpdate,
             onBucketingUpdated
         };
+        const Component = () => <Text>children</Text>
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const { rerender } = render(
             <FlagshipProvider {...props}>
-                <div>children</div>
+               <Component/>
             </FlagshipProvider>
         );
 
@@ -104,10 +106,11 @@ describe('Name of the group', () => {
             onUpdate,
             onBucketingUpdated
         };
+        const Component = () => <Text>children</Text>
         // eslint-disable-next-line @typescript-eslint/no-unused-vars
         const { rerender } = render(
             <FlagshipProvider {...props}>
-                <div>children</div>
+                <Component/>
             </FlagshipProvider>
         );
 
