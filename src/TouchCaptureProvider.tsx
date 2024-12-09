@@ -23,7 +23,7 @@ function TouchCaptureProviderFunc ({ children }: TouchCaptureProviderProps) {
 
     const fs = useFlagship();
     const [isEAIDataCollecting, setIsEAIDataCollecting] = React.useState(false);
-    const onEAICollectStatusChange = useCallback((status) => {
+    const onEAICollectStatusChange = useCallback((status: boolean) => {
         setIsEAIDataCollecting(status);
     }, []);
 
@@ -98,7 +98,7 @@ function TouchCaptureProviderFunc ({ children }: TouchCaptureProviderProps) {
             const { pageX, pageY } = event.nativeEvent;
             const coordinates = { pageX, pageY };
             if (lastTouchCoordinates.current) {
-                sendTouchPositionEvent(coordinates);
+                sendTouchPositionEvent(lastTouchCoordinates.current);
             }
             lastTouchEventTime.current = Date.now();
             lastTouchCoordinates.current = coordinates;
