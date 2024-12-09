@@ -6,11 +6,11 @@
         "strict": true,
         "module": "ESNext",
         "declaration": true,
-        "lib": ["ES6", "dom"],
+        "lib": ["ES6"],
         "target": "ES6",
         "moduleResolution": "Node",
-        "jsx": "react",
+        "jsx": "react-native",
         "skipLibCheck": true
     },
-    "include": ["src/**/*"]
+    "include": ["src/**/*", "test/TouchCaptureProvider.test.tsx"]
 }
