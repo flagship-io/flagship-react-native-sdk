@@ -14,7 +14,7 @@ interface TouchCaptureProviderProps {
 
 type Coordinates = { pageX: number; pageY: number };
 
-function TouchCaptureProviderFunc ({ children }: TouchCaptureProviderProps) {
+function TouchCaptureProviderFunc({ children }: TouchCaptureProviderProps) {
     const lastTouchCoordinates = useRef<Coordinates | null>(null);
     const lastTouchEventTime = useRef<number | null>(null);
     const touchPath = useRef<string>('');
@@ -81,6 +81,7 @@ function TouchCaptureProviderFunc ({ children }: TouchCaptureProviderProps) {
 
             if (touchPath.current.length > MAX_CLICK_PATH_LENGTH) {
                 sendTouchPathEvent();
+                return;
             }
 
             touchPathTimeoutId.current = setTimeout(
@@ -133,13 +134,13 @@ function TouchCaptureProviderFunc ({ children }: TouchCaptureProviderProps) {
         <View
             style={styles.container}
             pointerEvents="box-none"
-            onTouchStart={isEAIDataCollecting? handleTouchStart : undefined}
-            onTouchMove={isEAIDataCollecting? handleTouchMove: undefined}
+            onTouchStart={isEAIDataCollecting ? handleTouchStart : undefined}
+            onTouchMove={isEAIDataCollecting ? handleTouchMove : undefined}
         >
             {children}
         </View>
     );
-};
+}
 
 const styles = StyleSheet.create({
     container: {
