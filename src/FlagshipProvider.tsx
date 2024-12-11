@@ -7,7 +7,7 @@ import {
     OS_VERSION_CODE,
     CacheStrategy
 } from '@flagship.io/react-sdk';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { DefaultHitCache } from './cache/DefaultHitCache';
 import { DefaultVisitorCache } from './cache/DefaultVisitorCache';
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -21,82 +21,104 @@ export const DEFAULT_POOL_MAX_SIZE = 10;
 export interface FlagshipProviderProps
     extends Omit<
         ReactFlagshipProviderProps,
-        'reuseVisitorIds' | 'nextFetchConfig' | 'sdkVersion' | 'language'|'shouldSaveInstance'
+        | 'reuseVisitorIds'
+        | 'nextFetchConfig'
+        | 'sdkVersion'
+        | 'language'
+        | 'shouldSaveInstance'
     > {}
 
 // Predefined context keys
 export const SDK_FIRST_TIME_INIT = 'sdk_firstTimeInit';
 
-export const FlagshipProvider: React.FC<FlagshipProviderProps> = ({ children, visitorCacheImplementation, hitCacheImplementation, visitorData, ...props }) => {
-    
-    const [newVisitorData, setNewVisitorData] = useState<VisitorData | null>(null);
-    
-    useEffect(() => {
-        if (visitorData && newVisitorData?.context && OS_NAME in newVisitorData.context) {
-            setNewVisitorData({
-                ...(visitorData as VisitorData),
-                id: visitorData.id,
-                context: {
-                    ...visitorData?.context,
-                    [OS_NAME]: Platform.OS,
-                    [OS_VERSION_CODE]: Platform.Version?.toString()
-                }
-            });
-        }
-    }, [JSON.stringify(visitorData)]);
+const FlagshipProviderFunc: React.FC<FlagshipProviderProps> = ({
+    children,
+    visitorCacheImplementation,
+    hitCacheImplementation,
+    visitorData,
+    ...props
+}) => {
+    const [processedVisitorData, setProcessedVisitorData] = useState<VisitorData | null>(null);
+    const firstTimeInitRef = React.useRef<boolean>();
 
-    useEffect(() => {
-        async function loadPredefinedContext() {
-            let firstTimeInit = null;
-            try {
-                firstTimeInit = await AsyncStorage.getItem(SDK_FIRST_TIME_INIT);
-            } catch (error) {
-                Flagship.getConfig()?.logManager?.error(
-                    'Error on get item from AsyncStorage',
-                    'loadPredefinedContext'
-                );
+    const loadPredefinedContext = useCallback(async () => {
+        try {
+            if (firstTimeInitRef.current !== undefined) {
+                return;
             }
-
-            setNewVisitorData({
-                ...(visitorData as VisitorData),
-                id: visitorData?.id,
-                context: {
-                    ...visitorData?.context,
-                    [OS_NAME]: Platform.OS,
-                    [OS_VERSION_CODE]: Platform.Version?.toString(),
-                    [SDK_FIRST_TIME_INIT]: !firstTimeInit
-                }
-            });
-
-            AsyncStorage.setItem(SDK_FIRST_TIME_INIT, SDK_FIRST_TIME_INIT);
-        }
-        if (visitorData) {
-            loadPredefinedContext();
+            const firstTimeInit = await AsyncStorage.getItem(
+                SDK_FIRST_TIME_INIT
+            );
+            firstTimeInitRef.current = !firstTimeInit;
+            await AsyncStorage.setItem(
+                SDK_FIRST_TIME_INIT,
+                SDK_FIRST_TIME_INIT
+            );
+        } catch (error) {
+            Flagship.getConfig()?.logManager?.error(
+                'Error accessing AsyncStorage',
+                'loadPredefinedContext'
+            );
         }
     }, []);
-    
+
+    const updateVisitorData = useCallback(
+        (data: VisitorData): VisitorData => ({
+            ...data,
+            id: data.id,
+            context: {
+                ...data.context,
+                [OS_NAME]: Platform.OS,
+                [OS_VERSION_CODE]: Platform.Version?.toString(),
+                [SDK_FIRST_TIME_INIT]: !!firstTimeInitRef.current
+            }
+        }),
+        []
+    );
+
+    useEffect(() => {
+        async function initialize() {
+            await loadPredefinedContext();
+            if (visitorData) {
+                const updatedData = updateVisitorData(visitorData);
+                setProcessedVisitorData(updatedData);
+            }
+        }
+        initialize();
+    }, [visitorData, updateVisitorData, loadPredefinedContext]);
+
+    const visitorCache = useMemo(() => {
+        return visitorCacheImplementation || new DefaultVisitorCache();
+    }, [visitorCacheImplementation]);
+
+    const hitCache = useMemo(() => {
+        return hitCacheImplementation || new DefaultHitCache();
+    }, [hitCacheImplementation]);
+
+    const trackingConfig = useMemo(() => {
+        return (
+            props.trackingManagerConfig || {
+                poolMaxSize: DEFAULT_POOL_MAX_SIZE,
+                batchIntervals: DEFAULT_TIME_INTERVAL,
+                cacheStrategy: CacheStrategy.CONTINUOUS_CACHING
+            }
+        );
+    }, [props.trackingManagerConfig]);
+
     return (
         <ReactFlagshipProvider
             {...props}
-            trackingManagerConfig={
-                props.trackingManagerConfig || {
-                    poolMaxSize: DEFAULT_POOL_MAX_SIZE,
-                    batchIntervals: DEFAULT_TIME_INTERVAL,
-                    cacheStrategy: CacheStrategy.CONTINUOUS_CACHING
-                }
-            }
+            trackingManagerConfig={trackingConfig}
             sdkVersion={SDK_VERSION}
             language={2}
-            visitorCacheImplementation={
-                visitorCacheImplementation || new DefaultVisitorCache()
-            }
-            hitCacheImplementation={
-                hitCacheImplementation || new DefaultHitCache()
-            }
-            visitorData={newVisitorData}
+            visitorCacheImplementation={visitorCache}
+            hitCacheImplementation={hitCache}
+            visitorData={processedVisitorData}
             shouldSaveInstance={true}
         >
             <TouchCaptureProvider>{children}</TouchCaptureProvider>
         </ReactFlagshipProvider>
     );
 };
+
+export const FlagshipProvider = React.memo(FlagshipProviderFunc);
