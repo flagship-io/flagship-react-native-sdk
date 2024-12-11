@@ -22,6 +22,14 @@ jest.mock('@flagship.io/react-sdk', () => {
     };
 });
 
+function sleep(time: number): Promise<void> {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            resolve();
+        }, time);
+    });
+}
+
 describe('TouchCaptureProvider', () => {
     const mockSendEaiVisitorEvent = jest.fn();
     const mockOnEAICollectStatusChange =
@@ -51,16 +59,16 @@ describe('TouchCaptureProvider', () => {
         jest.useRealTimers();
     });
 
-    // it('renders children correctly', () => {
-    //     const { getByText } = render(
-    //         <TouchCaptureProvider>
-    //             <View>
-    //                 <Text>Child Component</Text>
-    //             </View>
-    //         </TouchCaptureProvider>
-    //     );
-    //     expect(getByText('Child Component')).toBeTruthy();
-    // });
+    it('renders children correctly', () => {
+        const { getByText } = render(
+            <TouchCaptureProvider>
+                <View>
+                    <Text>Child Component</Text>
+                </View>
+            </TouchCaptureProvider>
+        );
+        expect(getByText('Child Component')).toBeTruthy();
+    });
 
     it('calls sendTouchPositionEvent on touch start', async () => {
         let onEAICollectStatusChange: ((status: boolean) => void) | undefined;
@@ -136,7 +144,7 @@ describe('TouchCaptureProvider', () => {
         );
     });
 
-    it('calls sendTouchPathEvent on touch move',async () => {
+    it('calls sendTouchPathEvent on touch move', async () => {
         let onEAICollectStatusChange: ((status: boolean) => void) | undefined;
         mockOnEAICollectStatusChange.mockImplementation((fn) => {
             onEAICollectStatusChange = fn;
@@ -152,9 +160,9 @@ describe('TouchCaptureProvider', () => {
             onEAICollectStatusChange?.(true);
         });
 
-        act(() => {
+        await act(() => {
             fireEvent(getByTestId('test-view'), 'touchMove', {
-                nativeEvent: { pageX: 150, pageY: 250 },
+                nativeEvent: { pageX: 150, pageY: 250 }
             });
         });
 
@@ -172,43 +180,173 @@ describe('TouchCaptureProvider', () => {
             { timeout: TIMEOUT_DURATION + 100 }
         );
 
+        await act(() => {
+            fireEvent(getByTestId('test-view'), 'touchStart', {
+                nativeEvent: { pageX: 100, pageY: 200 }
+            });
+            for (let index = 0; index < 136; index++) {
+                const pageX = 150 + index;
+                const pageY = 250 + index;
+                fireEvent(getByTestId('test-view'), 'touchMove', {
+                    nativeEvent: { pageX, pageY }
+                });
+            }
+        });
+
+        await waitFor(
+            () => {
+                expect(mockSendEaiVisitorEvent).toHaveBeenCalledTimes(2);
+                expect(mockSendEaiVisitorEvent).toHaveBeenNthCalledWith(2, {
+                    customerAccountId: 'testEnvId',
+                    visitorId: 'testVisitorId',
+                    currentUrl: '',
+                    clickPath: expect.stringMatching(
+                        /^(?:\d{3},\d{3},\d{5};)+$/
+                    ),
+                    screenSize: '1080,1920;'
+                });
+            },
+            { timeout: 100 }
+        );
     });
 
-    // it('does not attach touch handlers when not collecting EAI data', () => {
-    //     const { getByTestId } = render(
-    //         <TouchCaptureProvider>
-    //             <View testId="test-view" />
-    //         </TouchCaptureProvider>
-    //     );
+    it('does not attach touch handlers when not collecting EAI data', async () => {
+        const { getByTestId } = render(
+            <TouchCaptureProvider>
+                <Button testID="test-view" title="button" />
+            </TouchCaptureProvider>
+        );
 
-    //     // Simulate isEAIDataCollecting as false
-    //     // This might require modifying the component to accept props for testing
-    //     // Alternatively, ensure that the initial state is false and handlers are undefined
+        await act(() => {
+            fireEvent(getByTestId('test-view'), 'touchStart', {
+                nativeEvent: { pageX: 100, pageY: 200 }
+            });
 
-    //     const view = getByTestId('test-view');
-    //     expect(view.props.onTouchStart).toBeUndefined();
-    //     expect(view.props.onTouchMove).toBeUndefined();
-    // });
+            fireEvent(getByTestId('test-view'), 'touchMove', {
+                nativeEvent: { pageX: 150, pageY: 250 }
+            });
+        });
 
-    // it('attaches touch handlers when EAI data is collecting', () => {
-    //     const { getByTestId, rerender } = render(
-    //         <TouchCaptureProvider>
-    //             <View testId="test-view" />
-    //         </TouchCaptureProvider>
-    //     );
+        await waitFor(
+            () => {
+                expect(mockSendEaiVisitorEvent).toHaveBeenCalledTimes(0);
+            },
+            { timeout: TIMEOUT_DURATION + 100 }
+        );
+    });
+});
 
-    //     // Simulate isEAIDataCollecting as true
-    //     // This might require modifying the component to accept props or mocking the state
+describe('TouchCaptureProvider with undefined visitor', () => {
+    const mockSendEaiVisitorEvent = jest.fn();
+    const mockOnEAICollectStatusChange =
+        jest.fn<(fn: (status: boolean) => void) => void>();
 
-    //     // Assuming there is a way to set isEAIDataCollecting to true
-    //     // This part may vary based on implementation
+    beforeEach(() => {
+        jest.clearAllMocks();
 
-    //     // Example:
-    //     // setIsEAIDataCollecting(true);
-    //     // rerender(...)
+        const mockVisitor = {
+            visitorId: 'testVisitorId',
+            sendEaiVisitorEvent: mockSendEaiVisitorEvent,
+            onEAICollectStatusChange: mockOnEAICollectStatusChange
+        };
 
-    //     // Then check if handlers are attached
-    //     // expect(view.props.onTouchStart).toBeDefined();
-    //     // expect(view.props.onTouchMove).toBeDefined();
-    // });
+        (Flagship.getVisitor as jest.Mock).mockReturnValue(mockVisitor);
+
+        Dimensions.get = jest
+            .fn<(dim: 'window' | 'screen') => ScaledSize>()
+            .mockReturnValue({
+                width: 1080,
+                height: 1920,
+                scale: 1,
+                fontScale: 1
+            });
+    });
+
+    it('renders children correctly', async () => {
+        (Flagship.getVisitor as jest.Mock).mockReturnValue(undefined);
+        let onEAICollectStatusChange: ((status: boolean) => void) | undefined;
+        mockOnEAICollectStatusChange.mockImplementation((fn) => {
+            onEAICollectStatusChange = fn;
+        });
+
+        const { getByText } = render(
+            <TouchCaptureProvider>
+                <View>
+                    <Text>Child Component</Text>
+                </View>
+            </TouchCaptureProvider>
+        );
+
+        await waitFor(() => {
+            expect(mockOnEAICollectStatusChange).toHaveBeenCalledTimes(0);
+        });
+    });
+
+    it('touch start', async () => {
+        let onEAICollectStatusChange: ((status: boolean) => void) | undefined;
+        mockOnEAICollectStatusChange.mockImplementation((fn) => {
+            onEAICollectStatusChange = fn;
+        });
+
+        const { getByTestId } = render(
+            <TouchCaptureProvider>
+                <Button testID="test-view" title="button" />
+            </TouchCaptureProvider>
+        );
+
+        await waitFor(() => {
+            onEAICollectStatusChange?.(true);
+        });
+
+        (Flagship.getVisitor as jest.Mock).mockReturnValue(undefined);
+
+        await act(() => {
+            fireEvent(getByTestId('test-view'), 'touchStart', {
+                nativeEvent: { pageX: 100, pageY: 200 }
+            });
+        });
+
+        await sleep(TIMEOUT_DURATION + 100);
+
+        await waitFor(
+            () => {
+                expect(mockSendEaiVisitorEvent).toHaveBeenCalledTimes(0);
+            },
+            { timeout: TIMEOUT_DURATION + 100 }
+        );
+    });
+
+    it('touch move', async () => {
+        let onEAICollectStatusChange: ((status: boolean) => void) | undefined;
+        mockOnEAICollectStatusChange.mockImplementation((fn) => {
+            onEAICollectStatusChange = fn;
+        });
+
+        const { getByTestId } = render(
+            <TouchCaptureProvider>
+                <Button testID="test-view" title="button" />
+            </TouchCaptureProvider>
+        );
+
+        await waitFor(() => {
+            onEAICollectStatusChange?.(true);
+        });
+
+        (Flagship.getVisitor as jest.Mock).mockReturnValue(undefined);
+
+        await act(() => {
+            fireEvent(getByTestId('test-view'), 'touchMove', {
+                nativeEvent: { pageX: 100, pageY: 200 }
+            });
+        });
+
+        await sleep(TIMEOUT_DURATION + 100);
+
+        await waitFor(
+            () => {
+                expect(mockSendEaiVisitorEvent).toHaveBeenCalledTimes(0);
+            },
+            { timeout: TIMEOUT_DURATION + 100 }
+        );
+    });
 });
