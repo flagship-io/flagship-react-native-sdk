@@ -1,6 +1,7 @@
 'use client'
 
 import { Flagship, IPageView, UseFlagshipOutput as OriginalUseFlagshipOutput, useFlagship as useFs } from '@flagship.io/react-sdk'
+import { useCallback } from 'react';
 import { Dimensions, PixelRatio, Platform } from 'react-native';
 
 export type UseFlagshipOutput =  Omit<OriginalUseFlagshipOutput, 'collectEAIDataAsync'> & {
@@ -57,22 +58,23 @@ const createPageView = (
 export const useFlagship = (): UseFlagshipOutput => {
   const {collectEAIDataAsync:fsCollectEAIDataAsync, ...fs} = useFs()
 
-  function sendEaiPageView (screenName: string): void {
+  const sendEaiPageView = useCallback((screenName: string): void =>{
     if (!fs.context) {
       return
     }
     const pageView :IPageView = createPageView(fs.visitorId as string, screenName)
     const visitor = Flagship.getVisitor() as any
     visitor.sendEaiPageView(pageView)
-  }
+  }, [fs.context])
 
-  async function collectEAIDataAsync (screenName:string): Promise<void> {
+  const collectEAIDataAsync = useCallback(async (screenName:string): Promise<void> => {
     if (!fs.context) {
       return
     }
     const pageView :IPageView = createPageView(fs.visitorId as string, screenName)
     return (fsCollectEAIDataAsync as any)(pageView)
-  }
+  }, [fsCollectEAIDataAsync, fs.context])
+
 
   return {
     ...fs,
