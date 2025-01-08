@@ -12,5 +12,5 @@
         "jsx": "react-native",
         "skipLibCheck": true
     },
-    "include": ["src/**/*", "test/TouchCaptureProvider.test.tsx"]
+    "include": ["src/**/*"]
 }
