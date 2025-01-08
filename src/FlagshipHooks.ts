@@ -1,11 +1,11 @@
 'use client'
 
 import { Flagship, IPageView, UseFlagshipOutput as OriginalUseFlagshipOutput, useFlagship as useFs } from '@flagship.io/react-sdk'
-import { useCallback } from 'react';
+import { useCallback, useMemo } from 'react';
 import { Dimensions, PixelRatio, Platform } from 'react-native';
 
-export type UseFlagshipOutput =  Omit<OriginalUseFlagshipOutput, 'collectEAIDataAsync'> & {
-  collectEAIDataAsync: (screenNam: string) => Promise<void>
+export type UseFlagshipOutput =  Omit<OriginalUseFlagshipOutput, 'collectEAIEventsAsync'> & {
+  collectEAIEventsAsync: (screenNam: string) => Promise<void>
   sendEaiPageView: (screenName: string) => void
 }
 
@@ -56,7 +56,8 @@ const createPageView = (
 
 
 export const useFlagship = (): UseFlagshipOutput => {
-  const {collectEAIDataAsync:fsCollectEAIDataAsync, ...fs} = useFs()
+  // const {collectEAIDataAsync:fsCollectEAIDataAsync, ...fs} = useFs()
+  const fs = useFs()
 
   const sendEaiPageView = useCallback((screenName: string): void =>{
     if (!fs.context) {
@@ -67,18 +68,17 @@ export const useFlagship = (): UseFlagshipOutput => {
     visitor.sendEaiPageView(pageView)
   }, [fs.context])
 
-  const collectEAIDataAsync = useCallback(async (screenName:string): Promise<void> => {
+  const collectEAIEventsAsync = useCallback(async (screenName:string): Promise<void> => {
     if (!fs.context) {
       return
     }
     const pageView :IPageView = createPageView(fs.visitorId as string, screenName)
-    return (fsCollectEAIDataAsync as any)(pageView)
-  }, [fsCollectEAIDataAsync, fs.context])
+    return (fs.collectEAIEventsAsync as any)(pageView)
+  }, [fs.collectEAIEventsAsync, fs.context])
 
-
-  return {
+  return useMemo(()=>({
     ...fs,
-    collectEAIDataAsync,
+    collectEAIEventsAsync,
     sendEaiPageView
-  }
+  }), [fs, collectEAIEventsAsync, sendEaiPageView])
 }

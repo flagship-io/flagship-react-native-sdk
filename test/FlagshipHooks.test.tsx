@@ -41,7 +41,7 @@ describe('useFlagship', () => {
         (useFs as jest.Mock).mockReturnValue({
             context: { someContext: true },
             visitorId: 'visitor123',
-            collectEAIDataAsync: mockCollectEAIDataAsync
+            collectEAIEventsAsync: mockCollectEAIDataAsync
             // other properties if needed
         });
         jest.clearAllMocks();
@@ -49,7 +49,7 @@ describe('useFlagship', () => {
 
     it('should return collectEAIDataAsync and sendEaiPageView functions', () => {
         const { result } = renderHook(() => useFlagship());
-        expect(result.current.collectEAIDataAsync).toBeInstanceOf(Function);
+        expect(result.current.collectEAIEventsAsync).toBeInstanceOf(Function);
         expect(result.current.sendEaiPageView).toBeInstanceOf(Function);
     });
 
@@ -88,7 +88,7 @@ describe('useFlagship', () => {
     it('collectEAIDataAsync should call fsCollectEAIDataAsync with correct pageView', async () => {
         const { result } = renderHook(() => useFlagship());
         await act(async () => {
-            await result.current.collectEAIDataAsync('ProfileScreen');
+            await result.current.collectEAIEventsAsync('ProfileScreen');
         });
 
         expect(mockCollectEAIDataAsync).toHaveBeenCalledWith({
@@ -136,13 +136,13 @@ describe('useFlagship', () => {
         (useFs as jest.Mock).mockReturnValue({
             context: undefined,
             visitorId: 'visitor123',
-            collectEAIDataAsync: mockCollectEAIDataAsync
+            collectEAIEventsAsync: mockCollectEAIDataAsync
             // other properties if needed
         });
 
         const { result } = renderHook(() => useFlagship());
         await act(async () => {
-            await result.current.collectEAIDataAsync('ProfileScreen');
+            await result.current.collectEAIEventsAsync('ProfileScreen');
         });
 
         expect(mockCollectEAIDataAsync).not.toHaveBeenCalled();
