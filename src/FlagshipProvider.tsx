@@ -21,7 +21,6 @@ export const DEFAULT_POOL_MAX_SIZE = 10;
 export interface FlagshipProviderProps
     extends Omit<
         ReactFlagshipProviderProps,
-        | 'reuseVisitorIds'
         | 'nextFetchConfig'
         | 'sdkVersion'
         | 'language'
@@ -30,6 +29,12 @@ export interface FlagshipProviderProps
 
 // Predefined context keys
 export const SDK_FIRST_TIME_INIT = 'sdk_firstTimeInit';
+export const CLIENT_CACHE_KEY = 'FS_CLIENT_VISITOR';
+
+type AugmentedFlagship = typeof Flagship & {
+    setVisitorProfile: (value: string | null) => void;
+    setOnSaveVisitorProfile: (value: (v: string) => void) => void;
+};
 
 const FlagshipProviderFunc: React.FC<FlagshipProviderProps> = ({
     children,
@@ -38,22 +43,33 @@ const FlagshipProviderFunc: React.FC<FlagshipProviderProps> = ({
     visitorData,
     ...props
 }) => {
-    const [processedVisitorData, setProcessedVisitorData] = useState<VisitorData | null>(null);
+    const [processedVisitorData, setProcessedVisitorData] =
+        useState<VisitorData | null>(null);
     const firstTimeInitRef = React.useRef<boolean>();
+
+    const saveVisitorProfile = useCallback(async (value: string) => {
+        try {
+            await AsyncStorage.setItem(CLIENT_CACHE_KEY, value);
+        } catch (error) {
+            Flagship.getConfig()?.logManager?.error(
+                'Error accessing AsyncStorage',
+                'saveVisitorProfile'
+            );
+        }
+    }, []);
 
     const loadPredefinedContext = useCallback(async () => {
         try {
             if (firstTimeInitRef.current !== undefined) {
                 return;
             }
-            const firstTimeInit = await AsyncStorage.getItem(
-                SDK_FIRST_TIME_INIT
-            );
-            firstTimeInitRef.current = !firstTimeInit;
-            await AsyncStorage.setItem(
-                SDK_FIRST_TIME_INIT,
-                SDK_FIRST_TIME_INIT
-            );
+            const clientCache = await AsyncStorage.getItem(CLIENT_CACHE_KEY);
+
+            const augmentedFlagship = Flagship as AugmentedFlagship;
+            augmentedFlagship.setVisitorProfile(clientCache);
+            augmentedFlagship.setOnSaveVisitorProfile(saveVisitorProfile);
+
+            firstTimeInitRef.current = !clientCache;
         } catch (error) {
             Flagship.getConfig()?.logManager?.error(
                 'Error accessing AsyncStorage',
