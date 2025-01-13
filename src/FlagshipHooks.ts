@@ -6,7 +6,19 @@ import { Dimensions, PixelRatio, Platform } from 'react-native';
 
 export type UseFlagshipOutput =  Omit<OriginalUseFlagshipOutput, 'collectEAIEventsAsync'> & {
   collectEAIEventsAsync: (screenNam: string) => Promise<void>
-  sendEaiPageView: (screenName: string) => void
+  /**
+   * Send a page view event to Emotion AI service.
+   * 
+   * This function should be invoked each time a new screen is displayed.
+   * 
+   * We recommend calling this function in the useEffect hook of the screen component when the screen is mounted.
+   * 
+   * No event will be sent when the emotion AI event collection is not in progress.
+   * 
+   * @param screenName  The name of the screen to be displayed.
+   * @returns 
+   */
+  sendEaiPageViewAsync: (screenName: string) => Promise<void>
 }
 
 type PlatformOS = typeof Platform.OS;
@@ -59,7 +71,7 @@ export const useFlagship = (): UseFlagshipOutput => {
   // const {collectEAIDataAsync:fsCollectEAIDataAsync, ...fs} = useFs()
   const fs = useFs()
 
-  const sendEaiPageView = useCallback((screenName: string): void =>{
+  const sendEaiPageViewAsync = useCallback(async(screenName: string): Promise<void> =>{
     if (!fs.context) {
       return
     }
@@ -79,6 +91,6 @@ export const useFlagship = (): UseFlagshipOutput => {
   return useMemo(()=>({
     ...fs,
     collectEAIEventsAsync,
-    sendEaiPageView
-  }), [fs, collectEAIEventsAsync, sendEaiPageView])
+    sendEaiPageViewAsync
+  }), [fs, collectEAIEventsAsync, sendEaiPageViewAsync])
 }
