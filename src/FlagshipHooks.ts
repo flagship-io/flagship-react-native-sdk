@@ -5,7 +5,12 @@ import { useCallback, useMemo } from 'react';
 import { Dimensions, PixelRatio, Platform } from 'react-native';
 
 export type UseFlagshipOutput =  Omit<OriginalUseFlagshipOutput, 'collectEAIEventsAsync'> & {
-  collectEAIEventsAsync: (screenNam: string) => Promise<void>
+  /**
+   * Collect Emotion AI events.
+   * @param screenName The name of the screen to be displayed. 
+   * @returns 
+   */
+  collectEAIEventsAsync: (screenName: string) => Promise<void>
   /**
    * Send a page view event to Emotion AI service.
    * 
@@ -68,7 +73,7 @@ const createPageView = (
 
 
 export const useFlagship = (): UseFlagshipOutput => {
-  // const {collectEAIDataAsync:fsCollectEAIDataAsync, ...fs} = useFs()
+
   const fs = useFs()
 
   const sendEaiPageViewAsync = useCallback(async(screenName: string): Promise<void> =>{
