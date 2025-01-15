@@ -14,35 +14,30 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Platform } from 'react-native';
 import { version as SDK_VERSION } from './sdkVersion';
 import { TouchCaptureProvider } from './TouchCaptureProvider';
-
-export const DEFAULT_TIME_INTERVAL = 5;
-export const DEFAULT_POOL_MAX_SIZE = 10;
+import { CLIENT_CACHE_KEY, DEFAULT_POOL_MAX_SIZE, DEFAULT_TIME_INTERVAL, SDK_FIRST_TIME_INIT } from './Constant';
 
 export interface FlagshipProviderProps
     extends Omit<
         ReactFlagshipProviderProps,
-        | 'nextFetchConfig'
-        | 'sdkVersion'
-        | 'language'
-        | 'shouldSaveInstance'
+        'nextFetchConfig' | 'sdkVersion' | 'language' | 'shouldSaveInstance'
     > {}
 
-// Predefined context keys
-export const SDK_FIRST_TIME_INIT = 'sdk_firstTimeInit';
-export const CLIENT_CACHE_KEY = 'FS_CLIENT_VISITOR';
+const ERROR_MESSAGE_ASYNC_STORAGE = 'Error accessing AsyncStorage';
+const CONTEXT_LOAD_PREDEFINED = 'loadPredefinedContext';
+const SAVE_VISITOR_PROFILE = 'saveVisitorProfile';
 
 type AugmentedFlagship = typeof Flagship & {
     setVisitorProfile: (value: string | null) => void;
     setOnSaveVisitorProfile: (value: (v: string) => void) => void;
 };
 
-const FlagshipProviderFunc: React.FC<FlagshipProviderProps> = ({
+const FlagshipProviderFunc = ({
     children,
     visitorCacheImplementation,
     hitCacheImplementation,
     visitorData,
     ...props
-}) => {
+}: FlagshipProviderProps) => {
     const [processedVisitorData, setProcessedVisitorData] =
         useState<VisitorData | null>(null);
     const firstTimeInitRef = React.useRef<boolean>();
@@ -52,13 +47,13 @@ const FlagshipProviderFunc: React.FC<FlagshipProviderProps> = ({
             await AsyncStorage.setItem(CLIENT_CACHE_KEY, value);
         } catch (error) {
             Flagship.getConfig()?.logManager?.error(
-                'Error accessing AsyncStorage',
-                'saveVisitorProfile'
+                ERROR_MESSAGE_ASYNC_STORAGE,
+                SAVE_VISITOR_PROFILE
             );
         }
     }, []);
 
-    const loadPredefinedContext = useCallback(async () => {
+    const initializeVisitorProfile = useCallback(async () => {
         try {
             if (firstTimeInitRef.current !== undefined) {
                 return;
@@ -72,8 +67,8 @@ const FlagshipProviderFunc: React.FC<FlagshipProviderProps> = ({
             firstTimeInitRef.current = !clientCache;
         } catch (error) {
             Flagship.getConfig()?.logManager?.error(
-                'Error accessing AsyncStorage',
-                'loadPredefinedContext'
+                ERROR_MESSAGE_ASYNC_STORAGE,
+                CONTEXT_LOAD_PREDEFINED
             );
         }
     }, []);
@@ -94,14 +89,14 @@ const FlagshipProviderFunc: React.FC<FlagshipProviderProps> = ({
 
     useEffect(() => {
         async function initialize() {
-            await loadPredefinedContext();
+            await initializeVisitorProfile();
             if (visitorData) {
                 const updatedData = updateVisitorData(visitorData);
                 setProcessedVisitorData(updatedData);
             }
         }
         initialize();
-    }, [visitorData, updateVisitorData, loadPredefinedContext]);
+    }, [visitorData, updateVisitorData, initializeVisitorProfile]);
 
     const visitorCache = useMemo(() => {
         return visitorCacheImplementation || new DefaultVisitorCache();
