@@ -50,13 +50,13 @@ describe('useFlagship', () => {
     it('should return collectEAIDataAsync and sendEaiPageView functions', () => {
         const { result } = renderHook(() => useFlagship());
         expect(result.current.collectEAIEventsAsync).toBeInstanceOf(Function);
-        expect(result.current.sendEaiPageView).toBeInstanceOf(Function);
+        expect(result.current.sendEaiPageViewAsync).toBeInstanceOf(Function);
     });
 
     it('sendEaiPageView should call Flagship.getVisitor().sendEaiPageView with correct pageView', () => {
         const { result } = renderHook(() => useFlagship());
         act(() => {
-            result.current.sendEaiPageView('HomeScreen');
+            result.current.sendEaiPageViewAsync('HomeScreen');
         });
 
         expect(Flagship.getVisitor).toHaveBeenCalled();
@@ -126,7 +126,7 @@ describe('useFlagship', () => {
 
         const { result } = renderHook(() => useFlagship());
         act(() => {
-            result.current.sendEaiPageView('HomeScreen');
+            result.current.sendEaiPageViewAsync('HomeScreen');
         });
 
         expect(mockSendEaiPageView).not.toHaveBeenCalled();
