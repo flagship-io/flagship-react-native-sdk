@@ -1116,7 +1116,20 @@
     "@babel/parser" "^7.25.9"
     "@babel/types" "^7.25.9"
 
-"@babel/traverse--for-generate-function-map@npm:@babel/traverse@^7.25.3", "@babel/traverse@^7.20.0", "@babel/traverse@^7.25.3", "@babel/traverse@^7.25.9", "@babel/traverse@^7.7.0":
+"@babel/traverse--for-generate-function-map@npm:@babel/traverse@^7.25.3":
+  version "7.26.4"
+  resolved "https://registry.yarnpkg.com/@babel/traverse/-/traverse-7.26.4.tgz#ac3a2a84b908dde6d463c3bfa2c5fdc1653574bd"
+  integrity sha512-fH+b7Y4p3yqvApJALCPJcwb0/XaOSgtK4pzV6WVjPR5GLFQBRI7pfoX2V2iM48NXvX07NUxxm1Vw98YjqTcU5w==
+  dependencies:
+    "@babel/code-frame" "^7.26.2"
+    "@babel/generator" "^7.26.3"
+    "@babel/parser" "^7.26.3"
+    "@babel/template" "^7.25.9"
+    "@babel/types" "^7.26.3"
+    debug "^4.3.1"
+    globals "^11.1.0"
+
+"@babel/traverse@^7.20.0", "@babel/traverse@^7.25.3", "@babel/traverse@^7.25.9", "@babel/traverse@^7.7.0":
   version "7.26.4"
   resolved "https://registry.yarnpkg.com/@babel/traverse/-/traverse-7.26.4.tgz#ac3a2a84b908dde6d463c3bfa2c5fdc1653574bd"
   integrity sha512-fH+b7Y4p3yqvApJALCPJcwb0/XaOSgtK4pzV6WVjPR5GLFQBRI7pfoX2V2iM48NXvX07NUxxm1Vw98YjqTcU5w==
@@ -1142,22 +1155,22 @@
   resolved "https://registry.yarnpkg.com/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz#75a2e8b51cb758a7553d6804a5932d7aace75c39"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
-"@flagship.io/js-sdk@^4.0.2":
-  version "4.0.4"
-  resolved "https://registry.yarnpkg.com/@flagship.io/js-sdk/-/js-sdk-4.0.4.tgz#ce117cd3dc7aa0d65345dcf14a5e457b10516a79"
-  integrity sha512-mwwi7rLhnJs5tSyA00E3sFQk55CNPnWM3m34USLZ4Cj8VIUeDIvitAbfQebB7tt41qGl/S2RBOxF7JViCtTJIA==
+"@flagship.io/js-sdk@^4.1.0-beta.0":
+  version "4.1.0-beta.1"
+  resolved "https://registry.yarnpkg.com/@flagship.io/js-sdk/-/js-sdk-4.1.0-beta.1.tgz#3c586420b5667aad4c3524cce076954d11c77ab9"
+  integrity sha512-spTlBKNBfcdpWeTid+8ObkCiAABgQ8+VsvWV4n4t4EMk/yBe3aF4u0Fj331lVtbkjhJpcU11+vbWRy128UDlBg==
   dependencies:
     events "^3.3.0"
     follow-redirects "^1.15.2"
     node-abort-controller "^3.1.1"
     node-fetch "^2.6.7"
 
-"@flagship.io/react-sdk@^4.0.1":
-  version "4.0.1"
-  resolved "https://registry.yarnpkg.com/@flagship.io/react-sdk/-/react-sdk-4.0.1.tgz#dd654e618324fc34f8e6c7018ae90e657fe97ed7"
-  integrity sha512-xKmt28NchLLMzKwHE/Wx1qqMokI60512vK7Cmt9uPzpzM5C6cAk+rBKRBLY7ajj+5xMQErraaGouKaIpuPIShA==
+"@flagship.io/react-sdk@^4.1.0-beta.0":
+  version "4.1.0-beta.0"
+  resolved "https://registry.yarnpkg.com/@flagship.io/react-sdk/-/react-sdk-4.1.0-beta.0.tgz#ca771e2f24385aeaa29c3c191d5a249ab9b6a92f"
+  integrity sha512-7U8aRxgjFZLc2+zhky1FEN0qN9s/DoUKoj9wLxn8HLE+2RbljeSje9LKNy3GTTYW2+ko3KDfoxZx6Xwm0KzmXA==
   dependencies:
-    "@flagship.io/js-sdk" "^4.0.2"
+    "@flagship.io/js-sdk" "^4.1.0-beta.0"
     encoding "^0.1.13"
 
 "@hapi/hoek@^9.0.0", "@hapi/hoek@^9.3.0":
