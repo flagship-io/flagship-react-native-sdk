@@ -21,5 +21,6 @@
     },
     "[javascriptreact]": {
         "editor.defaultFormatter": null
-    }
+    },
+    "liveServer.settings.port": 5503
 }
