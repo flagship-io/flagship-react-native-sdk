@@ -159,342 +159,342 @@ describe('', () => {
         });
     });
 
-    // describe('FlagshipProvider without visitorData', () => {
-    //     const envId = 'EnvId';
-    //     const apiKey = 'apiKey';
-    //     const onSdkStatusChanged = jest.fn();
-    //     const onInitStart = jest.fn();
-    //     const onInitDone = jest.fn();
-    //     const onUpdate = jest.fn();
-    //     const onBucketingUpdated = jest.fn();
+    describe('FlagshipProvider without visitorData', () => {
+        const envId = 'EnvId';
+        const apiKey = 'apiKey';
+        const onSdkStatusChanged = jest.fn();
+        const onInitStart = jest.fn();
+        const onInitDone = jest.fn();
+        const onUpdate = jest.fn();
+        const onBucketingUpdated = jest.fn();
 
-    //     it('should initialize with null visitorData', async () => {
-    //         const props = {
-    //             envId,
-    //             apiKey,
-    //             decisionMode: DecisionMode.DECISION_API,
-    //             visitorData: null,
-    //             statusChangedCallback: onSdkStatusChanged,
-    //             onInitStart,
-    //             onInitDone,
-    //             onUpdate,
-    //             onBucketingUpdated
-    //         };
-    //         const Component = () => <Text>children</Text>;
-    //         render(
-    //             <FlagshipProvider {...props}>
-    //                 <Component />
-    //             </FlagshipProvider>
-    //         );
+        it('should initialize with null visitorData', async () => {
+            const props = {
+                envId,
+                apiKey,
+                decisionMode: DecisionMode.DECISION_API,
+                visitorData: null,
+                statusChangedCallback: onSdkStatusChanged,
+                onInitStart,
+                onInitDone,
+                onUpdate,
+                onBucketingUpdated
+            };
+            const Component = () => <Text>children</Text>;
+            render(
+                <FlagshipProvider {...props}>
+                    <Component />
+                </FlagshipProvider>
+            );
 
-    //         await waitFor(() => {
-    //             expect(reactFlagshipProvider).toBeCalledTimes(1);
-    //             expect(reactProps.visitorCacheImplementation).toBeInstanceOf(
-    //                 DefaultVisitorCache
-    //             );
-    //             expect(reactProps.hitCacheImplementation).toBeInstanceOf(
-    //                 DefaultHitCache
-    //             );
-    //             expect(reactProps.visitorData).toBeNull();
-    //             expect(setVisitorProfile).toBeCalledTimes(0);
-    //             expect(setOnSaveVisitorProfile).toBeCalledTimes(0);
-    //         });
-    //     });
-    // });
+            await waitFor(() => {
+                expect(reactFlagshipProvider).toBeCalledTimes(1);
+                expect(reactProps.visitorCacheImplementation).toBeInstanceOf(
+                    DefaultVisitorCache
+                );
+                expect(reactProps.hitCacheImplementation).toBeInstanceOf(
+                    DefaultHitCache
+                );
+                expect(reactProps.visitorData).toBeNull();
+                expect(setVisitorProfile).toBeCalledTimes(0);
+                expect(setOnSaveVisitorProfile).toBeCalledTimes(0);
+            });
+        });
+    });
 
-    // describe('FlagshipProvider with visitor profile', () => {
-    //     const visitorData = {
-    //         id: 'visitor_id',
-    //         context: {
-    //             isReactNative: true
-    //         },
-    //         isAuthenticated: false,
-    //         hasConsented: true
-    //     };
-    //     const envId = 'EnvId';
-    //     const apiKey = 'apiKey';
+    describe('FlagshipProvider with visitor profile', () => {
+        const visitorData = {
+            id: 'visitor_id',
+            context: {
+                isReactNative: true
+            },
+            isAuthenticated: false,
+            hasConsented: true
+        };
+        const envId = 'EnvId';
+        const apiKey = 'apiKey';
 
-    //     let onSaveVisitorProfile: ((value: string) => void) | undefined;
-    //     setOnSaveVisitorProfile.mockImplementation((value) => {
-    //         onSaveVisitorProfile = value;
-    //     });
+        let onSaveVisitorProfile: ((value: string) => void) | undefined;
+        setOnSaveVisitorProfile.mockImplementation((value) => {
+            onSaveVisitorProfile = value;
+        });
 
-    //     it('should load visitor profile form storage', async () => {
-    //         const visitorProfile = JSON.stringify({
-    //             anonymousId: 'anonymous_id',
-    //             visitorId: 'visitor_id'
-    //         });
+        it('should load visitor profile form storage', async () => {
+            const visitorProfile = JSON.stringify({
+                anonymousId: 'anonymous_id',
+                visitorId: 'visitor_id'
+            });
 
-    //         (mockAsyncStorage.getItem as any).mockResolvedValueOnce(
-    //             visitorProfile
-    //         );
+            (mockAsyncStorage.getItem as any).mockResolvedValueOnce(
+                visitorProfile
+            );
 
-    //         const props = {
-    //             envId,
-    //             apiKey,
-    //             decisionMode: DecisionMode.DECISION_API,
-    //             visitorData
-    //         };
-    //         const Component = () => <Text>children</Text>;
+            const props = {
+                envId,
+                apiKey,
+                decisionMode: DecisionMode.DECISION_API,
+                visitorData
+            };
+            const Component = () => <Text>children</Text>;
 
-    //         const { rerender } = render(
-    //             <FlagshipProvider {...props}>
-    //                 <Component />
-    //             </FlagshipProvider>
-    //         );
+            const { rerender } = render(
+                <FlagshipProvider {...props}>
+                    <Component />
+                </FlagshipProvider>
+            );
 
-    //         await waitFor(() => {
-    //             expect(reactFlagshipProvider).toBeCalledTimes(2);
-    //             expect(reactProps.visitorCacheImplementation).toBeInstanceOf(
-    //                 DefaultVisitorCache
-    //             );
-    //             expect(reactProps.hitCacheImplementation).toBeInstanceOf(
-    //                 DefaultHitCache
-    //             );
-    //             expect(reactProps.visitorData).toEqual(
-    //                 expect.objectContaining({
-    //                     ...visitorData,
-    //                     context: {
-    //                         ...visitorData.context,
-    //                         [OS_NAME]: Platform.OS,
-    //                         [OS_VERSION_CODE]: Platform.Version,
-    //                         [SDK_FIRST_TIME_INIT]: false
-    //                     }
-    //                 })
-    //             );
-    //             expect(setVisitorProfile).toBeCalledTimes(1);
-    //             expect(setVisitorProfile).toBeCalledWith(visitorProfile);
-    //             expect(setOnSaveVisitorProfile).toBeCalledTimes(1);
-    //             expect(setOnSaveVisitorProfile).toBeCalledWith(
-    //                 onSaveVisitorProfile
-    //             );
-    //             expect(onSaveVisitorProfile).toBeInstanceOf(Function);
-    //         });
+            await waitFor(() => {
+                expect(reactFlagshipProvider).toBeCalledTimes(2);
+                expect(reactProps.visitorCacheImplementation).toBeInstanceOf(
+                    DefaultVisitorCache
+                );
+                expect(reactProps.hitCacheImplementation).toBeInstanceOf(
+                    DefaultHitCache
+                );
+                expect(reactProps.visitorData).toEqual(
+                    expect.objectContaining({
+                        ...visitorData,
+                        context: {
+                            ...visitorData.context,
+                            [OS_NAME]: Platform.OS,
+                            [OS_VERSION_CODE]: Platform.Version,
+                            [SDK_FIRST_TIME_INIT]: false
+                        }
+                    })
+                );
+                expect(setVisitorProfile).toBeCalledTimes(1);
+                expect(setVisitorProfile).toBeCalledWith(visitorProfile);
+                expect(setOnSaveVisitorProfile).toBeCalledTimes(1);
+                expect(setOnSaveVisitorProfile).toBeCalledWith(
+                    onSaveVisitorProfile
+                );
+                expect(onSaveVisitorProfile).toBeInstanceOf(Function);
+            });
 
-    //         const visitorData2 = {
-    //             ...visitorData,
-    //             id: 'visitor_id2'
-    //         };
+            const visitorData2 = {
+                ...visitorData,
+                id: 'visitor_id2'
+            };
 
-    //         rerender(
-    //             <FlagshipProvider {...props} visitorData={visitorData2}>
-    //                 <Component />
-    //             </FlagshipProvider>
-    //         );
+            rerender(
+                <FlagshipProvider {...props} visitorData={visitorData2}>
+                    <Component />
+                </FlagshipProvider>
+            );
 
-    //         await waitFor(() => {
-    //             expect(reactFlagshipProvider).toBeCalledTimes(4);
-    //             expect(reactProps.visitorCacheImplementation).toBeInstanceOf(
-    //                 DefaultVisitorCache
-    //             );
-    //             expect(reactProps.hitCacheImplementation).toBeInstanceOf(
-    //                 DefaultHitCache
-    //             );
-    //             expect(reactProps.visitorData).toEqual(
-    //                 expect.objectContaining({
-    //                     ...visitorData2,
-    //                     context: {
-    //                         ...visitorData2.context,
-    //                         [OS_NAME]: Platform.OS,
-    //                         [OS_VERSION_CODE]: Platform.Version,
-    //                         [SDK_FIRST_TIME_INIT]: false
-    //                     }
-    //                 })
-    //             );
-    //             expect(setVisitorProfile).toBeCalledTimes(1);
-    //             expect(setOnSaveVisitorProfile).toBeCalledTimes(1);
-    //         });
-    //     });
+            await waitFor(() => {
+                expect(reactFlagshipProvider).toBeCalledTimes(4);
+                expect(reactProps.visitorCacheImplementation).toBeInstanceOf(
+                    DefaultVisitorCache
+                );
+                expect(reactProps.hitCacheImplementation).toBeInstanceOf(
+                    DefaultHitCache
+                );
+                expect(reactProps.visitorData).toEqual(
+                    expect.objectContaining({
+                        ...visitorData2,
+                        context: {
+                            ...visitorData2.context,
+                            [OS_NAME]: Platform.OS,
+                            [OS_VERSION_CODE]: Platform.Version,
+                            [SDK_FIRST_TIME_INIT]: false
+                        }
+                    })
+                );
+                expect(setVisitorProfile).toBeCalledTimes(1);
+                expect(setOnSaveVisitorProfile).toBeCalledTimes(1);
+            });
+        });
 
-    //     it('should save visitor profile to storage', async () => {
-    //         const visitorProfile = JSON.stringify({
-    //             anonymousId: 'anonymous_id',
-    //             visitorId: 'visitor_id'
-    //         });
+        it('should save visitor profile to storage', async () => {
+            const visitorProfile = JSON.stringify({
+                anonymousId: 'anonymous_id',
+                visitorId: 'visitor_id'
+            });
 
-    //         (mockAsyncStorage.getItem as any).mockResolvedValueOnce(
-    //             visitorProfile
-    //         );
+            (mockAsyncStorage.getItem as any).mockResolvedValueOnce(
+                visitorProfile
+            );
 
-    //         const props = {
-    //             envId,
-    //             apiKey,
-    //             decisionMode: DecisionMode.DECISION_API,
-    //             visitorData
-    //         };
-    //         const Component = () => <Text>children</Text>;
+            const props = {
+                envId,
+                apiKey,
+                decisionMode: DecisionMode.DECISION_API,
+                visitorData
+            };
+            const Component = () => <Text>children</Text>;
 
-    //         render(
-    //             <FlagshipProvider {...props}>
-    //                 <Component />
-    //             </FlagshipProvider>
-    //         );
+            render(
+                <FlagshipProvider {...props}>
+                    <Component />
+                </FlagshipProvider>
+            );
 
-    //         const visitorProfile2 = JSON.stringify({
-    //             anonymousId: 'anonymous_id2',
-    //             visitorId: 'visitor_id2'
-    //         });
+            const visitorProfile2 = JSON.stringify({
+                anonymousId: 'anonymous_id2',
+                visitorId: 'visitor_id2'
+            });
 
-    //         onSaveVisitorProfile!(visitorProfile2);
+            onSaveVisitorProfile!(visitorProfile2);
 
-    //         await waitFor(() => {
-    //             expect(reactFlagshipProvider).toBeCalledTimes(2);
-    //             expect(reactProps.visitorCacheImplementation).toBeInstanceOf(
-    //                 DefaultVisitorCache
-    //             );
-    //             expect(reactProps.hitCacheImplementation).toBeInstanceOf(
-    //                 DefaultHitCache
-    //             );
-    //             expect(reactProps.visitorData).toEqual(
-    //                 expect.objectContaining({
-    //                     ...visitorData,
-    //                     context: {
-    //                         ...visitorData.context,
-    //                         [OS_NAME]: Platform.OS,
-    //                         [OS_VERSION_CODE]: Platform.Version,
-    //                         [SDK_FIRST_TIME_INIT]: false
-    //                     }
-    //                 })
-    //             );
-    //             expect(setVisitorProfile).toBeCalledTimes(1);
-    //             expect(setVisitorProfile).toBeCalledWith(visitorProfile);
-    //             expect(setOnSaveVisitorProfile).toBeCalledTimes(1);
-    //             expect(setOnSaveVisitorProfile).toBeCalledWith(
-    //                 onSaveVisitorProfile
-    //             );
-    //             expect(mockAsyncStorage.setItem).toBeCalledTimes(1);
-    //             expect(mockAsyncStorage.setItem).toBeCalledWith(
-    //                 CLIENT_CACHE_KEY,
-    //                 visitorProfile2
-    //             );
-    //         });
-    //     });
+            await waitFor(() => {
+                expect(reactFlagshipProvider).toBeCalledTimes(2);
+                expect(reactProps.visitorCacheImplementation).toBeInstanceOf(
+                    DefaultVisitorCache
+                );
+                expect(reactProps.hitCacheImplementation).toBeInstanceOf(
+                    DefaultHitCache
+                );
+                expect(reactProps.visitorData).toEqual(
+                    expect.objectContaining({
+                        ...visitorData,
+                        context: {
+                            ...visitorData.context,
+                            [OS_NAME]: Platform.OS,
+                            [OS_VERSION_CODE]: Platform.Version,
+                            [SDK_FIRST_TIME_INIT]: false
+                        }
+                    })
+                );
+                expect(setVisitorProfile).toBeCalledTimes(1);
+                expect(setVisitorProfile).toBeCalledWith(visitorProfile);
+                expect(setOnSaveVisitorProfile).toBeCalledTimes(1);
+                expect(setOnSaveVisitorProfile).toBeCalledWith(
+                    onSaveVisitorProfile
+                );
+                expect(mockAsyncStorage.setItem).toBeCalledTimes(1);
+                expect(mockAsyncStorage.setItem).toBeCalledWith(
+                    CLIENT_CACHE_KEY,
+                    visitorProfile2
+                );
+            });
+        });
 
-    //     it('should throw error while saving visitor profile to storage', async () => {
-    //         const visitorProfile = JSON.stringify({
-    //             anonymousId: 'anonymous_id',
-    //             visitorId: 'visitor_id'
-    //         });
+        it('should throw error while saving visitor profile to storage', async () => {
+            const visitorProfile = JSON.stringify({
+                anonymousId: 'anonymous_id',
+                visitorId: 'visitor_id'
+            });
 
-    //         (mockAsyncStorage.getItem as any).mockResolvedValueOnce(
-    //             visitorProfile
-    //         );
+            (mockAsyncStorage.getItem as any).mockResolvedValueOnce(
+                visitorProfile
+            );
 
-    //         const props = {
-    //             envId,
-    //             apiKey,
-    //             decisionMode: DecisionMode.DECISION_API,
-    //             visitorData
-    //         };
+            const props = {
+                envId,
+                apiKey,
+                decisionMode: DecisionMode.DECISION_API,
+                visitorData
+            };
 
-    //         (mockAsyncStorage.setItem as any).mockRejectedValueOnce(
-    //             new Error('AsyncStorage error')
-    //         );
+            (mockAsyncStorage.setItem as any).mockRejectedValueOnce(
+                new Error('AsyncStorage error')
+            );
 
-    //         const logManager = {
-    //             error: jest.fn()
-    //         };
+            const logManager = {
+                error: jest.fn()
+            };
 
-    //         Flagship.getConfig = jest.fn(
-    //             () =>
-    //                 ({
-    //                     logManager
-    //                 } as any)
-    //         );
+            Flagship.getConfig = jest.fn(
+                () =>
+                    ({
+                        logManager
+                    } as any)
+            );
 
-    //         const Component = () => <Text>children</Text>;
+            const Component = () => <Text>children</Text>;
 
-    //         render(
-    //             <FlagshipProvider {...props}>
-    //                 <Component />
-    //             </FlagshipProvider>
-    //         );
+            render(
+                <FlagshipProvider {...props}>
+                    <Component />
+                </FlagshipProvider>
+            );
 
-    //         const visitorProfile2 = JSON.stringify({
-    //             anonymousId: 'anonymous_id2',
-    //             visitorId: 'visitor_id2'
-    //         });
+            const visitorProfile2 = JSON.stringify({
+                anonymousId: 'anonymous_id2',
+                visitorId: 'visitor_id2'
+            });
 
-    //         onSaveVisitorProfile!(visitorProfile2);
+            onSaveVisitorProfile!(visitorProfile2);
 
-    //         await waitFor(() => {
-    //             expect(reactFlagshipProvider).toBeCalledTimes(2);
-    //             expect(reactProps.visitorCacheImplementation).toBeInstanceOf(
-    //                 DefaultVisitorCache
-    //             );
-    //             expect(reactProps.hitCacheImplementation).toBeInstanceOf(
-    //                 DefaultHitCache
-    //             );
-    //             expect(reactProps.visitorData).toEqual(
-    //                 expect.objectContaining({
-    //                     ...visitorData,
-    //                     context: {
-    //                         ...visitorData.context,
-    //                         [OS_NAME]: Platform.OS,
-    //                         [OS_VERSION_CODE]: Platform.Version,
-    //                         [SDK_FIRST_TIME_INIT]: false
-    //                     }
-    //                 })
-    //             );
-    //             expect(setVisitorProfile).toBeCalledTimes(1);
-    //             expect(setVisitorProfile).toBeCalledWith(visitorProfile);
-    //             expect(setOnSaveVisitorProfile).toBeCalledTimes(1);
-    //             expect(setOnSaveVisitorProfile).toBeCalledWith(
-    //                 onSaveVisitorProfile
-    //             );
-    //             expect(logManager.error).toBeCalledTimes(1);
-    //         });
-    //     });
-    // });
+            await waitFor(() => {
+                expect(reactFlagshipProvider).toBeCalledTimes(2);
+                expect(reactProps.visitorCacheImplementation).toBeInstanceOf(
+                    DefaultVisitorCache
+                );
+                expect(reactProps.hitCacheImplementation).toBeInstanceOf(
+                    DefaultHitCache
+                );
+                expect(reactProps.visitorData).toEqual(
+                    expect.objectContaining({
+                        ...visitorData,
+                        context: {
+                            ...visitorData.context,
+                            [OS_NAME]: Platform.OS,
+                            [OS_VERSION_CODE]: Platform.Version,
+                            [SDK_FIRST_TIME_INIT]: false
+                        }
+                    })
+                );
+                expect(setVisitorProfile).toBeCalledTimes(1);
+                expect(setVisitorProfile).toBeCalledWith(visitorProfile);
+                expect(setOnSaveVisitorProfile).toBeCalledTimes(1);
+                expect(setOnSaveVisitorProfile).toBeCalledWith(
+                    onSaveVisitorProfile
+                );
+                expect(logManager.error).toBeCalledTimes(1);
+            });
+        });
+    });
 
-    // describe('AsyncStorage throw while loadPredefinedContext', () => {
-    //     const envId = 'EnvId';
-    //     const apiKey = 'apiKey';
+    describe('AsyncStorage throw while loadPredefinedContext', () => {
+        const envId = 'EnvId';
+        const apiKey = 'apiKey';
 
-    //     const visitorData = {
-    //         id: 'visitor_id',
-    //         context: {
-    //             isReactNative: true
-    //         },
-    //         isAuthenticated: false,
-    //         hasConsented: true
-    //     };
+        const visitorData = {
+            id: 'visitor_id',
+            context: {
+                isReactNative: true
+            },
+            isAuthenticated: false,
+            hasConsented: true
+        };
 
-    //     it('should throw an error', async () => {
-    //         const props = {
-    //             envId,
-    //             apiKey,
-    //             decisionMode: DecisionMode.DECISION_API,
-    //             visitorData
-    //         };
+        it('should throw an error', async () => {
+            const props = {
+                envId,
+                apiKey,
+                decisionMode: DecisionMode.DECISION_API,
+                visitorData
+            };
 
-    //         const logManager = {
-    //             error: jest.fn()
-    //         };
+            const logManager = {
+                error: jest.fn()
+            };
 
-    //         Flagship.getConfig = jest.fn(
-    //             () =>
-    //                 ({
-    //                     logManager
-    //                 } as any)
-    //         );
+            Flagship.getConfig = jest.fn(
+                () =>
+                    ({
+                        logManager
+                    } as any)
+            );
 
-    //         (mockAsyncStorage.getItem as any).mockRejectedValueOnce(
-    //             new Error('AsyncStorage error')
-    //         );
+            (mockAsyncStorage.getItem as any).mockRejectedValueOnce(
+                new Error('AsyncStorage error')
+            );
 
-    //         const Component = () => <Text>children</Text>;
+            const Component = () => <Text>children</Text>;
 
-    //         render(
-    //             <FlagshipProvider {...props}>
-    //                 <Component />
-    //             </FlagshipProvider>
-    //         );
+            render(
+                <FlagshipProvider {...props}>
+                    <Component />
+                </FlagshipProvider>
+            );
 
-    //         await waitFor(() => {
-    //             expect(reactFlagshipProvider).toBeCalledTimes(2);
-    //             expect(logManager.error).toBeCalledTimes(1);
-    //         });
-    //     });
-    // });
+            await waitFor(() => {
+                expect(reactFlagshipProvider).toBeCalledTimes(2);
+                expect(logManager.error).toBeCalledTimes(1);
+            });
+        });
+    });
 });
