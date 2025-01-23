@@ -97,17 +97,17 @@ describe('', () => {
                 expect(reactProps.hitCacheImplementation).toBeInstanceOf(
                     DefaultHitCache
                 );
-                // expect(reactProps.visitorData).toEqual(
-                //     expect.objectContaining({
-                //         ...visitorData,
-                //         context: {
-                //             ...visitorData.context,
-                //             [OS_NAME]: Platform.OS,
-                //             [OS_VERSION_CODE]: Platform.Version,
-                //             [SDK_FIRST_TIME_INIT]: true
-                //         }
-                //     })
-                // );
+                expect(reactProps.visitorData).toEqual(
+                    expect.objectContaining({
+                        ...visitorData,
+                        context: {
+                            ...visitorData.context,
+                            [OS_NAME]: Platform.OS,
+                            [OS_VERSION_CODE]: Platform.Version,
+                            [SDK_FIRST_TIME_INIT]: true
+                        }
+                    })
+                );
                 expect(setVisitorProfile).toBeCalledTimes(1);
                 expect(setVisitorProfile).toBeCalledWith(null);
                 expect(setOnSaveVisitorProfile).toBeCalledTimes(1);
