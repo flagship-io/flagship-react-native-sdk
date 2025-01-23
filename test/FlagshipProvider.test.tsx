@@ -90,7 +90,11 @@ describe('', () => {
 
 
             await waitFor(() => {
-                // expect(reactFlagshipProvider).toBeCalledTimes(2);
+                console.log("reactFlagshipProvider",reactFlagshipProvider);
+                console.log("reactProps",reactProps);
+                
+                
+                expect(reactFlagshipProvider).toBeCalledTimes(2);
                 expect(reactProps.visitorCacheImplementation).toBeInstanceOf(
                     DefaultVisitorCache
                 );
@@ -109,8 +113,8 @@ describe('', () => {
                 //     })
                 // );
                 expect(setVisitorProfile).toBeCalledTimes(1);
-                // expect(setVisitorProfile).toBeCalledWith(null);
-                // expect(setOnSaveVisitorProfile).toBeCalledTimes(1);
+                expect(setVisitorProfile).toBeCalledWith(null);
+                expect(setOnSaveVisitorProfile).toBeCalledTimes(1);
             });
 
             // const visitorData2 = {
