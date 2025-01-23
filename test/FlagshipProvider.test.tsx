@@ -88,68 +88,74 @@ describe('', () => {
                 </FlagshipProvider>
             );
 
+            await waitFor(
+                () => {
+                    expect(reactFlagshipProvider).toBeCalledTimes(2);
+                    expect(
+                        reactProps.visitorCacheImplementation
+                    ).toBeInstanceOf(DefaultVisitorCache);
+                    expect(reactProps.hitCacheImplementation).toBeInstanceOf(
+                        DefaultHitCache
+                    );
+                    expect(reactProps.visitorData).toEqual(
+                        expect.objectContaining({
+                            ...visitorData,
+                            context: {
+                                ...visitorData.context,
+                                [OS_NAME]: Platform.OS,
+                                [OS_VERSION_CODE]: Platform.Version,
+                                [SDK_FIRST_TIME_INIT]: true
+                            }
+                        })
+                    );
+                    expect(setVisitorProfile).toBeCalledTimes(1);
+                    expect(setVisitorProfile).toBeCalledWith(null);
+                    expect(setOnSaveVisitorProfile).toBeCalledTimes(1);
+                },
+                {
+                    timeout: 2000
+                }
+            );
 
-            await waitFor(() => {                
-                expect(reactFlagshipProvider).toBeCalledTimes(2);
-                expect(reactProps.visitorCacheImplementation).toBeInstanceOf(
-                    DefaultVisitorCache
-                );
-                expect(reactProps.hitCacheImplementation).toBeInstanceOf(
-                    DefaultHitCache
-                );
-                expect(reactProps.visitorData).toEqual(
-                    expect.objectContaining({
-                        ...visitorData,
-                        context: {
-                            ...visitorData.context,
-                            [OS_NAME]: Platform.OS,
-                            [OS_VERSION_CODE]: Platform.Version,
-                            [SDK_FIRST_TIME_INIT]: true
-                        }
-                    })
-                );
-                expect(setVisitorProfile).toBeCalledTimes(1);
-                expect(setVisitorProfile).toBeCalledWith(null);
-                expect(setOnSaveVisitorProfile).toBeCalledTimes(1);
-            }, {
-                
-                timeout: 2000
-            });
+            const visitorData2 = {
+                ...visitorData,
+                id: 'visitor_id2'
+            };
 
-            // const visitorData2 = {
-            //     ...visitorData,
-            //     id: 'visitor_id2'
-            // };
+            rerender(
+                <FlagshipProvider {...props} visitorData={visitorData2}>
+                    <Component />
+                </FlagshipProvider>
+            );
 
-            // rerender(
-            //     <FlagshipProvider {...props} visitorData={visitorData2}>
-            //         <Component />
-            //     </FlagshipProvider>
-            // );
-
-            // await waitFor(() => {
-            //     expect(reactFlagshipProvider).toBeCalledTimes(4);
-            //     expect(reactProps.visitorCacheImplementation).toBeInstanceOf(
-            //         DefaultVisitorCache
-            //     );
-            //     expect(reactProps.hitCacheImplementation).toBeInstanceOf(
-            //         DefaultHitCache
-            //     );
-            //     expect(reactProps.visitorData).toEqual(
-            //         expect.objectContaining({
-            //             ...visitorData2,
-            //             context: {
-            //                 ...visitorData2.context,
-            //                 [OS_NAME]: Platform.OS,
-            //                 [OS_VERSION_CODE]: Platform.Version,
-            //                 [SDK_FIRST_TIME_INIT]: true
-            //             }
-            //         })
-            //     );
-            //     expect(setVisitorProfile).toBeCalledTimes(1);
-            //     expect(setVisitorProfile).toBeCalledWith(null);
-            //     expect(setOnSaveVisitorProfile).toBeCalledTimes(1);
-            // });
+            await waitFor(
+                () => {
+                    expect(reactFlagshipProvider).toBeCalledTimes(4);
+                    expect(
+                        reactProps.visitorCacheImplementation
+                    ).toBeInstanceOf(DefaultVisitorCache);
+                    expect(reactProps.hitCacheImplementation).toBeInstanceOf(
+                        DefaultHitCache
+                    );
+                    expect(reactProps.visitorData).toEqual(
+                        expect.objectContaining({
+                            ...visitorData2,
+                            context: {
+                                ...visitorData2.context,
+                                [OS_NAME]: Platform.OS,
+                                [OS_VERSION_CODE]: Platform.Version,
+                                [SDK_FIRST_TIME_INIT]: true
+                            }
+                        })
+                    );
+                    expect(setVisitorProfile).toBeCalledTimes(1);
+                    expect(setVisitorProfile).toBeCalledWith(null);
+                    expect(setOnSaveVisitorProfile).toBeCalledTimes(1);
+                },
+                {
+                    timeout: 2000
+                }
+            );
         });
     });
 
