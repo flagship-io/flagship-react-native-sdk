@@ -4,7 +4,7 @@ import {
     OS_NAME,
     OS_VERSION_CODE
 } from '@flagship.io/react-sdk';
-import { render, waitFor } from '@testing-library/react-native';
+import { render, waitFor, act } from '@testing-library/react-native';
 import { FlagshipProvider } from '../src/index';
 import React from 'react';
 import { DefaultVisitorCache } from '../src/cache/DefaultVisitorCache';
@@ -87,6 +87,8 @@ describe('', () => {
                     <Component />
                 </FlagshipProvider>
             );
+
+            await waitFor(() => {});
 
             // await waitFor(() => {
             //     expect(reactFlagshipProvider).toBeCalledTimes(2);
