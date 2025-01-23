@@ -88,7 +88,15 @@ describe('', () => {
                 </FlagshipProvider>
             );
 
-            await waitFor(() => {});
+            await waitFor(() => {
+                expect(reactFlagshipProvider).toBeCalledTimes(2);
+                expect(reactProps.visitorCacheImplementation).toBeInstanceOf(
+                    DefaultVisitorCache
+                );
+                expect(reactProps.hitCacheImplementation).toBeInstanceOf(
+                    DefaultHitCache
+                );
+            });
 
             // await waitFor(() => {
             //     expect(reactFlagshipProvider).toBeCalledTimes(2);
