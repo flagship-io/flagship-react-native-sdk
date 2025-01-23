@@ -89,7 +89,9 @@ describe('', () => {
             );
 
             await waitFor(() => {
-                expect(true).toBeTruthy();
+                expect(reactProps.visitorCacheImplementation).toBeInstanceOf(
+                    DefaultVisitorCache
+                );
             });
 
             // await waitFor(() => {
