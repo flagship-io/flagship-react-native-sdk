@@ -1,6 +1,6 @@
 {
   "name": "@flagship.io/react-native-sdk",
-  "version": "4.0.1",
+  "version": "5.0.0",
   "description": "Flagship SDK for React Native",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -23,7 +23,7 @@
     "url": "git+https://github.com/abtasty/flagship-react-native-sdk.git"
   },
   "dependencies": {
-    "@flagship.io/react-sdk": "^4.0.1"
+    "@flagship.io/react-sdk": "^5.0.0"
   },
   "peerDependencies": {
     "@react-native-async-storage/async-storage": ">=1.17.0",
@@ -46,12 +46,12 @@
     "@react-native-async-storage/async-storage": "^1.17.11",
     "@react-native-community/eslint-config": "^1.1.0",
     "@testing-library/jest-native": "^3.1.0",
-    "@testing-library/react": "^14.0.0",
     "@testing-library/react-hooks": "^3.4.1",
+    "@testing-library/react-native": "^13.0.1",
     "@types/jest": "^27.4.1",
     "@types/lodash": "^4.14.181",
-    "@types/react": "^17.0.42",
-    "@types/react-native": "^0.67.3",
+    "@types/react": "18.2.0",
+    "@types/react-native": "^0.73.0",
     "@types/react-test-renderer": "^17.0.1",
     "cross-env": "^7.0.3",
     "eslint": "^6.8.0",
@@ -69,8 +69,9 @@
     "prettier": "^2.0.5",
     "prettier-eslint": "^9.0.1",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-native": "^0.71.7",
+    "react-native": "^0.73",
+    "react-test-renderer": "18.2.0",
+    "setimmediate": "^1.0.5",
     "ts-jest": "^29.1.0",
     "typescript": "^5.0.4"
   }

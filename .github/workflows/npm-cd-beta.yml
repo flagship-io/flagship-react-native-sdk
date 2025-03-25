@@ -14,6 +14,7 @@ jobs:
           registry-url: "https://registry.npmjs.org"
       - run: yarn install
       - run: yarn build
+      - run: yarn test --coverage
       - run: npm publish --tag beta
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
