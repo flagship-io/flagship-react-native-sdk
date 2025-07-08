@@ -10,7 +10,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "@flagship.io/react-native-sdk": "^4.0.0",
+    "@flagship.io/react-native-sdk": "5.0.0",
     "@react-native-async-storage/async-storage": "^1.23.1",
     "react": "18.2.0",
     "react-native": "0.74.0"
@@ -30,7 +30,8 @@
     "jest": "^29.6.3",
     "prettier": "2.8.8",
     "react-test-renderer": "18.2.0",
-    "typescript": "5.0.4"
+    "typescript": "5.0.4",
+    "babel-plugin-formatjs": "10.5.39"
   },
   "engines": {
     "node": ">=18"
