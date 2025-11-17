@@ -1636,15 +1636,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@flagship.io/js-sdk@npm:^5.1.2":
-  version: 5.1.5
-  resolution: "@flagship.io/js-sdk@npm:5.1.5"
+"@flagship.io/js-sdk@npm:^5.1.7":
+  version: 5.1.7
+  resolution: "@flagship.io/js-sdk@npm:5.1.7"
   dependencies:
     events: "npm:^3.3.0"
     follow-redirects: "npm:^1.15.9"
     node-abort-controller: "npm:^3.1.1"
     node-fetch: "npm:^2.6.7"
-  checksum: 10c0/59ce9dd1b84e4dedb5b7961e089c9249c5dcb35ea35f5cfdb3f76457876eb74689af5222082fdfae80e5c2a91c9b19c3efac34eb160c86bfb319f00d848520da
+  checksum: 10c0/b8dedcb22bb1300f4b8c4495bbdadeb3be341c399ff66e9e8c2f31cd1eb946817fd079403dca84cd7ca3bb0af8499f2808ffde14f5317058ae9f81f614879a16
   languageName: node
   linkType: hard
 
@@ -1657,7 +1657,7 @@ __metadata:
     "@babel/preset-env": "npm:^7.14.7"
     "@babel/preset-react": "npm:^7.14.5"
     "@babel/preset-typescript": "npm:^7.14.5"
-    "@flagship.io/react-sdk": "npm:^5.1.1"
+    "@flagship.io/react-sdk": "npm:^5.2.1"
     "@react-native-async-storage/async-storage": "npm:^1.17.11"
     "@react-native-community/eslint-config": "npm:^1.1.0"
     "@testing-library/jest-native": "npm:^3.1.0"
@@ -1695,15 +1695,15 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@flagship.io/react-sdk@npm:^5.1.1":
-  version: 5.1.1
-  resolution: "@flagship.io/react-sdk@npm:5.1.1"
+"@flagship.io/react-sdk@npm:^5.2.1":
+  version: 5.2.1
+  resolution: "@flagship.io/react-sdk@npm:5.2.1"
   dependencies:
-    "@flagship.io/js-sdk": "npm:^5.1.2"
+    "@flagship.io/js-sdk": "npm:^5.1.7"
     encoding: "npm:^0.1.13"
   peerDependencies:
     react: ">=16.8.0"
-  checksum: 10c0/0300f05aeea49d899794f14c8506735f61dcfec95d3f53cd575e8aef6c60644f4af351c058c92e2e8efc9248e01733e088948f8319b445adb8c0f98e64b9a4b3
+  checksum: 10c0/e09d3927dd55a65289e1b51b14c179f8758e885a69f5199539930f02ba91ade5b35e70830fb889d39e7e36cbcb1aa1a5d83d8321827a2d1cade7b210e2297ca3
   languageName: node
   linkType: hard
 
