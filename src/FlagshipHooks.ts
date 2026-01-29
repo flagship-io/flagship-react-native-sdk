@@ -1,8 +1,7 @@
-'use client'
-
-import { Flagship, IPageView, UseFlagshipOutput as OriginalUseFlagshipOutput, useFlagship as useFs } from '@flagship.io/react-sdk'
+import { Flagship, IPageView, UseFlagshipOutput as OriginalUseFlagshipOutput, useFlagship as useFs, Visitor } from '@flagship.io/react-sdk'
 import { useCallback, useMemo } from 'react';
 import { Dimensions, PixelRatio, Platform } from 'react-native';
+import { VisitorAugmented } from './type';
 
 export type UseFlagshipOutput =  Omit<OriginalUseFlagshipOutput, 'collectEAIEventsAsync'> & {
   /**
@@ -28,6 +27,7 @@ export type UseFlagshipOutput =  Omit<OriginalUseFlagshipOutput, 'collectEAIEven
 
 type PlatformOS = typeof Platform.OS;
 
+
 const DEVICE_CATEGORY_MAP: Record<PlatformOS, string> = {
   ios: 'iphone',
   android: 'android',
@@ -46,7 +46,7 @@ const createPageView = (
   const config = Flagship.getConfig();
 
   return {
-    visitorId: visitorId,
+    visitorId,
     customerAccountId: config?.envId ?? '',
     currentUrl: screenName,
     hasAdBlocker: false,
@@ -77,20 +77,25 @@ export const useFlagship = (): UseFlagshipOutput => {
   const fs = useFs()
 
   const sendEaiPageViewAsync = useCallback(async(screenName: string): Promise<void> =>{
-    if (!fs.context) {
+    if (!fs.context || !fs.visitorId) {
       return
     }
-    const pageView :IPageView = createPageView(fs.visitorId as string, screenName)
-    const visitor = Flagship.getVisitor() as any
+    const pageView :IPageView = createPageView(fs.visitorId, screenName)
+    const visitor = Flagship.getVisitor() as unknown as  VisitorAugmented
+
+    if (typeof visitor.sendEaiPageView !== 'function') {
+      return
+    }
+
     visitor.sendEaiPageView(pageView)
-  }, [fs.context])
+  }, [fs.context, fs.visitorId])
 
   const collectEAIEventsAsync = useCallback(async (screenName:string): Promise<void> => {
     if (!fs.context) {
       return
     }
     const pageView :IPageView = createPageView(fs.visitorId as string, screenName)
-    return (fs.collectEAIEventsAsync as any)(pageView)
+    return (fs.collectEAIEventsAsync as (page:IPageView)=>void)(pageView)
   }, [fs.collectEAIEventsAsync, fs.context])
 
   return useMemo(()=>({
