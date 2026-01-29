@@ -19,7 +19,7 @@
     **To learn more:**
     ​
 -   [Solution overview](https://www.flagship.io/#showvideo) - A 5mn video demo :movie_camera:
--   [Documentation](https://docs.developers.flagship.io/) - Our dev portal with guides, how tos, API and SDK references
+-   [Documentation](https://docs.abtasty.com/server-side/sdks/react-native) - Our dev portal with guides, how tos, API and SDK references
 -   [Sign up for a free trial](https://www.flagship.io/sign-up/) - Create your free account
 -   [Guide to feature flagging](https://www.flagship.io/feature-flags/) - Everyhting you need to know about feature flag related use cases
 -   [Blog](https://www.flagship.io/blog/) - Additional resources about release management
