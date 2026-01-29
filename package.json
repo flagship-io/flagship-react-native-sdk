@@ -20,7 +20,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/abtasty/flagship-react-native-sdk.git"
+    "url": "git+https://github.com/flagship-io/flagship-react-native-sdk.git"
   },
   "dependencies": {
     "@flagship.io/react-sdk": "^5.2.2"
@@ -35,7 +35,7 @@
     "native"
   ],
   "author": "ABTasty",
-  "homepage": "https://github.com/abtasty/flagship-react-native-sdk#readme",
+  "homepage": "https://github.com/flagship-io/flagship-react-native-sdk",
   "license": "Apache-2.0",
   "devDependencies": {
     "@babel/cli": "^7.14.6",
