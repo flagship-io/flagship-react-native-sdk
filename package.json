@@ -1,6 +1,6 @@
 {
   "name": "@flagship.io/react-native-sdk",
-  "version": "5.0.1",
+  "version": "5.0.3",
   "description": "Flagship SDK for React Native",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
