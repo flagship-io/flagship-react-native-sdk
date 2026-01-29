@@ -61,8 +61,13 @@ const FlagshipProviderFunc = ({
             const clientCache = await AsyncStorage.getItem(CLIENT_CACHE_KEY);
 
             const augmentedFlagship = Flagship as AugmentedFlagship;
-            augmentedFlagship.setVisitorProfile(clientCache);
-            augmentedFlagship.setOnSaveVisitorProfile(saveVisitorProfile);
+
+            if (typeof augmentedFlagship.setVisitorProfile === 'function') {
+                augmentedFlagship.setVisitorProfile(clientCache);
+            }
+            if (typeof augmentedFlagship.setOnSaveVisitorProfile === 'function') {
+                augmentedFlagship.setOnSaveVisitorProfile(saveVisitorProfile);
+            }
 
             firstTimeInitRef.current = !clientCache;
         } catch (error) {
@@ -71,7 +76,7 @@ const FlagshipProviderFunc = ({
                 CONTEXT_LOAD_PREDEFINED
             );
         }
-    }, []);
+    }, [saveVisitorProfile]);
 
     const updateVisitorData = useCallback(
         (data: VisitorData): VisitorData => ({

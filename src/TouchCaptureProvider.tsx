@@ -7,6 +7,7 @@ import {
     Dimensions
 } from 'react-native';
 import { MAX_CLICK_PATH_LENGTH, TIMEOUT_DURATION } from './Constant';
+import { VisitorAugmented } from './type';
 
 interface TouchCaptureProviderProps {
     children: React.ReactNode;
@@ -29,7 +30,7 @@ function TouchCaptureProviderFunc({ children }: TouchCaptureProviderProps) {
 
     useEffect(() => {
         const visitor = Flagship.getVisitor() as any;
-        if (visitor) {
+        if (visitor && typeof visitor.onEAICollectStatusChange === 'function') {
             visitor.onEAICollectStatusChange(onEAICollectStatusChange);
         }
     }, [fs]);
@@ -49,7 +50,14 @@ function TouchCaptureProviderFunc({ children }: TouchCaptureProviderProps) {
                 screenSize: `${screen.width},${screen.height};`
             };
 
-            (visitor as any).sendEaiVisitorEvent(visitorEvent);
+            if (
+                typeof (visitor as unknown as VisitorAugmented)
+                    .sendEaiVisitorEvent === 'function'
+            ) {
+                (visitor as unknown as VisitorAugmented).sendEaiVisitorEvent(
+                    visitorEvent
+                );
+            }
         },
         []
     );
@@ -129,6 +137,17 @@ function TouchCaptureProviderFunc({ children }: TouchCaptureProviderProps) {
         },
         [processTouchMoveEvent]
     );
+
+    useEffect(() => {
+        return () => {
+            if (touchPathTimeoutId.current) {
+                clearTimeout(touchPathTimeoutId.current);
+            }
+            if (touchPositionTimeoutId.current) {
+                clearTimeout(touchPositionTimeoutId.current);
+            }
+        };
+    }, []);
 
     return (
         <View
