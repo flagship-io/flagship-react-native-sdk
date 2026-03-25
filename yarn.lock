@@ -1636,15 +1636,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@flagship.io/js-sdk@npm:^5.1.7":
-  version: 5.1.7
-  resolution: "@flagship.io/js-sdk@npm:5.1.7"
+"@flagship.io/js-sdk@npm:^5.2.0":
+  version: 5.2.0
+  resolution: "@flagship.io/js-sdk@npm:5.2.0"
   dependencies:
     events: "npm:^3.3.0"
     follow-redirects: "npm:^1.15.9"
     node-abort-controller: "npm:^3.1.1"
     node-fetch: "npm:^2.6.7"
-  checksum: 10c0/b8dedcb22bb1300f4b8c4495bbdadeb3be341c399ff66e9e8c2f31cd1eb946817fd079403dca84cd7ca3bb0af8499f2808ffde14f5317058ae9f81f614879a16
+  checksum: 10c0/cb11aebae792fb02dd892603f4b7cfe2f93ecf289578637095a2c68bab53a4c1e468f5bce8837af4b1696a6a2d0c12f2e3181417fe9f7cf7512f84fd8df0cd40
   languageName: node
   linkType: hard
 
@@ -1657,7 +1657,7 @@ __metadata:
     "@babel/preset-env": "npm:^7.14.7"
     "@babel/preset-react": "npm:^7.14.5"
     "@babel/preset-typescript": "npm:^7.14.5"
-    "@flagship.io/react-sdk": "npm:^5.2.2"
+    "@flagship.io/react-sdk": "npm:^5.2.3"
     "@react-native-async-storage/async-storage": "npm:^1.17.11"
     "@react-native-community/eslint-config": "npm:^1.1.0"
     "@testing-library/jest-native": "npm:^3.1.0"
@@ -1695,15 +1695,15 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@flagship.io/react-sdk@npm:^5.2.2":
-  version: 5.2.2
-  resolution: "@flagship.io/react-sdk@npm:5.2.2"
+"@flagship.io/react-sdk@npm:^5.2.3":
+  version: 5.2.3
+  resolution: "@flagship.io/react-sdk@npm:5.2.3"
   dependencies:
-    "@flagship.io/js-sdk": "npm:^5.1.7"
+    "@flagship.io/js-sdk": "npm:^5.2.0"
     encoding: "npm:^0.1.13"
   peerDependencies:
     react: ">=16.8.0"
-  checksum: 10c0/5756018456ccbb30436d7647310b894cda5f4ffbf9fb7efd0fa5b5871876e6c809d23ea2c759818c457559dc4d79b332a0b8c7da342821ed118712551f0ab3b7
+  checksum: 10c0/5002021532b9e1206b47b9aef3b93061852c08a03b8ea2c07e22c3d2efad55b95e90b5b7b541e9a90f1cda3d3e8cfa61ec24bd969ad1ad8b86ad1be783ca3cdf
   languageName: node
   linkType: hard
 
@@ -5989,12 +5989,12 @@ __metadata:
   linkType: hard
 
 "follow-redirects@npm:^1.15.9":
-  version: 1.15.9
-  resolution: "follow-redirects@npm:1.15.9"
+  version: 1.15.11
+  resolution: "follow-redirects@npm:1.15.11"
   peerDependenciesMeta:
     debug:
       optional: true
-  checksum: 10c0/5829165bd112c3c0e82be6c15b1a58fa9dcfaede3b3c54697a82fe4a62dd5ae5e8222956b448d2f98e331525f05d00404aba7d696de9e761ef6e42fdc780244f
+  checksum: 10c0/d301f430542520a54058d4aeeb453233c564aaccac835d29d15e050beb33f339ad67d9bddbce01739c5dc46a6716dbe3d9d0d5134b1ca203effa11a7ef092343
   languageName: node
   linkType: hard
 
