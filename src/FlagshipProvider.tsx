@@ -14,7 +14,13 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Platform } from 'react-native';
 import { version as SDK_VERSION } from './sdkVersion';
 import { TouchCaptureProvider } from './TouchCaptureProvider';
-import { CLIENT_CACHE_KEY, DEFAULT_POOL_MAX_SIZE, DEFAULT_TIME_INTERVAL, SDK_FIRST_TIME_INIT } from './Constant';
+import {
+    CLIENT_CACHE_KEY,
+    DEFAULT_POOL_MAX_SIZE,
+    DEFAULT_TIME_INTERVAL,
+    SDK_FIRST_TIME_INIT
+} from './Constant';
+import { ABTastyQAProvider } from './qaAssistant/ABTastyQAProvider';
 
 export interface FlagshipProviderProps
     extends Omit<
@@ -121,9 +127,12 @@ const FlagshipProviderFunc = ({
         );
     }, [props.trackingManagerConfig]);
 
+    const isQAModeEnabled = props.isQAModeEnabled || false;
+
     return (
         <ReactFlagshipProvider
             {...props}
+            isQAModeEnabled={isQAModeEnabled}
             trackingManagerConfig={trackingConfig}
             sdkVersion={SDK_VERSION}
             language={2}
@@ -132,7 +141,13 @@ const FlagshipProviderFunc = ({
             visitorData={processedVisitorData}
             shouldSaveInstance={true}
         >
-            <TouchCaptureProvider>{children}</TouchCaptureProvider>
+            <ABTastyQAProvider
+                isQAModeEnabled={isQAModeEnabled}
+                envId={props.envId}
+                apiKey={props.apiKey}
+            >
+                <TouchCaptureProvider>{children}</TouchCaptureProvider>
+            </ABTastyQAProvider>
         </ReactFlagshipProvider>
     );
 };
